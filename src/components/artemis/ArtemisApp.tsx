@@ -34,6 +34,7 @@ import CentersOfInquiry from '@/components/artemis/CentersOfInquiry';
 import CenterDetail from '@/components/artemis/CenterDetail';
 import Blog from '@/components/artemis/Blog';
 import BlogArticlePage from '@/components/artemis/BlogArticlePage';
+import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
@@ -141,7 +142,7 @@ function getBreadcrumbs(currentPage: string, currentProgram: string): { items: B
     case 'jobs':
       return {
         items: [{ label: 'About', page: 'about' }],
-        currentLabel: 'Jobs',
+        currentLabel: 'Careers',
       };
     case 'contact-us':
       return {
@@ -419,7 +420,7 @@ export default function ArtemisApp() {
       case 'visit-us':
         return <GenericAboutSubpage goToPage={goToPage} id="visit" title="Visit us" description="Guidelines for visiting our residency hubs and historic colleges." />;
       case 'jobs':
-        return <GenericAboutSubpage goToPage={goToPage} id="jobs" title="Jobs" description="Building the future of knowledge with the Artemis team." />;
+        return <CareersPage goToPage={goToPage} />;
       case 'contact-us':
         return <GenericAboutSubpage goToPage={goToPage} id="contact" title="Contact us" description="Connect with the Artemis Collegium central administration." />;
       

@@ -49,7 +49,7 @@ const searchIndex: SearchResult[] = [
   { title: 'Access at Artemis', page: 'access-at-artemis', category: 'About' },
   { title: 'Artemis in the World', page: 'artemis-in-the-world', category: 'About' },
   { title: 'Visit Us', page: 'visit-us', category: 'About' },
-  { title: 'Jobs', page: 'jobs', category: 'About' },
+  { title: 'Careers', page: 'jobs', category: 'About' },
   { title: 'Contact Us', page: 'contact-us', category: 'About' },
   { title: 'Facts and Figures', page: 'facts', category: 'About' },
   { title: 'Artemis Glossary', page: 'glossary', category: 'About' },

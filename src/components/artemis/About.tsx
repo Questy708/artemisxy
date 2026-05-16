@@ -16,7 +16,7 @@ const sectionLinks = [
   { title: 'Access at Artemis', link: 'access-at-artemis' },
   { title: 'Artemis in the World', link: 'artemis-in-the-world' },
   { title: 'Visit Us', link: 'visit-us' },
-  { title: 'Jobs', link: 'jobs' },
+  { title: 'Careers', link: 'jobs' },
   { title: 'Contact Us', link: 'contact-us' },
 ];
 
