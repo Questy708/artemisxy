@@ -40,11 +40,11 @@ const COMPENSATION_TABLE = [
 ];
 
 const DIVISIONS = [
-  { id: 'div-i', numeral: 'I', title: 'Humanities & Social Sciences', fields: ['Philosophy & Ethics', 'History & Cultural Studies', 'Economics & Political Economy', 'Sociology & Anthropology', 'Languages, Literature & Translation', 'Media & Communications'], icon: Scale, color: '#8A0000' },
-  { id: 'div-ii', numeral: 'II', title: 'Natural Sciences & Mathematics', fields: ['Mathematics & Statistics', 'Physics & Astronomy', 'Chemistry & Materials', 'Earth & Environmental Sciences'], icon: Atom, color: '#6B0000' },
-  { id: 'div-iii', numeral: 'III', title: 'Engineering & Technology', fields: ['Computer Science & AI', 'Engineering Sciences', 'Biomedical Engineering'], icon: Cpu, color: '#4a0e0e' },
-  { id: 'div-iv', numeral: 'IV', title: 'Business, Policy & Global Affairs', fields: ['Business & Entrepreneurship', 'Policy, Governance & International Affairs', 'Law & Justice'], icon: Gavel, color: '#3d0808' },
-  { id: 'div-v', numeral: 'V', title: 'Health & Life Sciences', fields: ['Biological Sciences', 'Public Health & Epidemiology', 'Psychology & Cognitive Sciences'], icon: Stethoscope, color: '#2d0505' },
+  { id: 'div-i', numeral: 'I', title: 'Humanities & Social Sciences', fields: ['Philosophy & Ethics', 'History & Cultural Studies', 'Economics & Political Economy', 'Sociology & Anthropology', 'Languages, Literature & Translation', 'Media & Communications'], icon: Scale, color: '#8A0000', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=800' },
+  { id: 'div-ii', numeral: 'II', title: 'Natural Sciences & Mathematics', fields: ['Mathematics & Statistics', 'Physics & Astronomy', 'Chemistry & Materials', 'Earth & Environmental Sciences'], icon: Atom, color: '#6B0000', image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800' },
+  { id: 'div-iii', numeral: 'III', title: 'Engineering & Technology', fields: ['Computer Science & AI', 'Engineering Sciences', 'Biomedical Engineering'], icon: Cpu, color: '#4a0e0e', image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=800' },
+  { id: 'div-iv', numeral: 'IV', title: 'Business, Policy & Global Affairs', fields: ['Business & Entrepreneurship', 'Policy, Governance & International Affairs', 'Law & Justice'], icon: Gavel, color: '#3d0808', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800' },
+  { id: 'div-v', numeral: 'V', title: 'Health & Life Sciences', fields: ['Biological Sciences', 'Public Health & Epidemiology', 'Psychology & Cognitive Sciences'], icon: Stethoscope, color: '#2d0505', image: 'https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&q=80&w=800' },
 ];
 
 const COLLEGE_LOCATIONS = [
@@ -670,17 +670,17 @@ export default function CareersPage({ goToPage }: Props) {
                     <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">Compensation</span>
                   </div>
                   <h2 className="text-[24px] sm:text-[32px] lg:text-[38px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
-                    The Deal
+                    Compensation Structure
                   </h2>
                   <p className="text-[15px] text-gray-600 leading-[1.75] mb-4">
-                    <span className="font-bold text-[#141414]">Years 1–5: Survival Stipends.</span> UN Model 3 compensation — a base stipend with a location multiplier.
+                    <span className="font-bold text-[#141414]">Years 1–5: Foundational Stipends.</span> UN Model 3 compensation — a base stipend with a location multiplier to support your work from day one.
                   </p>
                   <p className="text-[15px] text-gray-600 leading-[1.75] mb-5">
-                    <span className="font-bold text-[#141414]">Year 6+: Career Compensation.</span> The Y6+ Quality Upgrade Fund transitions all faculty from survival to career-level pay.
+                    <span className="font-bold text-[#141414]">Year 6+: Career Compensation.</span> The Y6+ Quality Upgrade Fund transitions all faculty to career-level pay.
                   </p>
                   <div className="border-l-4 border-[#8A0000] pl-4 py-1">
                     <p className="text-[13px] text-gray-500 italic leading-[1.6]">
-                      A fellowship stipend, not an employment contract. Designed so you can survive and do your best work.
+                      A fellowship stipend, not an employment contract. Designed so you can focus on your best work from the start.
                     </p>
                   </div>
                 </div>
@@ -727,52 +727,85 @@ export default function CareersPage({ goToPage }: Props) {
           ══════════════════════════════════════════ */}
       <section id="divisions" className="scroll-mt-[110px] w-full bg-gray-50 border-y border-gray-100">
         <div ref={divAnim.ref} className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
-          <div className="mb-6 flex items-center space-x-3">
-            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">Academic Structure</span>
-          </div>
-          <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
-            Five Divisions
-          </h2>
-          <p className="text-[17px] text-gray-600 leading-[1.75] max-w-2xl mb-12">
-            Each Division spans all 50 Colleges and is led by a Division Head. Explore the divisions to find where your expertise fits.
-          </p>
+          <div className={`transition-all duration-700 ${divAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="mb-6 flex items-center space-x-3">
+              <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">Academic Structure</span>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-12">
+              <div>
+                <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+                  Five Divisions
+                </h2>
+                <p className="text-[17px] text-gray-600 leading-[1.75]">
+                  Each Division spans all 50 Colleges and is led by a Division Head who reports directly to the President. Together they cover the full breadth of human inquiry — from philosophy to physics, from business to biology. Explore the divisions to find where your expertise fits.
+                </p>
+              </div>
+              <div className="border-l-4 border-[#8A0000] pl-6 py-2">
+                <p className="text-[20px] font-bold text-[#141414] leading-tight mb-2">
+                  &ldquo;Five divisions. No departments. No silos. Just organized inquiry.&rdquo;
+                </p>
+                <p className="text-[12px] font-bold uppercase tracking-widest text-[#8A0000]">
+                  Artemis Academic Charter
+                </p>
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-0 border border-gray-200">
-            {DIVISIONS.map((div, i) => {
-              const Icon = div.icon;
-              return (
-                <div
-                  key={div.id}
-                  className={`p-6 sm:p-7 ${i > 0 ? 'border-t sm:border-t-0 sm:border-l border-gray-200' : ''} group hover:bg-white transition-colors`}
-                >
-                  <div className="w-10 h-10 flex items-center justify-center mb-4" style={{ backgroundColor: div.color }}>
-                    <Icon size={18} className="text-white" />
-                  </div>
-                  <span className="text-[9px] font-black tracking-[0.25em] text-gray-400 block mb-1">DIVISION {div.numeral}</span>
-                  <h4 className="text-[15px] sm:text-[16px] font-black text-[#141414] leading-tight mb-4">{div.title}</h4>
-                  <div className="space-y-1.5">
-                    {div.fields.map((field, j) => (
-                      <div key={j} className="text-[11px] text-gray-500 leading-[1.4]">{field}</div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+            {/* Division cards with images */}
+            <div className="space-y-0">
+              {DIVISIONS.map((div, i) => {
+                const Icon = div.icon;
+                return (
+                  <div
+                    key={div.id}
+                    className="group border-b border-gray-200 hover:border-[#8A0000] transition-colors bg-white"
+                  >
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+                      {/* Image */}
+                      <div className="lg:col-span-4 aspect-[16/9] lg:aspect-auto bg-gray-100 overflow-hidden">
+                        <img
+                          src={div.image}
+                          alt={div.title}
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                        />
+                      </div>
 
-          {/* Link to Centers of Inquiry */}
-          <div className="mt-10 pt-8 border-t border-gray-200">
-            <button
-              onClick={() => goToPage('centers-of-inquiry')}
-              className="flex items-center gap-3 py-3 border-b-2 border-[#141414] text-[#141414] text-[13px] font-bold uppercase tracking-[0.2em] hover:text-[#8A0000] hover:border-[#8A0000] transition-all group"
-            >
-              <span>Explore the 19 Centers of Inquiry</span>
-              <svg className="group-hover:translate-x-2 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
+                      {/* Content */}
+                      <div className="lg:col-span-8 p-6 sm:p-8 flex flex-col justify-center">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-9 h-9 flex items-center justify-center" style={{ backgroundColor: div.color }}>
+                            <Icon size={16} className="text-white" />
+                          </div>
+                          <span className="text-[9px] font-black tracking-[0.25em] text-gray-400 uppercase">Division {div.numeral}</span>
+                        </div>
+                        <h4 className="text-[20px] sm:text-[24px] font-black text-[#141414] group-hover:text-[#8A0000] transition-colors leading-tight mb-4">{div.title}</h4>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {div.fields.map((field, j) => (
+                            <span key={j} className="text-[11px] font-bold uppercase tracking-wider bg-gray-100 text-gray-600 px-3 py-1.5 group-hover:bg-[#8A0000]/5 group-hover:text-[#8A0000] transition-colors">
+                              {field}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Link to Centers of Inquiry */}
+            <div className="mt-10 pt-8 border-t border-gray-200">
+              <button
+                onClick={() => goToPage('centers-of-inquiry')}
+                className="flex items-center gap-3 py-3 border-b-2 border-[#141414] text-[#141414] text-[13px] font-bold uppercase tracking-[0.2em] hover:text-[#8A0000] hover:border-[#8A0000] transition-all group"
+              >
+                <span>Explore the 19 Centers of Inquiry</span>
+                <svg className="group-hover:translate-x-2 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -780,52 +813,77 @@ export default function CareersPage({ goToPage }: Props) {
       {/* ══════════════════════════════════════════
           5. LOCATIONS — Horizontal scroll carousel
           ══════════════════════════════════════════ */}
-      <section id="locations" className="scroll-mt-[110px] w-full bg-white">
-        <div ref={locAnim.ref} className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-            <div>
-              <div className="mb-6 flex items-center space-x-3">
-                <span className="w-8 h-[1px] bg-[#8A0000]"></span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">Where You'll Work</span>
+      <section id="locations" className="scroll-mt-[110px] w-full">
+        {/* Parallax hero image for locations */}
+        <div className="max-w-[1600px] mx-auto">
+          <div ref={locAnim.ref} className="relative w-full min-h-[340px] md:min-h-[400px] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&q=80&w=1800"
+              alt="Global College Locations"
+              className="absolute inset-0 w-full h-full object-cover grayscale"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+            <div className="relative z-10 flex items-end h-full min-h-[340px] md:min-h-[400px] max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-10 lg:py-14">
+              <div className={`transition-all duration-700 ${locAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className="bg-white max-w-lg p-6 sm:p-8 shadow-xl">
+                  <div className="mb-4 flex items-center space-x-3">
+                    <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">Where You'll Work</span>
+                  </div>
+                  <h2 className="text-[24px] sm:text-[32px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-3">
+                    50 Colleges. 35 Countries.
+                  </h2>
+                  <p className="text-[15px] text-gray-600 leading-[1.75]">
+                    Every College is a physical place — a repurposed convent, a converted warehouse, a former caravansarai. Not a Zoom room with a logo.
+                  </p>
+                </div>
               </div>
-              <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-3">
-                50 Colleges. 35 Countries.
-              </h2>
-              <p className="text-[17px] text-gray-600 leading-[1.75] max-w-xl">
-                Every College is a physical place — a repurposed convent, a converted warehouse, a former caravansarai.
-              </p>
             </div>
           </div>
+        </div>
 
-          {/* Tier rows */}
-          <div className="space-y-0 border-t border-gray-200">
-            {['Central Node', 'Tier A', 'Tier B', 'Tier C'].map((tier) => {
-              const cities = COLLEGE_LOCATIONS.filter(c => c.tier === tier);
-              const tierColor = tier === 'Central Node' ? '#8A0000' : tier === 'Tier A' ? '#6B0000' : tier === 'Tier B' ? '#4a0e0e' : '#3d0808';
-              return (
-                <div key={tier} className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-gray-200 group hover:bg-gray-50/50 transition-colors">
-                  <div className="lg:col-span-3 p-5 sm:p-6 flex items-center gap-4" style={{ backgroundColor: `${tierColor}06` }}>
-                    <div className="w-9 h-9 flex items-center justify-center shrink-0" style={{ backgroundColor: tierColor }}>
-                      <Building2 size={14} className="text-white" />
+        {/* Tier rows */}
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 py-12 lg:py-16">
+          {['Central Node', 'Tier A', 'Tier B', 'Tier C'].map((tier) => {
+            const cities = COLLEGE_LOCATIONS.filter(c => c.tier === tier);
+            const tierColor = tier === 'Central Node' ? '#8A0000' : tier === 'Tier A' ? '#6B0000' : tier === 'Tier B' ? '#4a0e0e' : '#3d0808';
+            const tierDesc = tier === 'Central Node'
+              ? 'The three hubs that anchor the Artemis network — governance, operations, and global coordination.'
+              : tier === 'Tier A'
+              ? 'Major global cities with established infrastructure and strong academic ecosystems.'
+              : tier === 'Tier B'
+              ? 'Emerging academic hubs with growing research communities and cultural richness.'
+              : 'Frontier locations where Artemis will have the greatest transformative impact.';
+            return (
+              <div key={tier} className="group mb-6 last:mb-0">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-gray-200 hover:border-[#8A0000]/30 transition-colors overflow-hidden">
+                  {/* Tier info with accent */}
+                  <div className="lg:col-span-4 p-6 sm:p-8 flex flex-col justify-center" style={{ backgroundColor: `${tierColor}06` }}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 flex items-center justify-center shrink-0" style={{ backgroundColor: tierColor }}>
+                        <Building2 size={16} className="text-white" />
+                      </div>
+                      <div>
+                        <h4 className="text-[18px] sm:text-[20px] font-black text-[#141414]">{tier}</h4>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{cities.length} cities</span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-[14px] font-black text-[#141414]">{tier}</h4>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{cities.length} cities</span>
-                    </div>
+                    <p className="text-[13px] text-gray-500 leading-[1.6] mt-2">{tierDesc}</p>
                   </div>
-                  <div className="lg:col-span-9 p-5 sm:p-6 border-t lg:border-t-0 lg:border-l border-gray-100">
+                  {/* Cities */}
+                  <div className="lg:col-span-8 p-6 sm:p-8 border-t lg:border-t-0 lg:border-l border-gray-100 bg-white">
                     <div className="flex flex-wrap gap-2">
                       {cities.map((c, j) => (
-                        <span key={j} className="text-[12px] font-medium px-3 py-1.5 bg-white border border-gray-200 text-gray-700 group-hover:border-[#8A0000]/20 transition-colors">
+                        <span key={j} className="text-[12px] font-semibold px-3 py-2 bg-gray-50 border border-gray-200 text-gray-700 group-hover:border-[#8A0000]/20 group-hover:bg-[#8A0000]/[0.02] transition-colors">
                           {c.city}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -876,7 +934,7 @@ export default function CareersPage({ goToPage }: Props) {
                 We are not reading CVs.<br />We are reading manifestos.
               </h2>
               <p className="text-[17px] text-white/70 leading-[1.75] mb-8">
-                Tell us what you would build, where you would build it, and why you can survive on a stipend for five years without resentment.
+                Tell us what you would build, where you would build it, and why the Artemis mission matters more to you than a conventional salary.
               </p>
               <a
                 href="mailto:faculty@artemis.edu"
@@ -896,7 +954,7 @@ export default function CareersPage({ goToPage }: Props) {
                 { num: '02', text: 'Which College you want to live in' },
                 { num: '03', text: 'What you would teach in your first term' },
                 { num: '04', text: 'What you would research in your first year' },
-                { num: '05', text: 'Why you can survive on a stipend for five years without resentment' },
+                { num: '05', text: 'Why the Artemis mission matters more to you than a conventional salary' },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 bg-white/10 border border-white/15 p-5">
                   <span className="text-[28px] font-black text-white/20 leading-none shrink-0">{item.num}</span>
