@@ -544,13 +544,13 @@ export default function CareersPage({ goToPage }: Props) {
                   {/* Apply CTA */}
                   <div className="mt-10 pt-6 border-t border-gray-100">
                     <a
-                      href={`mailto:faculty@artemis.edu?subject=Application: ${activeJob.title}`}
+                      href={`mailto:faculty@artemisui.org?subject=Application: ${activeJob.title}`}
                       className="inline-flex items-center gap-3 px-8 py-4 bg-[#8A0000] text-white text-[12px] font-bold uppercase tracking-[0.25em] hover:bg-[#6B0000] transition-colors group"
                     >
                       <span>Apply Now</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </a>
-                    <p className="text-[12px] text-gray-400 mt-3">Send your manifesto to faculty@artemis.edu</p>
+                    <p className="text-[12px] text-gray-400 mt-3">Send your manifesto to faculty@artemisui.org</p>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -628,7 +628,7 @@ export default function CareersPage({ goToPage }: Props) {
                         </div>
                         <div className="mt-6 pt-5 border-t border-gray-100">
                           <a
-                            href={`mailto:faculty@artemis.edu?subject=Application: ${job.title}`}
+                            href={`mailto:faculty@artemisui.org?subject=Application: ${job.title}`}
                             className="inline-flex items-center gap-2 px-6 py-3 bg-[#8A0000] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#6B0000] transition-colors group"
                           >
                             <span>Apply Now</span>
@@ -937,11 +937,11 @@ export default function CareersPage({ goToPage }: Props) {
                 Tell us what you would build, where you would build it, and why the Artemis mission matters more to you than a conventional salary.
               </p>
               <a
-                href="mailto:faculty@artemis.edu"
+                href="mailto:faculty@artemisui.org"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8A0000] text-[12px] font-bold uppercase tracking-[0.25em] hover:bg-gray-100 transition-colors group"
               >
                 <Mail size={16} />
-                <span>faculty@artemis.edu</span>
+                <span>faculty@artemisui.org</span>
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <p className="text-[12px] text-white/40 mt-3">No form. No portal. No algorithm. A human will read it.</p>

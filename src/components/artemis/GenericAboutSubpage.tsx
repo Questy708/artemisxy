@@ -257,10 +257,10 @@ const jobListings = [
 
 /* ─── Contact Blocks ─── */
 const contactBlocks = [
-  { label: 'General Enquiries', email: 'info@artemis.edu', desc: 'For broad questions about Artemis, our programmes, or the network.' },
-  { label: 'Admissions', email: 'admissions@artemis.edu', desc: 'Application queries, entry requirements, and offer-holder support.' },
-  { label: 'Media & Press', email: 'press@artemis.edu', desc: 'Journalist enquiries, press kits, interview requests, and media partnerships.' },
-  { label: 'Research Partnerships', email: 'research@artemis.edu', desc: 'Collaborative proposals, joint ventures, and institutional partnerships.' },
+  { label: 'General Enquiries', email: 'info@artemisui.org', desc: 'For broad questions about Artemis, our programmes, or the network.' },
+  { label: 'Admissions', email: 'admissions@artemisui.org', desc: 'Application queries, entry requirements, and offer-holder support.' },
+  { label: 'Media & Press', email: 'press@artemisui.org', desc: 'Journalist enquiries, press kits, interview requests, and media partnerships.' },
+  { label: 'Research Partnerships', email: 'research@artemisui.org', desc: 'Collaborative proposals, joint ventures, and institutional partnerships.' },
 ];
 
 /* ─── Reusable Sub-components ─── */

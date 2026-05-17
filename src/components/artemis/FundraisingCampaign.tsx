@@ -143,7 +143,7 @@ const DONOR_SEGMENTS = [
 const WAYS_TO_GIVE = [
   { title: 'Online', desc: 'Make a one-time or recurring gift by card, PayPal, or cryptocurrency directly on this page. Fast, secure, and immediate confirmation of your contribution.', icon: CreditCard },
   { title: 'Bank or Wire Transfer', desc: 'Transfer directly from your bank. Suitable for large contributions and international donors. See the donation form for our account details, or contact our advancement team for assistance with international transfers.', icon: Banknote },
-  { title: 'Cryptocurrency', desc: 'Donate Bitcoin (BTC) or Ethereum (ETH) directly to Artemis. Crypto donations are recorded on the public chain, making your contribution a permanent part of the university\'s founding record. Contact crypto@artemis.edu with your transaction hash.', icon: Bitcoin },
+  { title: 'Cryptocurrency', desc: 'Donate Bitcoin (BTC) or Ethereum (ETH) directly to Artemis. Crypto donations are recorded on the public chain, making your contribution a permanent part of the university\'s founding record. Contact crypto@artemisui.org with your transaction hash.', icon: Bitcoin },
   { title: 'Securities and Stock', desc: 'Donate appreciated stocks, bonds, or mutual funds to avoid capital gains tax while maximising your impact. Our advancement team will facilitate the transfer and provide all necessary documentation for your records.', icon: Briefcase },
   { title: 'Planned Giving', desc: 'Include Artemis in your estate plan through a will, trust, or beneficiary designation. Planned gifts create a permanent legacy and may provide significant tax benefits. We work with your advisors to structure a gift that aligns with your financial goals.', icon: FileText },
   { title: 'Employer Matching', desc: 'Many employers match charitable contributions dollar-for-dollar. Check with your HR department to see if your company participates \u2014 your gift to Artemis could be doubled at no additional cost to you.', icon: HandCoins },
@@ -1006,7 +1006,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
             Naming<br />opportunities
           </motion.h2>
           <motion.p {...fadeUp(opportunitiesAnim.visible, 0.15)} className="text-[15px] sm:text-[16px] text-gray-600 max-w-2xl leading-relaxed mb-4">Every gift at the naming level carries your name in perpetuity. Colleges, professorships, centers, programs, scholarships &mdash; each one a permanent mark on the university that reshapes civilisation.</motion.p>
-          <motion.p {...fadeUp(opportunitiesAnim.visible, 0.2)} className="text-[13px] sm:text-[14px] text-gray-500 mb-10 sm:mb-16">Contact our advancement team at <a href="mailto:donate@artemis.edu" className="text-[#8A0000] font-bold hover:underline">donate@artemis.edu</a> to discuss naming opportunities.</motion.p>
+          <motion.p {...fadeUp(opportunitiesAnim.visible, 0.2)} className="text-[13px] sm:text-[14px] text-gray-500 mb-10 sm:mb-16">Contact our advancement team at <a href="mailto:donate@artemisui.org" className="text-[#8A0000] font-bold hover:underline">donate@artemisui.org</a> to discuss naming opportunities.</motion.p>
 
           {/* Table-style layout */}
           <motion.div {...fadeUp(opportunitiesAnim.visible, 0.25)} className="mb-12 sm:mb-20">
@@ -1242,8 +1242,8 @@ export default function FundraisingCampaign({ goToPage }: Props) {
               <Phone size={16} className="text-[#8A0000] shrink-0" />
               <span className="text-[13px] sm:text-[14px] text-gray-600">Questions about giving? Our advancement team is here to help.</span>
             </div>
-            <a href="mailto:donate@artemis.edu" className="flex items-center space-x-3 px-6 py-2.5 border-2 border-[#8A0000] text-[#8A0000] text-[10px] font-bold uppercase tracking-widest hover:bg-[#8A0000] hover:text-white transition-colors group shrink-0">
-              <span>donate@artemis.edu</span>
+            <a href="mailto:donate@artemisui.org" className="flex items-center space-x-3 px-6 py-2.5 border-2 border-[#8A0000] text-[#8A0000] text-[10px] font-bold uppercase tracking-widest hover:bg-[#8A0000] hover:text-white transition-colors group shrink-0">
+              <span>donate@artemisui.org</span>
               <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>
@@ -1258,7 +1258,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
           <motion.h2 {...clipReveal(giveAnim.visible)} className="text-[32px] sm:text-[44px] md:text-[56px] font-black leading-[0.92] tracking-tighter text-[#141414] mb-4">
             Give now
           </motion.h2>
-          <motion.p {...fadeUp(giveAnim.visible, 0.1)} className="text-[14px] sm:text-[16px] text-gray-600 max-w-2xl leading-relaxed mb-8 sm:mb-12">Choose your amount, select your payment method, and join the founding. For major gifts and naming opportunities, contact <a href="mailto:donate@artemis.edu" className="text-[#8A0000] font-bold hover:underline">donate@artemis.edu</a>.</motion.p>
+          <motion.p {...fadeUp(giveAnim.visible, 0.1)} className="text-[14px] sm:text-[16px] text-gray-600 max-w-2xl leading-relaxed mb-8 sm:mb-12">Choose your amount, select your payment method, and join the founding. For major gifts and naming opportunities, contact <a href="mailto:donate@artemisui.org" className="text-[#8A0000] font-bold hover:underline">donate@artemisui.org</a>.</motion.p>
 
           {/* Premium Card Layout */}
           <motion.div {...fadeUp(giveAnim.visible, 0.15)} className="border border-gray-200 bg-white overflow-hidden">
@@ -1376,7 +1376,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
                       <code className="text-[12px] text-gray-600 bg-white px-3 py-2 flex-1 break-all font-mono border border-gray-100">{CRYPTO[cryptoCoin]}</code>
                       <button onClick={() => navigator.clipboard?.writeText(CRYPTO[cryptoCoin])} className="px-3 py-2 bg-gray-100 text-gray-600 text-[9px] font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">Copy</button>
                     </div>
-                    <p className="text-[12px] text-gray-400 mt-3">After sending, email crypto@artemis.edu with your transaction hash.</p>
+                    <p className="text-[12px] text-gray-400 mt-3">After sending, email crypto@artemisui.org with your transaction hash.</p>
                   </div>
                 )}
 
@@ -1657,7 +1657,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                   <div>
                     <div className="text-[9px] font-bold uppercase tracking-widest text-[#8A0000] mb-2">Email</div>
-                    <a href="mailto:donate@artemis.edu" className="text-[14px] font-bold text-[#141414] hover:text-[#8A0000] transition-colors">donate@artemis.edu</a>
+                    <a href="mailto:donate@artemisui.org" className="text-[14px] font-bold text-[#141414] hover:text-[#8A0000] transition-colors">donate@artemisui.org</a>
                   </div>
                   <div>
                     <div className="text-[9px] font-bold uppercase tracking-widest text-[#8A0000] mb-2">Phone</div>

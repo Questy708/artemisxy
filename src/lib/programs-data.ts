@@ -33,7 +33,7 @@ export const programsData: Record<string, ProgramData> = {
     coDirectorTitle: "Director of the program in African Languages",
     coDirectorName: "Dr. Kwame Osei",
     coDirectorLocation: "Artemis Global Humanities Center, Valletta Campus",
-    website: "www.artemis.edu/african-studies",
+    website: "www.artemisui.org/african-studies",
     overviewParagraphs: [
       "The program in African Studies enables students to undertake interdisciplinary study of the arts, history, cultures, politics, and development of Africa, specifically contextualized through Artemis University's global node framework.",
       "As a foundation, students in the program gain cross-disciplinary exposure to Africa. In the junior and senior years, students develop analytical ability and focus their studies on research in a particular discipline such as anthropology, art history, history, languages and literature, political science, or on topics such as global health, economic sustainability, or human rights.",
@@ -82,7 +82,7 @@ export const programsData: Record<string, ProgramData> = {
     coDirectorTitle: "Assistant DUS",
     coDirectorName: "Dr. Rajan Mehta",
     coDirectorLocation: "Artemis Computability Lab, Valletta Node",
-    website: "www.artemis.edu/cpsc",
+    website: "www.artemisui.org/cpsc",
     overviewParagraphs: [
       "The College of Computer Science at Artemis offers both B.S. and B.A. degree programs, with specialized cross-collegiate tracks linking our tech infrastructure with humanities, economics, and quantum mathematics.",
       "The major in Computer Science prepares students for an array of global pursuits, ranging from leading deep-tech research to driving computational policy in international bodies. Our Valletta campus provides a unique intersection for global tech innovation. Core requirements cover rigorous software engineering and theoretical foundations, while electives delve into distributed AI, quantum computing, and bio-informatics."
@@ -121,7 +121,7 @@ export const programsData: Record<string, ProgramData> = {
     title: "Cognitive Science",
     directorName: "Dr. Miriam Falk",
     directorLocation: "Artemis Institute for Mind and Computation, Valletta Node",
-    website: "www.artemis.edu/cogsci",
+    website: "www.artemisui.org/cogsci",
     overviewParagraphs: [
       "Cognitive science explores the nature of cognitive processes such as perception, reasoning, memory, attention, language, decision making, imagery, motor control, and problem solving. The goal of cognitive science, stated simply, is to understand how the mind works.",
       "At Artemis University, Cognitive Science is an inherently interdisciplinary endeavor, drawing on tools and ideas from fields such as psychology, computer science, linguistics, philosophy, economics, and neuroscience. Approaches include empirical studies of the ontogenetic and phylogenetic development of cognitive abilities, experimental work on cognitive processing in adults, attempts to understand perception and cognition based on patterns of breakdown in pathology, computational and robotic research that strives to simulate aspects of cognition and behavior, neuroscientific investigations of the neural bases of cognition using neural recording and brain scanning, and the development of philosophical theories of the nature of mind."
@@ -164,7 +164,7 @@ export const programsData: Record<string, ProgramData> = {
     title: "Ethics, Politics, and Economics",
     directorName: "Dr. Isadora Venn",
     directorLocation: "Institution for Social and Policy Studies",
-    website: "www.artemis.edu/epe",
+    website: "www.artemisui.org/epe",
     overviewParagraphs: [
       "The major in Ethics, Politics, and Economics (EP&E) joins the analytic rigor of the social sciences with the enduring normative questions of philosophy. It aims to develop thoughtful citizens and leaders who are equipped to analyze complex social problems using multiple disciplinary lenses.",
       "By integrating economic analysis, political science, and philosophical inquiry, EP&E students examine how institutions construct value, distribute resources, and justify authority in modern societies."
@@ -211,7 +211,7 @@ export const generateProgramData = (programName: string): ProgramData => {
     coDirectorTitle: `Director of the program in Applied ${cleanName}`,
     coDirectorName: "Dr. Julian Vance",
     coDirectorLocation: "Global Synthesis Building, Valletta Campus, Room 138, 555-0192",
-    website: `www.artemis.edu/academics/${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    website: `www.artemisui.org/academics/${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
     overviewParagraphs: [
       `The program in ${cleanName} enables students to undertake interdisciplinary study of the theories, history, practice, and development of ${cleanName}. As a foundation, students in the program gain cross-disciplinary exposure operating within Artemis University's collegiate system, anchored by our central node in Valletta, Malta. In the junior and senior years, students develop analytical ability and focus their studies on research in a particular discipline or on intersections with global health, decentralized economics, or sustainable development.`,
       `${cleanName} provides training of special interest to those considering admission to top-tier graduate or professional schools or careers in education, law, management, medicine, international relations, or forward-thinking global industries. The interdisciplinary structure of the program offers students an opportunity to satisfy the increasingly rigorous expectations of admissions committees and prospective employers for a broad liberal arts perspective that complements specialized knowledge of a field.`

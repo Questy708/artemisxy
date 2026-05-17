@@ -340,11 +340,11 @@ export default function About({ goToPage }: AboutProps) {
             <div className="space-y-6">
               <div className="border-l-2 border-[#8A0000] pl-6">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">General Enquiries</div>
-                <p className="text-[14px] text-gray-600 leading-relaxed">info@artemis.edu</p>
+                <p className="text-[14px] text-gray-600 leading-relaxed">info@artemisui.org</p>
               </div>
               <div className="border-l-2 border-[#8A0000] pl-6">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">Admissions</div>
-                <p className="text-[14px] text-gray-600 leading-relaxed">admissions@artemis.edu</p>
+                <p className="text-[14px] text-gray-600 leading-relaxed">admissions@artemisui.org</p>
               </div>
               <div className="border-l-2 border-[#8A0000] pl-6">
                 <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">Visit</div>

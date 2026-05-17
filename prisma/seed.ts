@@ -93,7 +93,7 @@ async function main() {
     { email: 'innovation.seeker@tech.io', source: 'homepage', active: false },
     { email: 'lena.schmidt@tu-berlin.de', source: 'footer', active: true },
     { email: 'global.citizen@un.org', source: 'give', active: true },
-    { email: 'future.scholar@artemis.edu', source: 'blog', active: true },
+    { email: 'future.scholar@artemisui.org', source: 'blog', active: true },
   ];
 
   console.log('Creating 10 subscribers...');
