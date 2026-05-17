@@ -31,7 +31,6 @@ const researchLeadership = [
   { title: 'Director of Digital Learning', dept: 'Academic Technology', abbr: 'DL', desc: 'Architects the digital learning infrastructure — from AI-augmented tutoring and immersive environments to the synchronous classroom technology that connects every node in real time.' },
   { title: 'University Librarian & Knowledge Core Director', dept: 'Knowledge Core', abbr: 'KL', desc: 'Stewards the Knowledge Core — Artemis\'s living, open-access repository of all research outputs, curricular materials, and institutional memory across the global network.' },
   { title: 'Director of Sustainability', dept: 'Campus & Planet', abbr: 'SU', desc: 'Leads Artemis\'s commitment to carbon-negative operations, sustainable construction across all nodes, and the integration of planetary stewardship into the curriculum.' },
-  { title: 'Director of Equity & Inclusion', dept: 'Institutional Culture', abbr: 'EI', desc: 'Ensures that equity, diversity, and inclusion are not aspirational add-ons but structural features embedded in every policy, programme, and appointment at Artemis.' },
   { title: 'Director of Communications', dept: 'Public Affairs', abbr: 'CM', desc: 'Shapes the public narrative of Artemis — managing media relations, brand identity, digital presence, and the stories that convey the university\'s mission to the world.' },
   { title: 'Director of Global Operations', dept: 'Operations', abbr: 'GO', desc: 'Coordinates the 20 micro-college nodes worldwide — ensuring seamless academic synchronisation, regulatory compliance, and cultural integration across jurisdictions.' },
 ];
@@ -48,6 +47,82 @@ const boardOfAdvisors = [
   { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Represents the student and community perspective on the board — ensuring that institutional decisions are informed by the lived experience of the people Artemis exists to serve.' },
   { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Guides the university\'s fundraising strategy, donor stewardship, and campaign execution — drawing on deep experience in philanthropy and institutional advancement.' },
   { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Provides strategic counsel on the university\'s commitment to equity and access, ensuring that Artemis research and education serve the communities that need them most.' },
+];
+
+/* ─── Data: Faculty ─── */
+const faculty = [
+  {
+    name: 'Arin Solberg',
+    rank: 'Professor',
+    dept: 'Synthetic Intelligence & Computation',
+    interests: ['Autonomous reasoning systems', 'Neuro-symbolic AI', 'Ethics of machine cognition'],
+  },
+  {
+    name: 'Priya Okafor',
+    rank: 'Associate Professor',
+    dept: 'Bio-Regenerative Arts',
+    interests: ['Living materials', 'Biodesign for planetary repair', 'Post-anthropocene aesthetics'],
+  },
+  {
+    name: 'Luca Ferreira',
+    rank: 'Professor',
+    dept: 'Cosmological Humanities',
+    interests: ['Space habitation ethics', 'Astro-philosophy', 'Exoplanetary governance'],
+  },
+  {
+    name: 'Miri Tanaka',
+    rank: 'Assistant Professor',
+    dept: 'Neo-Economics',
+    interests: ['Post-scarcity economic models', 'Decentralized financial systems', 'Universal basic capital'],
+  },
+  {
+    name: 'Dimitri Volkov',
+    rank: 'Professor',
+    dept: 'Planetary Engineering',
+    interests: ['Carbon-negative infrastructure', 'Geoengineering governance', 'Resilient urban systems'],
+  },
+  {
+    name: 'Amara Diallo',
+    rank: 'Associate Professor',
+    dept: 'Cognitive Enhancement Studies',
+    interests: ['Neuroplasticity and learning', 'Brain-computer interfaces', 'Cognitive equity'],
+  },
+  {
+    name: 'Jian Wei Chen',
+    rank: 'Professor',
+    dept: 'Quantum Information Science',
+    interests: ['Quantum error correction', 'Post-quantum cryptography', 'Quantum machine learning'],
+  },
+  {
+    name: 'Sofia Restrepo',
+    rank: 'Assistant Professor',
+    dept: 'Equitable Governance',
+    interests: ['Deliberative democracy at scale', 'Algorithmic fairness', 'Transnational policy design'],
+  },
+  {
+    name: 'Obi Nwosu',
+    rank: 'Associate Professor',
+    dept: 'Digital Civilizations',
+    interests: ['Networked society theory', 'Digital heritage preservation', 'Virtual community formation'],
+  },
+  {
+    name: 'Elena Voss',
+    rank: 'Professor',
+    dept: 'Adaptive Education Systems',
+    interests: ['Personalized learning architectures', 'AI-assisted pedagogy', 'Lifelong learning frameworks'],
+  },
+  {
+    name: 'Kwame Asante',
+    rank: 'Assistant Professor',
+    dept: 'Climate Adaptation Science',
+    interests: ['Resilient agriculture systems', 'Heat adaptation biology', 'Climate migration logistics'],
+  },
+  {
+    name: 'Yara Kuznetsova',
+    rank: 'Associate Professor',
+    dept: 'Synthetic Biology',
+    interests: ['Programmable organisms', 'Bio-computation', 'Open-source biotechnology'],
+  },
 ];
 
 const peopleStats = [
@@ -152,7 +227,7 @@ export default function OurPeople({ goToPage }: Props) {
   const officersAnim = useInView();
   const researchAnim = useInView();
   const boardAnim = useInView();
-  const spotlightAnim = useInView();
+  const facultyAnim = useInView();
   const statsAnim = useInView();
   const workingAnim = useInView();
   const activeSection = useActiveSection(['officers', 'research-leadership', 'board', 'faculty', 'staff']);
@@ -241,48 +316,76 @@ export default function OurPeople({ goToPage }: Props) {
         bgClass="bg-gray-50"
       />
 
-      {/* ── 5. FACULTY SPOTLIGHT ── */}
-      <section id="faculty" className="py-16 lg:py-24 scroll-mt-[110px]">
+      {/* ── 5. FACULTY ── */}
+      <section id="faculty" className="py-16 lg:py-24 scroll-mt-[110px] bg-white">
         <div
-          ref={spotlightAnim.ref}
-          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${spotlightAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          ref={facultyAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${facultyAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <div className="relative flex items-center mb-16">
-            <div className="flex-grow border-t border-gray-200"></div>
-            <span className="mx-4 text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
-              Faculty Spotlight
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Faculty
             </span>
-            <div className="flex-grow border-t border-gray-200"></div>
           </div>
 
-          <div className="max-w-[1600px] mx-auto">
-            <div className="relative w-full min-h-[380px] md:min-h-[460px] overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1655720357872-ce227e4164ba?auto=format&fit=crop&q=80&w=1400"
-                alt="Faculty collaboration at Artemis"
-                className="absolute inset-0 w-full h-full object-cover grayscale"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-              <div className="relative z-10 flex items-end h-full min-h-[380px] md:min-h-[460px] p-5 sm:p-8 md:p-14">
-                <div className="bg-white max-w-sm p-5 sm:p-8 shadow-xl">
-                  <div className="text-[10px] font-bold text-[#8A0000] tracking-widest mb-3 uppercase">
-                    Academic Excellence
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Distributed scholars, unified purpose
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-4">
+            Artemis faculty are not confined to a single discipline or a single campus. They are distributed scholars — thinkers who collaborate across nodes, time zones, and traditions to deliver a truly global education. Our founding faculty represent the first wave of appointments to the Centers of Inquiry.
+          </p>
+          <p className="text-[14px] text-gray-500 leading-relaxed max-w-2xl mb-12">
+            Each faculty member holds a joint appointment across at least two Artemis nodes, ensuring that knowledge flows freely and no centre of learning operates in isolation.
+          </p>
+
+          {/* Faculty directory — list layout */}
+          <div className="divide-y divide-gray-200">
+            {faculty.map((f, i) => (
+              <div
+                key={i}
+                className="group py-6 first:pt-0 hover:bg-gray-50/60 -mx-4 px-4 transition-colors"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+                  {/* Rank badge */}
+                  <div className="shrink-0 w-28">
+                    <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 border ${
+                      f.rank === 'Professor'
+                        ? 'border-[#8A0000]/30 text-[#8A0000] bg-[#8A0000]/[0.05]'
+                        : f.rank === 'Associate Professor'
+                        ? 'border-gray-300 text-gray-600 bg-gray-50'
+                        : 'border-gray-200 text-gray-500 bg-white'
+                    }`}>
+                      {f.rank}
+                    </span>
                   </div>
-                  <h3 className="text-[24px] font-bold text-[#141414] mb-3 leading-tight">
-                    Minds that shape the future
-                  </h3>
-                  <p className="text-[14px] text-gray-600 leading-relaxed mb-5">
-                    Artemis faculty are not confined to a single discipline or a single campus. They are distributed scholars — thinkers who collaborate across nodes, time zones, and traditions to deliver a truly global education.
-                  </p>
-                  <button
-                    onClick={() => goToPage('research')}
-                    className="text-[11px] font-bold uppercase tracking-widest border-b-2 border-[#8A0000] text-[#8A0000] pb-1 hover:text-black hover:border-black transition-colors"
-                  >
-                    Explore Faculty Research →
-                  </button>
+                  {/* Name & details */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                      {f.name}
+                    </h3>
+                    <div className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                      {f.dept}
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      {f.interests.map((interest, j) => (
+                        <span key={j} className="text-[12px] text-gray-500 leading-relaxed">
+                          {j > 0 && <span className="text-gray-300 mr-3">·</span>}
+                          {interest}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="mt-10 pt-8 border-t border-gray-200 flex items-center gap-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#8A0000]">
+              Faculty appointments are ongoing — new profiles will appear as they are confirmed
+            </span>
           </div>
         </div>
       </section>
