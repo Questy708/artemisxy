@@ -84,7 +84,7 @@ export default function Home({ goToPage }: HomeProps) {
               A new kind of university —<br />one degree, every horizon.
             </h1>
             <p className="text-[15px] sm:text-[18px] text-white/70 max-w-xl leading-relaxed font-light mb-8">
-              Inspired by centuries of collegiate tradition and built for a connected age, the University of Artemis unites diverse colleges — each with distinct expertise and identity — as integral academic units within one accredited institution.
+              Founded on the conviction that world-class education should transcend borders, the University of Artemis pioneers a global collegiate model that makes rigorous, accredited learning more accessible, transferable, and impactful. Our approach fuses the depth of the Oxford tutorial tradition with the reach of a distributed network — 50 colleges across 35 countries, each a real place in a real city, united under one institution and one degree.
             </p>
             <div className="flex items-center space-x-5 text-[11px] font-bold text-white/50 uppercase tracking-widest">
               <span>Apr 25, 2026</span>
