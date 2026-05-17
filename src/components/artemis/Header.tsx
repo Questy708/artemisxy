@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Menu, Shield } from 'lucide-react';
+import { Search, Menu } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 /* ─── Artemis Shield Logo ─── */
@@ -82,7 +82,6 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick }:
         <button onClick={() => goToPage('blog')} className="hover:underline transition-opacity cursor-pointer text-white/90" suppressHydrationWarning>Blog</button>
         <button onClick={() => goToPage('fundraising')} className="border border-white/40 text-white px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-white/10 transition-colors cursor-pointer" suppressHydrationWarning>Give</button>
         <button onClick={() => goToPage('apply')} className="bg-white text-[#8A0000] px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-gray-100 transition-colors cursor-pointer" suppressHydrationWarning>Apply</button>
-        <button onClick={() => goToPage('admin')} className="flex items-center gap-1 text-white/50 hover:text-white transition-colors cursor-pointer ml-1" suppressHydrationWarning title="Admin Dashboard"><Shield size={15} /></button>
       </div>
       <button
         onClick={onSearchClick}

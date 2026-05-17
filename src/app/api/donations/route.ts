@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { verifyAdminAuth } from '@/lib/admin-auth';
 
 // POST /api/donations — create a new donation record (persisted to SQLite via Prisma)
 export async function POST(request: Request) {
@@ -83,9 +84,21 @@ export async function POST(request: Request) {
 }
 
 // GET /api/donations — fetch recent public donations for the donor wall
-export async function GET() {
+// For the admin dashboard, requires auth. For the public donor wall, returns limited data.
+export async function GET(request: Request) {
+  const isAuth = await verifyAdminAuth();
+
   try {
-    // Query the database for recent non-anonymous donations
+    if (isAuth) {
+      // Admin: return ALL donations with full details
+      const allDonations = await db.donation.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 100,
+      });
+      return NextResponse.json({ donors: allDonations });
+    }
+
+    // Public: return limited, non-anonymous donor wall data
     const dbDonors = await db.donation.findMany({
       where: {
         donorAnonymous: false,

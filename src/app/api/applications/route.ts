@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { verifyAdminAuth } from '@/lib/admin-auth';
 
 // POST /api/applications — submit an application (persisted to SQLite via Prisma)
 export async function POST(request: Request) {
@@ -75,8 +76,13 @@ export async function POST(request: Request) {
   }
 }
 
-// GET /api/applications — list all applications (admin use)
+// GET /api/applications — list all applications (admin only)
 export async function GET() {
+  const isAuth = await verifyAdminAuth();
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const applications = await db.application.findMany({
       orderBy: { createdAt: 'desc' },

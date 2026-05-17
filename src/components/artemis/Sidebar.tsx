@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, X, Shield } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
@@ -71,13 +71,6 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
               Apply
             </button>
           </div>
-          <button
-            onClick={() => { goToPage('admin'); onClose?.(); }}
-            className="w-full mt-3 py-2 flex items-center justify-center gap-2 border border-gray-200 text-gray-500 text-[11px] font-bold uppercase tracking-wider hover:text-[#8A0000] hover:border-[#8A0000]/30 transition-colors text-center"
-            suppressHydrationWarning
-          >
-            <Shield size={13} /> Admin
-          </button>
         </div>
 
         <div className="mb-10 relative">
@@ -178,7 +171,6 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
           <button onClick={() => goToPage('jobs')} className="footer-link" suppressHydrationWarning>Careers</button>
           <button onClick={() => goToPage('fundraising')} className="footer-link text-[#8A0000]" suppressHydrationWarning>Give</button>
           <button onClick={() => goToPage('contact-us')} className="footer-link" suppressHydrationWarning>Contact</button>
-          <button onClick={() => goToPage('admin')} className="footer-link text-[#8A0000]" suppressHydrationWarning>Admin</button>
         </div>
         <div className="text-[12px] space-x-2 mb-6 font-medium">
           <button onClick={() => goToPage('about')} className="footer-link" suppressHydrationWarning>Privacy</button>

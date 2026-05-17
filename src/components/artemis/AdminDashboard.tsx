@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { RefreshCw, Download, ChevronDown, ChevronUp, Shield } from 'lucide-react';
+import { RefreshCw, Download, ChevronDown, ChevronUp, Shield, Lock, LogOut } from 'lucide-react';
 
 interface Props {
   goToPage: (page: string) => void;
@@ -10,12 +10,71 @@ interface Props {
 type Tab = 'overview' | 'donations' | 'applications' | 'contacts' | 'subscribers';
 
 export default function AdminDashboard({ goToPage }: Props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
+
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [expandedApp, setExpandedApp] = useState<number | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+
+  // Check if already authenticated on mount
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch('/api/admin');
+      if (res.ok) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    } catch {
+      setIsAuthenticated(false);
+    } finally {
+      setAuthChecked(true);
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!password) return;
+    setLoginLoading(true);
+    setLoginError('');
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        setIsAuthenticated(true);
+        setPassword('');
+      } else {
+        setLoginError(json.error || 'Authentication failed');
+      }
+    } catch {
+      setLoginError('Network error. Please try again.');
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/login', { method: 'DELETE' });
+    } catch { /* ignore */ }
+    setIsAuthenticated(false);
+    setData(null);
+  };
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -29,6 +88,11 @@ export default function AdminDashboard({ goToPage }: Props) {
         subscribers: '/api/subscribe',
       };
       const res = await fetch(endpoints[activeTab]);
+      if (res.status === 401) {
+        setIsAuthenticated(false);
+        setError('Session expired. Please log in again.');
+        return;
+      }
       const json = await res.json();
       if (json.error) {
         setError(json.error);
@@ -44,8 +108,10 @@ export default function AdminDashboard({ goToPage }: Props) {
   }, [activeTab]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (isAuthenticated) {
+      fetchData();
+    }
+  }, [isAuthenticated, fetchData]);
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   const formatCurrency = (n: number, c = 'USD') => new Intl.NumberFormat('en-US', { style: 'currency', currency: c }).format(n);
@@ -75,7 +141,7 @@ export default function AdminDashboard({ goToPage }: Props) {
     URL.revokeObjectURL(url);
   };
 
-  const tabs: { id: Tab; label: string; icon?: string }[] = [
+  const tabs: { id: Tab; label: string }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'donations', label: 'Donations' },
     { id: 'applications', label: 'Applications' },
@@ -83,6 +149,83 @@ export default function AdminDashboard({ goToPage }: Props) {
     { id: 'subscribers', label: 'Subscribers' },
   ];
 
+  // ─── Loading while checking auth ───
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen bg-[#141414] flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin mb-3" />
+          <p className="text-white/40 text-[13px]">Checking access...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── Login Screen ───
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#141414] flex items-center justify-center px-6">
+        <div className="w-full max-w-[380px]">
+          <div className="text-center mb-8">
+            <div className="w-14 h-14 bg-[#8A0000] flex items-center justify-center text-white mx-auto mb-4">
+              <Shield size={24} />
+            </div>
+            <h1 className="text-[20px] font-bold text-white mb-1">Artemis Admin</h1>
+            <p className="text-[13px] text-white/40">Enter your admin password to continue</p>
+          </div>
+
+          <form onSubmit={handleLogin}>
+            <div className="mb-4">
+              <div className="relative">
+                <Lock size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={e => { setPassword(e.target.value); setLoginError(''); }}
+                  placeholder="Admin password"
+                  className="w-full bg-white/5 border border-white/10 text-white px-4 py-3.5 pl-10 text-[14px] placeholder-white/25 focus:outline-none focus:border-[#8A0000] focus:ring-1 focus:ring-[#8A0000] transition-all"
+                  autoFocus
+                />
+              </div>
+            </div>
+
+            {loginError && (
+              <div className="bg-red-900/30 border border-red-500/30 text-red-300 p-3 text-[12px] mb-4">
+                {loginError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loginLoading || !password}
+              className="w-full py-3.5 bg-[#8A0000] text-white text-[12px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              suppressHydrationWarning
+            >
+              {loginLoading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => goToPage('home')}
+              className="text-[11px] font-bold uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors"
+              suppressHydrationWarning
+            >
+              Back to Site
+            </button>
+          </div>
+
+          <div className="mt-8 bg-white/5 border border-white/10 p-4">
+            <p className="text-[11px] text-white/30 leading-relaxed">
+              The admin password is set via the <code className="bg-white/10 px-1">ADMIN_PASSWORD</code> environment variable in your <code className="bg-white/10 px-1">.env</code> file. If you haven&apos;t set one, add it and restart the server.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── Authenticated Dashboard ───
   return (
     <div className="min-h-screen bg-[#F9F8F6]">
       {/* Header */}
@@ -108,6 +251,13 @@ export default function AdminDashboard({ goToPage }: Props) {
             >
               <RefreshCw size={13} className={loading ? 'animate-spin' : ''} />
               Refresh
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-white/50 hover:text-white transition-colors"
+              suppressHydrationWarning
+            >
+              <LogOut size={13} /> Logout
             </button>
             <button
               onClick={() => goToPage('home')}
@@ -151,7 +301,11 @@ export default function AdminDashboard({ goToPage }: Props) {
           <div className="bg-red-50 border border-red-200 text-red-700 p-6 text-[14px] rounded-sm">
             <p className="font-bold mb-1">Error loading data</p>
             <p>{error}</p>
-            <button onClick={fetchData} className="mt-3 text-[12px] font-bold uppercase tracking-wider underline" suppressHydrationWarning>Try Again</button>
+            {error.includes('Unauthorized') || error.includes('Session expired') ? (
+              <button onClick={handleLogout} className="mt-3 text-[12px] font-bold uppercase tracking-wider underline" suppressHydrationWarning>Log In Again</button>
+            ) : (
+              <button onClick={fetchData} className="mt-3 text-[12px] font-bold uppercase tracking-wider underline" suppressHydrationWarning>Try Again</button>
+            )}
           </div>
         ) : (
           <>
@@ -270,7 +424,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                     <li><strong>Newsletter Subscribers</strong> &mdash; from subscribe forms across the site (homepage, blog, footer)</li>
                   </ul>
                   <p className="text-[11px] text-blue-600 mt-3">
-                    Database file: <code className="bg-blue-100 px-1">/home/z/my-project/db/custom.db</code>. You can also export data to CSV using the download buttons on each tab.
+                    Database file: <code className="bg-blue-100 px-1">db/custom.db</code>. You can also export data to CSV using the download buttons on each tab.
                   </p>
                 </div>
               </div>
@@ -315,7 +469,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                         {(data.donors || []).map((d: any) => (
                           <tr key={d.id || d.date} className="border-b border-gray-100 hover:bg-gray-50">
                             <td className="p-3 text-gray-600 whitespace-nowrap">{formatDate(d.createdAt || d.date)}</td>
-                            <td className="p-3 font-medium text-[#141414]">{d.donorName || d.name || 'Anonymous'}</td>
+                            <td className="p-3 font-medium text-[#141414]">{d.donorName || d.name || (d.donorAnonymous ? 'Anonymous' : '-')}</td>
                             <td className="p-3 text-gray-500">{d.donorEmail || ''}</td>
                             <td className="p-3 font-bold text-[#141414]">{formatCurrency(d.amount, d.currency || 'USD')}</td>
                             <td className="p-3 text-gray-600 capitalize">{d.paymentMethod || 'card'}</td>
@@ -364,7 +518,6 @@ export default function AdminDashboard({ goToPage }: Props) {
                   <div className="space-y-4">
                     {(data.applications || []).map((app: any, idx: number) => (
                       <div key={app.id} className="bg-white border border-gray-200 hover:border-gray-300 transition-colors">
-                        {/* Summary row - always visible */}
                         <div
                           className="p-5 cursor-pointer flex items-start justify-between"
                           onClick={() => setExpandedApp(expandedApp === idx ? null : idx)}
@@ -382,7 +535,6 @@ export default function AdminDashboard({ goToPage }: Props) {
                           </div>
                         </div>
 
-                        {/* Expanded details */}
                         {expandedApp === idx && (
                           <div className="px-5 pb-5 border-t border-gray-100 pt-4">
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-[12px] mb-4">

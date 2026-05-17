@@ -1,8 +1,15 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { verifyAdminAuth } from '@/lib/admin-auth';
 
 // GET /api/admin — aggregate stats for the admin dashboard
 export async function GET() {
+  // Require admin authentication
+  const isAuth = await verifyAdminAuth();
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const [
       totalDonations,

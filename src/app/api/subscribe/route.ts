@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { verifyAdminAuth } from '@/lib/admin-auth';
 
 // POST /api/subscribe — add a newsletter subscriber
 export async function POST(request: Request) {
@@ -39,8 +40,13 @@ export async function POST(request: Request) {
   }
 }
 
-// GET /api/subscribe — list subscribers (admin)
+// GET /api/subscribe — list subscribers (admin only)
 export async function GET() {
+  const isAuth = await verifyAdminAuth();
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const subscribers = await db.subscriber.findMany({
       where: { active: true },
