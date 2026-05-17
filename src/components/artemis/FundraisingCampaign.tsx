@@ -162,19 +162,19 @@ const CRYPTO = { BTC: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', ETH: '0x71C7
 const PRESETS = [25, 100, 500, 1000, 5000, 10000];
 
 const RESOURCES = [
-  { id: 'founding-prospectus', title: 'Founding Prospectus', desc: 'The complete donor-facing deck: vision, model, financial engine, naming opportunities, and the ask. Designed to close.', icon: FileText, file: '/resources/artemis-founding-prospectus.pdf', pages: 14 },
-  { id: 'campaign-overview', title: 'Campaign Overview', desc: 'A one-page summary of the $100M founding campaign: milestones, pillars, and how to give.', icon: Zap, file: '/resources/artemis-campaign-overview.pdf', pages: 1 },
+  { id: 'founding-prospectus', title: 'Founding Prospectus', desc: 'The complete donor-facing deck: vision, model, financial engine, naming opportunities, and the ask. Designed to close.', icon: FileText, file: '/resources/artemis-founding-prospectus.pdf', pages: 19 },
+  { id: 'campaign-overview', title: 'Campaign Overview', desc: 'A concise summary of the $100M founding campaign: milestones, pillars, allocation, and how to give.', icon: Zap, file: '/resources/artemis-campaign-overview.pdf', pages: 2 },
   { id: 'case-for-support', title: 'Case for Support', desc: 'The detailed narrative: why Artemis, why now, and why your gift creates a self-sustaining institution.', icon: Heart, file: '/resources/artemis-case-for-support.pdf', pages: 8 },
   { id: 'financial-model', title: 'Financial Model Breakdown', desc: 'Full pro-forma: where every dollar goes, revenue projections, OPEX ratios, and endowment growth.', icon: CreditCard, file: '/resources/artemis-financial-model.pdf', pages: 6 },
   { id: 'tax-guide', title: 'Tax Deductibility Guide', desc: 'Jurisdiction-by-jurisdiction guide: US 501(c)(3), UK Gift Aid, Swiss foundations, and more.', icon: Scale, file: '/resources/artemis-tax-guide.pdf', pages: 4 },
-  { id: 'legal-entities', title: 'Legal Entity Overview', desc: 'Corporate structure across 25 countries, governance documents, and incorporation details.', icon: Landmark, file: '/resources/artemis-legal-entities.pdf', pages: 5 },
-  { id: 'naming-booklet', title: 'Naming Opportunities Booklet', desc: 'All naming opportunities with descriptions, amounts, and scope — Colleges, Central Nodes, Professorships, and more.', icon: Crown, file: '/resources/artemis-naming-booklet.pdf', pages: 10 },
+  { id: 'legal-entities', title: 'Legal Entity Overview', desc: 'Corporate structure across three jurisdictions, governance documents, and incorporation details.', icon: Landmark, file: '/resources/artemis-legal-entities.pdf', pages: 3 },
+  { id: 'naming-booklet', title: 'Naming Opportunities Booklet', desc: 'All naming opportunities with descriptions, amounts, and scope — Colleges, Central Nodes, Professorships, and more.', icon: Crown, file: '/resources/artemis-naming-booklet.pdf', pages: 7 },
   { id: 'giving-circles', title: 'Giving Circles Benefits Guide', desc: 'Full details on each circle: benefits, recognition, events, and annual impact.', icon: Star, file: '/resources/artemis-giving-circles.pdf', pages: 6 },
-  { id: 'campus-plan', title: 'Campus Master Plan', desc: 'Renderings and plans for 50 Colleges, 3 Central Nodes, and the global node network.', icon: Building2, file: '/resources/artemis-campus-master-plan.pdf', pages: 12 },
-  { id: 'alliance-map', title: 'Collegium Alliance Map', desc: 'High-res map: 10 colleges, 6 continents, 35 countries, and node locations.', icon: MapPin, file: '/resources/artemis-collegium-map.pdf', pages: 2 },
-  { id: 'academic-prospectus', title: 'Academic Prospectus', desc: 'Programs of study, curriculum pillars, faculty hiring plan, and the competency-based grading model.', icon: BookOpen, file: '/resources/artemis-academic-prospectus.pdf', pages: 8 },
-  { id: 'research-portfolio', title: 'Centers of Inquiry Research Portfolio', desc: 'The 19 Centers, their directors, current projects, and research outputs.', icon: FlaskConical, file: '/resources/artemis-research-portfolio.pdf', pages: 10 },
-  { id: 'strategic-plan', title: 'Strategic Plan 2025-2030', desc: 'The full 5-year strategic roadmap: academic, financial, and infrastructure plans.', icon: Rocket, file: '/resources/artemis-strategic-plan.pdf', pages: 16 },
+  { id: 'campus-plan', title: 'Campus Master Plan', desc: 'Repurposing philosophy, 3 Central Nodes, College tiers, and the global node network.', icon: Building2, file: '/resources/artemis-campus-master-plan.pdf', pages: 4 },
+  { id: 'alliance-map', title: 'Collegium Alliance Map', desc: 'Regional breakdown: 50 Colleges, 6 continents, 35 countries, and Central Node locations.', icon: MapPin, file: '/resources/artemis-collegium-map.pdf', pages: 2 },
+  { id: 'academic-prospectus', title: 'Academic Prospectus', desc: 'Programs of study, curriculum pillars, tutorial system, and the competency-based grading model.', icon: BookOpen, file: '/resources/artemis-academic-prospectus.pdf', pages: 6 },
+  { id: 'research-portfolio', title: 'Centers of Inquiry Research Portfolio', desc: 'The 19 Centers, their research domains, current projects, and the 7-year release policy.', icon: FlaskConical, file: '/resources/artemis-research-portfolio.pdf', pages: 5 },
+  { id: 'strategic-plan', title: 'Strategic Plan 2025-2030', desc: 'The full 5-year strategic roadmap: year-by-year targets, academic, financial, and infrastructure plans.', icon: Rocket, file: '/resources/artemis-strategic-plan.pdf', pages: 8 },
 ];
 
 /* ─── Helpers ─── */
