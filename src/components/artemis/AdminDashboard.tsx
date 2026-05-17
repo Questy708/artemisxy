@@ -135,7 +135,7 @@ export default function AdminDashboard({ goToPage }: Props) {
 
   const checkAuth = async () => {
     try {
-      const res = await fetch('/api/admin');
+      const res = await fetch('/api/admin', { credentials: 'include' });
       setIsAuthenticated(res.ok);
     } catch {
       setIsAuthenticated(false);
@@ -157,8 +157,14 @@ export default function AdminDashboard({ goToPage }: Props) {
       });
       const json = await res.json();
       if (json.success) {
-        setIsAuthenticated(true);
-        setPassword('');
+        // Verify the session actually works by checking auth
+        const verifyRes = await fetch('/api/admin', { credentials: 'include' });
+        if (verifyRes.ok) {
+          setIsAuthenticated(true);
+          setPassword('');
+        } else {
+          setLoginError('Session could not be established. Please try again.');
+        }
       } else {
         setLoginError(json.error || 'Authentication failed');
       }
@@ -170,7 +176,7 @@ export default function AdminDashboard({ goToPage }: Props) {
   };
 
   const handleLogout = async () => {
-    try { await fetch('/api/admin/login', { method: 'DELETE' }); } catch { /* ignore */ }
+    try { await fetch('/api/admin/login', { method: 'DELETE', credentials: 'include' }); } catch { /* ignore */ }
     setIsAuthenticated(false);
     setAllData(null);
   };
@@ -180,11 +186,11 @@ export default function AdminDashboard({ goToPage }: Props) {
     setError('');
     try {
       const [overviewRes, donationsRes, applicationsRes, messagesRes, subscribersRes] = await Promise.all([
-        fetch('/api/admin'),
-        fetch('/api/donations'),
-        fetch('/api/applications'),
-        fetch('/api/contact'),
-        fetch('/api/subscribe'),
+        fetch('/api/admin', { credentials: 'include' }),
+        fetch('/api/donations', { credentials: 'include' }),
+        fetch('/api/applications', { credentials: 'include' }),
+        fetch('/api/contact', { credentials: 'include' }),
+        fetch('/api/subscribe', { credentials: 'include' }),
       ]);
 
       if (overviewRes.status === 401) {
