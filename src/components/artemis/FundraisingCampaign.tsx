@@ -12,7 +12,7 @@ import {
   Banknote, Repeat, Rocket, Landmark,
   Heart,
   Briefcase, FileText, Gift, HandCoins, Phone,
-  Scale, MapPin, Eye, CircleDot
+  Scale, MapPin, Eye, CircleDot, Download
 } from 'lucide-react';
 
 interface Props {
@@ -160,6 +160,22 @@ const DONORS = [
 
 const CRYPTO = { BTC: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', ETH: '0x71C7656EC7ab88b098defB751B7401B5f6d8976F' };
 const PRESETS = [25, 100, 500, 1000, 5000, 10000];
+
+const RESOURCES = [
+  { id: 'founding-prospectus', title: 'Founding Prospectus', desc: 'The complete donor-facing deck: vision, model, financial engine, naming opportunities, and the ask. Designed to close.', icon: FileText, file: '/resources/artemis-founding-prospectus.pdf', pages: 14 },
+  { id: 'campaign-overview', title: 'Campaign Overview', desc: 'A one-page summary of the $100M founding campaign: milestones, pillars, and how to give.', icon: Zap, file: '/resources/artemis-campaign-overview.pdf', pages: 1 },
+  { id: 'case-for-support', title: 'Case for Support', desc: 'The detailed narrative: why Artemis, why now, and why your gift creates a self-sustaining institution.', icon: Heart, file: '/resources/artemis-case-for-support.pdf', pages: 8 },
+  { id: 'financial-model', title: 'Financial Model Breakdown', desc: 'Full pro-forma: where every dollar goes, revenue projections, OPEX ratios, and endowment growth.', icon: CreditCard, file: '/resources/artemis-financial-model.pdf', pages: 6 },
+  { id: 'tax-guide', title: 'Tax Deductibility Guide', desc: 'Jurisdiction-by-jurisdiction guide: US 501(c)(3), UK Gift Aid, Swiss foundations, and more.', icon: Scale, file: '/resources/artemis-tax-guide.pdf', pages: 4 },
+  { id: 'legal-entities', title: 'Legal Entity Overview', desc: 'Corporate structure across 25 countries, governance documents, and incorporation details.', icon: Landmark, file: '/resources/artemis-legal-entities.pdf', pages: 5 },
+  { id: 'naming-booklet', title: 'Naming Opportunities Booklet', desc: 'All naming opportunities with descriptions, amounts, and scope — Colleges, Central Nodes, Professorships, and more.', icon: Crown, file: '/resources/artemis-naming-booklet.pdf', pages: 10 },
+  { id: 'giving-circles', title: 'Giving Circles Benefits Guide', desc: 'Full details on each circle: benefits, recognition, events, and annual impact.', icon: Star, file: '/resources/artemis-giving-circles.pdf', pages: 6 },
+  { id: 'campus-plan', title: 'Campus Master Plan', desc: 'Renderings and plans for 50 Colleges, 3 Central Nodes, and the global node network.', icon: Building2, file: '/resources/artemis-campus-master-plan.pdf', pages: 12 },
+  { id: 'alliance-map', title: 'Collegium Alliance Map', desc: 'High-res map: 10 colleges, 6 continents, 35 countries, and node locations.', icon: MapPin, file: '/resources/artemis-collegium-map.pdf', pages: 2 },
+  { id: 'academic-prospectus', title: 'Academic Prospectus', desc: 'Programs of study, curriculum pillars, faculty hiring plan, and the competency-based grading model.', icon: BookOpen, file: '/resources/artemis-academic-prospectus.pdf', pages: 8 },
+  { id: 'research-portfolio', title: 'Centers of Inquiry Research Portfolio', desc: 'The 19 Centers, their directors, current projects, and research outputs.', icon: FlaskConical, file: '/resources/artemis-research-portfolio.pdf', pages: 10 },
+  { id: 'strategic-plan', title: 'Strategic Plan 2025-2030', desc: 'The full 5-year strategic roadmap: academic, financial, and infrastructure plans.', icon: Rocket, file: '/resources/artemis-strategic-plan.pdf', pages: 16 },
+];
 
 /* ─── Helpers ─── */
 function getGivingCircle(amount: number) {
@@ -389,7 +405,7 @@ function PhaseSlider() {
 
 /* ─── Main Component ─── */
 export default function FundraisingCampaign({ goToPage }: Props) {
-  const activeSection = useActiveSection(['case', 'pillars', 'ask', 'phases', 'opportunities', 'circles', 'ways', 'give', 'accountability']);
+  const activeSection = useActiveSection(['case', 'pillars', 'ask', 'phases', 'opportunities', 'circles', 'ways', 'give', 'resources', 'accountability']);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState('');
   const [donorName, setDonorName] = useState('');
@@ -445,6 +461,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
   const beyondAnim = useInView(0);
   const askAnim = useInView(0);
   const accountabilityAnim = useInView(0);
+  const resourcesAnim = useInView(0);
 
   const effectiveAmount = selectedAmount || parseFloat(customAmount) || 0;
 
@@ -546,6 +563,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
           { id: 'circles', label: 'Giving Circles' },
           { id: 'ways', label: 'Ways to Give' },
           { id: 'give', label: 'Give Now' },
+          { id: 'resources', label: 'Resources' },
           { id: 'accountability', label: 'Accountability' },
         ]}
         activeSection={activeSection}
@@ -1744,6 +1762,51 @@ export default function FundraisingCampaign({ goToPage }: Props) {
               })}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════
+          RESOURCES — Downloadable Documents
+          ══════════════════════════════════════════ */}
+      <section id="resources" className="scroll-mt-[110px] py-16 sm:py-24 lg:py-36 bg-gray-50 border-t border-gray-100">
+        <div ref={resourcesAnim.ref} className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
+          <motion.h2 {...clipReveal(resourcesAnim.visible)} className="text-[32px] sm:text-[44px] md:text-[56px] font-black leading-[0.92] tracking-tighter text-[#141414] mb-4">
+            Resources
+          </motion.h2>
+          <motion.p {...fadeUp(resourcesAnim.visible, 0.1)} className="text-[16px] text-gray-600 max-w-2xl leading-relaxed mb-10 sm:mb-16">
+            Everything you need to evaluate, share, and decide. Download, print, or forward to your advisors.
+          </motion.p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {RESOURCES.map((res, i) => {
+              const Icon = res.icon;
+              return (
+                <motion.a
+                  key={res.id}
+                  href={res.file}
+                  download
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.4) }}
+                  viewport={{ once: true }}
+                  className="group bg-white border border-gray-200 p-5 sm:p-6 hover:border-[#8A0000]/30 hover:shadow-sm transition-all flex flex-col"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-10 h-10 flex items-center justify-center bg-[#8A0000]/5 shrink-0">
+                      <Icon size={18} className="text-[#8A0000]" />
+                    </div>
+                    <Download size={16} className="text-gray-300 group-hover:text-[#8A0000] transition-colors" />
+                  </div>
+                  <h4 className="text-[14px] sm:text-[15px] font-bold text-[#141414] mb-1.5 group-hover:text-[#8A0000] transition-colors">{res.title}</h4>
+                  <p className="text-[12px] sm:text-[13px] text-gray-500 leading-relaxed flex-1">{res.desc}</p>
+                  <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">PDF</span>
+                    <span className="text-[10px] text-gray-400">{res.pages} page{res.pages !== 1 ? 's' : ''}</span>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
         </div>
       </section>
 
