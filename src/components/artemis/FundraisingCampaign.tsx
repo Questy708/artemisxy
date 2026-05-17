@@ -476,10 +476,10 @@ export default function FundraisingCampaign({ goToPage }: Props) {
       });
       const data = await res.json();
       if (data.success && data.checkoutUrl) {
-        // Stripe is configured — redirect to checkout
+        // Stripe, PayPal, or DONATION_LINK — redirect to checkout
         window.location.href = data.checkoutUrl;
       } else if (data.success) {
-        // No Stripe — donation recorded as pending
+        // No gateway — donation recorded as pending
         setDonationResult({ success: true, message: data.message || 'Thank you! Your donation has been recorded. We will follow up with payment details.' });
       } else {
         setDonationResult({ success: false, message: data.error || 'Something went wrong.' });

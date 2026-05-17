@@ -1,13 +1,19 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { RefreshCw, Download, ChevronDown, ChevronUp, Shield, Lock, LogOut, Users, DollarSign, Mail, UserPlus, Eye, EyeOff } from 'lucide-react';
+import { RefreshCw, Download, ChevronDown, ChevronUp, Shield, Lock, LogOut, Eye, EyeOff } from 'lucide-react';
 
 interface Props {
   goToPage: (page: string) => void;
 }
 
-type Section = 'home' | 'donations' | 'applications' | 'messages' | 'subscribers';
+interface AllData {
+  overview: any;
+  donations: any;
+  applications: any;
+  messages: any;
+  subscribers: any;
+}
 
 export default function AdminDashboard({ goToPage }: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,12 +23,11 @@ export default function AdminDashboard({ goToPage }: Props) {
   const [authChecked, setAuthChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [activeSection, setActiveSection] = useState<Section>('home');
-  const [overviewData, setOverviewData] = useState<any>(null);
-  const [sectionData, setSectionData] = useState<any>(null);
+  const [allData, setAllData] = useState<AllData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [expandedApp, setExpandedApp] = useState<number | null>(null);
+  const [expandedMsg, setExpandedMsg] = useState<number | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
   // Check if already authenticated on mount
@@ -75,25 +80,41 @@ export default function AdminDashboard({ goToPage }: Props) {
       await fetch('/api/admin/login', { method: 'DELETE' });
     } catch { /* ignore */ }
     setIsAuthenticated(false);
-    setOverviewData(null);
-    setSectionData(null);
+    setAllData(null);
   };
 
-  const fetchOverview = useCallback(async () => {
+  // Fetch ALL data in parallel after login
+  const fetchAllData = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/admin');
-      if (res.status === 401) {
+      const [overviewRes, donationsRes, applicationsRes, messagesRes, subscribersRes] = await Promise.all([
+        fetch('/api/admin'),
+        fetch('/api/donations'),
+        fetch('/api/applications'),
+        fetch('/api/contact'),
+        fetch('/api/subscribe'),
+      ]);
+
+      // Check auth on first response
+      if (overviewRes.status === 401) {
         setIsAuthenticated(false);
         setError('Session expired. Please log in again.');
         return;
       }
-      const json = await res.json();
-      if (json.error) {
-        setError(json.error);
+
+      const [overview, donations, applications, messages, subscribers] = await Promise.all([
+        overviewRes.json(),
+        donationsRes.json(),
+        applicationsRes.json(),
+        messagesRes.json(),
+        subscribersRes.json(),
+      ]);
+
+      if (overview.error) {
+        setError(overview.error);
       } else {
-        setOverviewData(json);
+        setAllData({ overview, donations, applications, messages, subscribers });
       }
     } catch {
       setError('Failed to fetch data. Make sure the server is running.');
@@ -103,50 +124,11 @@ export default function AdminDashboard({ goToPage }: Props) {
     }
   }, []);
 
-  const fetchSection = useCallback(async (section: Section) => {
-    if (section === 'home') {
-      fetchOverview();
-      return;
-    }
-    setLoading(true);
-    setError('');
-    setExpandedApp(null);
-    try {
-      const endpoints: Record<string, string> = {
-        donations: '/api/donations',
-        applications: '/api/applications',
-        messages: '/api/contact',
-        subscribers: '/api/subscribe',
-      };
-      const res = await fetch(endpoints[section]);
-      if (res.status === 401) {
-        setIsAuthenticated(false);
-        setError('Session expired. Please log in again.');
-        return;
-      }
-      const json = await res.json();
-      if (json.error) {
-        setError(json.error);
-      } else {
-        setSectionData(json);
-      }
-    } catch {
-      setError('Failed to fetch data. Make sure the server is running.');
-    } finally {
-      setLoading(false);
-      setLastRefresh(new Date());
-    }
-  }, [fetchOverview]);
-
   useEffect(() => {
     if (isAuthenticated) {
-      if (activeSection === 'home') {
-        fetchOverview();
-      } else {
-        fetchSection(activeSection);
-      }
+      fetchAllData();
     }
-  }, [isAuthenticated, activeSection, fetchOverview, fetchSection]);
+  }, [isAuthenticated, fetchAllData]);
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   const formatCurrency = (n: number, c = 'USD') => new Intl.NumberFormat('en-US', { style: 'currency', currency: c }).format(n);
@@ -178,10 +160,11 @@ export default function AdminDashboard({ goToPage }: Props) {
 
   // Build "What's New" feed from overview data
   const buildWhatsNew = () => {
-    if (!overviewData) return [];
+    if (!allData?.overview) return [];
+    const ov = allData.overview;
     const items: { type: string; emoji: string; text: string; date: string; id: string }[] = [];
 
-    (overviewData.recentDonations || []).forEach((d: any) => {
+    (ov.recentDonations || []).forEach((d: any) => {
       items.push({
         type: 'donation',
         emoji: '💰',
@@ -191,7 +174,7 @@ export default function AdminDashboard({ goToPage }: Props) {
       });
     });
 
-    (overviewData.recentApplications || []).forEach((a: any) => {
+    (ov.recentApplications || []).forEach((a: any) => {
       items.push({
         type: 'application',
         emoji: '📋',
@@ -201,7 +184,7 @@ export default function AdminDashboard({ goToPage }: Props) {
       });
     });
 
-    (overviewData.recentContacts || []).forEach((c: any) => {
+    (ov.recentContacts || []).forEach((c: any) => {
       items.push({
         type: 'message',
         emoji: '✉️',
@@ -211,25 +194,8 @@ export default function AdminDashboard({ goToPage }: Props) {
       });
     });
 
-    // Sort by date descending and take top 5
     items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     return items.slice(0, 5);
-  };
-
-  const navItems: { id: Section; label: string; emoji: string; icon: React.ReactNode }[] = [
-    { id: 'home', label: 'Home', emoji: '🏠', icon: <Shield size={20} /> },
-    { id: 'donations', label: 'Money Donated', emoji: '💰', icon: <DollarSign size={20} /> },
-    { id: 'applications', label: 'People Who Applied', emoji: '📋', icon: <Users size={20} /> },
-    { id: 'messages', label: 'Messages Sent', emoji: '✉️', icon: <Mail size={20} /> },
-    { id: 'subscribers', label: 'Newsletter Sign-ups', emoji: '📬', icon: <UserPlus size={20} /> },
-  ];
-
-  const handleRefresh = () => {
-    if (activeSection === 'home') {
-      fetchOverview();
-    } else {
-      fetchSection(activeSection);
-    }
   };
 
   // ─── Loading while checking auth ───
@@ -316,11 +282,17 @@ export default function AdminDashboard({ goToPage }: Props) {
     );
   }
 
-  // ─── Authenticated Dashboard ───
+  // ─── Authenticated Dashboard — Single Scrollable Page ───
+  const stats = allData?.overview?.stats;
+  const donors = allData?.donations?.donors || [];
+  const applications = allData?.applications?.applications || [];
+  const messages = allData?.messages?.messages || [];
+  const subscribers = allData?.subscribers?.subscribers || [];
+
   return (
     <div className="min-h-screen bg-[#F9F8F6]">
-      {/* Header */}
-      <div className="bg-[#141414] text-white px-6 py-5">
+      {/* ─── Header Bar ─── */}
+      <div className="bg-[#141414] text-white px-6 py-5 sticky top-0 z-30">
         <div className="max-w-[1200px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-[#8A0000] rounded-xl flex items-center justify-center text-white">
@@ -336,7 +308,7 @@ export default function AdminDashboard({ goToPage }: Props) {
               Updated {lastRefresh.toLocaleTimeString()}
             </span>
             <button
-              onClick={handleRefresh}
+              onClick={fetchAllData}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-sm font-semibold text-white/60 hover:text-white transition-all"
               suppressHydrationWarning
             >
@@ -362,33 +334,8 @@ export default function AdminDashboard({ goToPage }: Props) {
         </div>
       </div>
 
-      {/* Big Navigation Cards */}
-      <div className="max-w-[1200px] mx-auto px-6 pt-6">
-        <div className="grid grid-cols-5 gap-3">
-          {navItems.map(item => (
-            <button
-              key={item.id}
-              onClick={() => setActiveSection(item.id)}
-              className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all text-center ${
-                activeSection === item.id
-                  ? 'bg-[#8A0000] text-white shadow-lg shadow-[#8A0000]/20 scale-[1.02]'
-                  : 'bg-white text-[#141414] hover:shadow-md border border-gray-100'
-              }`}
-              suppressHydrationWarning
-            >
-              <span className="text-2xl">{item.emoji}</span>
-              <span className={`text-xs font-bold leading-tight ${
-                activeSection === item.id ? 'text-white' : 'text-gray-600'
-              }`}>
-                {item.label}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-[1200px] mx-auto px-6 py-6">
+      {/* ─── Content ─── */}
+      <div className="max-w-[1200px] mx-auto px-6 py-8">
         {loading ? (
           <div className="text-center py-24">
             <div className="inline-block w-8 h-8 border-3 border-[#8A0000] border-t-transparent rounded-full animate-spin mb-4" />
@@ -401,462 +348,403 @@ export default function AdminDashboard({ goToPage }: Props) {
             {error.includes('Unauthorized') || error.includes('Session expired') ? (
               <button onClick={handleLogout} className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm" suppressHydrationWarning>Log In Again</button>
             ) : (
-              <button onClick={handleRefresh} className="px-6 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm" suppressHydrationWarning>Try Again</button>
+              <button onClick={fetchAllData} className="px-6 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm" suppressHydrationWarning>Try Again</button>
             )}
           </div>
         ) : (
-          <>
-            {/* ═══════ HOME / OVERVIEW ═══════ */}
-            {activeSection === 'home' && overviewData?.stats && (
-              <div>
-                {/* Welcome */}
-                <div className="mb-8">
-                  <h2 className="text-3xl font-black text-[#141414] mb-1">Welcome back! 👋</h2>
-                  <p className="text-base text-gray-500">Here&apos;s what&apos;s happening with your site.</p>
-                </div>
+          <div className="space-y-10">
 
-                {/* Stat Cards */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-                  {[
-                    { label: 'Money Donated', value: overviewData.stats.totalDonations, emoji: '💰', color: '#8A0000' },
-                    { label: 'Total Raised', value: formatCurrency(overviewData.stats.totalRaised || 0), emoji: '💵', color: '#15803d' },
-                    { label: 'People Who Applied', value: overviewData.stats.totalApplications, emoji: '📋', color: '#b45309' },
-                    { label: 'Messages Sent', value: overviewData.stats.totalContactMessages, emoji: '✉️', color: '#0e7490' },
-                    { label: 'Newsletter Sign-ups', value: overviewData.stats.totalSubscribers, emoji: '📬', color: '#7c3aed' },
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow text-center">
-                      <div className="text-3xl mb-2">{stat.emoji}</div>
-                      <div className="text-3xl font-black" style={{ color: stat.color }}>{stat.value}</div>
-                      <div className="text-sm font-semibold text-gray-400 mt-1">{stat.label}</div>
+            {/* ═══════ STATS BAR ═══════ */}
+            {stats && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                {[
+                  { label: 'Donations', value: stats.totalDonations, emoji: '💰', color: '#8A0000' },
+                  { label: 'Total Raised', value: formatCurrency(stats.totalRaised || 0), emoji: '💵', color: '#15803d' },
+                  { label: 'Applications', value: stats.totalApplications, emoji: '📋', color: '#b45309' },
+                  { label: 'Messages', value: stats.totalContactMessages, emoji: '✉️', color: '#0e7490' },
+                  { label: 'Subscribers', value: stats.totalSubscribers, emoji: '📬', color: '#7c3aed' },
+                ].map((stat, i) => (
+                  <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow text-center">
+                    <div className="text-3xl mb-2">{stat.emoji}</div>
+                    <div className="text-3xl font-black" style={{ color: stat.color }}>{stat.value}</div>
+                    <div className="text-sm font-semibold text-gray-400 mt-1">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* ═══════ RECENT ACTIVITY ═══════ */}
+            <section>
+              <h2 className="text-2xl font-black text-[#141414] mb-4">Recent Activity ✨</h2>
+              {buildWhatsNew().length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
+                  <p className="text-4xl mb-3">🌱</p>
+                  <p className="text-lg text-gray-400 font-medium">Nothing here yet</p>
+                  <p className="text-sm text-gray-300 mt-1">When people interact with your site, you&apos;ll see their activity here.</p>
+                </div>
+              ) : (
+                <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-50">
+                  {buildWhatsNew().map(item => (
+                    <div key={item.id} className="flex items-center gap-4 p-5">
+                      <span className="text-2xl">{item.emoji}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-base font-semibold text-[#141414]">{item.text}</p>
+                        <p className="text-sm text-gray-400">{formatDate(item.date)}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
+              )}
+            </section>
 
-                {/* Unread Messages Alert */}
-                {overviewData.stats.unreadMessages > 0 && (
+            {/* ═══════ MESSAGES ═══════ */}
+            <section>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-[#141414]">✉️ Messages</h2>
+                  <p className="text-base text-gray-500 mt-1">Messages from your contact form</p>
+                </div>
+                {messages.length > 0 && (
                   <button
-                    onClick={() => setActiveSection('messages')}
-                    className="w-full bg-[#8A0000]/5 border-2 border-[#8A0000]/20 rounded-2xl p-5 mb-8 flex items-center justify-between hover:bg-[#8A0000]/10 transition-colors text-left"
+                    onClick={() => exportCSV(messages, 'artemis-messages')}
+                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
                     suppressHydrationWarning
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">💌</span>
-                      <div>
-                        <p className="text-lg font-bold text-[#8A0000]">{overviewData.stats.unreadMessages} new message{overviewData.stats.unreadMessages !== 1 ? 's' : ''}</p>
-                        <p className="text-sm text-[#8A0000]/60">Click to read them</p>
-                      </div>
-                    </div>
-                    <span className="text-[#8A0000] text-xl">→</span>
+                    <Download size={18} /> Export CSV
                   </button>
                 )}
-
-                {/* What's New Feed */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-[#141414] mb-4">What&apos;s New ✨</h3>
-                  {buildWhatsNew().length === 0 ? (
-                    <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
-                      <p className="text-4xl mb-3">🌱</p>
-                      <p className="text-lg text-gray-400 font-medium">Nothing here yet</p>
-                      <p className="text-sm text-gray-300 mt-1">When people interact with your site, you&apos;ll see their activity here.</p>
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-50">
-                      {buildWhatsNew().map(item => (
-                        <div key={item.id} className="flex items-center gap-4 p-5">
-                          <span className="text-2xl">{item.emoji}</span>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-base font-semibold text-[#141414]">{item.text}</p>
-                            <p className="text-sm text-gray-400">{formatDate(item.date)}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Quick Links to Sections */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  {[
-                    { section: 'donations' as Section, label: 'Money Donated', emoji: '💰', count: overviewData.stats.totalDonations },
-                    { section: 'applications' as Section, label: 'People Who Applied', emoji: '📋', count: overviewData.stats.totalApplications },
-                    { section: 'messages' as Section, label: 'Messages Sent', emoji: '✉️', count: overviewData.stats.totalContactMessages },
-                    { section: 'subscribers' as Section, label: 'Newsletter Sign-ups', emoji: '📬', count: overviewData.stats.totalSubscribers },
-                  ].map(link => (
-                    <button
-                      key={link.section}
-                      onClick={() => setActiveSection(link.section)}
-                      className="bg-white rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition-all hover:scale-[1.02] group"
-                      suppressHydrationWarning
-                    >
-                      <span className="text-3xl block mb-2">{link.emoji}</span>
-                      <p className="text-2xl font-black text-[#141414]">{link.count}</p>
-                      <p className="text-sm font-semibold text-gray-400 mb-2">{link.label}</p>
-                      <span className="text-xs font-bold text-[#8A0000] group-hover:underline">View all →</span>
-                    </button>
-                  ))}
-                </div>
-
-                {/* Payment Status */}
-                {overviewData.donationsByStatus && Object.keys(overviewData.donationsByStatus).length > 0 && (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6">
-                    <h3 className="text-lg font-bold text-[#141414] mb-4">💳 Payment Status</h3>
-                    <div className="flex flex-wrap gap-6 mb-4">
-                      {Object.entries(overviewData.donationsByStatus).map(([status, count]) => (
-                        <div key={status} className="flex items-center gap-3">
-                          <span className="text-2xl font-black text-[#141414]">{count as number}</span>
-                          <span className="text-sm font-semibold uppercase tracking-wider text-gray-400">{status}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="text-sm text-gray-500">
-                      <strong>pending</strong> = recorded but payment hasn&apos;t been confirmed yet.
-                      To accept real payments, set up Stripe (see below).
-                    </p>
-                  </div>
-                )}
-
-                {/* Payment Setup - Friendly */}
-                <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 mb-4">
-                  <h3 className="text-lg font-bold text-amber-800 mb-3">💳 How to Accept Real Payments</h3>
-                  <p className="text-base text-amber-700 leading-relaxed mb-4">
-                    Right now, donations are saved as <strong>pending</strong>. To accept real credit card payments through Stripe:
-                  </p>
-                  <ol className="text-sm text-amber-700 space-y-2 list-decimal list-inside">
-                    <li>Create a Stripe account at <a href="https://stripe.com" target="_blank" rel="noreferrer" className="underline font-semibold">stripe.com</a></li>
-                    <li>Get your API keys from the Stripe Dashboard (Developers → API Keys)</li>
-                    <li>Add <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">STRIPE_SECRET_KEY=sk_live_...</code> to your <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">.env</code> file</li>
-                    <li>Set <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">NEXT_PUBLIC_BASE_URL</code> to your website address</li>
-                    <li>In Stripe Dashboard, add a webhook to <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">https://yourdomain.com/api/stripe/webhook</code></li>
-                    <li>Add <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">STRIPE_WEBHOOK_SECRET=whsec_...</code> to your <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">.env</code> file</li>
-                  </ol>
-                  <p className="text-xs text-amber-600 mt-4">
-                    Once Stripe is set up, donors will see a Stripe checkout page and payments will automatically update to &ldquo;completed&rdquo; when they succeed.
-                  </p>
-                </div>
-
-                {/* Data Storage - Friendly */}
-                <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
-                  <h3 className="text-lg font-bold text-blue-800 mb-3">📁 Where Your Data Lives</h3>
-                  <p className="text-base text-blue-700 leading-relaxed mb-4">
-                    Everything is saved to a <strong>secure database</strong> on your server. This includes:
-                  </p>
-                  <ul className="text-sm text-blue-700 space-y-2 list-disc list-inside">
-                    <li><strong>Applications</strong> — from the 4-step Apply form</li>
-                    <li><strong>Donations</strong> — from the Give page</li>
-                    <li><strong>Messages</strong> — from contact forms</li>
-                    <li><strong>Newsletter sign-ups</strong> — from subscribe forms</li>
-                  </ul>
-                  <p className="text-xs text-blue-600 mt-4">
-                    Database file: <code className="bg-blue-100 px-1.5 py-0.5 rounded">db/custom.db</code>. You can also download your data as CSV using the export buttons.
-                  </p>
-                </div>
               </div>
-            )}
 
-            {/* ═══════ MONEY DONATED ═══════ */}
-            {activeSection === 'donations' && (
-              <div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                  <div>
-                    <h2 className="text-3xl font-black text-[#141414]">💰 Money Donated</h2>
-                    <p className="text-base text-gray-500 mt-1">All the donations people have made</p>
-                  </div>
-                  {sectionData?.donors && sectionData.donors.length > 0 && (
-                    <button
-                      onClick={() => exportCSV(sectionData.donors, 'artemis-donations')}
-                      className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                      suppressHydrationWarning
-                    >
-                      <Download size={18} /> Download CSV
-                    </button>
-                  )}
+              {messages.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+                  <p className="text-5xl mb-4">📮</p>
+                  <p className="text-xl text-gray-400 font-semibold">No messages yet</p>
+                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone sends you a message through the contact form, it&apos;ll appear here.</p>
                 </div>
-
-                {(!sectionData?.donors || sectionData.donors.length === 0) ? (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                    <p className="text-5xl mb-4">💝</p>
-                    <p className="text-xl text-gray-400 font-semibold">No donations yet</p>
-                    <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone makes a donation on your site, it&apos;ll show up right here.</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {(sectionData.donors || []).map((d: any) => (
-                      <div key={d.id || d.date} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <p className="text-2xl font-black text-[#8A0000]">{formatCurrency(d.amount, d.currency || 'USD')}</p>
-                            <p className="text-base font-semibold text-[#141414] mt-1">
-                              {d.donorName || d.name || (d.donorAnonymous ? 'Anonymous donor' : 'Unknown')}
-                            </p>
-                          </div>
-                          <span className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${
-                            d.paymentStatus === 'completed' ? 'bg-green-100 text-green-700' :
-                            d.paymentStatus === 'pending' ? 'bg-amber-100 text-amber-700' :
-                            d.paymentStatus === 'expired' ? 'bg-red-100 text-red-700' :
-                            'bg-gray-100 text-gray-600'
+              ) : (
+                <div className="space-y-3">
+                  {messages.map((msg: any, idx: number) => (
+                    <div key={msg.id} className={`rounded-2xl border-2 overflow-hidden transition-all ${
+                      !msg.read ? 'bg-[#8A0000]/[0.03] border-[#8A0000]/20' : 'bg-white border-gray-100'
+                    }`}>
+                      <div
+                        className="p-5 cursor-pointer flex items-center justify-between gap-4"
+                        onClick={() => setExpandedMsg(expandedMsg === idx ? null : idx)}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-base flex-shrink-0 ${
+                            !msg.read ? 'bg-[#8A0000] text-white' : 'bg-gray-100 text-gray-500'
                           }`}>
-                            {d.paymentStatus || 'unknown'}
-                          </span>
+                            {msg.name?.[0]?.toUpperCase() || '?'}
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-lg font-bold text-[#141414]">
+                              {msg.name}
+                              {!msg.read && <span className="ml-2 text-[10px] bg-[#8A0000] text-white px-2 py-1 rounded-md font-bold uppercase">New</span>}
+                            </h3>
+                            <p className="text-sm text-gray-500 truncate">{msg.email}</p>
+                          </div>
                         </div>
-                        <div className="space-y-1 text-sm text-gray-500">
-                          {d.donorEmail && <p>📧 {d.donorEmail}</p>}
-                          <p>📅 {formatDate(d.createdAt || d.date)}</p>
-                          {d.isRecurring && <p>🔄 Recurring ({d.recurringFreq || 'monthly'})</p>}
-                          {d.paymentMethod && <p>💳 {d.paymentMethod}</p>}
-                          {(d.message || d.tier) && <p>💬 &ldquo;{d.message || d.tier}&rdquo;</p>}
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <div className="text-right hidden sm:block">
+                            <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-lg">{msg.area || 'General'}</span>
+                            <p className="text-xs text-gray-400 mt-1">{formatDate(msg.createdAt)}</p>
+                          </div>
+                          <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
+                            {expandedMsg === idx ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* ═══════ PEOPLE WHO APPLIED ═══════ */}
-            {activeSection === 'applications' && (
-              <div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                  <div>
-                    <h2 className="text-3xl font-black text-[#141414]">📋 People Who Applied</h2>
-                    <p className="text-base text-gray-500 mt-1">Everyone who submitted an application</p>
-                  </div>
-                  {sectionData?.applications && sectionData.applications.length > 0 && (
-                    <button
-                      onClick={() => exportCSV(sectionData.applications, 'artemis-applications')}
-                      className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                      suppressHydrationWarning
-                    >
-                      <Download size={18} /> Download CSV
-                    </button>
-                  )}
-                </div>
-
-                {(!sectionData?.applications || sectionData.applications.length === 0) ? (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                    <p className="text-5xl mb-4">📝</p>
-                    <p className="text-xl text-gray-400 font-semibold">No applications yet</p>
-                    <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone completes the Apply form, they&apos;ll appear here.</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {(sectionData.applications || []).map((app: any, idx: number) => (
-                      <div key={app.id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all overflow-hidden">
-                        <div
-                          className="p-6 cursor-pointer flex items-center justify-between gap-4"
-                          onClick={() => setExpandedApp(expandedApp === idx ? null : idx)}
-                        >
-                          <div className="flex items-center gap-4 min-w-0">
-                            <div className="w-12 h-12 bg-[#8A0000]/10 rounded-xl flex items-center justify-center text-[#8A0000] font-bold text-lg flex-shrink-0">
-                              {app.firstName?.[0]}{app.lastName?.[0]}
-                            </div>
-                            <div className="min-w-0">
-                              <h3 className="text-lg font-bold text-[#141414]">{app.firstName} {app.lastName}</h3>
-                              <p className="text-sm text-gray-500 truncate">{app.email} &middot; {app.phone || 'No phone'}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3 flex-shrink-0">
-                            <div className="text-right hidden sm:block">
-                              <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
-                              <p className="text-xs text-gray-400 mt-1">{formatDate(app.createdAt)}</p>
-                            </div>
-                            <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
-                              {expandedApp === idx ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
-                            </div>
-                          </div>
-                        </div>
-
-                        {expandedApp === idx && (
-                          <div className="px-6 pb-6 border-t border-gray-50 pt-5">
-                            {/* Personal Info */}
-                            <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">👤 Personal Info</h4>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Application Cycle</span> <span className="font-semibold">{app.applicationCycle || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Concentration</span> <span className="font-semibold">{app.concentration || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Gender</span> <span className="font-semibold">{app.gender || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Citizenship</span> <span className="font-semibold">{app.citizenship || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Country</span> <span className="font-semibold">{app.country || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">How Heard</span> <span className="font-semibold">{app.howHeard || '—'}</span></div>
-                            </div>
-
-                            {/* Academic Record */}
-                            <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎓 Academic Record</h4>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School</span> <span className="font-semibold">{app.schoolName || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School Country</span> <span className="font-semibold">{app.schoolCountry || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">GPA</span> <span className="font-semibold">{app.gpa || '—'}/{app.maxGpa || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Grading Scale</span> <span className="font-semibold">{app.gradingScale || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Math</span> <span className="font-semibold">{app.satMath || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Reading</span> <span className="font-semibold">{app.satReading || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">ACT Score</span> <span className="font-semibold">{app.actScore || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Test Optional</span> <span className="font-semibold">{app.isTestOptional ? 'Yes' : 'No'}</span></div>
-                            </div>
-
-                            {/* Accomplishments */}
-                            {app.accomplishments && (
-                              <div className="mb-6">
-                                <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🏆 Accomplishments</h4>
-                                <div className="space-y-3">
-                                  {(typeof app.accomplishments === 'string' ? JSON.parse(app.accomplishments) : app.accomplishments || []).map((acc: any, i: number) => (
-                                    <div key={i} className="bg-gray-50 rounded-xl p-4 text-sm">
-                                      <div className="font-bold text-[#141414] text-base">{acc.title || 'Untitled'}</div>
-                                      {acc.role && <div className="text-gray-500 mt-1">Role: {acc.role}</div>}
-                                      {acc.description && <div className="text-gray-600 mt-1">{acc.description}</div>}
-                                      {acc.impact && <div className="text-gray-500 italic mt-1">Impact: {acc.impact}</div>}
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Personal Statement */}
-                            {app.personalStatement && (
-                              <div className="mb-6">
-                                <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">✍️ Personal Statement</h4>
-                                <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.personalStatement}</p>
-                              </div>
-                            )}
-
-                            {/* Mission Statement */}
-                            {app.missionStatement && (
-                              <div className="mb-6">
-                                <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎯 Mission Statement</h4>
-                                <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.missionStatement}</p>
-                              </div>
-                            )}
-
-                            {/* Financial Aid */}
-                            <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">💵 Financial Aid</h4>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Applying for Aid</span> <span className="font-semibold">{app.applyingForAid || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Household Income</span> <span className="font-semibold">{app.householdIncome || '—'}</span></div>
-                              <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Dependents</span> <span className="font-semibold">{app.dependents || '—'}</span></div>
-                            </div>
-
-                            {/* Mobile-only date/status */}
-                            <div className="sm:hidden mt-4 pt-4 border-t border-gray-100">
-                              <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
-                              <p className="text-xs text-gray-400 mt-2">{formatDate(app.createdAt)}</p>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* ═══════ MESSAGES SENT ═══════ */}
-            {activeSection === 'messages' && (
-              <div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                  <div>
-                    <h2 className="text-3xl font-black text-[#141414]">✉️ Messages Sent</h2>
-                    <p className="text-base text-gray-500 mt-1">Messages from your contact form</p>
-                  </div>
-                  {sectionData?.messages && sectionData.messages.length > 0 && (
-                    <button
-                      onClick={() => exportCSV(sectionData.messages, 'artemis-messages')}
-                      className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                      suppressHydrationWarning
-                    >
-                      <Download size={18} /> Download CSV
-                    </button>
-                  )}
-                </div>
-
-                {(!sectionData?.messages || sectionData.messages.length === 0) ? (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                    <p className="text-5xl mb-4">📮</p>
-                    <p className="text-xl text-gray-400 font-semibold">No messages yet</p>
-                    <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone sends you a message through the contact form, it&apos;ll appear here.</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {(sectionData.messages || []).map((msg: any) => (
-                      <div key={msg.id} className={`rounded-2xl border-2 p-6 transition-all ${
-                        !msg.read
-                          ? 'bg-[#8A0000]/[0.03] border-[#8A0000]/20'
-                          : 'bg-white border-gray-100'
-                      }`}>
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-base flex-shrink-0 ${
-                              !msg.read ? 'bg-[#8A0000] text-white' : 'bg-gray-100 text-gray-500'
-                            }`}>
-                              {msg.name?.[0]?.toUpperCase() || '?'}
-                            </div>
-                            <div>
-                              <h3 className="text-lg font-bold text-[#141414]">
-                                {msg.name}
-                                {!msg.read && <span className="ml-2 text-[10px] bg-[#8A0000] text-white px-2 py-1 rounded-md font-bold uppercase">New</span>}
-                              </h3>
-                              <p className="text-sm text-gray-500">{msg.email}</p>
-                            </div>
-                          </div>
-                          <div className="text-right flex-shrink-0">
+                      {expandedMsg === idx && (
+                        <div className="px-5 pb-5 border-t border-gray-50 pt-4">
+                          {msg.subject && <p className="text-base font-semibold text-gray-600 mb-2">Subject: {msg.subject}</p>}
+                          <p className="text-base text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{msg.message}</p>
+                          <div className="sm:hidden mt-3">
                             <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-lg">{msg.area || 'General'}</span>
                             <p className="text-xs text-gray-400 mt-1.5">{formatDate(msg.createdAt)}</p>
                           </div>
                         </div>
-                        {msg.subject && <p className="text-base font-semibold text-gray-600 mb-2">Subject: {msg.subject}</p>}
-                        <p className="text-base text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{msg.message}</p>
-                      </div>
-                    ))}
-                  </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* ═══════ APPLICATIONS ═══════ */}
+            <section>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-[#141414]">📋 Applications</h2>
+                  <p className="text-base text-gray-500 mt-1">Everyone who submitted an application</p>
+                </div>
+                {applications.length > 0 && (
+                  <button
+                    onClick={() => exportCSV(applications, 'artemis-applications')}
+                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
+                    suppressHydrationWarning
+                  >
+                    <Download size={18} /> Export CSV
+                  </button>
                 )}
               </div>
-            )}
 
-            {/* ═══════ NEWSLETTER SIGN-UPS ═══════ */}
-            {activeSection === 'subscribers' && (
-              <div>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-                  <div>
-                    <h2 className="text-3xl font-black text-[#141414]">📬 Newsletter Sign-ups</h2>
-                    <p className="text-base text-gray-500 mt-1">People who subscribed to your newsletter</p>
-                  </div>
-                  {sectionData?.subscribers && sectionData.subscribers.length > 0 && (
-                    <button
-                      onClick={() => exportCSV(sectionData.subscribers, 'artemis-subscribers')}
-                      className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                      suppressHydrationWarning
-                    >
-                      <Download size={18} /> Download CSV
-                    </button>
-                  )}
+              {applications.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+                  <p className="text-5xl mb-4">📝</p>
+                  <p className="text-xl text-gray-400 font-semibold">No applications yet</p>
+                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone completes the Apply form, they&apos;ll appear here.</p>
                 </div>
-
-                {(!sectionData?.subscribers || sectionData.subscribers.length === 0) ? (
-                  <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                    <p className="text-5xl mb-4">💌</p>
-                    <p className="text-xl text-gray-400 font-semibold">No sign-ups yet</p>
-                    <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone subscribes to your newsletter, they&apos;ll show up here.</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {(sectionData.subscribers || []).map((sub: any) => (
-                      <div key={sub.id} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold text-base flex-shrink-0">
-                            {sub.email?.[0]?.toUpperCase() || '?'}
+              ) : (
+                <div className="space-y-3">
+                  {applications.map((app: any, idx: number) => (
+                    <div key={app.id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all overflow-hidden">
+                      <div
+                        className="p-5 cursor-pointer flex items-center justify-between gap-4"
+                        onClick={() => setExpandedApp(expandedApp === idx ? null : idx)}
+                      >
+                        <div className="flex items-center gap-4 min-w-0">
+                          <div className="w-12 h-12 bg-[#8A0000]/10 rounded-xl flex items-center justify-center text-[#8A0000] font-bold text-lg flex-shrink-0">
+                            {app.firstName?.[0]}{app.lastName?.[0]}
                           </div>
                           <div className="min-w-0">
-                            <p className="text-base font-semibold text-[#141414] truncate">{sub.email}</p>
+                            <h3 className="text-lg font-bold text-[#141414]">{app.firstName} {app.lastName}</h3>
+                            <p className="text-sm text-gray-500 truncate">{app.email} &middot; {app.phone || 'No phone'}</p>
                           </div>
                         </div>
-                        <div className="space-y-1.5 text-sm text-gray-500">
-                          {sub.source && <p>📍 From: <span className="capitalize">{sub.source}</span></p>}
-                          <p>📅 {formatDate(sub.createdAt)}</p>
-                          <p>{sub.active ? '✅ Active' : '⏸️ Inactive'}</p>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <div className="text-right hidden sm:block">
+                            <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
+                            <p className="text-xs text-gray-400 mt-1">{formatDate(app.createdAt)}</p>
+                          </div>
+                          <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
+                            {expandedApp === idx ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+
+                      {expandedApp === idx && (
+                        <div className="px-5 pb-5 border-t border-gray-50 pt-4">
+                          {/* Personal Info */}
+                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">👤 Personal Info</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Application Cycle</span> <span className="font-semibold">{app.applicationCycle || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Concentration</span> <span className="font-semibold">{app.concentration || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Gender</span> <span className="font-semibold">{app.gender || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Citizenship</span> <span className="font-semibold">{app.citizenship || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Country</span> <span className="font-semibold">{app.country || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">How Heard</span> <span className="font-semibold">{app.howHeard || '—'}</span></div>
+                          </div>
+
+                          {/* Academic Record */}
+                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎓 Academic Record</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School</span> <span className="font-semibold">{app.schoolName || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School Country</span> <span className="font-semibold">{app.schoolCountry || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">GPA</span> <span className="font-semibold">{app.gpa || '—'}/{app.maxGpa || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Grading Scale</span> <span className="font-semibold">{app.gradingScale || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Math</span> <span className="font-semibold">{app.satMath || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Reading</span> <span className="font-semibold">{app.satReading || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">ACT Score</span> <span className="font-semibold">{app.actScore || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Test Optional</span> <span className="font-semibold">{app.isTestOptional ? 'Yes' : 'No'}</span></div>
+                          </div>
+
+                          {/* Accomplishments */}
+                          {app.accomplishments && (
+                            <div className="mb-6">
+                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🏆 Accomplishments</h4>
+                              <div className="space-y-3">
+                                {(typeof app.accomplishments === 'string' ? JSON.parse(app.accomplishments) : app.accomplishments || []).map((acc: any, i: number) => (
+                                  <div key={i} className="bg-gray-50 rounded-xl p-4 text-sm">
+                                    <div className="font-bold text-[#141414] text-base">{acc.title || 'Untitled'}</div>
+                                    {acc.role && <div className="text-gray-500 mt-1">Role: {acc.role}</div>}
+                                    {acc.description && <div className="text-gray-600 mt-1">{acc.description}</div>}
+                                    {acc.impact && <div className="text-gray-500 italic mt-1">Impact: {acc.impact}</div>}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Personal Statement */}
+                          {app.personalStatement && (
+                            <div className="mb-6">
+                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">✍️ Personal Statement</h4>
+                              <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.personalStatement}</p>
+                            </div>
+                          )}
+
+                          {/* Mission Statement */}
+                          {app.missionStatement && (
+                            <div className="mb-6">
+                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎯 Mission Statement</h4>
+                              <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.missionStatement}</p>
+                            </div>
+                          )}
+
+                          {/* Financial Aid */}
+                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">💵 Financial Aid</h4>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Applying for Aid</span> <span className="font-semibold">{app.applyingForAid || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Household Income</span> <span className="font-semibold">{app.householdIncome || '—'}</span></div>
+                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Dependents</span> <span className="font-semibold">{app.dependents || '—'}</span></div>
+                          </div>
+
+                          {/* Mobile-only date/status */}
+                          <div className="sm:hidden mt-4 pt-4 border-t border-gray-100">
+                            <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
+                            <p className="text-xs text-gray-400 mt-2">{formatDate(app.createdAt)}</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* ═══════ DONATIONS ═══════ */}
+            <section>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-[#141414]">💰 Donations</h2>
+                  <p className="text-base text-gray-500 mt-1">All the donations people have made</p>
+                </div>
+                {donors.length > 0 && (
+                  <button
+                    onClick={() => exportCSV(donors, 'artemis-donations')}
+                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
+                    suppressHydrationWarning
+                  >
+                    <Download size={18} /> Export CSV
+                  </button>
                 )}
               </div>
-            )}
-          </>
+
+              {donors.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+                  <p className="text-5xl mb-4">💝</p>
+                  <p className="text-xl text-gray-400 font-semibold">No donations yet</p>
+                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone makes a donation on your site, it&apos;ll show up right here.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {donors.map((d: any) => (
+                    <div key={d.id || d.date} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <p className="text-2xl font-black text-[#8A0000]">{formatCurrency(d.amount, d.currency || 'USD')}</p>
+                          <p className="text-base font-semibold text-[#141414] mt-1">
+                            {d.donorName || d.name || (d.donorAnonymous ? 'Anonymous donor' : 'Unknown')}
+                          </p>
+                        </div>
+                        <span className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${
+                          d.paymentStatus === 'completed' ? 'bg-green-100 text-green-700' :
+                          d.paymentStatus === 'pending' ? 'bg-amber-100 text-amber-700' :
+                          d.paymentStatus === 'expired' ? 'bg-red-100 text-red-700' :
+                          'bg-gray-100 text-gray-600'
+                        }`}>
+                          {d.paymentStatus || 'unknown'}
+                        </span>
+                      </div>
+                      <div className="space-y-1 text-sm text-gray-500">
+                        {d.donorEmail && <p>📧 {d.donorEmail}</p>}
+                        <p>📅 {formatDate(d.createdAt || d.date)}</p>
+                        {d.isRecurring && <p>🔄 Recurring ({d.recurringFreq || 'monthly'})</p>}
+                        {d.paymentMethod && <p>💳 {d.paymentMethod}</p>}
+                        {(d.message || d.tier) && <p>💬 &ldquo;{d.message || d.tier}&rdquo;</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* ═══════ SUBSCRIBERS ═══════ */}
+            <section>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+                <div>
+                  <h2 className="text-2xl font-black text-[#141414]">📬 Subscribers</h2>
+                  <p className="text-base text-gray-500 mt-1">People who subscribed to your newsletter</p>
+                </div>
+                {subscribers.length > 0 && (
+                  <button
+                    onClick={() => exportCSV(subscribers, 'artemis-subscribers')}
+                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
+                    suppressHydrationWarning
+                  >
+                    <Download size={18} /> Export CSV
+                  </button>
+                )}
+              </div>
+
+              {subscribers.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
+                  <p className="text-5xl mb-4">💌</p>
+                  <p className="text-xl text-gray-400 font-semibold">No sign-ups yet</p>
+                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone subscribes to your newsletter, they&apos;ll show up here.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {subscribers.map((sub: any) => (
+                    <div key={sub.id} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold text-base flex-shrink-0">
+                          {sub.email?.[0]?.toUpperCase() || '?'}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-base font-semibold text-[#141414] truncate">{sub.email}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-1.5 text-sm text-gray-500">
+                        {sub.source && <p>📍 From: <span className="capitalize">{sub.source}</span></p>}
+                        <p>📅 {formatDate(sub.createdAt)}</p>
+                        <p>{sub.active ? '✅ Active' : '⏸️ Inactive'}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            {/* ═══════ INFO CARDS ═══════ */}
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+              {/* Payment Setup — PayPal */}
+              <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6">
+                <h3 className="text-lg font-bold text-amber-800 mb-3">💳 How to Accept Real Payments</h3>
+                <p className="text-base text-amber-700 leading-relaxed mb-4">
+                  Right now, donations are saved as <strong>pending</strong>. To accept real payments:
+                </p>
+                <ol className="text-sm text-amber-700 space-y-2 list-decimal list-inside">
+                  <li>Create a PayPal account at <a href="https://paypal.com" target="_blank" rel="noreferrer" className="underline font-semibold">paypal.com</a> (personal or business)</li>
+                  <li>Get your PayPal email address</li>
+                  <li>Add <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">PAYPAL_EMAIL=your@email.com</code> to your <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">.env</code> file</li>
+                  <li>Donors will see a &ldquo;Donate with PayPal&rdquo; button on the Give page</li>
+                </ol>
+                <p className="text-xs text-amber-600 mt-4">
+                  PayPal doesn&apos;t require an EIN — just a valid email address. You can also upgrade to a PayPal Business account later for more features.
+                </p>
+              </div>
+
+              {/* Where Data Lives */}
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
+                <h3 className="text-lg font-bold text-blue-800 mb-3">📁 Where Your Data Lives</h3>
+                <p className="text-base text-blue-700 leading-relaxed mb-4">
+                  Everything is saved to a <strong>secure database</strong> on your server. This includes:
+                </p>
+                <ul className="text-sm text-blue-700 space-y-2 list-disc list-inside">
+                  <li><strong>Applications</strong> — from the 4-step Apply form</li>
+                  <li><strong>Donations</strong> — from the Give page</li>
+                  <li><strong>Messages</strong> — from contact forms</li>
+                  <li><strong>Newsletter sign-ups</strong> — from subscribe forms</li>
+                </ul>
+                <p className="text-xs text-blue-600 mt-4">
+                  Database file: <code className="bg-blue-100 px-1.5 py-0.5 rounded">db/custom.db</code>. You can also download your data as CSV using the export buttons.
+                </p>
+              </div>
+            </section>
+
+          </div>
         )}
       </div>
     </div>

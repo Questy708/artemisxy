@@ -172,9 +172,12 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
           <button onClick={() => goToPage('fundraising')} className="footer-link text-[#8A0000]" suppressHydrationWarning>Give</button>
           <button onClick={() => goToPage('contact-us')} className="footer-link" suppressHydrationWarning>Contact</button>
         </div>
-        <div className="text-[12px] space-x-2 mb-6 font-medium">
+        <div className="text-[12px] space-x-2 mb-2 font-medium">
           <button onClick={() => goToPage('about')} className="footer-link" suppressHydrationWarning>Privacy</button>
           <button onClick={() => goToPage('access-at-artemis')} className="footer-link" suppressHydrationWarning>Accessibility</button>
+        </div>
+        <div className="text-[11px] space-x-2 mb-6 font-medium opacity-40">
+          <button onClick={() => goToPage('admin')} className="footer-link" suppressHydrationWarning>Admin</button>
         </div>
         
         <div className="flex space-x-4 grayscale opacity-60 text-sm font-bold">

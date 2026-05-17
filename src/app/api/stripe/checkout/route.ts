@@ -2,10 +2,11 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 // POST /api/stripe/checkout — process a donation
-// Supports 3 modes (checked in order):
+// Supports 4 modes (checked in order):
 //   1. Stripe (STRIPE_SECRET_KEY set) → real Stripe checkout
-//   2. External payment link (DONATION_LINK set) → redirect to PayPal/BMAC/Ko-fi etc.
-//   3. No gateway → record as pending for manual follow-up
+//   2. PayPal Donate (PAYPAL_EMAIL set) → redirect to PayPal Donate page
+//   3. External payment link (DONATION_LINK set) → redirect to PayPal/BMAC/Ko-fi etc.
+//   4. No gateway → record as pending for manual follow-up
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
 
     const transactionRef = `ART-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    const paypalEmail = process.env.PAYPAL_EMAIL;
     const donationLink = process.env.DONATION_LINK;
 
     // ─── MODE 1: REAL STRIPE INTEGRATION ───
@@ -97,7 +99,36 @@ export async function POST(request: Request) {
       });
     }
 
-    // ─── MODE 2: EXTERNAL PAYMENT LINK (PayPal, Buy Me a Coffee, Ko-fi, etc.) ───
+    // ─── MODE 2: PAYPAL DONATE ───
+    if (paypalEmail) {
+      await db.donation.create({
+        data: {
+          donorEmail,
+          donorName: isAnonymous ? null : donorName,
+          donorAnonymous: isAnonymous,
+          amount,
+          currency,
+          paymentMethod: 'paypal',
+          paymentStatus: 'pending',
+          transactionRef,
+          perkId: perkId || null,
+          isRecurring,
+          recurringFreq: isRecurring ? recurringFreq : null,
+          message: message || null,
+        },
+      });
+
+      const paypalDonateUrl = `https://www.paypal.com/donate/?business=${encodeURIComponent(paypalEmail)}&amount=${amount}&currency_code=${currency}`;
+
+      return NextResponse.json({
+        success: true,
+        checkoutUrl: paypalDonateUrl,
+        transactionRef,
+        message: 'Your pledge has been recorded! You\'ll now be redirected to PayPal to complete your donation.',
+      });
+    }
+
+    // ─── MODE 3: EXTERNAL PAYMENT LINK (PayPal.me, Buy Me a Coffee, Ko-fi, etc.) ───
     if (donationLink) {
       await db.donation.create({
         data: {
@@ -133,7 +164,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // ─── MODE 3: NO GATEWAY — record as pending ───
+    // ─── MODE 4: NO GATEWAY — record as pending ───
     const donation = await db.donation.create({
       data: {
         donorEmail,

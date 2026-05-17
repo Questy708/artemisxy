@@ -333,12 +333,17 @@ export default function ArtemisApp() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
 
-  // Keyboard shortcut: Cmd/Ctrl+K to open search
+  // Keyboard shortcuts: Cmd/Ctrl+K to open search, Cmd/Ctrl+Shift+A for admin
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setSearchOpen(true);
+      }
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setCurrentPage('admin');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
     window.addEventListener('keydown', handleKey);
