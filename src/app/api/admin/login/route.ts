@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 
 // POST /api/admin/login — authenticate with admin password
 export async function POST(request: Request) {
@@ -21,16 +22,19 @@ export async function POST(request: Request) {
       );
     }
 
-    // Generate a simple session token
-    const token = `adm_${Date.now()}_${Math.random().toString(36).slice(2, 10)}_${Buffer.from(adminPassword).toString('base64').slice(0, 12)}`;
+    // Generate a session token with cryptographic hash
+    const timestamp = Date.now().toString();
+    const random = Math.random().toString(36).slice(2, 10);
+    const hash = crypto.createHash('sha256').update(adminPassword + timestamp).digest('base64url').slice(0, 16);
+    const token = `adm_${timestamp}_${random}_${hash}`;
 
     const response = NextResponse.json({ success: true, message: 'Authenticated' });
 
     // Set HttpOnly cookie — not accessible via JavaScript, only by the server
     response.cookies.set('artemis_admin_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: false, // Allow cookie over HTTP in development
+      sameSite: 'lax', // 'lax' allows the cookie on same-site navigation
       path: '/',
       maxAge: 60 * 60 * 24, // 24 hours
     });
@@ -49,8 +53,8 @@ export async function DELETE() {
   const response = NextResponse.json({ success: true, message: 'Logged out' });
   response.cookies.set('artemis_admin_token', '', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: false,
+    sameSite: 'lax',
     path: '/',
     maxAge: 0,
   });
