@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
-// POST /api/stripe/checkout — create a Stripe checkout session
-// NOTE: This route requires the STRIPE_SECRET_KEY environment variable.
-// When not set, it falls back to a mock mode that still records the donation
-// in the database with status "pending" so no data is lost.
+// POST /api/stripe/checkout — process a donation
+// Supports 3 modes (checked in order):
+//   1. Stripe (STRIPE_SECRET_KEY set) → real Stripe checkout
+//   2. External payment link (DONATION_LINK set) → redirect to PayPal/BMAC/Ko-fi etc.
+//   3. No gateway → record as pending for manual follow-up
 
 export async function POST(request: Request) {
   try {
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
       perkId,
       message,
       isAnonymous = false,
+      paymentMethod = 'card',
     } = body;
 
     if (!donorEmail || !amount || amount <= 0) {
@@ -29,12 +31,11 @@ export async function POST(request: Request) {
     }
 
     const transactionRef = `ART-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-
-    // Check if Stripe is configured
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    const donationLink = process.env.DONATION_LINK;
 
+    // ─── MODE 1: REAL STRIPE INTEGRATION ───
     if (stripeSecretKey) {
-      // ─── REAL STRIPE INTEGRATION ───
       const Stripe = (await import('stripe')).default;
       const stripe = new Stripe(stripeSecretKey, { apiVersion: '2025-04-30.basil' });
 
@@ -51,10 +52,10 @@ export async function POST(request: Request) {
                   ? `Artemis ${recurringFreq} donation`
                   : 'Artemis Donation',
                 description: isRecurring
-                  ? `Recurring ${recurringFreq} donation to the University of Artemis $100M Founding Campaign`
-                  : 'One-time donation to the University of Artemis $100M Founding Campaign',
+                  ? `Recurring ${recurringFreq} donation to the University of Artemis Founding Campaign`
+                  : 'One-time donation to the University of Artemis Founding Campaign',
               },
-              unit_amount: Math.round(amount * 100), // Stripe expects cents
+              unit_amount: Math.round(amount * 100),
               ...(isRecurring ? { recurring: { interval: recurringFreq === 'yearly' ? 'year' : 'month' } } : {}),
             },
             quantity: 1,
@@ -71,7 +72,6 @@ export async function POST(request: Request) {
         },
       });
 
-      // Create pending donation in DB
       await db.donation.create({
         data: {
           donorEmail,
@@ -95,18 +95,18 @@ export async function POST(request: Request) {
         checkoutUrl: session.url,
         transactionRef,
       });
-    } else {
-      // ─── FALLBACK: NO STRIPE KEY ───
-      // Record the donation as pending. In production, you would redirect
-      // the user to Stripe. Here we just save it so no data is lost.
-      const donation = await db.donation.create({
+    }
+
+    // ─── MODE 2: EXTERNAL PAYMENT LINK (PayPal, Buy Me a Coffee, Ko-fi, etc.) ───
+    if (donationLink) {
+      await db.donation.create({
         data: {
           donorEmail,
           donorName: isAnonymous ? null : donorName,
           donorAnonymous: isAnonymous,
           amount,
           currency,
-          paymentMethod: 'card',
+          paymentMethod: paymentMethod || 'link',
           paymentStatus: 'pending',
           transactionRef,
           perkId: perkId || null,
@@ -116,18 +116,52 @@ export async function POST(request: Request) {
         },
       });
 
+      // Build the redirect URL — append amount if the platform supports it
+      let redirectUrl = donationLink;
+      // PayPal.me supports amounts: paypal.me/username/100
+      if (donationLink.includes('paypal.me') && amount) {
+        redirectUrl = `${donationLink.replace(/\/$/, '')}/${amount}${currency === 'GBP' ? 'GBP' : 'USD'}`;
+      }
+      // Buy Me a Coffee doesn't support URL amounts, just redirect
+      // Ko-fi doesn't support URL amounts either
+
       return NextResponse.json({
         success: true,
-        checkoutUrl: null,
+        checkoutUrl: redirectUrl,
         transactionRef,
-        donationId: donation.id,
-        message: 'Donation recorded. Payment gateway not yet configured — the admin dashboard shows this as "pending" for follow-up.',
+        message: 'Your pledge has been recorded! You\'ll now be redirected to complete your payment.',
       });
     }
+
+    // ─── MODE 3: NO GATEWAY — record as pending ───
+    const donation = await db.donation.create({
+      data: {
+        donorEmail,
+        donorName: isAnonymous ? null : donorName,
+        donorAnonymous: isAnonymous,
+        amount,
+        currency,
+        paymentMethod: paymentMethod || 'card',
+        paymentStatus: 'pending',
+        transactionRef,
+        perkId: perkId || null,
+        isRecurring,
+        recurringFreq: isRecurring ? recurringFreq : null,
+        message: message || null,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      checkoutUrl: null,
+      transactionRef,
+      donationId: donation.id,
+      message: 'Thank you! Your donation has been recorded. We will follow up with payment details.',
+    });
   } catch (error) {
-    console.error('Stripe checkout error:', error);
+    console.error('Checkout error:', error);
     return NextResponse.json(
-      { error: 'Failed to create checkout session' },
+      { error: 'Failed to process donation' },
       { status: 500 }
     );
   }

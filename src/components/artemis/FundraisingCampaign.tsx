@@ -1437,7 +1437,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
                 {submitting ? 'Processing...' : 'Give Now'} {!submitting && <ArrowRight size={20} />}
               </motion.button>
 
-              <div className="flex items-center gap-2 mt-4 justify-center"><Lock size={10} className="text-gray-300" /><span className="text-[10px] text-gray-400">256-bit SSL encrypted</span></div>
+              <div className="flex items-center gap-2 mt-4 justify-center"><Lock size={10} className="text-gray-300" /><span className="text-[10px] text-gray-400">Secure payment — you&apos;ll be redirected to complete your donation</span></div>
             </div>
           </motion.div>
 
