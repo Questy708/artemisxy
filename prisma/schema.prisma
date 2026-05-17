@@ -30,3 +30,64 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Donation {
+  id              String   @id @default(cuid())
+  donorEmail      String
+  donorName       String?
+  donorAnonymous  Boolean  @default(false)
+  amount          Float
+  currency        String   @default("USD")
+  paymentMethod   String   @default("card")
+  paymentStatus   String   @default("pending")
+  transactionRef  String   @unique
+  perkId          String?
+  isRecurring     Boolean  @default(false)
+  recurringFreq   String?
+  message         String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Application {
+  id                String   @id @default(cuid())
+  firstName         String
+  lastName          String
+  email             String
+  phone             String?
+  birthdate         String?
+  gender            String?
+  pronoun           String?
+  citizenship       String?
+  dualCitizenship   String?
+  address           String?
+  city              String?
+  state             String?
+  postalCode        String?
+  country           String?
+  howHeard          String?
+  applicationCycle  String?
+  concentration     String?
+  currentlyEnrolled String?
+  schoolName        String?
+  schoolCountry     String?
+  schoolCity        String?
+  enrollmentStart   String?
+  enrollmentEnd     String?
+  gradingScale      String?
+  gpa               String?
+  maxGpa            String?
+  satMath           String?
+  satReading        String?
+  actScore          String?
+  isTestOptional    Boolean  @default(false)
+  accomplishments   String?  // JSON string
+  personalStatement String?
+  missionStatement  String?
+  applyingForAid    String?
+  householdIncome   String?
+  dependents        String?
+  status            String   @default("submitted")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

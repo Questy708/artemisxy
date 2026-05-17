@@ -20,7 +20,7 @@ interface Props {
 }
 
 /* ─── Data ─── */
-const CAMPAIGN = { goal: 100_000_000, raised: 2_100_000, donors: 342, currency: 'USD' };
+const CAMPAIGN = { goal: 100_000_000, raised: 5_000, donors: 342, currency: 'USD' };
 const fmtNum = (n: number) => n.toLocaleString('en-US');
 const fmtShort = (n: number) => n >= 1_000_000 ? `${(n/1_000_000).toFixed(n%1_000_000===0?0:1)}M` : n >= 1_000 ? `${(n/1_000).toFixed(0)}K` : fmtNum(n);
 const sym = '$';
@@ -610,34 +610,7 @@ export default function FundraisingCampaign({ goToPage }: Props) {
             ))}
           </div>
 
-          {/* Pillar allocation row */}
-          <div className="mt-10 sm:mt-14 pt-10 sm:pt-14 border-t border-gray-100">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 block mb-6">How the {sym}100M is allocated</span>
-            <div className="grid grid-cols-5 gap-0 h-2.5 w-full overflow-hidden">
-              {FIVE_PILLARS.map((p, i) => (
-                <motion.div
-                  key={p.id}
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${p.pct}%` }}
-                  transition={{ duration: 1, delay: i * 0.1, ease: 'easeOut' }}
-                  viewport={{ once: true }}
-                  className="h-full"
-                  style={{ backgroundColor: i === 0 ? '#8A0000' : i === 1 ? '#a01010' : i === 2 ? '#b82020' : i === 3 ? '#c94040' : '#d96060' }}
-                />
-              ))}
-            </div>
-            <div className="grid grid-cols-5 mt-3">
-              {FIVE_PILLARS.map((p, i) => {
-                const PIcon = p.icon;
-                return (
-                  <div key={p.id} className="flex items-center gap-1.5">
-                    <PIcon size={11} className="text-[#8A0000] shrink-0" />
-                    <span className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wider truncate">{p.title} {p.pct}%</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+
         </div>
       </section>
 

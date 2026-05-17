@@ -150,9 +150,69 @@ export default function Apply({ goToPage }: Props) {
     setAccomplishments(updated);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const res = await fetch('/api/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          birthdate,
+          gender,
+          pronoun,
+          citizenship,
+          dualCitizenship,
+          address,
+          city,
+          state,
+          postalCode,
+          country,
+          howHeard,
+          applicationCycle,
+          concentration,
+          currentlyEnrolled,
+          schoolName,
+          schoolCountry,
+          schoolCity,
+          enrollmentStart,
+          enrollmentEnd,
+          gradingScale,
+          gpa,
+          maxGpa,
+          satMath,
+          satReading,
+          actScore,
+          isTestOptional,
+          accomplishments,
+          personalStatement,
+          missionStatement,
+          applyingForAid,
+          householdIncome,
+          dependents,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // Shared form styles — Minerva-inspired warm aesthetic
@@ -727,12 +787,17 @@ export default function Apply({ goToPage }: Props) {
                   </div>
                 </div>
 
+                {submitError && (
+                  <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 text-[14px] font-medium">
+                    {submitError}
+                  </div>
+                )}
                 <div className="flex justify-between">
                   <button type="button" onClick={() => setCurrentStep(3)} className="px-8 py-4 border-2 border-gray-300 text-gray-600 text-[12px] font-bold uppercase tracking-widest hover:border-[#8A0000] hover:text-[#8A0000] transition-colors">
                     &larr; Back
                   </button>
-                  <button type="submit" className="flex items-center gap-3 px-12 py-4 bg-[#8A0000] text-white text-[14px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors shadow-lg shadow-[#8A0000]/20">
-                    Submit Application <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  <button type="submit" disabled={submitting} className="flex items-center gap-3 px-12 py-4 bg-[#8A0000] text-white text-[14px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors shadow-lg shadow-[#8A0000]/20 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {submitting ? 'Submitting...' : 'Submit Application'} {!submitting && <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>}
                   </button>
                 </div>
               </div>
