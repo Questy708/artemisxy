@@ -60,3 +60,36 @@ export async function GET(request: Request) {
     );
   }
 }
+
+// PATCH /api/contact — mark a message as read (admin only)
+export async function PATCH(request: Request) {
+  const isAuth = await verifyAdminAuth(request);
+  if (!isAuth) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const body = await request.json();
+    const { id, read } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Message ID is required' },
+        { status: 400 }
+      );
+    }
+
+    const updated = await db.contactMessage.update({
+      where: { id },
+      data: { read: read !== undefined ? read : true },
+    });
+
+    return NextResponse.json({ success: true, message: updated });
+  } catch (error) {
+    console.error('Contact update error:', error);
+    return NextResponse.json(
+      { error: 'Failed to update message' },
+      { status: 500 }
+    );
+  }
+}

@@ -285,20 +285,205 @@ export default function AdminDashboard({ goToPage }: Props) {
     return formatDate(d);
   };
 
-  const exportCSV = (rows: any[], filename: string) => {
+  // ─── CSV escape helper ───
+  const csvEscape = (val: any): string => {
+    if (val === null || val === undefined) return '';
+    let str: string;
+    if (typeof val === 'boolean') str = val ? 'Yes' : 'No';
+    else if (Array.isArray(val)) str = val.map(v => typeof v === 'object' && v !== null ? JSON.stringify(v) : String(v)).join('; ');
+    else if (typeof val === 'object' && val !== null) str = JSON.stringify(val);
+    else str = String(val);
+    // Format ISO dates to readable format
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(str)) {
+      try { str = new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch { /* keep original */ }
+    }
+    return str.includes(',') || str.includes('"') || str.includes('\n')
+      ? `"${str.replace(/"/g, '""')}"` : str;
+  };
+
+  // ─── Entity-specific export definitions ───
+  // Each defines: columns (key→header label) and a transform function
+  type ExportDef = { columns: Record<string, string>; transform: (row: any) => Record<string, any> };
+
+  const exportDefs: Record<string, ExportDef> = {
+    donations: {
+      columns: {
+        donorName: 'Donor Name',
+        donorEmail: 'Email',
+        donorAnonymous: 'Anonymous',
+        amount: 'Amount',
+        currency: 'Currency',
+        paymentMethod: 'Payment Method',
+        paymentStatus: 'Status',
+        transactionRef: 'Transaction Ref',
+        perkId: 'Perk',
+        isRecurring: 'Recurring',
+        recurringFreq: 'Recurring Frequency',
+        message: 'Message',
+        createdAt: 'Date',
+      },
+      transform: (d: any) => ({
+        donorName: d.donorAnonymous ? 'Anonymous' : (d.donorName || ''),
+        donorEmail: d.donorEmail || '',
+        donorAnonymous: d.donorAnonymous || false,
+        amount: d.amount,
+        currency: d.currency || 'USD',
+        paymentMethod: d.paymentMethod || 'card',
+        paymentStatus: d.paymentStatus || 'pending',
+        transactionRef: d.transactionRef || '',
+        perkId: d.perkId || '',
+        isRecurring: d.isRecurring || false,
+        recurringFreq: d.recurringFreq || '',
+        message: d.message || '',
+        createdAt: d.createdAt,
+      }),
+    },
+    applications: {
+      columns: {
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        email: 'Email',
+        phone: 'Phone',
+        birthdate: 'Birthdate',
+        gender: 'Gender',
+        pronoun: 'Pronoun',
+        citizenship: 'Citizenship',
+        dualCitizenship: 'Dual Citizenship',
+        address: 'Address',
+        city: 'City',
+        state: 'State/Province',
+        postalCode: 'Postal Code',
+        country: 'Country',
+        howHeard: 'How Heard',
+        applicationCycle: 'Application Cycle',
+        concentration: 'Concentration',
+        currentlyEnrolled: 'Currently Enrolled',
+        schoolName: 'School Name',
+        schoolCountry: 'School Country',
+        schoolCity: 'School City',
+        enrollmentStart: 'Enrollment Start',
+        enrollmentEnd: 'Enrollment End',
+        gradingScale: 'Grading Scale',
+        gpa: 'GPA',
+        maxGpa: 'Max GPA',
+        satMath: 'SAT Math',
+        satReading: 'SAT Reading',
+        actScore: 'ACT Score',
+        isTestOptional: 'Test Optional',
+        accomplishments: 'Accomplishments',
+        personalStatement: 'Personal Statement',
+        missionStatement: 'Mission Statement',
+        applyingForAid: 'Applying for Aid',
+        householdIncome: 'Household Income',
+        dependents: 'Dependents',
+        status: 'Status',
+        createdAt: 'Date Submitted',
+      },
+      transform: (a: any) => {
+        // Flatten accomplishments array to readable text
+        let accStr = '';
+        if (a.accomplishments) {
+          const accs = typeof a.accomplishments === 'string' ? JSON.parse(a.accomplishments) : a.accomplishments;
+          if (Array.isArray(accs)) {
+            accStr = accs.map((ac: any) => {
+              let s = ac.title || '';
+              if (ac.role) s += ` (${ac.role})`;
+              if (ac.description) s += ` - ${ac.description}`;
+              return s;
+            }).join('; ');
+          } else {
+            accStr = String(accs);
+          }
+        }
+        return {
+          firstName: a.firstName || '',
+          lastName: a.lastName || '',
+          email: a.email || '',
+          phone: a.phone || '',
+          birthdate: a.birthdate || '',
+          gender: a.gender || '',
+          pronoun: a.pronoun || '',
+          citizenship: a.citizenship || '',
+          dualCitizenship: a.dualCitizenship || '',
+          address: a.address || '',
+          city: a.city || '',
+          state: a.state || '',
+          postalCode: a.postalCode || '',
+          country: a.country || '',
+          howHeard: a.howHeard || '',
+          applicationCycle: a.applicationCycle || '',
+          concentration: a.concentration || '',
+          currentlyEnrolled: a.currentlyEnrolled || '',
+          schoolName: a.schoolName || '',
+          schoolCountry: a.schoolCountry || '',
+          schoolCity: a.schoolCity || '',
+          enrollmentStart: a.enrollmentStart || '',
+          enrollmentEnd: a.enrollmentEnd || '',
+          gradingScale: a.gradingScale || '',
+          gpa: a.gpa || '',
+          maxGpa: a.maxGpa || '',
+          satMath: a.satMath || '',
+          satReading: a.satReading || '',
+          actScore: a.actScore || '',
+          isTestOptional: a.isTestOptional || false,
+          accomplishments: accStr,
+          personalStatement: a.personalStatement || '',
+          missionStatement: a.missionStatement || '',
+          applyingForAid: a.applyingForAid || '',
+          householdIncome: a.householdIncome || '',
+          dependents: a.dependents || '',
+          status: a.status || 'submitted',
+          createdAt: a.createdAt,
+        };
+      },
+    },
+    messages: {
+      columns: {
+        name: 'Name',
+        email: 'Email',
+        subject: 'Subject',
+        area: 'Area',
+        message: 'Message',
+        read: 'Read',
+        createdAt: 'Date',
+      },
+      transform: (m: any) => ({
+        name: m.name || '',
+        email: m.email || '',
+        subject: m.subject || '',
+        area: m.area || '',
+        message: m.message || '',
+        read: m.read || false,
+        createdAt: m.createdAt,
+      }),
+    },
+    subscribers: {
+      columns: {
+        email: 'Email',
+        source: 'Source',
+        active: 'Active',
+        createdAt: 'Date Subscribed',
+      },
+      transform: (s: any) => ({
+        email: s.email || '',
+        source: s.source || '',
+        active: s.active !== false,
+        createdAt: s.createdAt,
+      }),
+    },
+  };
+
+  const exportCSV = (rows: any[], filename: string, type?: string) => {
     if (!rows || rows.length === 0) return;
-    const headers = Object.keys(rows[0]).filter(k => k !== 'id');
+    const def = type && exportDefs[type] ? exportDefs[type] : null;
+    const headers = def ? Object.keys(def.columns) : Object.keys(rows[0]).filter(k => k !== 'id');
+    const headerLabels = def ? Object.values(def.columns) : headers;
     const csvRows = [
-      headers.join(','),
-      ...rows.map(row =>
-        headers.map(h => {
-          const val = row[h];
-          if (val === null || val === undefined) return '';
-          const str = String(val);
-          return str.includes(',') || str.includes('"') || str.includes('\n')
-            ? `"${str.replace(/"/g, '""')}"` : str;
-        }).join(',')
-      )
+      headerLabels.join(','),
+      ...rows.map(row => {
+        const transformed = def ? def.transform(row) : row;
+        return headers.map(h => csvEscape(transformed[h])).join(',');
+      })
     ];
     const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
@@ -1099,7 +1284,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                     </div>
                     {donors.length > 0 && (
                       <button
-                        onClick={() => exportCSV(donors, 'artemis-donations')}
+                        onClick={() => exportCSV(donors, 'artemis-donations', 'donations')}
                         className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-lg text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
                         suppressHydrationWarning
                       >
@@ -1152,7 +1337,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                     </div>
                     {applications.length > 0 && (
                       <button
-                        onClick={() => exportCSV(applications, 'artemis-applications')}
+                        onClick={() => exportCSV(applications, 'artemis-applications', 'applications')}
                         className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-lg text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
                         suppressHydrationWarning
                       >
@@ -1274,7 +1459,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                     </div>
                     {messages.length > 0 && (
                       <button
-                        onClick={() => exportCSV(messages, 'artemis-messages')}
+                        onClick={() => exportCSV(messages, 'artemis-messages', 'messages')}
                         className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-lg text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
                         suppressHydrationWarning
                       >
@@ -1383,7 +1568,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                     </div>
                     {subscribers.length > 0 && (
                       <button
-                        onClick={() => exportCSV(subscribers, 'artemis-subscribers')}
+                        onClick={() => exportCSV(subscribers, 'artemis-subscribers', 'subscribers')}
                         className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-lg text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
                         suppressHydrationWarning
                       >
