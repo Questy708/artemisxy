@@ -6,7 +6,7 @@ import {
   Eye, EyeOff, DollarSign, Mail, UserPlus, Home, CreditCard,
   Database, ExternalLink, Clock, ArrowUpRight, MessageSquare, FileText,
   Heart, ChevronLeft, Search, Bell, CheckCircle, XCircle,
-  ChevronUp, BarChart3, TrendingUp, ArrowRight
+  ChevronUp, BarChart3, TrendingUp, ArrowRight, Menu
 } from 'lucide-react';
 
 interface Props {
@@ -122,6 +122,7 @@ export default function AdminDashboard({ goToPage }: Props) {
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // ─── New State ───
   const [searchQuery, setSearchQuery] = useState('');
@@ -656,7 +657,14 @@ export default function AdminDashboard({ goToPage }: Props) {
   return (
     <div className="min-h-screen bg-[#F6F9FC] flex">
       {/* ═══ SIDEBAR ═══ */}
-      <aside className={`${sidebarCollapsed ? 'w-[68px]' : 'w-[240px]'} bg-[#0A2540] text-white flex flex-col transition-all duration-200 shrink-0 sticky top-0 h-screen z-30`}>
+      {/* Mobile backdrop */}
+      {mobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+      <aside className={`fixed inset-y-0 left-0 z-40 ${sidebarCollapsed ? 'w-[68px]' : 'w-[240px]'} bg-[#0A2540] text-white flex flex-col transition-all duration-200 ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:sticky md:top-0 md:translate-x-0 md:shrink-0 md:z-30`}>
         {/* Logo */}
         <div className={`px-4 h-[64px] flex items-center border-b border-white/10 ${sidebarCollapsed ? 'justify-center' : 'gap-3'}`}>
           <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center shrink-0">
@@ -684,7 +692,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => { setActiveSection(item.id); setCurrentPage(1); setSearchQuery(''); }}
+                      onClick={() => { setActiveSection(item.id); setCurrentPage(1); setSearchQuery(''); setMobileSidebarOpen(false); }}
                       className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] transition-all ${
                         isActive
                           ? 'bg-white/10 text-white font-medium'
@@ -759,9 +767,17 @@ export default function AdminDashboard({ goToPage }: Props) {
       {/* ═══ MAIN CONTENT ═══ */}
       <main className="flex-1 min-w-0">
         {/* ─── Top bar ─── */}
-        <div className="h-[64px] bg-white border-b border-[#E8ECF1] flex items-center justify-between px-6 sticky top-0 z-20">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-sm">
+        <div className="h-[64px] bg-white border-b border-[#E8ECF1] flex items-center justify-between px-4 md:px-6 sticky top-0 z-20">
+          {/* Hamburger (mobile) + Breadcrumb */}
+          <div className="flex items-center gap-2 text-sm">
+            <button
+              onClick={() => setMobileSidebarOpen(true)}
+              className="md:hidden p-2 -ml-2 rounded-lg text-[#5A6987] hover:text-[#1A1F36] hover:bg-[#F6F9FC] transition-colors"
+              aria-label="Open sidebar"
+              suppressHydrationWarning
+            >
+              <Menu size={20} />
+            </button>
             <span className="text-[#8792A2]">Dashboard</span>
             <ChevronRight size={12} className="text-[#C1C9D2]" />
             <span className="font-semibold text-[#1A1F36]">{breadcrumb}</span>
@@ -776,7 +792,7 @@ export default function AdminDashboard({ goToPage }: Props) {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={e => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                className="w-[280px] h-[40px] pl-9 pr-4 bg-[#F6F9FC] border border-[#E8ECF1] rounded-lg text-sm text-[#1A1F36] placeholder-[#C1C9D2] focus:outline-none focus:border-[#0A2540]/20 focus:ring-1 focus:ring-[#0A2540]/10 transition-all"
+                className="flex-1 max-w-[280px] lg:max-w-[360px] h-[40px] pl-9 pr-4 bg-[#F6F9FC] border border-[#E8ECF1] rounded-lg text-sm text-[#1A1F36] placeholder-[#C1C9D2] focus:outline-none focus:border-[#0A2540]/20 focus:ring-1 focus:ring-[#0A2540]/10 transition-all"
               />
               {searchQuery && (
                 <button
@@ -826,7 +842,7 @@ export default function AdminDashboard({ goToPage }: Props) {
         </div>
 
         {/* ─── Page content ─── */}
-        <div className="p-6 max-w-[1080px]">
+        <div className="p-4 md:p-6 max-w-[1440px] mx-auto">
           {loading ? (
             <div className="flex items-center justify-center py-32">
               <div className="text-center">
@@ -859,7 +875,7 @@ export default function AdminDashboard({ goToPage }: Props) {
 
                   {/* Metric Cards with sparklines */}
                   {stats && (
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {[
                         {
                           label: 'Total Raised', value: formatCurrency(stats.totalRaised || 0),
@@ -1097,23 +1113,23 @@ export default function AdminDashboard({ goToPage }: Props) {
                   ) : (
                     <div className="bg-white rounded-lg border border-[#E8ECF1] overflow-hidden">
                       {/* Table header — sortable */}
-                      <div className="grid grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-2.5 bg-[#F6F9FC] text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider border-b border-[#E8ECF1]">
+                      <div className="grid grid-cols-[1fr_80px_90px] md:grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-2.5 bg-[#F6F9FC] text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider border-b border-[#E8ECF1]">
                         <button onClick={() => handleSort('donorName')} className="flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Donor <SortIndicator field="donorName" /></button>
-                        <button onClick={() => handleSort('donorEmail')} className="flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Email <SortIndicator field="donorEmail" /></button>
+                        <button onClick={() => handleSort('donorEmail')} className="hidden md:flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Email <SortIndicator field="donorEmail" /></button>
                         <button onClick={() => handleSort('amount')} className="flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Amount <SortIndicator field="amount" /></button>
-                        <button onClick={() => handleSort('createdAt')} className="flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Date <SortIndicator field="createdAt" /></button>
+                        <button onClick={() => handleSort('createdAt')} className="hidden md:flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Date <SortIndicator field="createdAt" /></button>
                         <button onClick={() => handleSort('paymentStatus')} className="flex items-center gap-1 hover:text-[#1A1F36] transition-colors text-left" suppressHydrationWarning>Status <SortIndicator field="paymentStatus" /></button>
                       </div>
                       {/* Rows */}
                       <div className="divide-y divide-[#F0F3F7]">
                         {paginate(filteredDonors).map((d: any) => (
-                          <div key={d.id || d.date} className="grid grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-3 hover:bg-[#F6F9FC]/60 transition-colors items-center text-sm">
+                          <div key={d.id || d.date} className="grid grid-cols-[1fr_80px_90px] md:grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-3 hover:bg-[#F6F9FC]/60 transition-colors items-center text-sm">
                             <span className="font-medium text-[#1A1F36] truncate">
                               {d.donorName || d.name || (d.donorAnonymous ? 'Anonymous' : 'Unknown')}
                             </span>
-                            <span className="text-[#5A6987] truncate text-xs">{d.donorEmail || '—'}</span>
+                            <span className="hidden md:block text-[#5A6987] truncate text-xs">{d.donorEmail || '—'}</span>
                             <span className="font-semibold text-[#1A1F36]">{formatCurrency(d.amount, d.currency || 'USD')}</span>
-                            <span className="text-xs text-[#8792A2]">{formatDate(d.createdAt || d.date)}</span>
+                            <span className="hidden md:block text-xs text-[#8792A2]">{formatDate(d.createdAt || d.date)}</span>
                             <span>
                               <StatusBadge status={d.paymentStatus || 'unknown'} />
                             </span>
