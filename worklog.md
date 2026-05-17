@@ -126,3 +126,26 @@ Stage Summary:
 - programs-data.ts updated with all fictional names
 - Duplicate navigation bar removed (OnThisPageNav remains as the single navigation)
 - No build errors
+---
+Task ID: 2
+Agent: Main
+Task: UX improvements for easy visitor flow — CTAs, search/filter, Back to Top, mobile nav, fix sidebar search
+
+Work Log:
+- Added "Apply Now" + "Request Info" CTA buttons to ProgramDetail.tsx (below the program title, above content)
+- Added floating bottom CTA bar on ProgramDetail for mobile (shows program name + Apply/Info buttons, lg:hidden)
+- Added search input + degree filter (B.A./B.S./B.F.A.) to ProgramsOfStudy.tsx with sticky filter bar
+- Added empty state with "No programs found" + "Clear Filters" button when search/filter yields no results
+- Added program count stats (60+ Programs, 7 Schools, 35 Countries) to ProgramsOfStudy intro
+- Added "Apply to [School]" CTA link at bottom of each school section in ProgramsOfStudy
+- Added "Back to Top" floating button to ArtemisApp.tsx (appears after 600px scroll, dark bg with hover to red)
+- Added mobile bottom tab bar with 5 tabs: Home, Programs, Admissions, Apply, Search (lg:hidden only)
+- Fixed Sidebar.tsx: replaced mock search with button that opens the real SearchOverlay (onSearchClick prop)
+- Added ⌘K keyboard shortcut hint in sidebar search button
+- Passed onSearchClick prop from ArtemisApp to both Sidebar instances
+- Build verified successfully
+
+Stage Summary:
+- 5 files modified: ProgramDetail.tsx, ProgramsOfStudy.tsx, ArtemisApp.tsx, Sidebar.tsx
+- Key UX improvements: CTAs on program pages, search/filter for 60+ programs, mobile bottom nav, back-to-top button, consistent search experience
+- All changes compile cleanly

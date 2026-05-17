@@ -115,9 +115,27 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
 
         {/* Main Content */}
         <main className="flex-1 px-8 lg:px-20 py-16 lg:py-24 bg-white">
-          <h1 className="text-[36px] font-serif font-bold text-[#141414] mb-8">
+          <h1 className="text-[36px] font-serif font-bold text-[#141414] mb-6">
             {data.title}
           </h1>
+
+          {/* Action CTAs */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            <button
+              onClick={() => goToPage('apply')}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#8A0000] text-white text-[12px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors shadow-lg shadow-[#8A0000]/20"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              Apply Now
+            </button>
+            <button
+              onClick={() => goToPage('admissions')}
+              className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-[#8A0000] text-[#8A0000] text-[12px] font-bold uppercase tracking-widest hover:bg-[#8A0000] hover:text-white transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Request Info
+            </button>
+          </div>
 
           <div className="max-w-4xl space-y-32">
             {/* Overview Section */}
@@ -332,6 +350,30 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
       </div>
 
       <SubPageFooter goToPage={goToPage} />
+
+      {/* Floating Bottom CTA — visible on scroll */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-gray-200 py-3 px-8 lg:px-20 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] lg:hidden">
+        <div className="flex items-center justify-between max-w-[1400px] mx-auto">
+          <div className="min-w-0">
+            <p className="text-[14px] font-bold text-[#141414] truncate">{data.title}</p>
+            <p className="text-[11px] text-gray-500">12 courses required</p>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <button
+              onClick={() => goToPage('admissions')}
+              className="px-4 py-2.5 border border-[#8A0000] text-[#8A0000] text-[11px] font-bold uppercase tracking-wider hover:bg-[#8A0000] hover:text-white transition-colors"
+            >
+              Info
+            </button>
+            <button
+              onClick={() => goToPage('apply')}
+              className="px-5 py-2.5 bg-[#8A0000] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-[#6B0000] transition-colors"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

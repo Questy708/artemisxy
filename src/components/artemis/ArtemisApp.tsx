@@ -332,6 +332,7 @@ export default function ArtemisApp() {
   const [currentProgram, setCurrentProgram] = useState('');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSearchOpen, setSearchOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Keyboard shortcuts: Cmd/Ctrl+K to open search, Cmd/Ctrl+Shift+A for admin
   useEffect(() => {
@@ -357,6 +358,15 @@ export default function ArtemisApp() {
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Track scroll for Back to Top button
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 600);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const pageKey = `${currentPage}-${currentProgram}`;
 
@@ -505,6 +515,7 @@ export default function ArtemisApp() {
               onClose={() => setSidebarOpen(false)}
               goHome={() => { setCurrentPage('home'); setSidebarOpen(false); }}
               goToPage={goToPage}
+              onSearchClick={() => setSearchOpen(true)}
             />
             <main className="flex-1 flex flex-col min-w-0">
               <PageTransition pageKey={pageKey}>
@@ -523,6 +534,7 @@ export default function ArtemisApp() {
             goHome={() => { setCurrentPage('home'); setSidebarOpen(false); }}
             goToPage={goToPage}
             hideDesktopSidebar={true}
+            onSearchClick={() => setSearchOpen(true)}
           />
 
           {/* Breadcrumb navigation — only on subpages */}
@@ -544,6 +556,57 @@ export default function ArtemisApp() {
       )}
 
       <ArtemisChatBot />
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-6 right-6 z-40 w-11 h-11 bg-[#141414] text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#8A0000] transition-all lg:bottom-8 lg:right-8"
+          aria-label="Back to top"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" /></svg>
+        </button>
+      )}
+
+      {/* Mobile Bottom Tab Bar — only on small screens */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 lg:hidden safe-area-bottom">
+        <div className="flex items-center justify-around h-14">
+          {[
+            { label: 'Home', page: 'home', icon: (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            )},
+            { label: 'Programs', page: 'programs', icon: (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+            )},
+            { label: 'Admissions', page: 'admissions', icon: (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+            )},
+            { label: 'Apply', page: 'apply', icon: (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+            )},
+            { label: 'Search', page: '_search', icon: (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            )},
+          ].map((tab) => (
+            <button
+              key={tab.label}
+              onClick={() => {
+                if (tab.page === '_search') {
+                  setSearchOpen(true);
+                } else {
+                  goToPage(tab.page);
+                }
+              }}
+              className={`flex flex-col items-center justify-center gap-0.5 flex-1 h-full transition-colors ${
+                currentPage === tab.page ? 'text-[#8A0000]' : 'text-gray-400 hover:text-gray-600'
+              }`}
+            >
+              {tab.icon}
+              <span className="text-[9px] font-bold uppercase tracking-wider">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   );
 }
