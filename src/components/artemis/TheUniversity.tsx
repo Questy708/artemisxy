@@ -71,14 +71,131 @@ const schools = [
   },
 ];
 
+const coreValues = [
+  {
+    title: 'Concern for Others',
+    desc: 'Rooted in the African principle of Ubuntu — the belief in a universal bond of sharing that connects all humanity. We recognise that our individual flourishing is inseparable from the flourishing of others, and we build this conviction into every programme, policy, and partnership at Artemis.',
+    icon: '♥',
+  },
+  {
+    title: 'Adventurous & Open-Minded',
+    desc: 'We look beyond present situations and challenge ourselves to think outside the box. The unknown is not a threat — it is an invitation. We cultivate intellectual courage, encouraging every member of our community to venture into unfamiliar territory and return with new perspective.',
+    icon: '◈',
+  },
+  {
+    title: 'Open Communication',
+    desc: 'Information and ideas are the most valuable currency and should be shared generously. We communicate openly, honestly, and respectfully — and we make up for boldness with people willing to listen. Those who listen well are happier, and the people around them are better off.',
+    icon: '◉',
+  },
+  {
+    title: 'Creativity, Innovation & Excellence',
+    desc: 'In all disciplines of study, made possible by the unconventional pursuit of knowledge, far transfer of theories into life-changing solutions, engaging with our host societies on collaborative projects and amplifying impact across the globe. Excellence is not a benchmark — it is a habit.',
+    icon: '✦',
+  },
+  {
+    title: 'Learning Continuously',
+    desc: 'We recognise that learning is essential for adapting to changes in a dynamic world. We create knowledge and outsource insights to inform the daily operations of the university. Every experience — inside or outside the classroom — is an opportunity to grow.',
+    icon: '⟲',
+  },
+  {
+    title: 'Global Citizenship',
+    desc: 'Among all members of the Artemis community, we facilitate non-discrimination, respect for diversity, and solidarity for humanity. This creates a sense of belonging among people with common goals — a community that transcends borders and embraces the full spectrum of human experience.',
+    icon: '◎',
+  },
+];
+
+const guidingPrinciples = [
+  {
+    title: 'Imagination',
+    maxim: 'Develop and put to use your imaginative capacities, at all levels of the university.',
+    desc: 'We develop and put to use our imaginative capacities across all levels — unlike traditional universities that have become bureaucracies with corporate tendencies that have dwarfed their imaginative powers. Our possibilities are neither there in the world to be read off nor yet discovered, but exist as an idea to be discovered. It takes a collective imaginative effort within our community to draw an image of what it might be. Such a practical imagination allows for the emergence of projects within our host societies.',
+  },
+  {
+    title: 'Nurturing Curiosity',
+    maxim: 'The more we know, the less we truly understand.',
+    desc: 'We are deeply curious about ourselves and the world. Even when we think we have a full comprehension of something, we do not stop remaining curious about it. We act with the notion that the more we know, the less we truly understand. Yet we balance this by creating things and testing our understanding while simultaneously helping others to understand.',
+  },
+  {
+    title: 'Active Concern',
+    maxim: 'Strive to live out your concerns for the world.',
+    desc: 'The University of Artemis has a concern for the whole Earth, and lives out this concern, with the difficulties that this concern will bring. This might open us to unsettled claims when controversial issues appear in the curriculum, but our concerns for persons\' learning ecologies to fully flourish orients us towards deliberately placing students in a pedagogical environment that may be personally stretching and discomfiting.',
+  },
+  {
+    title: 'Deeply Human',
+    maxim: 'We are each dependent upon one another and thus responsible for each other and future generations.',
+    desc: 'We act with the understanding that we are each dependent upon one another and thus responsible for each other and future generations. The human animal was made to be in tribes. We want to foster a community that unites us as a human race and impacts us all positively. We act with care, consideration, and openness to others\' cultures, perspectives, and ideas. We use emotional intelligence to create deep, meaningful relationships. We understand human psychology, neuroscience, and motivations and seek to meet people where they are.',
+  },
+  {
+    title: 'Exploration',
+    maxim: 'An exploring university — never content to reside within boundaries.',
+    desc: 'We always continue to explore possibilities for realising the potential of our academy in the world. The University of Artemis is an exploring university and we are never content to reside within our boundaries — of knowledge, academic identity, understanding, position, relationships with the world or pedagogical relationships. We are always self-critical, exploring possibilities for ourselves in the world. Our ventures forth, stretching into new spaces.',
+  },
+  {
+    title: 'Wellbeing of the World',
+    maxim: 'Continuously increase well-being in the world and its ecosystems.',
+    desc: 'We aim to continuously increase well-being in the world, mostly guided by a determination to increase well-being in the world, especially the well-being of each of the ecosystems in which we are especially implicated. This opens us to profound challenges — there will be disputes both within and the wider world over both the meaning of well-being and its source and legitimation. "Wellbeing" acts as an ideational umbrella, under which competing insights can coexist, even if uneasily.',
+  },
+];
+
+const goalsForEducation = [
+  {
+    title: 'Developing Centrally Important Human Values',
+    desc: 'Education should help students develop important human values and strategies to evaluate arguments and make independent choices in this noisy world full of disorientations and unexpected changes. "Philosophical habits of mind" should be formed through the learning process to serve as a foundation in navigating future endeavours, whether in life, at work, or in the case of global insurgencies.',
+  },
+  {
+    title: 'Pursuit for Universal Knowledge',
+    desc: 'We are guided by the principle of branches of knowledge being one whole — hence the commitment to explore the boundaries of all disciplines while appreciating the advancements made by past and present institutions of learning. Actual change happens when useful knowledge is transferred and disseminated into the world population for good intentions of solving the most pressing issues of our societies.',
+  },
+  {
+    title: 'Wellbeing of the World',
+    desc: 'The University of Artemis aims to continually increase well-being within our community as well as the rest of the world since we are all implicated in the ecologies. We believe that education should help students develop centrally important human values, and strategies to be able to evaluate arguments and make independent choices in this noisy world full of disorientation and changes in society.',
+  },
+  {
+    title: 'Academic Freedom',
+    desc: 'Committed to creating spaces that afford both students and faculty the freedom to enjoy academic freedom. It is fundamental for driving self-discovery and the unconventional pursuit of knowledge — which is crucial for meeting the teaching and learning parties involved in the entire cycle of transfer. A student will venture into various ecosystems in which they are embedded through readings, field trips, intercultural exchange, and cross-disciplinary endeavours — hence creating infinite opportunities.',
+  },
+  {
+    title: 'One School, Multiple Campuses',
+    desc: 'The University of Artemis will focus on investment in real estate to establish decentralized residential colleges — learning and living centres in major cities across the globe. Spaces will serve to foster close, intimate associations of students, faculty, and host communities, hence creating multiple intellectual associations where conversations drive personal development, the connection of interdisciplinary ideas, and forge lifelong relations.',
+  },
+  {
+    title: 'Gain a Global Mindset',
+    desc: 'In an increasingly interconnected world, students need more than just settling within closed campus walls during their course of studying. We will combine travel to multiple global centres and remote learning to immerse students into new environments and help them discover themselves while developing soft skills required for their professional development — such as adaptability, resilience, cultural awareness, self-sufficiency and independence, curiosity, and ability to work with people from diverse backgrounds.',
+  },
+  {
+    title: 'Fostering Innovations',
+    desc: 'Our world is filled with enormous challenges that affect the well-being of populations — but these same challenges present potential opportunities for highly motivated individuals to come up with novel solutions. We believe education is an active force for exploring new ideas and answering questions that have remained unanswered in society. Students should be exposed to the mindsets and tools to craft solutions to these long-lasting challenges, both locally and globally.',
+  },
+];
+
+const accreditationBodies = [
+  { region: 'United Kingdom', bodies: ['Quality Assurance Agency for Higher Education (QAA)', 'British Accreditation Council (BAC)'] },
+  { region: 'United States', bodies: ['Middle States Commission on Higher Education (MSCHE)', 'Western Association of Schools and Colleges (WASC)'] },
+  { region: 'Asia', bodies: ['Asia-Pacific Quality Network (APQN)', 'National Assessment and Accreditation Council (NAAC) — India'] },
+  { region: 'Africa', bodies: ['Council for Higher Education Accreditation (CHEA)', 'Association of African Universities (AAU)'] },
+];
+
+const academicPartners = [
+  { name: 'University of Oxford', location: 'UK' },
+  { name: 'Massachusetts Institute of Technology (MIT)', location: 'USA' },
+  { name: 'National University of Singapore (NUS)', location: 'Singapore' },
+  { name: 'University of Cape Town', location: 'South Africa' },
+];
+
 /* ─── Component ─── */
 export default function TheUniversity({ goToPage }: Props) {
+  const visionAnim = useInView();
+  const valuesAnim = useInView();
+  const principlesAnim = useInView();
+  const missionAnim = useInView();
+  const goalsAnim = useInView();
+  const accreditationAnim = useInView();
   const microCollegesAnim = useInView();
   const roleAnim = useInView();
   const schoolsAnim = useInView();
   const pressAnim = useInView();
   const lifelongAnim = useInView();
-  const activeSection = useActiveSection(['micro-colleges', 'schools', 'press', 'lifelong-learning']);
+  const activeSection = useActiveSection(['vision', 'values', 'mission', 'principles', 'goals', 'micro-colleges', 'schools', 'press', 'lifelong-learning']);
 
   return (
     <div className="flex flex-col bg-white">
@@ -115,6 +232,12 @@ export default function TheUniversity({ goToPage }: Props) {
 
       <OnThisPageNav
         sections={[
+          { id: 'vision', label: 'Vision' },
+          { id: 'values', label: 'Values' },
+          { id: 'mission', label: 'Mission' },
+          { id: 'principles', label: 'Principles' },
+          { id: 'goals', label: 'Goals' },
+          { id: 'accreditation', label: 'Accreditation' },
           { id: 'micro-colleges', label: 'Micro-Colleges' },
           { id: 'schools', label: 'Schools' },
           { id: 'press', label: 'Press' },
@@ -152,6 +275,304 @@ export default function TheUniversity({ goToPage }: Props) {
                   <svg className="w-4 h-4 text-gray-300 group-hover:text-[#8A0000] group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </button>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Vision ── */}
+      <section id="vision" className="scroll-mt-[110px] max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
+        <div
+          ref={visionAnim.ref}
+          className={`transition-all duration-700 ${visionAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Our Vision
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <div>
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-8">
+                A new era of shared fate
+              </h2>
+              <p className="text-[16px] text-gray-600 leading-relaxed mb-4">
+                In a flicker of historical time, humanity has evolved into a powerful force of change beyond what past generations could have ever imagined — from mapping the human genome to landing a man on the moon — we are witnessing a new era in which the defining feature is that of a species that is bound to the same fate.
+              </p>
+              <p className="text-[16px] text-gray-600 leading-relaxed mb-4">
+                The University of Artemis is founded as an institution for the whole earth to help contribute positively towards human progress for both the present and future generations. We believe that of all inventions of human origin, education is a great equalizer and public good that can be used in building a better and just world in which everyone has access to the future we desire.
+              </p>
+              <p className="text-[16px] text-gray-600 leading-relaxed">
+                Our world has entered a new phase of civilisation — an epochal moment of accelerated change in which the long threads of interdependence — economic, political, social, and environmental — are binding the planet&apos;s people into a single community of fate.
+              </p>
+            </div>
+            <div className="bg-[#8A0000] p-8 md:p-12 flex flex-col justify-center">
+              <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 mb-6">
+                Vision Statement
+              </div>
+              <p className="text-[20px] sm:text-[24px] font-bold text-white leading-snug mb-6">
+                The University of Artemis is founded as an institution for the whole earth — to help contribute positively towards human progress for both the present and future generations.
+              </p>
+              <p className="text-[14px] text-white/70 leading-relaxed">
+                We believe that education is a great equalizer and public good that can be used in building a better and just world in which everyone has access to the future we desire.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Core Values ── */}
+      <section id="values" className="scroll-mt-[110px] bg-gray-50 py-16 lg:py-24">
+        <div
+          ref={valuesAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${valuesAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              What We Value
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Core Values
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Core values are central to the culture and practices among our community of scholars, students, the communities that host our campuses, and the entire world. They guide every decision we make and every programme we build.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {coreValues.map((value, i) => (
+              <div key={i} className="group bg-white p-6 md:p-8 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm flex flex-col">
+                <div className="w-10 h-10 bg-[#8A0000]/[0.07] border border-[#8A0000]/20 flex items-center justify-center mb-5 group-hover:bg-[#8A0000]/[0.14] transition-colors text-[16px] text-[#8A0000]">
+                  {value.icon}
+                </div>
+                <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-3">
+                  {value.title}
+                </h3>
+                <p className="text-[13px] text-gray-500 leading-relaxed flex-1">
+                  {value.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Mission ── */}
+      <section id="mission" className="scroll-mt-[110px] max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
+        <div
+          ref={missionAnim.ref}
+          className={`transition-all duration-700 ${missionAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Our Mission
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-7">
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-8">
+                Mission
+              </h2>
+              <p className="text-[16px] text-gray-600 leading-relaxed mb-4">
+                The mission of the University of Artemis is to enable individuals to place themselves in relation to the world. This is possible through the strong urge to foster an unconventional pursuit of knowledge that informs us to craft authentic transformative learning experiences.
+              </p>
+              <p className="text-[16px] text-gray-600 leading-relaxed">
+                We build inclusive decentralized learning environments worldwide to nurture deeply human global citizens, change-makers, innovators, artists, scientists, leaders, outliers, and futurists that are philosophically habituated to make connections between self-knowledge and broader social issues across all sectors.
+              </p>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="border-l-2 border-[#8A0000] pl-8">
+                <p className="text-[18px] font-bold text-[#141414] leading-snug mb-4 italic">
+                  &ldquo;To enable individuals to place themselves in relation to the world — through the unconventional pursuit of knowledge that crafts authentic transformative learning experiences.&rdquo;
+                </p>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000]">
+                  Artemis Mission Statement
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Guiding Principles ── */}
+      <section id="principles" className="scroll-mt-[110px] bg-gray-50 py-16 lg:py-24">
+        <div
+          ref={principlesAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${principlesAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Our Guiding Principles
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Guiding Principles
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Artemis is designed to be ecological from within itself and the rest of the world — it lives from the earth and strives to do all for the whole earth, especially through its implications in the various ecosystems within which it is situated. These principles are not aspirational — they are structural.
+          </p>
+
+          <div className="space-y-8">
+            {guidingPrinciples.map((principle, i) => (
+              <div key={i} className="bg-white p-6 md:p-10 border border-gray-200 hover:border-[#8A0000]/40 transition-all">
+                <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
+                  <div className="lg:w-[200px] shrink-0">
+                    <div className="text-[10px] font-bold text-[#8A0000] tracking-widest mb-2 uppercase">
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                    <h3 className="text-[20px] font-bold text-[#141414] leading-snug mb-3">
+                      {principle.title}
+                    </h3>
+                    <p className="text-[12px] text-[#8A0000] font-semibold leading-relaxed italic">
+                      &ldquo;{principle.maxim}&rdquo;
+                    </p>
+                  </div>
+                  <div className="flex-1 border-l-0 lg:border-l border-gray-200 lg:pl-12">
+                    <p className="text-[15px] text-gray-600 leading-relaxed">
+                      {principle.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Goals for Education ── */}
+      <section id="goals" className="scroll-mt-[110px] max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
+        <div
+          ref={goalsAnim.ref}
+          className={`transition-all duration-700 ${goalsAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Education
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Goals for Education
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Our purpose ignites through the mission of enabling individuals to place themselves in relation to the world. Education should help students develop important human values and strategies to evaluate arguments and make independent choices in this noisy world full of disorientations and unexpected changes. &ldquo;Philosophical habits of mind&rdquo; should be formed through the learning process to serve as a foundation in navigating future endeavours.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {goalsForEducation.map((goal, i) => (
+              <div key={i} className="group p-6 md:p-8 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-8 h-8 bg-[#8A0000]/[0.07] border border-[#8A0000]/20 flex items-center justify-center group-hover:bg-[#8A0000]/[0.14] transition-colors">
+                    <span className="text-[10px] font-black text-[#8A0000]">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-[15px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-3">
+                      {goal.title}
+                    </h3>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">
+                      {goal.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Accreditation and Partnerships ── */}
+      <section id="accreditation" className="scroll-mt-[110px] bg-gray-50 py-16 lg:py-24">
+        <div
+          ref={accreditationAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${accreditationAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Quality Assurance
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Accreditation and Partnerships
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Our university is actively pursuing accreditation from several key accreditation bodies across different regions to ensure our programmes meet the highest standards of quality and rigour. We are committed to transparency and will provide updates on our accreditation status as we make progress.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 mb-16">
+            {/* Accreditation */}
+            <div>
+              <div className="mb-6 flex items-center space-x-3">
+                <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+                  Accreditation (Pending)
+                </span>
+              </div>
+              <div className="space-y-6">
+                {accreditationBodies.map((region, i) => (
+                  <div key={i} className="bg-white p-6 border border-gray-200">
+                    <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                      {region.region}
+                    </div>
+                    <ul className="space-y-2">
+                      {region.bodies.map((body, j) => (
+                        <li key={j} className="text-[14px] text-gray-600 leading-relaxed flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#8A0000] mt-2 shrink-0"></span>
+                          {body}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Partnerships */}
+            <div>
+              <div className="mb-6 flex items-center space-x-3">
+                <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+                  Academic and Industry Partners
+                </span>
+              </div>
+
+              {/* Academic Partners */}
+              <div className="bg-white p-6 border border-gray-200 mb-6">
+                <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-4">
+                  Academic Partners
+                </div>
+                <p className="text-[13px] text-gray-500 leading-relaxed mb-4">
+                  Our academic partnerships include collaborations with top universities and research institutions around the world. These partnerships enable joint research initiatives, student and faculty exchange programmes, and access to cutting-edge resources and expertise.
+                </p>
+                <ul className="space-y-3">
+                  {academicPartners.map((partner, i) => (
+                    <li key={i} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
+                      <span className="text-[14px] font-bold text-[#141414]">{partner.name}</span>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{partner.location}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Industry Partners */}
+              <div className="bg-white p-6 border border-gray-200">
+                <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-4">
+                  Industry Partners
+                </div>
+                <p className="text-[13px] text-gray-500 leading-relaxed">
+                  Our industry partnerships provide students with practical, real-world experiences and opportunities to engage with leading companies in various sectors. These collaborations include internships, project-based learning, and direct engagement with industry experts.
+                </p>
+              </div>
             </div>
           </div>
         </div>
