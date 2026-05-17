@@ -186,16 +186,16 @@ export default function SubPageFooter({ goToPage }: FooterProps) {
                 <button onClick={() => goToPage('contact-us')} className="text-gray-600 hover:text-[#8A0000] transition-colors">Contact</button>
               </div>
               <div className="flex gap-x-3 text-[12px] font-medium text-gray-500 mb-6">
-                <button onClick={() => goToPage('about')} className="hover:text-[#8A0000] transition-colors">Privacy</button>
+                <button onClick={() => goToPage('policies')} className="hover:text-[#8A0000] transition-colors">Privacy</button>
                 <button onClick={() => goToPage('access-at-artemis')} className="hover:text-[#8A0000] transition-colors">Accessibility</button>
-                <button onClick={() => goToPage('innovation')} className="hover:text-[#8A0000] transition-colors">Social Media Hub</button>
+                <button onClick={() => goToPage('blog')} className="hover:text-[#8A0000] transition-colors">News & Media</button>
               </div>
 
-              <div className="flex space-x-4 grayscale opacity-80 text-lg">
-                <span className="cursor-pointer hover:opacity-100 hover:grayscale-0 transition-all">𝕏</span>
-                <span className="cursor-pointer hover:opacity-100 hover:grayscale-0 transition-all text-blue-800 font-bold">f</span>
-                <span className="cursor-pointer hover:opacity-100 hover:grayscale-0 transition-all text-red-600">▶</span>
-                <span className="cursor-pointer hover:opacity-100 hover:grayscale-0 transition-all">📷</span>
+              <div className="flex space-x-3 text-[11px] font-medium text-gray-400">
+                <a href="https://x.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">X</a>
+                <a href="https://facebook.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">Facebook</a>
+                <a href="https://linkedin.com/school/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">LinkedIn</a>
+                <a href="https://instagram.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">Instagram</a>
               </div>
             </div>
           </div>
@@ -211,12 +211,12 @@ export default function SubPageFooter({ goToPage }: FooterProps) {
             <div className="flex flex-col gap-3">
               <button onClick={() => goToPage('research')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Research</button>
               <button onClick={() => goToPage('campus')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Campus Life</button>
-              <button onClick={() => goToPage('colleges')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Alumni</button>
+              <button onClick={() => goToPage('the-university')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Alumni</button>
             </div>
             <div className="flex flex-col gap-3">
               <button onClick={() => goToPage('innovation')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Innovation</button>
               <button onClick={() => goToPage('blog')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">News</button>
-              <button onClick={() => goToPage('education')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Lifelong Learning</button>
+              <button onClick={() => goToPage('collegium-alliance')} className="text-[13px] font-bold text-gray-900 text-left hover:text-[#8A0000] transition-colors">Global Network</button>
             </div>
           </div>
 

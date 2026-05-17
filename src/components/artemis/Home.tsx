@@ -96,7 +96,6 @@ export default function Home({ goToPage }: HomeProps) {
               >
                 FULL STORY
               </button>
-              <span>SHARE: X F</span>
             </div>
           </div>
         </div>

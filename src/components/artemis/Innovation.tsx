@@ -591,9 +591,9 @@ export default function Innovation({ goToPage }: InnovationProps) {
                     </div>
                     <div className="flex flex-wrap gap-3">
                       {[
-                        { label: 'Artemis Sandbox', page: 'campus-life' },
-                        { label: 'Collegium Accelerator', page: 'about' },
-                        { label: 'Delta V Summer', page: 'campus-life' },
+                        { label: 'Artemis Sandbox', page: 'campus' },
+                        { label: 'Collegium Accelerator', page: 'collegium-alliance' },
+                        { label: 'Delta V Summer', page: 'campus' },
                         { label: 'Innovation Fund', page: 'fundraising' },
                       ].map((btn, i) => (
                         <button
@@ -682,7 +682,7 @@ export default function Innovation({ goToPage }: InnovationProps) {
           {/* Join the studio CTA */}
           <div className="mt-12 text-center">
             <button
-              onClick={() => goToPage('about')}
+              onClick={() => goToPage('jobs')}
               className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest border-b-2 border-[#8A0000] text-[#8A0000] pb-1 hover:text-black hover:border-black transition-colors group"
             >
               <span>Join the Studio</span>
@@ -715,7 +715,7 @@ export default function Innovation({ goToPage }: InnovationProps) {
                 <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
               </button>
               <button
-                onClick={() => goToPage('about')}
+                onClick={() => goToPage('jobs')}
                 className="flex items-center space-x-3 border border-white text-white px-8 py-4 text-[13px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-[#8A0000] transition-colors group"
               >
                 <span>Join as a Builder</span>

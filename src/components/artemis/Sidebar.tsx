@@ -87,15 +87,15 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
           <ul className="text-[14px] space-y-3 font-medium">
             <li><button onClick={() => { goHome(); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Prospective Students</button></li>
             <li><button onClick={() => { goToPage('education'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Current Students</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Faculty & Staff</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Alumni</button></li>
+            <li><button onClick={() => { goToPage('our-people'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Faculty & Staff</button></li>
+            <li><button onClick={() => { goToPage('the-university'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Alumni</button></li>
             <li><button onClick={() => { goToPage('campus'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Communities & Partners</button></li>
           </ul>
         </div>
 
         <div className="bg-[#FFF5F5] border border-[#FFDADA] p-5 mb-10">
           <h4 className="text-[14px] font-bold border-b border-[#FFDADA] pb-2 mb-3">Artemis Manifesto</h4>
-          <button onClick={() => { goToPage('about'); onClose?.(); }} className="text-[13px] leading-snug text-left hover:underline" suppressHydrationWarning>Read the 'The Artemis Project' - our mission to re-engineer human learning.</button>
+          <button onClick={() => { goToPage('the-university'); onClose?.(); }} className="text-[13px] leading-snug text-left hover:underline" suppressHydrationWarning>Read the 'The Artemis Project' - our mission to re-engineer human learning.</button>
         </div>
 
         <div className="mb-6">
@@ -142,18 +142,18 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
           <button onClick={() => goToPage('contact-us')} className="footer-link" suppressHydrationWarning>Contact</button>
         </div>
         <div className="text-[12px] space-x-2 mb-2 font-medium">
-          <button onClick={() => goToPage('about')} className="footer-link" suppressHydrationWarning>Privacy</button>
+          <button onClick={() => goToPage('policies')} className="footer-link" suppressHydrationWarning>Privacy</button>
           <button onClick={() => goToPage('access-at-artemis')} className="footer-link" suppressHydrationWarning>Accessibility</button>
         </div>
         <div className="text-[11px] space-x-2 mb-6 font-medium opacity-40">
           <button onClick={() => goToPage('admin')} className="footer-link" suppressHydrationWarning>Admin</button>
         </div>
 
-        <div className="flex space-x-4 grayscale opacity-60 text-sm font-bold">
-          <span>X</span>
-          <span>f</span>
-          <span>In</span>
-          <span>IG</span>
+        <div className="flex space-x-3 text-[11px] font-medium text-gray-400">
+          <a href="https://x.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">X</a>
+          <a href="https://facebook.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">Facebook</a>
+          <a href="https://linkedin.com/school/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">LinkedIn</a>
+          <a href="https://instagram.com/artemisuni" target="_blank" rel="noopener noreferrer" className="hover:text-[#8A0000] transition-colors">Instagram</a>
         </div>
       </div>
     </>

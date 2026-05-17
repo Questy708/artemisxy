@@ -146,7 +146,7 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
                   {data.coDirectorTitle && data.coDirectorName && (
                     <span>{data.coDirectorTitle}: <button onClick={() => goToPage('our-people')} className="text-[#8A0000] hover:underline font-bold">{data.coDirectorName}</button>, {data.coDirectorLocation};{' '}</span>
                   )}
-                  <button onClick={() => goToPage('about')} className="text-[#8A0000] hover:underline font-bold">{data.website}</button>
+                  <span className="text-[#8A0000] font-bold">{data.website}</span>
                 </p>
                 {data.overviewParagraphs.map((p, i) => (
                   <p key={i} className="text-[15px] leading-relaxed text-[#141414]">{p}</p>
@@ -325,7 +325,7 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
                 <p className="text-gray-400 text-[16px] leading-relaxed mb-8">
                   Navigate your academic journey from orientation to graduation with our integrated visual mapping system.
                 </p>
-                <button onClick={() => goToPage('education')} className="inline-flex items-center space-x-4 px-8 py-3 bg-white text-[#141414] font-bold uppercase tracking-widest text-[12px] hover:bg-[#8A0000] hover:text-white transition-all transform hover:-translate-y-1">
+                <button onClick={() => goToPage('undergraduate')} className="inline-flex items-center space-x-4 px-8 py-3 bg-white text-[#141414] font-bold uppercase tracking-widest text-[12px] hover:bg-[#8A0000] hover:text-white transition-all transform hover:-translate-y-1">
                   <span>Open Roadmap Library</span>
                   <span className="text-lg">&#8599;</span>
                 </button>
@@ -338,10 +338,9 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
               <p className="text-gray-500 text-[14px] mb-8">Explore the full course catalogue for this program</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.coursesLinks.map((link, i) => (
-                  <button key={i} onClick={() => goToPage('education')} className={`group flex items-center justify-between px-6 py-5 rounded-xl font-bold text-[13px] tracking-wider uppercase transition-all ${i === 0 ? 'text-white bg-[#8A0000] hover:bg-[#6A0000] shadow-lg shadow-[#8A0000]/20' : 'text-[#141414] bg-white border border-gray-200 hover:border-[#8A0000] hover:shadow-md'}`}>
+                  <div key={i} className={`flex items-center px-6 py-5 rounded-xl font-bold text-[13px] tracking-wider uppercase ${i === 0 ? 'text-white bg-[#8A0000] shadow-lg shadow-[#8A0000]/20' : 'text-[#141414] bg-white border border-gray-200'}`}>
                     <span>{link.label}</span>
-                    <span className="text-lg opacity-50 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transform">&#8599;</span>
-                  </button>
+                  </div>
                 ))}
               </div>
             </section>

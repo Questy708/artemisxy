@@ -701,7 +701,10 @@ export default function CampusLife({ goToPage }: CampusLifeProps) {
                 how you live matters as much as what you learn.
               </p>
               <button
-                onClick={() => goToPage('campus')}
+                onClick={() => {
+                  const hostelSection = document.getElementById('hostel-map');
+                  if (hostelSection) hostelSection.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="flex items-center space-x-4 py-3 border-b-2 border-[#141414] text-[#141414] text-[13px] font-bold uppercase tracking-[0.2em] hover:text-[#8A0000] hover:border-[#8A0000] transition-all group"
               >
                 <span>Explore all 24 hostels</span>
@@ -872,7 +875,7 @@ export default function CampusLife({ goToPage }: CampusLifeProps) {
       </section>
 
       {/* ── 8. The Map — your world expands ── */}
-      <section className="bg-gray-50 py-16 lg:py-24">
+      <section id="hostel-map" className="bg-gray-50 py-16 lg:py-24">
         <div
           ref={mapAnim.ref}
           className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${
