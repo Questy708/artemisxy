@@ -40,7 +40,7 @@ export const programsData: Record<string, ProgramData> = {
       "African Studies provides training of special interest to those considering admission to graduate or professional schools or careers in global governance, international relations, sustainable development, diplomacy, and culturally informed technology."
     ],
     requirementsParagraphs: [
-      "The African Studies program consists of twelve term courses, including (1) one African Studies course in the humanities and one in the social sciences; (2) two years of an African language (Arabic, Kiswahili, Twi, Wolof, Yorùbá, isiZulu, or others with permission of the director of undergraduate studies (DUS)); (3) one research methods course, AFST 5505; (4) four courses in an area of focus; and (5) AFST 4491, the senior capstone. The required courses represent the core of the program and are intended to expose the student both to the interdisciplinary nature of African studies and to the methodologies currently being brought to bear on the study of African cultures and societies.",
+      "The African Studies program consists of twelve term courses, including (1) one African Studies course in the humanities and one in the social sciences; (2) two years of an African language (Arabic, Kiswahili, Twi, Wolof, Yoruba, isiZulu, or others with permission of the director of undergraduate studies (DUS)); (3) one research methods course, AFST 5505; (4) four courses in an area of focus; and (5) AFST 4491, the senior capstone. The required courses represent the core of the program and are intended to expose the student both to the interdisciplinary nature of African studies and to the methodologies currently being brought to bear on the study of African cultures and societies.",
       "**Language requirement** African Studies majors are required to complete two years of college-level study (or the equivalent) of an African language, deeply integrated through Artemis's VR immersion modules and field placements. For the language requirement to be waived, a student must pass a placement test for admission into an advanced-level course.",
       "**Program in African languages** The language program offers instruction in five major languages from sub-Saharan Africa. Sequences are designed to enable students to achieve advanced competence in all skill areas by the end of the third year, and students are encouraged to spend a summer or term in Africa during their language study.",
       "**Credit/D/Fail** No more than one course taken for Credit/D/Fail may be applied toward the requirements of the major.",
@@ -63,12 +63,12 @@ export const programsData: Record<string, ProgramData> = {
       "The program in African Studies considers the arts, history, cultures, languages and literatures, politics, and development of Africa. Students in the program gain a cross-disciplinary exposure to Africa while focusing their studies in a particular discipline such as anthropology, art history, economics, history, languages and literatures, political science, or sociology, or in an interdisciplinary program within their broader collegiate environment at Artemis University. Artemis has unusually rich resources for the study of Africa; the Artemis Malta Central Node, notably, has one of the world's most comprehensive collections of African materials.",
       "Students should begin their language study as soon as possible, ideally taking advantage of our immersive language technologies. Those considering a major in African Studies should consult the DUS."
     ],
-    certificateText: "The Department of African Studies offers a Certificate of Advanced Language Study in three major African languages—Kiswahili, Yorùbá, and isiZulu, and students may pursue a Certificate of Advanced Language Study in each of these languages. A certificate adviser, typically the director of undergraduate studies (DUS), advises students on the certification process and certifies to the University Registrar's Office that students have completed the stated requirements before the end of eight terms of study. The Certificate of Advanced Language Study, once certified, is listed on the student's transcript.",
+    certificateText: "The Department of African Studies offers a Certificate of Advanced Language Study in three major African languages—Kiswahili, Yoruba, and isiZulu, and students may pursue a Certificate of Advanced Language Study in each of these languages. A certificate adviser, typically the director of undergraduate studies (DUS), advises students on the certification process and certifies to the University Registrar's Office that students have completed the stated requirements before the end of eight terms of study. The Certificate of Advanced Language Study, once certified, is listed on the student's transcript.",
     certificateRequirements: "Students seeking to earn the certificate are required to take four courses beyond the L4 level in their chosen language, at least two of which must be Artemis courses designated as L5. All courses must be taken for a letter grade, and students must achieve a grade of B or above. With the approval of the adviser, one advanced non-L5 Artemis course, conducted in the target language, such as an independent study course, a graduate seminar, or an advanced seminar may count toward certification requirements.",
     facultyProfessors: "Dr. Kalu Diop (History & Digital Preservation), Dr. Amina Ghaffar (Anthropology), Dr. Samuel Nderitu (Political Science & Neo-Economics)",
     facultyAssociate: "Dr. Zinhle Mbeki (Sociology), Dr. Femi Ojo (Global Bio-Ethics)",
     facultyAssistant: "Dr. Tareq Hassan (Language Technologies)",
-    facultyLecturers: "Dr. Kiarie Wa'Njogu, Dr. Sandra Sanneh, Dr. Oluseye Adesola (Senior Lectors)",
+    facultyLecturers: "Dr. Kiarie Wanjogu (Kiswahili), Dr. Sandra Sanneh (isiZulu), Dr. Oluseye Adesola (Yoruba)",
     roadmapText: "See the Artemis Roadmap Library for a visual representation of the African Studies trajectory.",
     coursesLinks: [
       { label: "View African Studies Courses", link: "#" },
@@ -77,10 +77,10 @@ export const programsData: Record<string, ProgramData> = {
   },
   "Computer Science (B.A. or B.S.)": {
     title: "Computer Science",
-    directorName: "Dr. Alan Turing",
+    directorName: "Dr. Elena Vasquez",
     directorLocation: "Artemis Computability Lab, Valletta Node",
     coDirectorTitle: "Assistant DUS",
-    coDirectorName: "Dr. Ada Lovelace",
+    coDirectorName: "Dr. Rajan Mehta",
     coDirectorLocation: "Artemis Computability Lab, Valletta Node",
     website: "www.artemis.edu/cpsc",
     overviewParagraphs: [
@@ -107,9 +107,9 @@ export const programsData: Record<string, ProgramData> = {
       "Students with prior experience can enter directly into algorithms tracks. Beginners proceed through intensive foundational sequence taking advantage of Artemis immersive VR coding spheres.",
       "Mathematics forms a crucial foundation, and students must complete discrete math via the Artemis Core within two years."
     ],
-    facultyProfessors: "Dr. Grace Hopper, Dr. John von Neumann, Dr. Tim Berners-Lee",
-    facultyAssociate: "Dr. Linus Torvalds, Dr. Margaret Hamilton",
-    facultyLecturers: "Dr. Brian Kernighan, Dr. Dennis Ritchie",
+    facultyProfessors: "Dr. Elena Vasquez (Distributed Systems), Dr. Nikolai Petrov (Quantum Computing), Dr. Celeste Moreau (Computational Theory)",
+    facultyAssociate: "Dr. Hiroshi Tanaka (Machine Learning), Dr. Amara Diallo (Cybersecurity)",
+    facultyLecturers: "Dr. Marcus Chen (Software Engineering), Dr. Fatima Al-Rashid (Data Science)",
     roadmapText: "The Artemis Roadmap Library visualizes pathways for both the B.S. and B.A. Computer Science sequences.",
     coursesLinks: [
       { label: "View Computer Science Courses", link: "#" },
@@ -119,7 +119,7 @@ export const programsData: Record<string, ProgramData> = {
   },
   "Cognitive Science (B.A. or B.S.)": {
     title: "Cognitive Science",
-    directorName: "Dr. Tyler Brooke-Wilson",
+    directorName: "Dr. Miriam Falk",
     directorLocation: "Artemis Institute for Mind and Computation, Valletta Node",
     website: "www.artemis.edu/cogsci",
     overviewParagraphs: [
@@ -151,9 +151,9 @@ export const programsData: Record<string, ProgramData> = {
       "Cognitive science is an interdisciplinary field devoted to exploring the nature of cognitive processes such as perception, reasoning, memory, attention, language, imagery, motor control, and problem solving. The goal of cognitive science, stated simply, is to understand how the mind works.",
       "Students may apply to enter the major in Cognitive Science at any point after the first year. CGSC 1100 is prerequisite to the major. Interested students are also encouraged to take an introductory course in computer science, economics, linguistics, neuroscience, philosophy, or psychology."
     ],
-    facultyProfessors: "Woo-kyoung Ahn, Stephen Anderson, Amy Arnsten, Richard Aslin, John Bargh, Paul Bloom, Hal Blumenfeld, Claire Bowern, Nicolò Cesana-Arlotti, Marvin Chun, Veneeta Dayal, Michael Della Rocca, Ravi Dhar, Julie Dorsey, Melissa Ferguson, Robert Frank, David Gelernter, Tamar Gendler, Joshua Knobe, Gregory McCarthy, Brian Scassellati",
-    facultyAssociate: "Athulya Aravind, Steve Chang, Philip Corlett, Jason Dana, Julian Jara-Ettinger, Yarrow Dunham, Maria Piñango",
-    facultyAssistant: "Ryan Bennett, Tyler Brooke-Wilson, Julia Leonard, Tom McCoy, Samuel McDougle, Robb Rutledge, Marynel Vázquez, Ilker Yildirim",
+    facultyProfessors: "Dr. Miriam Falk (Cognitive Psychology), Dr. Darius Okafor (Neuroscience of Decision-Making), Dr. Lena Strasser (Computational Linguistics), Dr. Priya Chakraborty (Philosophy of Mind)",
+    facultyAssociate: "Dr. Yuki Morioka (Language Acquisition), Dr. Tomás Guerrero (Behavioral Economics), Dr. Sophie Laurent (Neural Computation)",
+    facultyAssistant: "Dr. Caleb Winters (Perception & Action), Dr. Nadia Okonkwo (Developmental Cognition), Dr. Mateo Rivera (Social Neuroscience)",
     roadmapText: "See the Roadmap Library for a visual representation of the Cognitive Science pathways.",
     coursesLinks: [
       { label: "View Cognitive Science Courses", link: "#" },
@@ -162,7 +162,7 @@ export const programsData: Record<string, ProgramData> = {
   },
   "Ethics, Politics, and Economics (B.A.)": {
     title: "Ethics, Politics, and Economics",
-    directorName: "Dr. Hannah Arendt",
+    directorName: "Dr. Isadora Venn",
     directorLocation: "Institution for Social and Policy Studies",
     website: "www.artemis.edu/epe",
     overviewParagraphs: [
@@ -189,8 +189,8 @@ export const programsData: Record<string, ProgramData> = {
       "First-year students interested in EP&E should focus on completing the introductory prerequisites in Economics, Political Science, and Philosophy.",
       "Strong writing and analytical skills are essential, and students are encouraged to seek out seminars that challenge their normative and empirical reasoning."
     ],
-    facultyProfessors: "Dr. John Rawls, Dr. Amartya Sen, Dr. Olympe de Gouges",
-    facultyAssociate: "Dr. Martha Nussbaum, Dr. Isaiah Berlin",
+    facultyProfessors: "Dr. Isadora Venn (Political Philosophy), Dr. Kofi Mensah-Bonsu (Development Economics), Dr. Helena Schwarz (Normative Ethics)",
+    facultyAssociate: "Dr. Rafael Coste (Comparative Politics), Dr. Anya Korova (Behavioral Economics)",
     roadmapText: "The Roadmap Library outlines typical trajectories, including the optimal timing for prerequisite completion before applying to the major.",
     coursesLinks: [
       { label: "View EP&E Core Seminars", link: "#" },
@@ -201,9 +201,9 @@ export const programsData: Record<string, ProgramData> = {
 };
 
 export const generateProgramData = (programName: string): ProgramData => {
-  const cleanName = programName.replace(/\s*\(.*?\)\s*/g, ''); 
+  const cleanName = programName.replace(/\s*\(.*?\)\s*/g, '');
   const isScience = programName.includes('B.S.') || programName.includes('Engineering') || programName.includes('Physics') || programName.includes('Biology');
-  
+
   return {
     title: cleanName,
     directorName: "Prof. Elara Mediterranean",
@@ -243,10 +243,10 @@ export const generateProgramData = (programName: string): ProgramData => {
     ],
     certificateText: `The Department of ${cleanName} offers a Certificate of Advanced Study in specialized sub-fields. A certificate adviser, typically the director of undergraduate studies (DUS), advises students on the certification process and certifies to the University Registrar's Office that students have completed the stated requirements before the end of eight terms of study. The Certificate of Advanced Study, once certified, is listed on the student's transcript.`,
     certificateRequirements: `Students seeking to earn the certificate are required to take four courses beyond the introductory level in their chosen specialization, at least two of which must be Artemis courses designated as advanced (Level 5). All courses must be taken for a letter grade, and students must achieve a grade of B or above. With the approval of the adviser, one advanced non-Level 5 Artemis course, such as an independent study course, may count toward certification requirements.`,
-    facultyProfessors: "Lea Brilmayer, John Darnell, Owen Fiss, Robert Harms, Daniel Magaziner, Roderick McIntosh, Christopher Miller, Catherine Panter-Brick, Ian Shapiro",
-    facultyAssociate: "Robert Bailis, Jonathan Wyrtzen",
-    facultyAssistant: "Katharine Baldwin, Louisa Lombard",
-    facultyLecturers: "Lacina Coulibaly, Anne-Marie Foltz, David Simon",
+    facultyProfessors: "Dr. Elara Mediterranean (Interdisciplinary Theory), Dr. Julian Vance (Applied Methodology), Dr. Cassandra Whitfield (Comparative Analysis)",
+    facultyAssociate: "Dr. Renata Almeida (Global Systems), Dr. Henrik Johansson (Structural Frameworks)",
+    facultyAssistant: "Dr. Priya Narayan (Emerging Methodologies), Dr. Kwame Asante (Field Applications)",
+    facultyLecturers: "Dr. Sofia Petros (Laboratory Instruction), Dr. Daniel Okello (Practicum Coordination), Dr. Mei-Lin Zhao (Clinical Training)",
     roadmapText: `See the Roadmap Library for a visual representation of the ${cleanName} major.`,
     coursesLinks: [
       { label: `View ${cleanName} Courses`, link: "#" },

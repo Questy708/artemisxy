@@ -104,3 +104,25 @@ Stage Summary:
 - AdminDashboard completely redesigned with Stripe-quality UX
 - New features: search bar, sortable tables, pagination, sparkline charts, donation trend area chart, application pipeline visualization, activity feed with filters, message read/unread filter, breadcrumbs, notification bell
 - File: /home/z/my-project/src/components/artemis/AdminDashboard.tsx (1461 lines)
+---
+Task ID: 1
+Agent: Main
+Task: Remove duplicate nav bar and redesign program detail page layouts with fictional names
+
+Work Log:
+- Read ProgramDetail.tsx, OnThisPageNav.tsx, and programs-data.ts to understand current structure
+- Removed the duplicate sticky navigation tab bar (Overview, Summary of Requirements, First Year, etc.) since OnThisPageNav already provides "On This Page" navigation
+- Removed unused state variables (activeTab, manualScroll) and the IntersectionObserver setup that was duplicating OnThisPageNav's useActiveSection hook
+- Redesigned "Summary of Major Requirements" section: replaced dot-list + dark box with a numbered step/timeline layout with vertical connector line, plus 3 summary cards (Prerequisites, Total Courses, Distribution)
+- Redesigned Faculty section: merged "Departmental Faculty" list and "Faculty Profiles" cards into one cohesive section organized by rank (Full Professors, Associate, Assistant, Lecturers) with new FacultyCard sub-component featuring gradient accent bar, avatar with ring, specialty tag, and bio excerpt
+- Redesigned First Year section with subtle gradient card background
+- Redesigned Certificates section with red top accent bar
+- Redesigned Courses section as a 2-column grid with rounded cards instead of flex-wrap buttons
+- Replaced all real names with fictional names in programs-data.ts: Computer Science (Elena Vasquez, Nikolai Petrov, Celeste Moreau, Hiroshi Tanaka, etc.), Cognitive Science (Miriam Falk, Darius Okafor, Lena Strasser, etc.), EP&E (Isadora Venn, Kofi Mensah-Bonsu, Helena Schwarz, etc.), generateProgramData fallback (Elara Mediterranean, Julian Vance, Cassandra Whitfield, etc.)
+- Build verified successfully
+
+Stage Summary:
+- ProgramDetail.tsx completely rewritten with improved layouts
+- programs-data.ts updated with all fictional names
+- Duplicate navigation bar removed (OnThisPageNav remains as the single navigation)
+- No build errors

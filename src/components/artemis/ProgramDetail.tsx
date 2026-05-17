@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import SubPageFooter from '@/components/artemis/SubPageFooter';
 import OnThisPageNav, { useActiveSection } from '@/components/artemis/OnThisPageNav';
 import { programsData, generateProgramData } from '@/lib/programs-data';
@@ -11,11 +11,6 @@ interface ProgramDetailProps {
 }
 
 export default function ProgramDetail({ goToPage, programName = "African Studies (B.A.)" }: ProgramDetailProps) {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [manualScroll, setManualScroll] = useState(false);
-  const observer = useRef<IntersectionObserver | null>(null);
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-
   const actualProgramName = programName || "African Studies (B.A.)";
   const data = useMemo(() => programsData[actualProgramName] || generateProgramData(actualProgramName), [actualProgramName]);
 
@@ -25,7 +20,6 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
     { id: 'firstyear', label: 'First Year' },
     { id: 'certificates', label: 'Certificates' },
     { id: 'faculty', label: 'Faculty' },
-    { id: 'bios', label: 'Faculty Bios' },
     { id: 'roadmap', label: 'Roadmap' },
     { id: 'courses', label: 'Courses' }
   ].filter(tab => {
@@ -35,7 +29,7 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
 
   const activeSection = useActiveSection(tabs.map(t => t.id));
 
-  const [facultyBios, setFacultyBios] = useState<{name: string, title: string, bio: string, image: string}[]>([]);
+  const [facultyBios, setFacultyBios] = useState<{name: string, title: string, bio: string, specialty: string, image: string}[]>([]);
   const [isLoadingBios, setIsLoadingBios] = useState(true);
 
   // Load bios on mount or when data changes
@@ -57,11 +51,12 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
         const cleanName = f.name.replace(/\(.*?\)/g, '').trim();
         const disciplineMatch = f.name.match(/\((.*?)\)/);
         const discipline = disciplineMatch ? disciplineMatch[1] : data.title;
-        
+
         return {
           name: cleanName,
           title: f.title,
-          image: `https://ui-avatars.com/api/?name=${encodeURIComponent(cleanName)}&background=random&size=150`,
+          specialty: discipline,
+          image: `https://ui-avatars.com/api/?name=${encodeURIComponent(cleanName)}&background=random&size=200`,
           bio: `${cleanName} is a ${f.title.toLowerCase()} specializing in ${discipline}. Their current research explores the intersections of ${discipline.toLowerCase()} and global theoretical models.`
         };
       });
@@ -69,53 +64,9 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
       setFacultyBios(bios);
       setIsLoadingBios(false);
     }, 600);
-    
+
     return () => clearTimeout(timer);
   }, [data]);
-
-  // Setup intersection observer for scroll-spy
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        if (manualScroll) return;
-
-        // Find the visible section with the largest intersection ratio
-        const visibleEntry = entries.find((entry) => entry.isIntersecting);
-        if (visibleEntry) {
-          setActiveTab(visibleEntry.target.id);
-        }
-      },
-      {
-        rootMargin: '-10% 0px -80% 0px', // Trigger when section is near top
-        threshold: 0
-      }
-    );
-
-    const { current: currentObserver } = observer;
-    Object.values(sectionRefs.current).forEach((section) => {
-      if (section) currentObserver.observe(section);
-    });
-
-    return () => currentObserver.disconnect();
-  }, [tabs, manualScroll]);
-
-  const scrollToSection = (id: string) => {
-    const section = sectionRefs.current[id];
-    if (section) {
-      setManualScroll(true);
-      setActiveTab(id);
-      
-      const yOffset = -120; // Offset for sticky header
-      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-      window.scrollTo({ top: y, behavior: 'smooth' });
-
-      // Re-enable observer after scroll ends
-      setTimeout(() => setManualScroll(false), 1000);
-    }
-  };
 
   const catalogNav = [
     "The Undergraduate Curriculum",
@@ -135,8 +86,6 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
       <div className="bg-[#8A0000] text-white pt-8 pb-4 px-8 lg:px-20 flex justify-between items-end">
          <h1 className="text-3xl lg:text-4xl font-serif font-bold">Artemis College Programs of Study 2026–2027</h1>
       </div>
-      
-
 
       <OnThisPageNav
         sections={tabs.map(t => ({ id: t.id, label: t.label }))}
@@ -149,7 +98,7 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
           <ul className="flex flex-col py-8 px-6 sticky top-24">
             {catalogNav.map((item, i) => (
               <li key={i}>
-                <button 
+                <button
                   className={`w-full text-left py-3 text-[15px] hover:text-[#8A0000] border-t border-gray-100 ${item === 'Subjects of Instruction' ? 'text-[#8A0000] font-bold border-l-2 border-l-[#8A0000] pl-3 -ml-[14px]' : 'text-[#141414]'}`}
                   onClick={(e) => {
                     if(item === 'Majors in Artemis College') goToPage('programs');
@@ -170,28 +119,9 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
             {data.title}
           </h1>
 
-          {/* Sticky Navigation Tabs */}
-          <div className="sticky top-0 z-20 bg-white pt-4 pb-0 border-b border-gray-200 mb-12">
-            <div className="flex overflow-x-auto hide-scrollbar">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => scrollToSection(tab.id)}
-                  className={`px-5 py-4 text-[13px] font-bold whitespace-nowrap transition-all border-b-[3px] -mb-[1px] uppercase tracking-wider ${
-                    activeTab === tab.id 
-                      ? 'border-[#8A0000] text-[#8A0000]' 
-                      : 'border-transparent text-gray-500 hover:text-[#141414]'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="max-w-4xl space-y-32">
             {/* Overview Section */}
-            <section id="overview" ref={(el) => { sectionRefs.current['overview'] = el; }} className="scroll-mt-32">
+            <section id="overview" className="scroll-mt-32">
               <div className="space-y-6">
                 <p className="text-[15px] leading-relaxed text-[#141414]">
                   <strong>Director of undergraduate studies</strong>: <button onClick={() => goToPage('our-people')} className="text-[#8A0000] hover:underline font-bold">{data.directorName}</button>, {data.directorLocation};{' '}
@@ -203,7 +133,7 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
                 {data.overviewParagraphs.map((p, i) => (
                   <p key={i} className="text-[15px] leading-relaxed text-[#141414]">{p}</p>
                 ))}
-                
+
                 <h4 className="text-[20px] font-bold text-[#141414] mt-12 mb-6 border-b border-gray-100 pb-2">Requirements of the Major</h4>
                 {data.requirementsParagraphs.map((p, i) => (
                   <p key={`req-${i}`} className="text-[15px] leading-relaxed text-[#141414]" dangerouslySetInnerHTML={{ __html: p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
@@ -217,116 +147,161 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
               </div>
             </section>
 
-            {/* Requirements Summary Section */}
-            <section id="requirements" ref={(el) => { sectionRefs.current['requirements'] = el; }} className="scroll-mt-32">
-              <h3 className="text-[22px] font-bold text-[#141414] mb-8 uppercase tracking-widest text-center py-4 bg-gray-50 border-y border-gray-200">Summary of Major Requirements</h3>
-              <div className="space-y-4">
-                <p className="font-bold text-[18px] mb-4">12 courses (12 credits)</p>
-                <div className="grid grid-cols-1 gap-6">
+            {/* Requirements Summary Section — Redesigned as numbered steps */}
+            <section id="requirements" className="scroll-mt-32">
+              <h3 className="text-[24px] font-bold text-[#141414] mb-2">Summary of Major Requirements</h3>
+              <p className="text-gray-500 text-[14px] mb-10">{data.requirementsArray.length} requirements for completion</p>
+
+              <div className="relative">
+                {/* Vertical connector line */}
+                <div className="absolute left-6 top-0 bottom-0 w-px bg-gray-200 hidden sm:block"></div>
+
+                <div className="space-y-6">
                   {data.requirementsArray.map((req, i) => (
-                    <div key={i} className="flex items-start space-x-4 p-4 border border-gray-100 rounded-lg hover:border-[#8A0000]/20 transition-colors">
-                      <div className="w-6 h-6 rounded-full bg-[#8A0000]/10 flex items-center justify-center shrink-0 mt-1">
-                        <div className="w-2 h-2 rounded-full bg-[#8A0000]"></div>
+                    <div key={i} className="relative flex items-start gap-5 sm:gap-8">
+                      {/* Step number */}
+                      <div className="relative z-10 w-12 h-12 rounded-full bg-[#8A0000] text-white flex items-center justify-center font-bold text-[14px] shrink-0 shadow-md">
+                        {i + 1}
                       </div>
-                      <p className="text-[15px] text-gray-800">{req}</p>
+                      {/* Content card */}
+                      <div className="flex-1 bg-white border border-gray-200 rounded-xl p-5 hover:border-[#8A0000]/30 hover:shadow-md transition-all">
+                        <p className="text-[15px] text-[#141414] leading-relaxed font-medium">{req}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
-                
-                <div className="mt-12 bg-[#141414] text-white p-8 rounded-xl shadow-xl">
-                  <h4 className="text-[14px] font-bold uppercase tracking-widest text-[#8A0000] mb-6">Quick Overview</h4>
-                  <ul className="space-y-4 text-[14px]">
-                    <li className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-gray-400">Prerequisites</span>
-                      <span className="font-bold">None</span>
-                    </li>
-                    <li className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-gray-400">Total Courses</span>
-                      <span className="font-bold">12 Term Courses</span>
-                    </li>
-                    <li className="flex justify-between border-b border-white/10 pb-2">
-                      <span className="text-gray-400">Distribution</span>
-                      <span className="font-bold text-right max-w-[200px]">{data.summaryDistribution}</span>
-                    </li>
-                  </ul>
+              </div>
+
+              {/* Quick Overview — Redesigned as summary cards */}
+              <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="bg-[#8A0000]/[0.04] border border-[#8A0000]/10 rounded-xl p-6">
+                  <div className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest mb-2">Prerequisites</div>
+                  <div className="text-[15px] font-semibold text-[#141414]">None</div>
+                </div>
+                <div className="bg-[#8A0000]/[0.04] border border-[#8A0000]/10 rounded-xl p-6">
+                  <div className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest mb-2">Total Courses</div>
+                  <div className="text-[15px] font-semibold text-[#141414]">12 Term Courses</div>
+                </div>
+                <div className="bg-[#8A0000]/[0.04] border border-[#8A0000]/10 rounded-xl p-6">
+                  <div className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest mb-2">Distribution</div>
+                  <div className="text-[14px] font-medium text-[#141414] leading-snug">{data.summaryDistribution}</div>
                 </div>
               </div>
             </section>
 
             {/* First Year Section */}
-            <section id="firstyear" ref={(el) => { sectionRefs.current['firstyear'] = el; }} className="scroll-mt-32">
-              <h3 className="text-[22px] font-bold text-[#141414] mb-8">First-Year Guidelines</h3>
-              <div className="space-y-4 text-[15px] leading-relaxed text-gray-700">
+            <section id="firstyear" className="scroll-mt-32">
+              <h3 className="text-[24px] font-bold text-[#141414] mb-8">First-Year Guidelines</h3>
+              <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl p-8 space-y-4">
                 {data.firstYearParagraphs.map((p, i) => (
-                  <p key={i}>{p}</p>
+                  <p key={i} className="text-[15px] leading-relaxed text-gray-700">{p}</p>
                 ))}
               </div>
             </section>
 
             {/* Certificates Section */}
             {data.certificateText && (
-              <section id="certificates" ref={(el) => { sectionRefs.current['certificates'] = el; }} className="scroll-mt-32">
-                <h3 className="text-[22px] font-bold text-[#141414] mb-8">Certificates of Advanced Study</h3>
-                <div className="space-y-6 text-[15px] text-[#141414] bg-white border border-gray-100 p-8 shadow-sm">
-                  <p className="leading-relaxed">{data.certificateText}</p>
-                  {data.certificateRequirements && (
-                    <div className="pt-6 border-t border-gray-100">
-                      <h4 className="font-bold text-[16px] mb-4 uppercase tracking-tighter">Required Credentials</h4>
-                      <p className="text-gray-600">{data.certificateRequirements}</p>
-                    </div>
-                  )}
+              <section id="certificates" className="scroll-mt-32">
+                <h3 className="text-[24px] font-bold text-[#141414] mb-8">Certificates of Advanced Study</h3>
+                <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="bg-[#8A0000] h-1"></div>
+                  <div className="p-8 space-y-6 text-[15px] text-[#141414]">
+                    <p className="leading-relaxed">{data.certificateText}</p>
+                    {data.certificateRequirements && (
+                      <div className="pt-6 border-t border-gray-100">
+                        <h4 className="font-bold text-[16px] mb-4 uppercase tracking-tight text-[#8A0000]">Required Credentials</h4>
+                        <p className="text-gray-600">{data.certificateRequirements}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </section>
             )}
 
-            {/* Faculty Section */}
-            <section id="faculty" ref={(el) => { sectionRefs.current['faculty'] = el; }} className="scroll-mt-32">
-              <h3 className="text-[22px] font-bold text-[#141414] mb-8">Departmental Faculty</h3>
-              <div className="space-y-6 text-[15px] text-[#141414]">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <h5 className="font-bold text-[#8A0000] uppercase tracking-widest text-[11px] mb-3">Full Professors</h5>
-                    <p className="leading-relaxed break-words">{data.facultyProfessors}</p>
-                  </div>
-                  <div className="p-6 bg-gray-50 rounded-lg">
-                    <h5 className="font-bold text-[#8A0000] uppercase tracking-widest text-[11px] mb-3">Associate Professors</h5>
-                    <p className="leading-relaxed break-words">{data.facultyAssociate}</p>
-                  </div>
-                </div>
-              </div>
-            </section>
+            {/* Faculty Section — Redesigned as rich profile cards */}
+            <section id="faculty" className="scroll-mt-32">
+              <h3 className="text-[24px] font-bold text-[#141414] mb-2">Departmental Faculty</h3>
+              <p className="text-gray-500 text-[14px] mb-10">Meet the scholars shaping the {data.title} program</p>
 
-            {/* Bios Section */}
-            <section id="bios" ref={(el) => { sectionRefs.current['bios'] = el; }} className="scroll-mt-32">
-              <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
-                <h3 className="text-[22px] font-bold text-[#141414]">Faculty Profiles</h3>
-              </div>
               {isLoadingBios ? (
                 <div className="flex justify-center items-center py-24">
                   <div className="w-12 h-12 rounded-full border-4 border-gray-100 border-t-[#8A0000] animate-spin"></div>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-                  {facultyBios.map((bio, idx) => (
-                    <div key={idx} className="group flex flex-col bg-white p-6 items-start shadow-sm border border-gray-100 hover:border-[#8A0000]/30 transition-all rounded-xl">
-                      <div className="flex items-center space-x-4 mb-6">
-                        <img src={bio.image} alt={bio.name} className="w-20 h-20 rounded-full object-cover shadow-md grayscale group-hover:grayscale-0 transition-all" />
-                        <div>
-                          <h5 className="font-bold text-[18px] text-[#141414] group-hover:text-[#8A0000] transition-colors">{bio.name}</h5>
-                          <p className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest">{bio.title}</p>
+                <div className="space-y-6">
+                  {/* Full Professors */}
+                  {facultyBios.filter(f => f.title === 'Professor').length > 0 && (
+                    <div>
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="w-8 h-8 rounded-full bg-[#8A0000] flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
                         </div>
+                        <h4 className="text-[13px] font-bold text-[#8A0000] uppercase tracking-widest">Full Professors</h4>
                       </div>
-                      <p className="text-[14px] text-gray-600 leading-relaxed italic border-l-2 border-gray-100 pl-4">
-                        &quot;{bio.bio}&quot;
-                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {facultyBios.filter(f => f.title === 'Professor').map((bio, idx) => (
+                          <FacultyCard key={idx} bio={bio} goToPage={goToPage} />
+                        ))}
+                      </div>
                     </div>
-                  ))}
+                  )}
+
+                  {/* Associate Professors */}
+                  {facultyBios.filter(f => f.title === 'Associate Professor').length > 0 && (
+                    <div className="mt-10">
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="w-8 h-8 rounded-full bg-[#141414] flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
+                        </div>
+                        <h4 className="text-[13px] font-bold text-[#141414] uppercase tracking-widest">Associate Professors</h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {facultyBios.filter(f => f.title === 'Associate Professor').map((bio, idx) => (
+                          <FacultyCard key={idx} bio={bio} goToPage={goToPage} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Assistant Professors */}
+                  {facultyBios.filter(f => f.title === 'Assistant Professor').length > 0 && (
+                    <div className="mt-10">
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <h4 className="text-[13px] font-bold text-gray-600 uppercase tracking-widest">Assistant Professors</h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {facultyBios.filter(f => f.title === 'Assistant Professor').map((bio, idx) => (
+                          <FacultyCard key={idx} bio={bio} goToPage={goToPage} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Lecturers */}
+                  {facultyBios.filter(f => f.title === 'Lecturer').length > 0 && (
+                    <div className="mt-10">
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        </div>
+                        <h4 className="text-[13px] font-bold text-gray-500 uppercase tracking-widest">Lecturers & Senior Lectors</h4>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {facultyBios.filter(f => f.title === 'Lecturer').map((bio, idx) => (
+                          <FacultyCard key={idx} bio={bio} goToPage={goToPage} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </section>
 
             {/* Roadmap Section */}
-            <section id="roadmap" ref={(el) => { sectionRefs.current['roadmap'] = el; }} className="scroll-mt-32">
+            <section id="roadmap" className="scroll-mt-32">
               <div className="bg-[#141414] text-white p-10 rounded-2xl">
                 <h3 className="text-[22px] font-bold mb-4">Navigational Roadmap</h3>
                 <p className="text-gray-400 text-[16px] leading-relaxed mb-8">
@@ -334,18 +309,20 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
                 </p>
                 <button onClick={() => goToPage('education')} className="inline-flex items-center space-x-4 px-8 py-3 bg-white text-[#141414] font-bold uppercase tracking-widest text-[12px] hover:bg-[#8A0000] hover:text-white transition-all transform hover:-translate-y-1">
                   <span>Open Roadmap Library</span>
-                  <span className="text-lg">↗</span>
+                  <span className="text-lg">&#8599;</span>
                 </button>
               </div>
             </section>
 
             {/* Courses Section */}
-            <section id="courses" ref={(el) => { sectionRefs.current['courses'] = el; }} className="scroll-mt-32 pb-24">
-              <h3 className="text-[22px] font-bold text-[#141414] mb-8">Course Directory</h3>
-              <div className="flex flex-wrap gap-4">
+            <section id="courses" className="scroll-mt-32 pb-24">
+              <h3 className="text-[24px] font-bold text-[#141414] mb-2">Course Directory</h3>
+              <p className="text-gray-500 text-[14px] mb-8">Explore the full course catalogue for this program</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {data.coursesLinks.map((link, i) => (
-                  <button key={i} onClick={() => goToPage('education')} className={`flex items-center gap-3 px-8 py-4 font-bold text-[12px] tracking-[0.2em] uppercase shadow-sm transition-all transform hover:-translate-y-1 ${i === 0 ? 'text-white bg-[#8A0000] hover:bg-[#6A0000]' : 'text-[#141414] bg-white border border-gray-200 hover:border-[#8A0000]'}`}>
-                    {link.label} <span>↗</span>
+                  <button key={i} onClick={() => goToPage('education')} className={`group flex items-center justify-between px-6 py-5 rounded-xl font-bold text-[13px] tracking-wider uppercase transition-all ${i === 0 ? 'text-white bg-[#8A0000] hover:bg-[#6A0000] shadow-lg shadow-[#8A0000]/20' : 'text-[#141414] bg-white border border-gray-200 hover:border-[#8A0000] hover:shadow-md'}`}>
+                    <span>{link.label}</span>
+                    <span className="text-lg opacity-50 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 transform">&#8599;</span>
                   </button>
                 ))}
               </div>
@@ -355,6 +332,40 @@ export default function ProgramDetail({ goToPage, programName = "African Studies
       </div>
 
       <SubPageFooter goToPage={goToPage} />
+    </div>
+  );
+}
+
+/* ─── Faculty Card Sub-Component ─── */
+function FacultyCard({ bio, goToPage }: { bio: { name: string; title: string; specialty: string; image: string; bio: string }; goToPage: (page: string) => void }) {
+  return (
+    <div className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-[#8A0000]/20 transition-all duration-300">
+      {/* Top accent bar */}
+      <div className="h-1 bg-gradient-to-r from-[#8A0000] to-[#8A0000]/40"></div>
+      <div className="p-5">
+        {/* Avatar + Name */}
+        <div className="flex items-center gap-4 mb-4">
+          <img
+            src={bio.image}
+            alt={bio.name}
+            className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100 group-hover:ring-[#8A0000]/20 transition-all"
+          />
+          <div className="min-w-0">
+            <h5 className="font-bold text-[15px] text-[#141414] group-hover:text-[#8A0000] transition-colors truncate">{bio.name}</h5>
+            <p className="text-[11px] font-semibold text-[#8A0000] uppercase tracking-wider">{bio.title}</p>
+          </div>
+        </div>
+        {/* Specialty tag */}
+        <div className="mb-3">
+          <span className="inline-block text-[11px] font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+            {bio.specialty}
+          </span>
+        </div>
+        {/* Bio excerpt */}
+        <p className="text-[13px] text-gray-500 leading-relaxed line-clamp-3">
+          {bio.bio}
+        </p>
+      </div>
     </div>
   );
 }
