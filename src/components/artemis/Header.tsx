@@ -71,14 +71,14 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick }:
         </div>
       </div>
       <div className="hidden lg:flex space-x-5 text-[13px] font-bold">
-        <button onClick={() => goToPage('education')} className="hover:underline transition-opacity cursor-pointer">education</button>
-        <button onClick={() => goToPage('research')} className="hover:underline transition-opacity cursor-pointer">research</button>
-        <button onClick={() => goToPage('innovation')} className="hover:underline transition-opacity cursor-pointer">innovation</button>
-        <button onClick={() => goToPage('admissions')} className="hover:underline transition-opacity cursor-pointer text-white/90">admissions + aid</button>
-        <button onClick={() => goToPage('campus')} className="hover:underline transition-opacity cursor-pointer text-white/90">campus life</button>
-        <button onClick={() => goToPage('colleges')} className="hover:underline transition-opacity cursor-pointer text-white/90">colleges</button>
-        <button onClick={() => goToPage('about')} className="hover:underline transition-opacity cursor-pointer text-white/90">about artemis</button>
-        <button onClick={() => goToPage('blog')} className="hover:underline transition-opacity cursor-pointer text-white/90">journal</button>
+        <button onClick={() => goToPage('education')} className="hover:underline transition-opacity cursor-pointer">Education</button>
+        <button onClick={() => goToPage('research')} className="hover:underline transition-opacity cursor-pointer">Research</button>
+        <button onClick={() => goToPage('innovation')} className="hover:underline transition-opacity cursor-pointer">Innovation</button>
+        <button onClick={() => goToPage('admissions')} className="hover:underline transition-opacity cursor-pointer text-white/90">Admissions + Aid</button>
+        <button onClick={() => goToPage('campus')} className="hover:underline transition-opacity cursor-pointer text-white/90">Campus Life</button>
+        <button onClick={() => goToPage('colleges')} className="hover:underline transition-opacity cursor-pointer text-white/90">Colleges</button>
+        <button onClick={() => goToPage('about')} className="hover:underline transition-opacity cursor-pointer text-white/90">About Artemis</button>
+        <button onClick={() => goToPage('blog')} className="hover:underline transition-opacity cursor-pointer text-white/90">Blog</button>
         <button onClick={() => goToPage('fundraising')} className="border border-white/40 text-white px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-white/10 transition-colors cursor-pointer">give</button>
         <button onClick={() => goToPage('apply')} className="bg-white text-[#8A0000] px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-gray-100 transition-colors cursor-pointer">apply</button>
       </div>

@@ -43,7 +43,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
               { label: 'Campus Life', page: 'campus' },
               { label: 'Colleges', page: 'colleges' },
               { label: 'About Artemis', page: 'about' },
-              { label: 'Journal', page: 'blog' },
+              { label: 'Blog', page: 'blog' },
             ].map((item) => (
               <button
                 key={item.page}
@@ -112,11 +112,11 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
         <div className="mb-10">
           <h3 className="text-[14px] font-bold mb-4 uppercase tracking-tight">Top resources for</h3>
           <ul className="text-[14px] space-y-3 font-medium">
-            <li><button onClick={() => { goHome(); onClose?.(); }} className="side-link w-full text-left">prospective students</button></li>
-            <li><button onClick={() => { goToPage('education'); onClose?.(); }} className="side-link w-full text-left">current students</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">faculty & staff</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">alumni</button></li>
-            <li><button onClick={() => { goToPage('campus'); onClose?.(); }} className="side-link w-full text-left">communities & partners</button></li>
+            <li><button onClick={() => { goHome(); onClose?.(); }} className="side-link w-full text-left">Prospective Students</button></li>
+            <li><button onClick={() => { goToPage('education'); onClose?.(); }} className="side-link w-full text-left">Current Students</button></li>
+            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">Faculty & Staff</button></li>
+            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">Alumni</button></li>
+            <li><button onClick={() => { goToPage('campus'); onClose?.(); }} className="side-link w-full text-left">Communities & Partners</button></li>
           </ul>
         </div>
 
@@ -131,7 +131,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
             className="flex items-center justify-between w-full py-3 border-t border-b border-gray-100 group"
           >
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">From the Journal</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">From the Blog</div>
               <span className="text-[13px] font-medium group-hover:text-[#8A0000] transition-colors">Latest stories & research</span>
             </div>
             <svg className="w-4 h-4 text-gray-300 group-hover:text-[#8A0000] group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -161,7 +161,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
         <div className="text-[12px] space-x-2 mb-2 font-medium">
           <button onClick={() => goToPage('visit-us')} className="footer-link">Visit</button>
           <button onClick={() => goToPage('campus')} className="footer-link">Map</button>
-          <button onClick={() => goToPage('blog')} className="footer-link">Journal</button>
+          <button onClick={() => goToPage('blog')} className="footer-link">Blog</button>
           <button onClick={() => goToPage('campus')} className="footer-link">Events</button>
           <button onClick={() => goToPage('jobs')} className="footer-link">Careers</button>
           <button onClick={() => goToPage('fundraising')} className="footer-link text-[#8A0000]">Give</button>
