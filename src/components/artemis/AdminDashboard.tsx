@@ -1,11 +1,18 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { RefreshCw, Download, ChevronDown, ChevronUp, Shield, Lock, LogOut, Eye, EyeOff } from 'lucide-react';
+import {
+  RefreshCw, Download, ChevronDown, ChevronRight, Shield, Lock, LogOut,
+  Eye, EyeOff, DollarSign, Users, Mail, UserPlus, Home, CreditCard,
+  Database, ExternalLink, Clock, ArrowUpRight, MessageSquare, FileText,
+  Heart, ChevronLeft
+} from 'lucide-react';
 
 interface Props {
   goToPage: (page: string) => void;
 }
+
+type Section = 'overview' | 'donations' | 'applications' | 'messages' | 'subscribers';
 
 interface AllData {
   overview: any;
@@ -23,26 +30,20 @@ export default function AdminDashboard({ goToPage }: Props) {
   const [authChecked, setAuthChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const [activeSection, setActiveSection] = useState<Section>('overview');
   const [allData, setAllData] = useState<AllData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [expandedApp, setExpandedApp] = useState<number | null>(null);
-  const [expandedMsg, setExpandedMsg] = useState<number | null>(null);
+  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Check if already authenticated on mount
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useEffect(() => { checkAuth(); }, []);
 
   const checkAuth = async () => {
     try {
       const res = await fetch('/api/admin');
-      if (res.ok) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
+      setIsAuthenticated(res.ok);
     } catch {
       setIsAuthenticated(false);
     } finally {
@@ -76,14 +77,11 @@ export default function AdminDashboard({ goToPage }: Props) {
   };
 
   const handleLogout = async () => {
-    try {
-      await fetch('/api/admin/login', { method: 'DELETE' });
-    } catch { /* ignore */ }
+    try { await fetch('/api/admin/login', { method: 'DELETE' }); } catch { /* ignore */ }
     setIsAuthenticated(false);
     setAllData(null);
   };
 
-  // Fetch ALL data in parallel after login
   const fetchAllData = useCallback(async () => {
     setLoading(true);
     setError('');
@@ -96,7 +94,6 @@ export default function AdminDashboard({ goToPage }: Props) {
         fetch('/api/subscribe'),
       ]);
 
-      // Check auth on first response
       if (overviewRes.status === 401) {
         setIsAuthenticated(false);
         setError('Session expired. Please log in again.');
@@ -104,11 +101,8 @@ export default function AdminDashboard({ goToPage }: Props) {
       }
 
       const [overview, donations, applications, messages, subscribers] = await Promise.all([
-        overviewRes.json(),
-        donationsRes.json(),
-        applicationsRes.json(),
-        messagesRes.json(),
-        subscribersRes.json(),
+        overviewRes.json(), donationsRes.json(), applicationsRes.json(),
+        messagesRes.json(), subscribersRes.json(),
       ]);
 
       if (overview.error) {
@@ -125,13 +119,32 @@ export default function AdminDashboard({ goToPage }: Props) {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchAllData();
-    }
+    if (isAuthenticated) fetchAllData();
   }, [isAuthenticated, fetchAllData]);
 
-  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const toggleExpanded = (idx: number) => {
+    setExpandedItems(prev => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  };
+
+  const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const formatTime = (d: string) => new Date(d).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   const formatCurrency = (n: number, c = 'USD') => new Intl.NumberFormat('en-US', { style: 'currency', currency: c }).format(n);
+  const formatRelative = (d: string) => {
+    const diff = Date.now() - new Date(d).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'Just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    if (days < 7) return `${days}d ago`;
+    return formatDate(d);
+  };
 
   const exportCSV = (rows: any[], filename: string) => {
     if (!rows || rows.length === 0) return;
@@ -144,8 +157,7 @@ export default function AdminDashboard({ goToPage }: Props) {
           if (val === null || val === undefined) return '';
           const str = String(val);
           return str.includes(',') || str.includes('"') || str.includes('\n')
-            ? `"${str.replace(/"/g, '""')}"`
-            : str;
+            ? `"${str.replace(/"/g, '""')}"` : str;
         }).join(',')
       )
     ];
@@ -158,87 +170,63 @@ export default function AdminDashboard({ goToPage }: Props) {
     URL.revokeObjectURL(url);
   };
 
-  // Build "What's New" feed from overview data
-  const buildWhatsNew = () => {
-    if (!allData?.overview) return [];
-    const ov = allData.overview;
-    const items: { type: string; emoji: string; text: string; date: string; id: string }[] = [];
+  // Derived data
+  const stats = allData?.overview?.stats;
+  const donors = allData?.donations?.donors || [];
+  const applications = allData?.applications?.applications || [];
+  const messages = allData?.messages?.messages || [];
+  const subscribers = allData?.subscribers?.subscribers || [];
+  const unreadCount = messages.filter((m: any) => !m.read).length;
 
-    (ov.recentDonations || []).forEach((d: any) => {
-      items.push({
-        type: 'donation',
-        emoji: '💰',
-        text: `${d.donorName || d.name || 'Someone'} donated ${formatCurrency(d.amount, d.currency)}`,
-        date: d.createdAt || d.date,
-        id: `d-${d.id}`,
-      });
-    });
+  // Sidebar nav items
+  const navItems: { id: Section; label: string; icon: React.ReactNode; count?: number }[] = [
+    { id: 'overview', label: 'Overview', icon: <Home size={18} /> },
+    { id: 'donations', label: 'Donations', icon: <DollarSign size={18} />, count: donors.length },
+    { id: 'applications', label: 'Applications', icon: <FileText size={18} />, count: applications.length },
+    { id: 'messages', label: 'Messages', icon: <Mail size={18} />, count: unreadCount || undefined },
+    { id: 'subscribers', label: 'Subscribers', icon: <UserPlus size={18} />, count: subscribers.length },
+  ];
 
-    (ov.recentApplications || []).forEach((a: any) => {
-      items.push({
-        type: 'application',
-        emoji: '📋',
-        text: `${a.firstName} ${a.lastName} applied`,
-        date: a.createdAt,
-        id: `a-${a.id}`,
-      });
-    });
-
-    (ov.recentContacts || []).forEach((c: any) => {
-      items.push({
-        type: 'message',
-        emoji: '✉️',
-        text: `${c.name} sent a message${!c.read ? ' (new!)' : ''}`,
-        date: c.createdAt,
-        id: `c-${c.id}`,
-      });
-    });
-
-    items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-    return items.slice(0, 5);
-  };
-
-  // ─── Loading while checking auth ───
+  // ─── Auth check loading ───
   if (!authChecked) {
     return (
-      <div className="min-h-screen bg-[#141414] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0A2540] flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-3 border-white border-t-transparent rounded-full animate-spin mb-4" />
-          <p className="text-white/40 text-base">Checking access...</p>
+          <div className="inline-block w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
         </div>
       </div>
     );
   }
 
-  // ─── Login Screen ───
+  // ─── Login Screen — Stripe-inspired ───
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#141414] flex items-center justify-center px-6">
-        <div className="w-full max-w-[420px]">
-          <div className="text-center mb-10">
-            <div className="w-16 h-16 bg-[#8A0000] rounded-2xl flex items-center justify-center text-white mx-auto mb-5">
-              <Shield size={28} />
+      <div className="min-h-screen bg-[#0A2540] flex items-center justify-center px-6">
+        <div className="w-full max-w-[400px]">
+          <div className="text-center mb-12">
+            <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <Shield size={22} className="text-[#0A2540]" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">Artemis Admin</h1>
-            <p className="text-sm text-white/40">Enter your admin password to continue</p>
+            <h1 className="text-[22px] font-semibold text-white mb-1">Artemis Dashboard</h1>
+            <p className="text-sm text-white/50">Sign in to your admin</p>
           </div>
 
-          <form onSubmit={handleLogin}>
-            <div className="mb-5">
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-white/60 mb-1.5 uppercase tracking-wider">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={e => { setPassword(e.target.value); setLoginError(''); }}
-                  placeholder="Admin password"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl text-white px-4 py-4 pl-11 pr-11 text-base placeholder-white/25 focus:outline-none focus:border-[#8A0000] focus:ring-2 focus:ring-[#8A0000]/30 transition-all"
+                  placeholder="Enter your admin password"
+                  className="w-full bg-white/10 border border-white/15 rounded-lg text-white px-4 py-3 text-sm placeholder-white/25 focus:outline-none focus:border-[#80E9FF] focus:ring-1 focus:ring-[#80E9FF]/30 transition-all"
                   autoFocus
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
                   suppressHydrationWarning
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -247,7 +235,7 @@ export default function AdminDashboard({ goToPage }: Props) {
             </div>
 
             {loginError && (
-              <div className="bg-red-900/30 border border-red-500/30 rounded-xl text-red-300 p-4 text-sm mb-5">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg text-red-300 px-4 py-3 text-sm">
                 {loginError}
               </div>
             )}
@@ -255,498 +243,606 @@ export default function AdminDashboard({ goToPage }: Props) {
             <button
               type="submit"
               disabled={loginLoading || !password}
-              className="w-full py-4 bg-[#8A0000] rounded-xl text-white text-sm font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-[#80E9FF] text-[#0A2540] rounded-lg text-sm font-semibold hover:bg-[#65D9F2] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               suppressHydrationWarning
             >
-              {loginLoading ? 'Signing in...' : 'Sign In'}
+              {loginLoading ? 'Signing in...' : 'Continue'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <button
-              onClick={() => goToPage('home')}
-              className="text-xs font-bold uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors"
-              suppressHydrationWarning
-            >
-              ← Back to Site
-            </button>
-          </div>
-
-          <div className="mt-10 bg-white/5 border border-white/10 rounded-xl p-5">
-            <p className="text-xs text-white/30 leading-relaxed">
-              The admin password is set via the <code className="bg-white/10 px-1.5 py-0.5 rounded">ADMIN_PASSWORD</code> environment variable in your <code className="bg-white/10 px-1.5 py-0.5 rounded">.env</code> file. If you haven&apos;t set one, add it and restart the server.
-            </p>
-          </div>
+          <button
+            onClick={() => goToPage('home')}
+            className="mt-8 w-full text-center text-sm text-white/30 hover:text-white/60 transition-colors flex items-center justify-center gap-2"
+            suppressHydrationWarning
+          >
+            <ChevronLeft size={14} /> Back to website
+          </button>
         </div>
       </div>
     );
   }
 
-  // ─── Authenticated Dashboard — Single Scrollable Page ───
-  const stats = allData?.overview?.stats;
-  const donors = allData?.donations?.donors || [];
-  const applications = allData?.applications?.applications || [];
-  const messages = allData?.messages?.messages || [];
-  const subscribers = allData?.subscribers?.subscribers || [];
-
+  // ─── Authenticated Dashboard — Stripe Layout ───
   return (
-    <div className="min-h-screen bg-[#F9F8F6]">
-      {/* ─── Header Bar ─── */}
-      <div className="bg-[#141414] text-white px-6 py-5 sticky top-0 z-30">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-[#8A0000] rounded-xl flex items-center justify-center text-white">
-              <Shield size={18} />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold">Artemis Admin</h1>
-              <p className="text-xs text-white/40">Your dashboard</p>
-            </div>
+    <div className="min-h-screen bg-[#F6F9FC] flex">
+      {/* ═══ SIDEBAR ═══ */}
+      <aside className={`${sidebarCollapsed ? 'w-[68px]' : 'w-[220px]'} bg-[#0A2540] text-white flex flex-col transition-all duration-200 shrink-0 sticky top-0 h-screen`}>
+        {/* Logo */}
+        <div className={`px-4 h-[56px] flex items-center border-b border-white/10 ${sidebarCollapsed ? 'justify-center' : 'gap-3'}`}>
+          <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center shrink-0">
+            <Shield size={16} className="text-[#0A2540]" />
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-white/25 hidden md:block">
-              Updated {lastRefresh.toLocaleTimeString()}
+          {!sidebarCollapsed && (
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-white truncate">Artemis</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-wider">Dashboard</p>
+            </div>
+          )}
+        </div>
+
+        {/* Nav */}
+        <nav className="flex-1 py-3 px-2 space-y-0.5">
+          {navItems.map(item => {
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveSection(item.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all ${
+                  isActive
+                    ? 'bg-white/10 text-white font-medium'
+                    : 'text-white/50 hover:text-white/80 hover:bg-white/5'
+                } ${sidebarCollapsed ? 'justify-center' : ''}`}
+                title={sidebarCollapsed ? item.label : undefined}
+                suppressHydrationWarning
+              >
+                <span className="shrink-0">{item.icon}</span>
+                {!sidebarCollapsed && (
+                  <>
+                    <span className="flex-1 text-left truncate">{item.label}</span>
+                    {item.count !== undefined && item.count > 0 && (
+                      <span className={`text-[11px] font-medium px-1.5 py-0.5 rounded-full ${
+                        item.id === 'messages' && unreadCount > 0
+                          ? 'bg-[#80E9FF] text-[#0A2540]'
+                          : 'bg-white/10 text-white/60'
+                      }`}>
+                        {item.count}
+                      </span>
+                    )}
+                  </>
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Bottom actions */}
+        <div className="px-2 py-3 border-t border-white/10 space-y-0.5">
+          <button
+            onClick={fetchAllData}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/40 hover:text-white/70 hover:bg-white/5 transition-all"
+            title="Refresh data"
+            suppressHydrationWarning
+          >
+            <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
+            {!sidebarCollapsed && <span>Refresh</span>}
+          </button>
+          <button
+            onClick={() => goToPage('home')}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/40 hover:text-white/70 hover:bg-white/5 transition-all"
+            title="View website"
+            suppressHydrationWarning
+          >
+            <ExternalLink size={16} />
+            {!sidebarCollapsed && <span>View Site</span>}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/40 hover:text-red-400 hover:bg-white/5 transition-all"
+            title="Sign out"
+            suppressHydrationWarning
+          >
+            <LogOut size={16} />
+            {!sidebarCollapsed && <span>Sign Out</span>}
+          </button>
+          <button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/20 hover:text-white/50 transition-all mt-2"
+            suppressHydrationWarning
+          >
+            <ChevronLeft size={16} className={`transition-transform ${sidebarCollapsed ? 'rotate-180' : ''}`} />
+            {!sidebarCollapsed && <span>Collapse</span>}
+          </button>
+        </div>
+      </aside>
+
+      {/* ═══ MAIN CONTENT ═══ */}
+      <main className="flex-1 min-w-0">
+        {/* Top bar */}
+        <div className="h-[56px] bg-white border-b border-[#E8ECF1] flex items-center justify-between px-6 sticky top-0 z-20">
+          <h1 className="text-[15px] font-semibold text-[#1A1F36] capitalize">{activeSection}</h1>
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-[#8792A2]">
+              Last updated {lastRefresh.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
-            <button
-              onClick={fetchAllData}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-sm font-semibold text-white/60 hover:text-white transition-all"
-              suppressHydrationWarning
-            >
-              <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
-              <span className="hidden sm:inline">Refresh</span>
-            </button>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-sm font-semibold text-white/60 hover:text-white transition-all"
-              suppressHydrationWarning
-            >
-              <LogOut size={16} />
-              <span className="hidden sm:inline">Log Out</span>
-            </button>
-            <button
-              onClick={() => goToPage('home')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold uppercase tracking-wider text-white/50 hover:text-white transition-all"
-              suppressHydrationWarning
-            >
-              ← Site
-            </button>
           </div>
         </div>
-      </div>
 
-      {/* ─── Content ─── */}
-      <div className="max-w-[1200px] mx-auto px-6 py-8">
-        {loading ? (
-          <div className="text-center py-24">
-            <div className="inline-block w-8 h-8 border-3 border-[#8A0000] border-t-transparent rounded-full animate-spin mb-4" />
-            <p className="text-gray-400 text-lg">Loading...</p>
-          </div>
-        ) : error ? (
-          <div className="bg-red-50 border-2 border-red-200 rounded-2xl text-red-700 p-8 text-center">
-            <p className="text-lg font-bold mb-2">Something went wrong</p>
-            <p className="text-base mb-4">{error}</p>
-            {error.includes('Unauthorized') || error.includes('Session expired') ? (
-              <button onClick={handleLogout} className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm" suppressHydrationWarning>Log In Again</button>
-            ) : (
-              <button onClick={fetchAllData} className="px-6 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm" suppressHydrationWarning>Try Again</button>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-10">
-
-            {/* ═══════ STATS BAR ═══════ */}
-            {stats && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                {[
-                  { label: 'Donations', value: stats.totalDonations, emoji: '💰', color: '#8A0000' },
-                  { label: 'Total Raised', value: formatCurrency(stats.totalRaised || 0), emoji: '💵', color: '#15803d' },
-                  { label: 'Applications', value: stats.totalApplications, emoji: '📋', color: '#b45309' },
-                  { label: 'Messages', value: stats.totalContactMessages, emoji: '✉️', color: '#0e7490' },
-                  { label: 'Subscribers', value: stats.totalSubscribers, emoji: '📬', color: '#7c3aed' },
-                ].map((stat, i) => (
-                  <div key={i} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow text-center">
-                    <div className="text-3xl mb-2">{stat.emoji}</div>
-                    <div className="text-3xl font-black" style={{ color: stat.color }}>{stat.value}</div>
-                    <div className="text-sm font-semibold text-gray-400 mt-1">{stat.label}</div>
+        {/* Page content */}
+        <div className="p-6 max-w-[1080px]">
+          {loading ? (
+            <div className="flex items-center justify-center py-32">
+              <div className="inline-block w-5 h-5 border-2 border-[#0A2540] border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : error ? (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+              <p className="text-sm font-medium text-red-800 mb-1">Something went wrong</p>
+              <p className="text-sm text-red-600 mb-4">{error}</p>
+              <button
+                onClick={error.includes('Unauthorized') || error.includes('expired') ? handleLogout : fetchAllData}
+                className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium"
+                suppressHydrationWarning
+              >
+                {error.includes('Unauthorized') || error.includes('expired') ? 'Sign In Again' : 'Try Again'}
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* ═══ OVERVIEW ═══ */}
+              {activeSection === 'overview' && (
+                <div className="space-y-6">
+                  {/* Welcome */}
+                  <div>
+                    <h2 className="text-xl font-semibold text-[#1A1F36]">Welcome to your dashboard</h2>
+                    <p className="text-sm text-[#8792A2] mt-0.5">Here's what's happening with your site today.</p>
                   </div>
-                ))}
-              </div>
-            )}
 
-            {/* ═══════ RECENT ACTIVITY ═══════ */}
-            <section>
-              <h2 className="text-2xl font-black text-[#141414] mb-4">Recent Activity ✨</h2>
-              {buildWhatsNew().length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 p-10 text-center">
-                  <p className="text-4xl mb-3">🌱</p>
-                  <p className="text-lg text-gray-400 font-medium">Nothing here yet</p>
-                  <p className="text-sm text-gray-300 mt-1">When people interact with your site, you&apos;ll see their activity here.</p>
-                </div>
-              ) : (
-                <div className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-50">
-                  {buildWhatsNew().map(item => (
-                    <div key={item.id} className="flex items-center gap-4 p-5">
-                      <span className="text-2xl">{item.emoji}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-base font-semibold text-[#141414]">{item.text}</p>
-                        <p className="text-sm text-gray-400">{formatDate(item.date)}</p>
-                      </div>
+                  {/* Metric Cards — Stripe style */}
+                  {stats && (
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                      {[
+                        { label: 'Total Raised', value: formatCurrency(stats.totalRaised || 0), icon: <DollarSign size={16} />, accent: '#0A2540', bg: '#F0F4FF' },
+                        { label: 'Applications', value: stats.totalApplications, icon: <FileText size={16} />, accent: '#B45309', bg: '#FFF8F0' },
+                        { label: 'Messages', value: stats.totalContactMessages, icon: <MessageSquare size={16} />, accent: '#0E7490', bg: '#F0F9FF', sub: unreadCount > 0 ? `${unreadCount} unread` : undefined },
+                        { label: 'Subscribers', value: stats.totalSubscribers, icon: <UserPlus size={16} />, accent: '#7C3AED', bg: '#F5F0FF' },
+                      ].map((m, i) => (
+                        <div key={i} className="bg-white rounded-lg border border-[#E8ECF1] p-5 hover:shadow-sm transition-shadow">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="text-xs font-medium text-[#8792A2] uppercase tracking-wide">{m.label}</span>
+                            <span className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: m.bg, color: m.accent }}>
+                              {m.icon}
+                            </span>
+                          </div>
+                          <p className="text-2xl font-semibold text-[#1A1F36]">{m.value}</p>
+                          {m.sub && (
+                            <p className="text-xs text-[#80E9FF] font-medium mt-1 flex items-center gap-1">
+                              <ArrowUpRight size={12} /> {m.sub}
+                            </p>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </section>
+                  )}
 
-            {/* ═══════ MESSAGES ═══════ */}
-            <section>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-[#141414]">✉️ Messages</h2>
-                  <p className="text-base text-gray-500 mt-1">Messages from your contact form</p>
-                </div>
-                {messages.length > 0 && (
-                  <button
-                    onClick={() => exportCSV(messages, 'artemis-messages')}
-                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                    suppressHydrationWarning
-                  >
-                    <Download size={18} /> Export CSV
-                  </button>
-                )}
-              </div>
-
-              {messages.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                  <p className="text-5xl mb-4">📮</p>
-                  <p className="text-xl text-gray-400 font-semibold">No messages yet</p>
-                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone sends you a message through the contact form, it&apos;ll appear here.</p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {messages.map((msg: any, idx: number) => (
-                    <div key={msg.id} className={`rounded-2xl border-2 overflow-hidden transition-all ${
-                      !msg.read ? 'bg-[#8A0000]/[0.03] border-[#8A0000]/20' : 'bg-white border-gray-100'
-                    }`}>
-                      <div
-                        className="p-5 cursor-pointer flex items-center justify-between gap-4"
-                        onClick={() => setExpandedMsg(expandedMsg === idx ? null : idx)}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-base flex-shrink-0 ${
-                            !msg.read ? 'bg-[#8A0000] text-white' : 'bg-gray-100 text-gray-500'
-                          }`}>
-                            {msg.name?.[0]?.toUpperCase() || '?'}
-                          </div>
-                          <div className="min-w-0">
-                            <h3 className="text-lg font-bold text-[#141414]">
-                              {msg.name}
-                              {!msg.read && <span className="ml-2 text-[10px] bg-[#8A0000] text-white px-2 py-1 rounded-md font-bold uppercase">New</span>}
-                            </h3>
-                            <p className="text-sm text-gray-500 truncate">{msg.email}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
-                          <div className="text-right hidden sm:block">
-                            <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-lg">{msg.area || 'General'}</span>
-                            <p className="text-xs text-gray-400 mt-1">{formatDate(msg.createdAt)}</p>
-                          </div>
-                          <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
-                            {expandedMsg === idx ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
-                          </div>
-                        </div>
-                      </div>
-                      {expandedMsg === idx && (
-                        <div className="px-5 pb-5 border-t border-gray-50 pt-4">
-                          {msg.subject && <p className="text-base font-semibold text-gray-600 mb-2">Subject: {msg.subject}</p>}
-                          <p className="text-base text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{msg.message}</p>
-                          <div className="sm:hidden mt-3">
-                            <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-2.5 py-1 rounded-lg">{msg.area || 'General'}</span>
-                            <p className="text-xs text-gray-400 mt-1.5">{formatDate(msg.createdAt)}</p>
-                          </div>
-                        </div>
-                      )}
+                  {/* Recent Activity — Stripe timeline style */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm font-semibold text-[#1A1F36]">Recent Activity</h3>
+                      <button onClick={() => setActiveSection('messages')} className="text-xs text-[#0A2540] font-medium hover:underline" suppressHydrationWarning>View all</button>
                     </div>
-                  ))}
-                </div>
-              )}
-            </section>
-
-            {/* ═══════ APPLICATIONS ═══════ */}
-            <section>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-[#141414]">📋 Applications</h2>
-                  <p className="text-base text-gray-500 mt-1">Everyone who submitted an application</p>
-                </div>
-                {applications.length > 0 && (
-                  <button
-                    onClick={() => exportCSV(applications, 'artemis-applications')}
-                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                    suppressHydrationWarning
-                  >
-                    <Download size={18} /> Export CSV
-                  </button>
-                )}
-              </div>
-
-              {applications.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                  <p className="text-5xl mb-4">📝</p>
-                  <p className="text-xl text-gray-400 font-semibold">No applications yet</p>
-                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone completes the Apply form, they&apos;ll appear here.</p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {applications.map((app: any, idx: number) => (
-                    <div key={app.id} className="bg-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all overflow-hidden">
-                      <div
-                        className="p-5 cursor-pointer flex items-center justify-between gap-4"
-                        onClick={() => setExpandedApp(expandedApp === idx ? null : idx)}
-                      >
-                        <div className="flex items-center gap-4 min-w-0">
-                          <div className="w-12 h-12 bg-[#8A0000]/10 rounded-xl flex items-center justify-center text-[#8A0000] font-bold text-lg flex-shrink-0">
-                            {app.firstName?.[0]}{app.lastName?.[0]}
-                          </div>
-                          <div className="min-w-0">
-                            <h3 className="text-lg font-bold text-[#141414]">{app.firstName} {app.lastName}</h3>
-                            <p className="text-sm text-gray-500 truncate">{app.email} &middot; {app.phone || 'No phone'}</p>
-                          </div>
+                    <div className="bg-white rounded-lg border border-[#E8ECF1]">
+                      {buildActivity().length === 0 ? (
+                        <div className="py-12 text-center">
+                          <Clock size={24} className="mx-auto text-[#C1C9D2] mb-2" />
+                          <p className="text-sm text-[#8792A2]">No activity yet</p>
+                          <p className="text-xs text-[#C1C9D2] mt-0.5">When people interact with your site, you'll see it here.</p>
                         </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
-                          <div className="text-right hidden sm:block">
-                            <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
-                            <p className="text-xs text-gray-400 mt-1">{formatDate(app.createdAt)}</p>
-                          </div>
-                          <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
-                            {expandedApp === idx ? <ChevronUp size={18} className="text-gray-400" /> : <ChevronDown size={18} className="text-gray-400" />}
-                          </div>
-                        </div>
-                      </div>
-
-                      {expandedApp === idx && (
-                        <div className="px-5 pb-5 border-t border-gray-50 pt-4">
-                          {/* Personal Info */}
-                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">👤 Personal Info</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Application Cycle</span> <span className="font-semibold">{app.applicationCycle || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Concentration</span> <span className="font-semibold">{app.concentration || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Gender</span> <span className="font-semibold">{app.gender || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Citizenship</span> <span className="font-semibold">{app.citizenship || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Country</span> <span className="font-semibold">{app.country || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">How Heard</span> <span className="font-semibold">{app.howHeard || '—'}</span></div>
-                          </div>
-
-                          {/* Academic Record */}
-                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎓 Academic Record</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm mb-6">
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School</span> <span className="font-semibold">{app.schoolName || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">School Country</span> <span className="font-semibold">{app.schoolCountry || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">GPA</span> <span className="font-semibold">{app.gpa || '—'}/{app.maxGpa || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Grading Scale</span> <span className="font-semibold">{app.gradingScale || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Math</span> <span className="font-semibold">{app.satMath || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">SAT Reading</span> <span className="font-semibold">{app.satReading || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">ACT Score</span> <span className="font-semibold">{app.actScore || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Test Optional</span> <span className="font-semibold">{app.isTestOptional ? 'Yes' : 'No'}</span></div>
-                          </div>
-
-                          {/* Accomplishments */}
-                          {app.accomplishments && (
-                            <div className="mb-6">
-                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🏆 Accomplishments</h4>
-                              <div className="space-y-3">
-                                {(typeof app.accomplishments === 'string' ? JSON.parse(app.accomplishments) : app.accomplishments || []).map((acc: any, i: number) => (
-                                  <div key={i} className="bg-gray-50 rounded-xl p-4 text-sm">
-                                    <div className="font-bold text-[#141414] text-base">{acc.title || 'Untitled'}</div>
-                                    {acc.role && <div className="text-gray-500 mt-1">Role: {acc.role}</div>}
-                                    {acc.description && <div className="text-gray-600 mt-1">{acc.description}</div>}
-                                    {acc.impact && <div className="text-gray-500 italic mt-1">Impact: {acc.impact}</div>}
-                                  </div>
-                                ))}
+                      ) : (
+                        <div className="divide-y divide-[#F0F3F7]">
+                          {buildActivity().map((item, i) => (
+                            <div key={i} className="flex items-center gap-3 px-4 py-3 hover:bg-[#F6F9FC] transition-colors">
+                              <span className="w-8 h-8 rounded-full flex items-center justify-center text-xs shrink-0" style={{ background: item.bg, color: item.color }}>
+                                {item.icon}
+                              </span>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-[#1A1F36] truncate">{item.text}</p>
                               </div>
+                              <span className="text-xs text-[#C1C9D2] shrink-0">{item.time}</span>
                             </div>
-                          )}
-
-                          {/* Personal Statement */}
-                          {app.personalStatement && (
-                            <div className="mb-6">
-                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">✍️ Personal Statement</h4>
-                              <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.personalStatement}</p>
-                            </div>
-                          )}
-
-                          {/* Mission Statement */}
-                          {app.missionStatement && (
-                            <div className="mb-6">
-                              <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">🎯 Mission Statement</h4>
-                              <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-xl p-4">{app.missionStatement}</p>
-                            </div>
-                          )}
-
-                          {/* Financial Aid */}
-                          <h4 className="text-sm font-bold text-[#8A0000] mb-3 uppercase tracking-wider">💵 Financial Aid</h4>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Applying for Aid</span> <span className="font-semibold">{app.applyingForAid || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Household Income</span> <span className="font-semibold">{app.householdIncome || '—'}</span></div>
-                            <div><span className="text-gray-400 block text-xs uppercase tracking-wider mb-0.5">Dependents</span> <span className="font-semibold">{app.dependents || '—'}</span></div>
-                          </div>
-
-                          {/* Mobile-only date/status */}
-                          <div className="sm:hidden mt-4 pt-4 border-t border-gray-100">
-                            <span className="px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-700">{app.status || 'submitted'}</span>
-                            <p className="text-xs text-gray-400 mt-2">{formatDate(app.createdAt)}</p>
-                          </div>
+                          ))}
                         </div>
                       )}
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Quick Setup — clean cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white rounded-lg border border-[#E8ECF1] p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CreditCard size={16} className="text-[#B45309]" />
+                        <h3 className="text-sm font-semibold text-[#1A1F36]">Accept Payments</h3>
+                      </div>
+                      <p className="text-xs text-[#8792A2] leading-relaxed mb-3">
+                        Donations are currently saved as pending. Set up PayPal to accept real payments — no EIN required.
+                      </p>
+                      <ol className="text-xs text-[#5A6987] space-y-1.5 list-decimal list-inside">
+                        <li>Create a PayPal account at <a href="https://paypal.com" target="_blank" rel="noreferrer" className="text-[#0A2540] hover:underline">paypal.com</a></li>
+                        <li>Get your PayPal email address</li>
+                        <li>Add <code className="bg-[#F6F9FC] px-1 py-0.5 rounded text-[11px]">PAYPAL_EMAIL=you@email.com</code> to your <code className="bg-[#F6F9FC] px-1 py-0.5 rounded text-[11px]">.env</code></li>
+                      </ol>
+                      <p className="text-[11px] text-[#C1C9D2] mt-3">PayPal doesn't require an EIN. You can upgrade to Business later.</p>
+                    </div>
+                    <div className="bg-white rounded-lg border border-[#E8ECF1] p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Database size={16} className="text-[#0E7490]" />
+                        <h3 className="text-sm font-semibold text-[#1A1F36]">Your Data</h3>
+                      </div>
+                      <p className="text-xs text-[#8792A2] leading-relaxed mb-3">
+                        All submissions are stored in a secure database on your server:
+                      </p>
+                      <ul className="text-xs text-[#5A6987] space-y-1.5">
+                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#0A2540]" /> Applications from the Apply form</li>
+                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#8A0000]" /> Donations from the Give page</li>
+                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#0E7490]" /> Messages from contact forms</li>
+                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]" /> Newsletter sign-ups</li>
+                      </ul>
+                      <p className="text-[11px] text-[#C1C9D2] mt-3">Database: <code className="bg-[#F6F9FC] px-1 py-0.5 rounded text-[11px]">db/custom.db</code> · Export any section as CSV</p>
+                    </div>
+                  </div>
                 </div>
               )}
-            </section>
 
-            {/* ═══════ DONATIONS ═══════ */}
-            <section>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-[#141414]">💰 Donations</h2>
-                  <p className="text-base text-gray-500 mt-1">All the donations people have made</p>
-                </div>
-                {donors.length > 0 && (
-                  <button
-                    onClick={() => exportCSV(donors, 'artemis-donations')}
-                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                    suppressHydrationWarning
-                  >
-                    <Download size={18} /> Export CSV
-                  </button>
-                )}
-              </div>
+              {/* ═══ DONATIONS ═══ */}
+              {activeSection === 'donations' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-semibold text-[#1A1F36]">Donations</h2>
+                      <p className="text-sm text-[#8792A2] mt-0.5">{donors.length} donation{donors.length !== 1 ? 's' : ''} received</p>
+                    </div>
+                    {donors.length > 0 && (
+                      <button
+                        onClick={() => exportCSV(donors, 'artemis-donations')}
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-md text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
+                        suppressHydrationWarning
+                      >
+                        <Download size={13} /> Export
+                      </button>
+                    )}
+                  </div>
 
-              {donors.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                  <p className="text-5xl mb-4">💝</p>
-                  <p className="text-xl text-gray-400 font-semibold">No donations yet</p>
-                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone makes a donation on your site, it&apos;ll show up right here.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {donors.map((d: any) => (
-                    <div key={d.id || d.date} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <p className="text-2xl font-black text-[#8A0000]">{formatCurrency(d.amount, d.currency || 'USD')}</p>
-                          <p className="text-base font-semibold text-[#141414] mt-1">
-                            {d.donorName || d.name || (d.donorAnonymous ? 'Anonymous donor' : 'Unknown')}
-                          </p>
-                        </div>
-                        <span className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider ${
-                          d.paymentStatus === 'completed' ? 'bg-green-100 text-green-700' :
-                          d.paymentStatus === 'pending' ? 'bg-amber-100 text-amber-700' :
-                          d.paymentStatus === 'expired' ? 'bg-red-100 text-red-700' :
-                          'bg-gray-100 text-gray-600'
-                        }`}>
-                          {d.paymentStatus || 'unknown'}
-                        </span>
+                  {donors.length === 0 ? (
+                    <EmptyState icon={<Heart size={24} />} title="No donations yet" desc="When someone makes a donation, it will appear here." />
+                  ) : (
+                    <div className="bg-white rounded-lg border border-[#E8ECF1] overflow-hidden">
+                      {/* Table header */}
+                      <div className="grid grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-2.5 bg-[#F6F9FC] text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider border-b border-[#E8ECF1]">
+                        <span>Donor</span>
+                        <span>Email</span>
+                        <span>Amount</span>
+                        <span>Date</span>
+                        <span>Status</span>
                       </div>
-                      <div className="space-y-1 text-sm text-gray-500">
-                        {d.donorEmail && <p>📧 {d.donorEmail}</p>}
-                        <p>📅 {formatDate(d.createdAt || d.date)}</p>
-                        {d.isRecurring && <p>🔄 Recurring ({d.recurringFreq || 'monthly'})</p>}
-                        {d.paymentMethod && <p>💳 {d.paymentMethod}</p>}
-                        {(d.message || d.tier) && <p>💬 &ldquo;{d.message || d.tier}&rdquo;</p>}
+                      {/* Rows */}
+                      <div className="divide-y divide-[#F0F3F7]">
+                        {donors.map((d: any) => (
+                          <div key={d.id || d.date} className="grid grid-cols-[1fr_1fr_100px_120px_90px] gap-4 px-4 py-3 hover:bg-[#F6F9FC] transition-colors items-center text-sm">
+                            <span className="font-medium text-[#1A1F36] truncate">
+                              {d.donorName || d.name || (d.donorAnonymous ? 'Anonymous' : 'Unknown')}
+                            </span>
+                            <span className="text-[#5A6987] truncate text-xs">{d.donorEmail || '—'}</span>
+                            <span className="font-semibold text-[#1A1F36]">{formatCurrency(d.amount, d.currency || 'USD')}</span>
+                            <span className="text-xs text-[#8792A2]">{formatDate(d.createdAt || d.date)}</span>
+                            <span>
+                              <StatusBadge status={d.paymentStatus || 'unknown'} />
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
-            </section>
 
-            {/* ═══════ SUBSCRIBERS ═══════ */}
-            <section>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
-                <div>
-                  <h2 className="text-2xl font-black text-[#141414]">📬 Subscribers</h2>
-                  <p className="text-base text-gray-500 mt-1">People who subscribed to your newsletter</p>
-                </div>
-                {subscribers.length > 0 && (
-                  <button
-                    onClick={() => exportCSV(subscribers, 'artemis-subscribers')}
-                    className="flex items-center gap-2 px-5 py-3 bg-[#8A0000] text-white rounded-xl font-bold text-sm hover:bg-[#6B0000] transition-colors"
-                    suppressHydrationWarning
-                  >
-                    <Download size={18} /> Export CSV
-                  </button>
-                )}
-              </div>
+              {/* ═══ APPLICATIONS ═══ */}
+              {activeSection === 'applications' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-semibold text-[#1A1F36]">Applications</h2>
+                      <p className="text-sm text-[#8792A2] mt-0.5">{applications.length} application{applications.length !== 1 ? 's' : ''} submitted</p>
+                    </div>
+                    {applications.length > 0 && (
+                      <button
+                        onClick={() => exportCSV(applications, 'artemis-applications')}
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-md text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
+                        suppressHydrationWarning
+                      >
+                        <Download size={13} /> Export
+                      </button>
+                    )}
+                  </div>
 
-              {subscribers.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center">
-                  <p className="text-5xl mb-4">💌</p>
-                  <p className="text-xl text-gray-400 font-semibold">No sign-ups yet</p>
-                  <p className="text-base text-gray-300 mt-2 max-w-md mx-auto">When someone subscribes to your newsletter, they&apos;ll show up here.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {subscribers.map((sub: any) => (
-                    <div key={sub.id} className="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold text-base flex-shrink-0">
-                          {sub.email?.[0]?.toUpperCase() || '?'}
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-base font-semibold text-[#141414] truncate">{sub.email}</p>
-                        </div>
-                      </div>
-                      <div className="space-y-1.5 text-sm text-gray-500">
-                        {sub.source && <p>📍 From: <span className="capitalize">{sub.source}</span></p>}
-                        <p>📅 {formatDate(sub.createdAt)}</p>
-                        <p>{sub.active ? '✅ Active' : '⏸️ Inactive'}</p>
+                  {applications.length === 0 ? (
+                    <EmptyState icon={<FileText size={24} />} title="No applications yet" desc="When someone applies, they'll appear here." />
+                  ) : (
+                    <div className="bg-white rounded-lg border border-[#E8ECF1] overflow-hidden">
+                      <div className="divide-y divide-[#F0F3F7]">
+                        {applications.map((app: any, idx: number) => {
+                          const isExpanded = expandedItems.has(idx);
+                          return (
+                            <div key={app.id}>
+                              {/* Row */}
+                              <div
+                                className="flex items-center gap-3 px-4 py-3 hover:bg-[#F6F9FC] transition-colors cursor-pointer"
+                                onClick={() => toggleExpanded(idx)}
+                              >
+                                <div className="w-8 h-8 rounded-full bg-[#F0F4FF] flex items-center justify-center text-[#0A2540] text-xs font-semibold shrink-0">
+                                  {app.firstName?.[0]}{app.lastName?.[0]}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium text-[#1A1F36]">{app.firstName} {app.lastName}</p>
+                                  <p className="text-xs text-[#8792A2] truncate">{app.email}</p>
+                                </div>
+                                <span className="text-xs text-[#8792A2] hidden sm:block">{app.concentration || '—'}</span>
+                                <span className="text-xs text-[#C1C9D2] hidden sm:block">{formatDate(app.createdAt)}</span>
+                                <StatusBadge status={app.status || 'submitted'} />
+                                <ChevronRight size={14} className={`text-[#C1C9D2] transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                              </div>
+
+                              {/* Expanded Detail */}
+                              {isExpanded && (
+                                <div className="px-4 pb-4 pt-1 bg-[#FAFBFD] border-t border-[#F0F3F7]">
+                                  <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3">
+                                    <DetailField label="Cycle" value={app.applicationCycle} />
+                                    <DetailField label="Concentration" value={app.concentration} />
+                                    <DetailField label="Gender" value={app.gender} />
+                                    <DetailField label="Citizenship" value={app.citizenship} />
+                                    <DetailField label="Country" value={app.country} />
+                                    <DetailField label="How Heard" value={app.howHeard} />
+                                    <DetailField label="Phone" value={app.phone} />
+                                    <DetailField label="GPA" value={app.gpa ? `${app.gpa}/${app.maxGpa || '—'}` : undefined} />
+                                    <DetailField label="School" value={app.schoolName} />
+                                    <DetailField label="School Country" value={app.schoolCountry} />
+                                    <DetailField label="SAT Math" value={app.satMath} />
+                                    <DetailField label="SAT Reading" value={app.satReading} />
+                                    <DetailField label="ACT" value={app.actScore} />
+                                    <DetailField label="Applying for Aid" value={app.applyingForAid} />
+                                    <DetailField label="Household Income" value={app.householdIncome} />
+                                  </div>
+                                  {app.accomplishments && (
+                                    <div className="mt-3">
+                                      <p className="text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider mb-1.5">Accomplishments</p>
+                                      {(typeof app.accomplishments === 'string' ? JSON.parse(app.accomplishments) : app.accomplishments || []).map((acc: any, i: number) => (
+                                        <div key={i} className="text-xs text-[#5A6987] mb-1">
+                                          <span className="font-medium text-[#1A1F36]">{acc.title}</span>
+                                          {acc.role && <span className="ml-1">· {acc.role}</span>}
+                                          {acc.description && <span className="ml-1">— {acc.description}</span>}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                  {app.personalStatement && (
+                                    <div className="mt-3">
+                                      <p className="text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider mb-1.5">Personal Statement</p>
+                                      <p className="text-xs text-[#5A6987] leading-relaxed">{app.personalStatement}</p>
+                                    </div>
+                                  )}
+                                  {app.missionStatement && (
+                                    <div className="mt-3">
+                                      <p className="text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider mb-1.5">Mission Statement</p>
+                                      <p className="text-xs text-[#5A6987] leading-relaxed">{app.missionStatement}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
-            </section>
 
-            {/* ═══════ INFO CARDS ═══════ */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
-              {/* Payment Setup — PayPal */}
-              <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6">
-                <h3 className="text-lg font-bold text-amber-800 mb-3">💳 How to Accept Real Payments</h3>
-                <p className="text-base text-amber-700 leading-relaxed mb-4">
-                  Right now, donations are saved as <strong>pending</strong>. To accept real payments:
-                </p>
-                <ol className="text-sm text-amber-700 space-y-2 list-decimal list-inside">
-                  <li>Create a PayPal account at <a href="https://paypal.com" target="_blank" rel="noreferrer" className="underline font-semibold">paypal.com</a> (personal or business)</li>
-                  <li>Get your PayPal email address</li>
-                  <li>Add <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">PAYPAL_EMAIL=your@email.com</code> to your <code className="bg-amber-100 px-1.5 py-0.5 rounded text-xs">.env</code> file</li>
-                  <li>Donors will see a &ldquo;Donate with PayPal&rdquo; button on the Give page</li>
-                </ol>
-                <p className="text-xs text-amber-600 mt-4">
-                  PayPal doesn&apos;t require an EIN — just a valid email address. You can also upgrade to a PayPal Business account later for more features.
-                </p>
-              </div>
+              {/* ═══ MESSAGES ═══ */}
+              {activeSection === 'messages' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-semibold text-[#1A1F36]">Messages</h2>
+                      <p className="text-sm text-[#8792A2] mt-0.5">
+                        {messages.length} message{messages.length !== 1 ? 's' : ''}
+                        {unreadCount > 0 && <span className="text-[#80E9FF]"> · {unreadCount} unread</span>}
+                      </p>
+                    </div>
+                    {messages.length > 0 && (
+                      <button
+                        onClick={() => exportCSV(messages, 'artemis-messages')}
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-md text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
+                        suppressHydrationWarning
+                      >
+                        <Download size={13} /> Export
+                      </button>
+                    )}
+                  </div>
 
-              {/* Where Data Lives */}
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
-                <h3 className="text-lg font-bold text-blue-800 mb-3">📁 Where Your Data Lives</h3>
-                <p className="text-base text-blue-700 leading-relaxed mb-4">
-                  Everything is saved to a <strong>secure database</strong> on your server. This includes:
-                </p>
-                <ul className="text-sm text-blue-700 space-y-2 list-disc list-inside">
-                  <li><strong>Applications</strong> — from the 4-step Apply form</li>
-                  <li><strong>Donations</strong> — from the Give page</li>
-                  <li><strong>Messages</strong> — from contact forms</li>
-                  <li><strong>Newsletter sign-ups</strong> — from subscribe forms</li>
-                </ul>
-                <p className="text-xs text-blue-600 mt-4">
-                  Database file: <code className="bg-blue-100 px-1.5 py-0.5 rounded">db/custom.db</code>. You can also download your data as CSV using the export buttons.
-                </p>
-              </div>
-            </section>
+                  {messages.length === 0 ? (
+                    <EmptyState icon={<MessageSquare size={24} />} title="No messages yet" desc="When someone contacts you, their message will appear here." />
+                  ) : (
+                    <div className="space-y-2">
+                      {messages.map((msg: any, idx: number) => {
+                        const isExpanded = expandedItems.has(idx);
+                        return (
+                          <div
+                            key={msg.id}
+                            className={`bg-white rounded-lg border transition-all ${
+                              !msg.read ? 'border-[#80E9FF]/40 bg-[#F0FBFF]' : 'border-[#E8ECF1]'
+                            }`}
+                          >
+                            <div
+                              className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-[#F6F9FC] transition-colors"
+                              onClick={() => toggleExpanded(idx)}
+                            >
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 ${
+                                !msg.read ? 'bg-[#0A2540] text-white' : 'bg-[#F0F4FF] text-[#0A2540]'
+                              }`}>
+                                {msg.name?.[0]?.toUpperCase() || '?'}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <p className="text-sm font-medium text-[#1A1F36]">{msg.name}</p>
+                                  {!msg.read && <span className="w-1.5 h-1.5 rounded-full bg-[#80E9FF]" />}
+                                </div>
+                                <p className="text-xs text-[#8792A2] truncate">{msg.email}</p>
+                              </div>
+                              {msg.area && (
+                                <span className="text-[11px] font-medium text-[#8792A2] bg-[#F6F9FC] px-2 py-0.5 rounded hidden sm:block">{msg.area}</span>
+                              )}
+                              <span className="text-xs text-[#C1C9D2] shrink-0">{formatRelative(msg.createdAt)}</span>
+                              <ChevronRight size={14} className={`text-[#C1C9D2] transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+                            </div>
+                            {isExpanded && (
+                              <div className="px-4 pb-4 pt-1 border-t border-[#F0F3F7]">
+                                {msg.subject && <p className="text-sm font-medium text-[#1A1F36] mb-2">{msg.subject}</p>}
+                                <p className="text-sm text-[#5A6987] leading-relaxed whitespace-pre-wrap">{msg.message}</p>
+                                <p className="text-[11px] text-[#C1C9D2] mt-3">{formatDate(msg.createdAt)} at {formatTime(msg.createdAt)}</p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
 
-          </div>
-        )}
-      </div>
+              {/* ═══ SUBSCRIBERS ═══ */}
+              {activeSection === 'subscribers' && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-semibold text-[#1A1F36]">Subscribers</h2>
+                      <p className="text-sm text-[#8792A2] mt-0.5">{subscribers.length} newsletter subscriber{subscribers.length !== 1 ? 's' : ''}</p>
+                    </div>
+                    {subscribers.length > 0 && (
+                      <button
+                        onClick={() => exportCSV(subscribers, 'artemis-subscribers')}
+                        className="flex items-center gap-1.5 px-3 py-1.5 border border-[#E8ECF1] rounded-md text-xs font-medium text-[#5A6987] hover:bg-[#F6F9FC] transition-colors"
+                        suppressHydrationWarning
+                      >
+                        <Download size={13} /> Export
+                      </button>
+                    )}
+                  </div>
+
+                  {subscribers.length === 0 ? (
+                    <EmptyState icon={<UserPlus size={24} />} title="No subscribers yet" desc="When someone subscribes to your newsletter, they'll show up here." />
+                  ) : (
+                    <div className="bg-white rounded-lg border border-[#E8ECF1] overflow-hidden">
+                      <div className="grid grid-cols-[1fr_100px_100px_80px] gap-4 px-4 py-2.5 bg-[#F6F9FC] text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider border-b border-[#E8ECF1]">
+                        <span>Email</span>
+                        <span>Source</span>
+                        <span>Signed Up</span>
+                        <span>Status</span>
+                      </div>
+                      <div className="divide-y divide-[#F0F3F7]">
+                        {subscribers.map((sub: any) => (
+                          <div key={sub.id} className="grid grid-cols-[1fr_100px_100px_80px] gap-4 px-4 py-3 hover:bg-[#F6F9FC] transition-colors items-center text-sm">
+                            <span className="font-medium text-[#1A1F36] truncate">{sub.email}</span>
+                            <span className="text-xs text-[#8792A2] capitalize">{sub.source || '—'}</span>
+                            <span className="text-xs text-[#8792A2]">{formatDate(sub.createdAt)}</span>
+                            <span className="text-xs">
+                              {sub.active ? (
+                                <span className="text-emerald-600 font-medium">Active</span>
+                              ) : (
+                                <span className="text-[#C1C9D2]">Inactive</span>
+                              )}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </main>
+    </div>
+  );
+
+  // ─── Helpers ───
+
+  function buildActivity() {
+    if (!allData?.overview) return [];
+    const ov = allData.overview;
+    const items: { text: string; time: string; icon: React.ReactNode; bg: string; color: string }[] = [];
+
+    (ov.recentDonations || []).forEach((d: any) => {
+      items.push({
+        text: `${d.donorName || d.name || 'Someone'} donated ${formatCurrency(d.amount, d.currency)}`,
+        time: formatRelative(d.createdAt || d.date),
+        icon: <DollarSign size={12} />, bg: '#F0F4FF', color: '#0A2540',
+      });
+    });
+
+    (ov.recentApplications || []).forEach((a: any) => {
+      items.push({
+        text: `${a.firstName} ${a.lastName} submitted an application`,
+        time: formatRelative(a.createdAt),
+        icon: <FileText size={12} />, bg: '#FFF8F0', color: '#B45309',
+      });
+    });
+
+    (ov.recentContacts || []).forEach((c: any) => {
+      items.push({
+        text: `${c.name} sent a message`,
+        time: formatRelative(c.createdAt),
+        icon: <MessageSquare size={12} />, bg: '#F0F9FF', color: '#0E7490',
+      });
+    });
+
+    items.sort((a, b) => a.time.localeCompare(b.time));
+    return items.slice(0, 8);
+  }
+}
+
+// ─── Sub-components ───
+
+function StatusBadge({ status }: { status: string }) {
+  const styles: Record<string, string> = {
+    completed: 'bg-emerald-50 text-emerald-700',
+    active: 'bg-emerald-50 text-emerald-700',
+    pending: 'bg-amber-50 text-amber-700',
+    submitted: 'bg-[#F0F4FF] text-[#0A2540]',
+    expired: 'bg-red-50 text-red-700',
+    failed: 'bg-red-50 text-red-700',
+    unknown: 'bg-[#F6F9FC] text-[#8792A2]',
+  };
+  return (
+    <span className={`inline-block px-2 py-0.5 rounded text-[11px] font-medium ${styles[status] || styles.unknown}`}>
+      {status}
+    </span>
+  );
+}
+
+function DetailField({ label, value }: { label: string; value?: string | null }) {
+  return (
+    <div>
+      <p className="text-[11px] font-semibold text-[#8792A2] uppercase tracking-wider mb-0.5">{label}</p>
+      <p className="text-xs text-[#1A1F36] font-medium">{value || '—'}</p>
+    </div>
+  );
+}
+
+function EmptyState({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
+  return (
+    <div className="bg-white rounded-lg border border-[#E8ECF1] py-16 text-center">
+      <div className="text-[#C1C9D2] mb-2 flex justify-center">{icon}</div>
+      <p className="text-sm font-medium text-[#8792A2]">{title}</p>
+      <p className="text-xs text-[#C1C9D2] mt-0.5">{desc}</p>
     </div>
   );
 }
