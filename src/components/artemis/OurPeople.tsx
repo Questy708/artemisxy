@@ -8,120 +8,240 @@ interface Props {
   goToPage: (page: string) => void;
 }
 
-/* ─── Data: University Officers ─── */
-const universityOfficers = [
-  { title: 'Chancellor', dept: 'Office of the Chancellor', abbr: 'CH', desc: 'Chief ceremonial and strategic head of the university; presides over Convocation and sets the long-term vision for the Artemis mission.' },
-  { title: 'Vice-Chancellor', dept: 'Office of the Chancellor', abbr: 'VC', desc: 'Deputises for the Chancellor and oversees day-to-day institutional strategy, external partnerships, and global node expansion.' },
-  { title: 'Provost & Chief Academic Officer', dept: 'Academic Affairs', abbr: 'PA', desc: 'The senior academic officer responsible for curriculum integrity, faculty appointments, and the academic standards of every Artemis programme worldwide.' },
-  { title: 'Vice-Provost for Education', dept: 'Academic Affairs', abbr: 'VE', desc: 'Leads the design and delivery of the undergraduate and graduate curriculum, including the Infinite Learning Continuum and Adaptive Paced Learning systems.' },
-  { title: 'Vice-Provost for Students', dept: 'Student Affairs', abbr: 'VS', desc: 'Champions the student experience across all nodes — from wellbeing and belonging to co-curricular life and the junior fellows programme.' },
-  { title: 'Chief Operating Officer', dept: 'Operations', abbr: 'CO', desc: 'Manages the operational backbone of a distributed university — technology infrastructure, global facilities, and institutional resilience across six continents.' },
-  { title: 'Chief Financial Officer', dept: 'Finance & Treasury', abbr: 'CF', desc: 'Stewards the Artemis endowment, annual budget, and financial sustainability — ensuring the university remains independent and mission-driven for generations to come.' },
-  { title: 'Dean of Faculty', dept: 'Academic Affairs', abbr: 'DF', desc: 'Responsible for faculty recruitment, development, and evaluation across all colleges and Centers of Inquiry — ensuring excellence and diversity in every appointment.' },
-  { title: 'Dean of Admissions & Aid', dept: 'Enrolment', abbr: 'DA', desc: 'Leads the global admissions operation, ensuring that every applicant is evaluated holistically and that financial barriers never prevent talent from accessing an Artemis education.' },
-  { title: 'Dean of the Graduate School', dept: 'Graduate Studies', abbr: 'DG', desc: 'Oversees all graduate programmes, research degrees, and postdoctoral fellowships — building the next generation of scholars and practitioners.' },
-  { title: 'General Counsel & Secretary', dept: 'Legal & Governance', abbr: 'GC', desc: 'Advises on legal and regulatory matters across all jurisdictions, serves as Secretary to the Board of Trustees, and ensures institutional compliance with international law.' },
-  { title: 'University Registrar', dept: 'Academic Administration', abbr: 'UR', desc: 'Maintains academic records, degree conferral, credit transfer, and the ECTS-equivalent framework that enables seamless mobility across the Artemis network.' },
+/* ─── Data: Board of Trustees ─── */
+const boardOfTrustees = [
+  { name: 'Eleanor Voss', title: 'Chairman', initials: 'EV' },
+  { name: 'Marcus Adebayo', title: 'Board Member', initials: 'MA' },
+  { name: 'Dr. Hannah Choi', title: 'Board Member', initials: 'HC' },
+  { name: 'Rajiv Mehta', title: 'Board Member', initials: 'RM' },
+  { name: 'Dr. Sofia Laurent', title: 'Board Member', initials: 'SL' },
+  { name: 'James Okonkwo', title: 'Board Member', initials: 'JO' },
+  { name: 'Dr. Yuki Tanaka', title: 'Board Member', initials: 'YT' },
+  { name: 'Catherine穆勒', title: 'Board Member', initials: 'CM' },
+  { name: 'David Reis', title: 'Board Member', initials: 'DR' },
+  { name: 'Dr. Amara Faye', title: 'Board Member', initials: 'AF' },
+];
+
+/* ─── Data: Leadership Cabinet ─── */
+const leadershipCabinet = [
+  {
+    name: 'Dr. Catherine Hargreaves',
+    title: 'Founding President',
+    initials: 'CH',
+    quote: 'Artemis exists to prove that brilliance is evenly distributed — opportunity is not. We are building the institution that closes that gap.',
+  },
+  {
+    name: 'Dr. Samuel Osei',
+    title: 'Provost, Chief Academic Officer',
+    initials: 'SO',
+    quote: 'A curriculum should be built on evidence of how learning works, not on tradition. Artemis is the first university to take that commitment seriously at every level.',
+  },
+  {
+    name: 'Dr. Mei-Ling Zhao',
+    title: 'Chief Discovery & Admissions Officer',
+    initials: 'MZ',
+    quote: 'Brilliance and drive know no borders. I\'m proud to lead the team that finds the extraordinary minds who will shape the Artemis community.',
+  },
+  {
+    name: 'Nikolaus Pelz',
+    title: 'Chief Financial Officer',
+    initials: 'NP',
+    quote: 'Building efficient financial solutions across cultural boundaries is what makes Artemis exciting. It is a truly global organization that embraces the opportunities found in diversity.',
+  },
+  {
+    name: 'Dr. Ari Betof',
+    title: 'Chief Advancement Officer',
+    initials: 'AB',
+    quote: 'Artemis lives at the intersection of theory and practice — helping students become their best selves while nurturing critical wisdom for the sake of the world.',
+  },
+  {
+    name: 'Dr. Kayla Krupnick Walsh',
+    title: 'Dean of Students',
+    initials: 'KK',
+    quote: 'Our team is building learning opportunities and promoting critical development in students regarding how they want to live and lead.',
+  },
+  {
+    name: 'Benjamin Arturi',
+    title: 'Founder and Advisor',
+    initials: 'BA',
+    quote: 'Nothing is more important for the world than nurturing critical wisdom. I founded Artemis to be the institution that systematically does that.',
+  },
 ];
 
 /* ─── Data: Research Leadership ─── */
 const researchLeadership = [
-  { title: 'Vice-Provost for Research', dept: 'Research Enterprise', abbr: 'VR', desc: 'Oversees all Centers of Inquiry, the Guild system, and the Knowledge Core — ensuring that Artemis research is both curiosity-driven and civically impactful.' },
-  { title: 'Director of Innovation & Partnerships', dept: 'Innovation', abbr: 'IP', desc: 'Bridges Artemis research and the wider world — managing corporate partnerships, technology transfer, spin-off incubation, and the Forge entrepreneurship ecosystem.' },
-  { title: 'Director of Digital Learning', dept: 'Academic Technology', abbr: 'DL', desc: 'Architects the digital learning infrastructure — from AI-augmented tutoring and immersive environments to the synchronous classroom technology that connects every node in real time.' },
-  { title: 'University Librarian & Knowledge Core Director', dept: 'Knowledge Core', abbr: 'KL', desc: 'Stewards the Knowledge Core — Artemis\'s living, open-access repository of all research outputs, curricular materials, and institutional memory across the global network.' },
-  { title: 'Director of Sustainability', dept: 'Campus & Planet', abbr: 'SU', desc: 'Leads Artemis\'s commitment to carbon-negative operations, sustainable construction across all nodes, and the integration of planetary stewardship into the curriculum.' },
-  { title: 'Director of Communications', dept: 'Public Affairs', abbr: 'CM', desc: 'Shapes the public narrative of Artemis — managing media relations, brand identity, digital presence, and the stories that convey the university\'s mission to the world.' },
-  { title: 'Director of Global Operations', dept: 'Operations', abbr: 'GO', desc: 'Coordinates the 20 micro-college nodes worldwide — ensuring seamless academic synchronisation, regulatory compliance, and cultural integration across jurisdictions.' },
-];
-
-/* ─── Data: Board of Advisors ─── */
-const boardOfAdvisors = [
-  { title: 'Chair of the Board', dept: 'Board of Trustees', abbr: 'CB', desc: 'Presides over the Board of Trustees, ensuring independent governance, fiduciary oversight, and strategic alignment with the university\'s founding charter and charitable mission.' },
-  { title: 'Vice-Chair of the Board', dept: 'Board of Trustees', abbr: 'VB', desc: 'Supports the Chair and leads board committees on audit, governance, and nomination — maintaining the institutional checks that ensure Artemis outlives its founders.' },
-  { title: 'Treasurer', dept: 'Finance & Investment Committee', abbr: 'TR', desc: 'Oversees the university\'s financial health, endowment investment strategy, and annual budget approval — ensuring long-term fiscal sustainability and donor confidence.' },
-  { title: 'Audit Committee Chair', dept: 'Audit & Compliance', abbr: 'AC', desc: 'Leads the independent audit function, ensuring that every dollar received and disbursed is tracked, reported, and published in the annual impact report.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Brings strategic perspective and independent judgment to the governance of Artemis, drawing on deep experience in building and scaling mission-driven institutions.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Contributes oversight and counsel on the university\'s growth trajectory, partnership strategy, and long-term financial sustainability.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Advises on the digital infrastructure and technology strategy that underpins the synchronous global campus and Artemis\'s research computing capabilities.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Represents the student and community perspective on the board — ensuring that institutional decisions are informed by the lived experience of the people Artemis exists to serve.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Guides the university\'s fundraising strategy, donor stewardship, and campaign execution — drawing on deep experience in philanthropy and institutional advancement.' },
-  { title: 'Board Member', dept: 'Board of Trustees', abbr: 'BM', desc: 'Provides strategic counsel on the university\'s commitment to equity and access, ensuring that Artemis research and education serve the communities that need them most.' },
+  {
+    name: 'Dr. Renata Holm',
+    title: 'Vice-Provost for Research',
+    initials: 'RH',
+    quote: 'Artemis research is organised so that no finding is locked behind a paywall and no Centre of Inquiry operates in isolation. Open knowledge is not an ideal — it is our architecture.',
+  },
+  {
+    name: 'Dr. Felipe Duarte',
+    title: 'Director of Innovation & Partnerships',
+    initials: 'FD',
+    quote: 'Bridging the laboratory and the world is not a sideline — it is a core function. The Forge ecosystem ensures that Artemis ideas become Artemis impact.',
+  },
+  {
+    name: 'Dr. Anika Patel',
+    title: 'Director of Digital Learning',
+    initials: 'AP',
+    quote: 'The synchronous classroom does not replicate the in-person experience — it surpasses it. Every student, everywhere, is present and accounted for.',
+  },
+  {
+    name: 'Dr. Tomás Eriksson',
+    title: 'University Librarian & Knowledge Core Director',
+    initials: 'TE',
+    quote: 'The Knowledge Core is the living memory of the university. Everything we produce, discover, and teach flows through it — open, searchable, and permanent.',
+  },
+  {
+    name: 'Dr. Linnea Bergström',
+    title: 'Director of Sustainability',
+    initials: 'LB',
+    quote: 'Carbon-negative is not a target — it is a baseline. Every node we build, every programme we run, must leave the planet better than we found it.',
+  },
+  {
+    name: 'Omar Farouk',
+    title: 'Director of Communications',
+    initials: 'OF',
+    quote: 'The story of Artemis is not ours alone to tell. It belongs to every scholar, every node, every community we touch. Our job is to make that story visible.',
+  },
+  {
+    name: 'Dr. Ji-Yeon Park',
+    title: 'Director of Global Operations',
+    initials: 'JP',
+    quote: 'Coordinating twenty nodes across six continents is not a logistics problem — it is a design problem. And we designed the solution from day one.',
+  },
 ];
 
 /* ─── Data: Faculty ─── */
 const faculty = [
   {
-    name: 'Arin Solberg',
-    rank: 'Professor',
+    name: 'Dr. Richard Holman',
+    title: 'Dean of Faculty',
+    initials: 'RH',
+    dept: 'Computational Sciences',
+    quote: 'A thorough grounding in logical analysis and computational tools is the sine qua non of being a citizen of modern society.',
+    isHead: true,
+  },
+  {
+    name: 'Dr. Dollie Davis',
+    title: 'Associate Dean of Faculty',
+    initials: 'DD',
+    dept: 'Natural Sciences',
+    quote: 'The Artemis experience provides students with an incredibly comprehensive and supportive learning environment. It is an honour to be part of this institution.',
+    isHead: true,
+  },
+  {
+    name: 'Dr. Arin Solberg',
+    title: 'Professor of Synthetic Intelligence & Computation',
+    initials: 'AS',
     dept: 'Synthetic Intelligence & Computation',
-    interests: ['Autonomous reasoning systems', 'Neuro-symbolic AI', 'Ethics of machine cognition'],
+    quote: 'Autonomous reasoning is not just a research interest — it is the frontier that will define whether humanity collaborates with its creations or is displaced by them.',
   },
   {
-    name: 'Priya Okafor',
-    rank: 'Associate Professor',
+    name: 'Dr. Priya Okafor',
+    title: 'Associate Professor of Bio-Regenerative Arts',
+    initials: 'PO',
     dept: 'Bio-Regenerative Arts',
-    interests: ['Living materials', 'Biodesign for planetary repair', 'Post-anthropocene aesthetics'],
+    quote: 'Living materials are the future of design. At Artemis, we don\'t just study biodesign — we practice it as a form of planetary repair.',
   },
   {
-    name: 'Luca Ferreira',
-    rank: 'Professor',
+    name: 'Dr. Luca Ferreira',
+    title: 'Professor of Cosmological Humanities',
+    initials: 'LF',
     dept: 'Cosmological Humanities',
-    interests: ['Space habitation ethics', 'Astro-philosophy', 'Exoplanetary governance'],
+    quote: 'The humanities cannot remain Earth-bound. As we reach for the stars, we need philosophers, ethicists, and historians who think beyond the atmosphere.',
   },
   {
-    name: 'Miri Tanaka',
-    rank: 'Assistant Professor',
+    name: 'Dr. Miri Tanaka',
+    title: 'Assistant Professor of Neo-Economics',
+    initials: 'MT',
     dept: 'Neo-Economics',
-    interests: ['Post-scarcity economic models', 'Decentralized financial systems', 'Universal basic capital'],
+    quote: 'Post-scarcity is not a utopia — it is an engineering problem. And the tools to solve it are already within reach.',
   },
   {
-    name: 'Dimitri Volkov',
-    rank: 'Professor',
+    name: 'Dr. Dimitri Volkov',
+    title: 'Professor of Planetary Engineering',
+    initials: 'DV',
     dept: 'Planetary Engineering',
-    interests: ['Carbon-negative infrastructure', 'Geoengineering governance', 'Resilient urban systems'],
+    quote: 'We cannot engineer our way out of the climate crisis with the same thinking that created it. Artemis is where the new thinking lives.',
   },
   {
-    name: 'Amara Diallo',
-    rank: 'Associate Professor',
+    name: 'Dr. Amara Diallo',
+    title: 'Associate Professor of Cognitive Enhancement Studies',
+    initials: 'AD',
     dept: 'Cognitive Enhancement Studies',
-    interests: ['Neuroplasticity and learning', 'Brain-computer interfaces', 'Cognitive equity'],
+    quote: 'Cognitive equity means that enhancement is not a luxury for the few — it is a right for everyone. That principle guides every course I teach.',
   },
   {
-    name: 'Jian Wei Chen',
-    rank: 'Professor',
+    name: 'Dr. Jian Wei Chen',
+    title: 'Professor of Quantum Information Science',
+    initials: 'JC',
     dept: 'Quantum Information Science',
-    interests: ['Quantum error correction', 'Post-quantum cryptography', 'Quantum machine learning'],
+    quote: 'The quantum revolution will not wait for institutions to catch up. At Artemis, we are already teaching the mathematics and ethics of a post-quantum world.',
   },
   {
-    name: 'Sofia Restrepo',
-    rank: 'Assistant Professor',
+    name: 'Dr. Sofia Restrepo',
+    title: 'Assistant Professor of Equitable Governance',
+    initials: 'SR',
     dept: 'Equitable Governance',
-    interests: ['Deliberative democracy at scale', 'Algorithmic fairness', 'Transnational policy design'],
+    quote: 'Governance at scale requires more than good intentions. It requires deliberative systems designed for fairness — and the courage to implement them.',
   },
   {
-    name: 'Obi Nwosu',
-    rank: 'Associate Professor',
+    name: 'Dr. Obi Nwosu',
+    title: 'Associate Professor of Digital Civilizations',
+    initials: 'ON',
     dept: 'Digital Civilizations',
-    interests: ['Networked society theory', 'Digital heritage preservation', 'Virtual community formation'],
+    quote: 'Digital civilisation is not something that happens to us — it is something we build. Heritage, community, and identity all have a place in the network.',
   },
   {
-    name: 'Elena Voss',
-    rank: 'Professor',
+    name: 'Dr. Elena Voss',
+    title: 'Professor of Adaptive Education Systems',
+    initials: 'EV',
     dept: 'Adaptive Education Systems',
-    interests: ['Personalized learning architectures', 'AI-assisted pedagogy', 'Lifelong learning frameworks'],
+    quote: 'Personalised learning is not a product feature — it is a pedagogical commitment. Every student deserves a curriculum that adapts to how they learn best.',
   },
   {
-    name: 'Kwame Asante',
-    rank: 'Assistant Professor',
+    name: 'Dr. Kwame Asante',
+    title: 'Assistant Professor of Climate Adaptation Science',
+    initials: 'KA',
     dept: 'Climate Adaptation Science',
-    interests: ['Resilient agriculture systems', 'Heat adaptation biology', 'Climate migration logistics'],
+    quote: 'Climate adaptation is not just about surviving — it is about transforming food systems, migration patterns, and habitats so that communities thrive.',
   },
   {
-    name: 'Yara Kuznetsova',
-    rank: 'Associate Professor',
+    name: 'Dr. Yara Kuznetsova',
+    title: 'Associate Professor of Synthetic Biology',
+    initials: 'YK',
     dept: 'Synthetic Biology',
-    interests: ['Programmable organisms', 'Bio-computation', 'Open-source biotechnology'],
+    quote: 'Programmable organisms and open-source biotechnology are the next great democratisation. Artemis students will not just read about it — they will build it.',
+  },
+];
+
+/* ─── Data: Staff ─── */
+const staffTeams = [
+  {
+    team: 'Admissions Team',
+    members: [
+      { name: 'Samantha Maskey', title: 'Associate Director of Admissions Programs', initials: 'SM' },
+      { name: 'Ben Wilkoff', title: 'Associate Director of Admissions Operations', initials: 'BW' },
+    ],
+  },
+  {
+    team: 'Student Life Team',
+    members: [
+      { name: 'Matthew Erskine', title: 'Global Director, Student Life', initials: 'ME' },
+      { name: 'Rachel Kim', title: 'Global Director, Coaching & Talent Development', initials: 'RK' },
+      { name: 'Will Meek', title: 'Global Director, Mental Health & Wellness', initials: 'WM' },
+      { name: 'Mara Steiner', title: 'Global Director of Student Life', initials: 'MS' },
+      { name: 'Barbara Walder', title: 'Global Director, Student Life', initials: 'BW' },
+    ],
+  },
+  {
+    team: 'Discovery Team',
+    members: [
+      { name: 'Fatou Badiane-Toure', title: 'Global Director, Outreach', initials: 'FB' },
+    ],
   },
 ];
 
@@ -154,83 +274,30 @@ function useInView(threshold = 0.15) {
   return { ref, visible };
 }
 
-/* ─── Reusable section renderer ─── */
-function RoleSection({ id, label, tagline, heading, description, subtext, roles, animRef, animVisible, bgClass }: {
-  id: string;
-  label: string;
-  tagline: string;
-  heading: string;
-  description: string;
-  subtext: string;
-  roles: { title: string; dept: string; abbr: string; desc: string }[];
-  animRef: React.RefObject<HTMLDivElement | null>;
-  animVisible: boolean;
-  bgClass: string;
-}) {
+/* ─── Person circle component ─── */
+function PersonCircle({ initials, size = 'md' }: { initials: string; size?: 'sm' | 'md' | 'lg' }) {
+  const sizeClasses = {
+    sm: 'w-10 h-10 text-[10px]',
+    md: 'w-14 h-14 text-[12px]',
+    lg: 'w-20 h-20 text-[14px]',
+  };
   return (
-    <section id={id} className={`${bgClass} py-16 lg:py-24 scroll-mt-[110px]`}>
-      <div
-        ref={animRef}
-        className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${animVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
-        <div className="mb-8 flex items-center space-x-3">
-          <span className="w-8 h-[1px] bg-[#8A0000]"></span>
-          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
-            {tagline}
-          </span>
-        </div>
-
-        <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
-          {heading}
-        </h2>
-        <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-4">
-          {description}
-        </p>
-        <p className="text-[14px] text-gray-500 leading-relaxed max-w-2xl mb-12">
-          {subtext}
-        </p>
-
-        {/* Role cards — 4 per row */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
-          {roles.map((role, i) => (
-            <div
-              key={i}
-              className="group border border-gray-200 hover:border-[#8A0000] bg-white p-5 transition-all cursor-default hover:shadow-sm flex flex-col"
-            >
-              <div className="w-10 h-10 bg-[#8A0000]/[0.07] border border-[#8A0000]/20 flex items-center justify-center mb-4 group-hover:bg-[#8A0000]/[0.14] transition-colors">
-                <span className="text-[11px] font-black text-[#8A0000] tracking-wider">{role.abbr}</span>
-              </div>
-              <h3 className="text-[13px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-2 min-h-[36px]">
-                {role.title}
-              </h3>
-              <div className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">
-                {role.dept}
-              </div>
-              <p className="text-[12px] text-gray-500 leading-relaxed flex-1">
-                {role.desc}
-              </p>
-              <div className="mt-3 pt-3 border-t border-gray-100 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8A0000] animate-pulse"></span>
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#8A0000]">Open</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className={`${sizeClasses[size]} rounded-full bg-[#8A0000]/[0.07] border border-[#8A0000]/20 flex items-center justify-center shrink-0`}>
+      <span className="font-black text-[#8A0000] tracking-wider">{initials}</span>
+    </div>
   );
 }
 
 /* ─── Component ─── */
 export default function OurPeople({ goToPage }: Props) {
   const heroAnim = useInView();
-  const officersAnim = useInView();
-  const researchAnim = useInView();
   const boardAnim = useInView();
+  const cabinetAnim = useInView();
+  const researchAnim = useInView();
   const facultyAnim = useInView();
   const statsAnim = useInView();
-  const workingAnim = useInView();
-  const activeSection = useActiveSection(['officers', 'research-leadership', 'board', 'faculty', 'staff']);
+  const staffAnim = useInView();
+  const activeSection = useActiveSection(['board', 'leadership', 'research', 'faculty', 'staff']);
 
   return (
     <div className="flex flex-col bg-white">
@@ -265,58 +332,141 @@ export default function OurPeople({ goToPage }: Props) {
 
       <OnThisPageNav
         sections={[
-          { id: 'officers', label: 'University Officers' },
-          { id: 'research-leadership', label: 'Research' },
-          { id: 'board', label: 'Board of Advisors' },
+          { id: 'board', label: 'Board of Trustees' },
+          { id: 'leadership', label: 'Leadership' },
+          { id: 'research', label: 'Research' },
           { id: 'faculty', label: 'Faculty' },
           { id: 'staff', label: 'Staff' },
         ]}
         activeSection={activeSection}
       />
 
-      {/* ── 2. UNIVERSITY OFFICERS ── */}
-      <RoleSection
-        id="officers"
-        label="University Officers"
-        tagline="Leadership & Governance"
-        heading="Roles, not resumes"
-        description="As a new university, Artemis is building its leadership team from first principles. The positions below represent the governance architecture we are assembling — each one essential to the mission of re-engineering higher education for a connected age. We do not yet have faces for these roles; we have the conviction that the right people will find them."
-        subtext="Positions marked with an open indicator are currently accepting expressions of interest."
-        roles={universityOfficers}
-        animRef={officersAnim.ref}
-        animVisible={officersAnim.visible}
-        bgClass="bg-gray-50"
-      />
+      {/* ── 2. BOARD OF TRUSTEES ── */}
+      <section id="board" className="py-16 lg:py-24 scroll-mt-[110px] bg-gray-50">
+        <div
+          ref={boardAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${boardAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Governance
+            </span>
+          </div>
 
-      {/* ── 3. RESEARCH LEADERSHIP ── */}
-      <RoleSection
-        id="research-leadership"
-        label="Research Leadership"
-        tagline="Research & Innovation"
-        heading="The engines of inquiry"
-        description="Artemis research is organised through Centers of Inquiry — independently operating, permanently endowed research centres that produce open-access knowledge under a 7-year mandatory release policy. The roles below lead the research enterprise, from the Vice-Provost who oversees the entire portfolio to the directors who manage the digital, sustainability, and equity infrastructure that makes it possible."
-        subtext="Each role bridges scholarship and the world it serves — ensuring that Artemis research is both curiosity-driven and civically impactful."
-        roles={researchLeadership}
-        animRef={researchAnim.ref}
-        animVisible={researchAnim.visible}
-        bgClass="bg-white"
-      />
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Board of Trustees
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            The University of Artemis is structured so that no single individual can control the institution. The Board of Trustees provides strategic oversight, fiduciary governance, and external validation — ensuring that the university remains true to its founding charter, financially independent, and academically excellent.
+          </p>
 
-      {/* ── 4. BOARD OF ADVISORS ── */}
-      <RoleSection
-        id="board"
-        label="Board of Advisors"
-        tagline="Board of Advisors"
-        heading="Governance beyond control"
-        description="The University of Artemis is structured so that no single individual can control the institution. The Board of Advisors provides strategic oversight, fiduciary governance, and external validation — ensuring that the university remains true to its founding charter, financially independent, and academically excellent. Board members bring deep experience in academia, philanthropy, law, technology, and global health."
-        subtext="The board includes independent directors, student representation, and external advisors — a governance architecture designed to outlive its founders."
-        roles={boardOfAdvisors}
-        animRef={boardAnim.ref}
-        animVisible={boardAnim.visible}
-        bgClass="bg-gray-50"
-      />
+          {/* Board grid — 5 per row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12">
+            {boardOfTrustees.map((person, i) => (
+              <div key={i} className="flex flex-col items-center text-center group">
+                <div className="mb-4 group-hover:scale-105 transition-transform">
+                  <PersonCircle initials={person.initials} size="lg" />
+                </div>
+                <h3 className="text-[14px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                  {person.name}
+                </h3>
+                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                  {person.title}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* ── 5. FACULTY ── */}
+      {/* ── 3. LEADERSHIP CABINET ── */}
+      <section id="leadership" className="py-16 lg:py-24 scroll-mt-[110px] bg-white">
+        <div
+          ref={cabinetAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${cabinetAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Leadership
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Cabinet
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            The leadership team carries the operational responsibility for Artemis across every function — academic, financial, global, and cultural. Each member brings deep conviction that higher education must be rebuilt from first principles.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {leadershipCabinet.map((person, i) => (
+              <div key={i} className="group flex gap-5 p-6 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm">
+                <div className="shrink-0 group-hover:scale-105 transition-transform">
+                  <PersonCircle initials={person.initials} size="lg" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                    {person.name}
+                  </h3>
+                  <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                    {person.title}
+                  </div>
+                  <p className="text-[13px] text-gray-500 leading-relaxed italic">
+                    &ldquo;{person.quote}&rdquo;
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. RESEARCH LEADERSHIP ── */}
+      <section id="research" className="py-16 lg:py-24 scroll-mt-[110px] bg-gray-50">
+        <div
+          ref={researchAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${researchAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Research & Innovation
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Research Leadership
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Artemis research is organised through Centers of Inquiry — independently operating, permanently endowed research centres that produce open-access knowledge under a 7-year mandatory release policy. The directors below lead the research enterprise and the infrastructure that makes it possible.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {researchLeadership.map((person, i) => (
+              <div key={i} className="group flex gap-5 p-6 border border-gray-200 bg-white hover:border-[#8A0000] transition-all hover:shadow-sm">
+                <div className="shrink-0 group-hover:scale-105 transition-transform">
+                  <PersonCircle initials={person.initials} size="lg" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                    {person.name}
+                  </h3>
+                  <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                    {person.title}
+                  </div>
+                  <p className="text-[13px] text-gray-500 leading-relaxed italic">
+                    &ldquo;{person.quote}&rdquo;
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. DEAN, ASSOCIATE DEANS, AND FACULTY ── */}
       <section id="faculty" className="py-16 lg:py-24 scroll-mt-[110px] bg-white">
         <div
           ref={facultyAnim.ref}
@@ -330,55 +480,89 @@ export default function OurPeople({ goToPage }: Props) {
           </div>
 
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
-            Distributed scholars, unified purpose
+            Dean, Associate Deans, and Faculty
           </h2>
-          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-4">
-            Artemis faculty are not confined to a single discipline or a single campus. They are distributed scholars — thinkers who collaborate across nodes, time zones, and traditions to deliver a truly global education. Our founding faculty represent the first wave of appointments to the Centers of Inquiry.
-          </p>
-          <p className="text-[14px] text-gray-500 leading-relaxed max-w-2xl mb-12">
-            Each faculty member holds a joint appointment across at least two Artemis nodes, ensuring that knowledge flows freely and no centre of learning operates in isolation.
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            Artemis faculty are not confined to a single discipline or a single campus. They are distributed scholars — thinkers who collaborate across nodes, time zones, and traditions to deliver a truly global education. Each faculty member holds a joint appointment across at least two Artemis nodes.
           </p>
 
-          {/* Faculty directory — list layout */}
-          <div className="divide-y divide-gray-200">
-            {faculty.map((f, i) => (
-              <div
-                key={i}
-                className="group py-6 first:pt-0 hover:bg-gray-50/60 -mx-4 px-4 transition-colors"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
-                  {/* Rank badge */}
-                  <div className="shrink-0 w-28">
-                    <span className={`inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 border ${
-                      f.rank === 'Professor'
-                        ? 'border-[#8A0000]/30 text-[#8A0000] bg-[#8A0000]/[0.05]'
-                        : f.rank === 'Associate Professor'
-                        ? 'border-gray-300 text-gray-600 bg-gray-50'
-                        : 'border-gray-200 text-gray-500 bg-white'
-                    }`}>
-                      {f.rank}
-                    </span>
+          {/* Dean of Faculty — featured */}
+          <div className="mb-6">
+            <div className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">
+              Dean of Faculty
+            </div>
+            {faculty.filter(f => f.isHead && f.title.includes('Dean of Faculty')).map((person, i) => (
+              <div key={i} className="group flex gap-6 p-6 border border-[#8A0000]/20 bg-[#8A0000]/[0.02] hover:bg-[#8A0000]/[0.04] transition-all">
+                <div className="shrink-0 group-hover:scale-105 transition-transform">
+                  <PersonCircle initials={person.initials} size="lg" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[18px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                    {person.name}
+                  </h3>
+                  <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                    {person.title}
                   </div>
-                  {/* Name & details */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
-                      {f.name}
-                    </h3>
-                    <div className="text-[11px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
-                      {f.dept}
-                    </div>
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {f.interests.map((interest, j) => (
-                        <span key={j} className="text-[12px] text-gray-500 leading-relaxed">
-                          {j > 0 && <span className="text-gray-300 mr-3">·</span>}
-                          {interest}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  <p className="text-[14px] text-gray-500 leading-relaxed italic">
+                    &ldquo;{person.quote}&rdquo;
+                  </p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Associate Deans */}
+          <div className="mb-10">
+            <div className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">
+              Associate Deans
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {faculty.filter(f => f.isHead && f.title.includes('Associate Dean')).map((person, i) => (
+                <div key={i} className="group flex gap-5 p-6 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm">
+                  <div className="shrink-0 group-hover:scale-105 transition-transform">
+                    <PersonCircle initials={person.initials} size="md" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[16px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                      {person.name}
+                    </h3>
+                    <div className="text-[10px] font-bold text-[#8A0000] uppercase tracking-widest mb-3">
+                      {person.title}
+                    </div>
+                    <p className="text-[13px] text-gray-500 leading-relaxed italic">
+                      &ldquo;{person.quote}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Professors */}
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">
+              Professors
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {faculty.filter(f => !f.isHead).map((person, i) => (
+                <div key={i} className="group flex gap-4 p-5 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm">
+                  <div className="shrink-0 group-hover:scale-105 transition-transform">
+                    <PersonCircle initials={person.initials} size="sm" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-[14px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                      {person.name}
+                    </h3>
+                    <div className="text-[9px] font-bold text-[#8A0000] uppercase tracking-widest mb-2">
+                      {person.title}
+                    </div>
+                    <p className="text-[12px] text-gray-500 leading-relaxed italic line-clamp-3">
+                      &ldquo;{person.quote}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 pt-8 border-t border-gray-200 flex items-center gap-4">
@@ -429,12 +613,58 @@ export default function OurPeople({ goToPage }: Props) {
         </div>
       </section>
 
-      {/* ── 7. WORKING AT ARTEMIS ── */}
-      <section id="staff" className="py-16 lg:py-24 scroll-mt-[110px]">
+      {/* ── 7. STAFF ── */}
+      <section id="staff" className="py-16 lg:py-24 scroll-mt-[110px] bg-white">
         <div
-          ref={workingAnim.ref}
-          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${workingAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          ref={staffAnim.ref}
+          className={`max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 transition-all duration-700 ${staffAnim.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
+          <div className="mb-8 flex items-center space-x-3">
+            <span className="w-8 h-[1px] bg-[#8A0000]"></span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#8A0000]">
+              Staff
+            </span>
+          </div>
+
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-extrabold leading-[1.05] tracking-tighter text-[#141414] mb-4">
+            Staff
+          </h2>
+          <p className="text-[16px] text-gray-600 leading-relaxed max-w-2xl mb-12">
+            The staff of Artemis are the operational backbone of a distributed university — managing admissions, student life, outreach, and the day-to-day systems that make a global institution function seamlessly.
+          </p>
+
+          <div className="space-y-12">
+            {staffTeams.map((team, i) => (
+              <div key={i}>
+                <div className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-6">
+                  {team.team}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {team.members.map((person, j) => (
+                    <div key={j} className="group flex gap-4 p-5 border border-gray-200 hover:border-[#8A0000] transition-all hover:shadow-sm">
+                      <div className="shrink-0 group-hover:scale-105 transition-transform">
+                        <PersonCircle initials={person.initials} size="sm" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-[14px] font-bold text-[#141414] group-hover:text-[#8A0000] transition-colors leading-snug mb-1">
+                          {person.name}
+                        </h3>
+                        <div className="text-[9px] font-bold text-[#8A0000] uppercase tracking-widest">
+                          {person.title}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. WORKING AT ARTEMIS ── */}
+      <section className="bg-gray-50 py-16 lg:py-24">
+        <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
           <div className="relative flex items-center mb-16">
             <div className="flex-grow border-t border-gray-200"></div>
             <span className="mx-4 text-[12px] font-bold uppercase tracking-[0.2em] text-gray-500">
