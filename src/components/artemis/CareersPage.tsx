@@ -921,46 +921,48 @@ export default function CareersPage({ goToPage }: Props) {
       {/* ══════════════════════════════════════════
           7. HOW TO APPLY — Full-bleed crimson CTA
           ══════════════════════════════════════════ */}
-      <section id="apply" className="scroll-mt-[110px] w-full bg-[#8A0000] text-white">
-        <div ref={applyAnim.ref} className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Left */}
-            <div>
-              <div className="mb-6 flex items-center space-x-3">
-                <span className="w-8 h-[1px] bg-white/30"></span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">How to Apply</span>
-              </div>
-              <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tighter text-white mb-6">
-                We are not reading CVs.<br />We are reading manifestos.
-              </h2>
-              <p className="text-[17px] text-white/70 leading-[1.75] mb-8">
-                Tell us what you would build, where you would build it, and why the Artemis mission matters more to you than a conventional salary.
-              </p>
-              <a
-                href="mailto:faculty@artemisui.org"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8A0000] text-[12px] font-bold uppercase tracking-[0.25em] hover:bg-gray-100 transition-colors group"
-              >
-                <Mail size={16} />
-                <span>faculty@artemisui.org</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <p className="text-[12px] text-white/40 mt-3">No form. No portal. No algorithm. A human will read it.</p>
-            </div>
-
-            {/* Right — Application checklist */}
-            <div className="space-y-4">
-              {[
-                { num: '01', text: 'Which Division and Center you want to build' },
-                { num: '02', text: 'Which College you want to live in' },
-                { num: '03', text: 'What you would teach in your first term' },
-                { num: '04', text: 'What you would research in your first year' },
-                { num: '05', text: 'Why the Artemis mission matters more to you than a conventional salary' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 bg-white/10 border border-white/15 p-5">
-                  <span className="text-[28px] font-black text-white/20 leading-none shrink-0">{item.num}</span>
-                  <p className="text-[14px] sm:text-[15px] leading-[1.6] text-white/90 font-medium">{item.text}</p>
+      <section id="apply" className="scroll-mt-[110px] w-full py-16 lg:py-24">
+        <div ref={applyAnim.ref} className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20">
+          <div className="bg-[#8A0000] text-white p-8 sm:p-12 lg:p-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+              {/* Left */}
+              <div>
+                <div className="mb-6 flex items-center space-x-3">
+                  <span className="w-8 h-[1px] bg-white/30"></span>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">How to Apply</span>
                 </div>
-              ))}
+                <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tighter text-white mb-6">
+                  We are not reading CVs.<br />We are reading manifestos.
+                </h2>
+                <p className="text-[17px] text-white/70 leading-[1.75] mb-8">
+                  Tell us what you would build, where you would build it, and why the Artemis mission matters more to you than a conventional salary.
+                </p>
+                <a
+                  href="mailto:faculty@artemisui.org"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8A0000] text-[12px] font-bold uppercase tracking-[0.25em] hover:bg-gray-100 transition-colors group"
+                >
+                  <Mail size={16} />
+                  <span>faculty@artemisui.org</span>
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <p className="text-[12px] text-white/40 mt-3">No form. No portal. No algorithm. A human will read it.</p>
+              </div>
+
+              {/* Right — Application checklist */}
+              <div className="space-y-4">
+                {[
+                  { num: '01', text: 'Which Division and Center you want to build' },
+                  { num: '02', text: 'Which College you want to live in' },
+                  { num: '03', text: 'What you would teach in your first term' },
+                  { num: '04', text: 'What you would research in your first year' },
+                  { num: '05', text: 'Why the Artemis mission matters more to you than a conventional salary' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 bg-white/10 border border-white/15 p-5">
+                    <span className="text-[28px] font-black text-white/20 leading-none shrink-0">{item.num}</span>
+                    <p className="text-[14px] sm:text-[15px] leading-[1.6] text-white/90 font-medium">{item.text}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -41,17 +41,6 @@ const FIVE_PILLARS = [
   { id: 'p5', title: 'Progress', subtitle: 'Innovation & Infrastructure', goal: 3_000_000, pct: 3, icon: Rocket, desc: 'Innovation labs, the Global Challenge Fund, technology infrastructure. The bridge between scholarship and the world it serves.', details: "The university that outlives its founders needs a corpus that outlives its donors. After Year 1, the surplus builds the endowment at $60M/year. But the first deposit — the seed — comes from the founding campaign. $3M at 4.5% = $135K/year in perpetuity from Day 1. That's enough to fund 11 full scholarships forever, before any surplus is generated. Founders' Circle gifts are cumulative across all pillars.", color: '#8A0000' },
 ];
 
-const PILLAR_FINANCIAL_MODEL = [
-  { category: 'Property Acquisition + Repurpose (50 Colleges)', amount: 78_950_000, pct: 79, desc: '50 physical Colleges acquired and repurposed across 35 countries — the places where civilization\'s next minds gather.' },
-  { category: 'Faculty Pre-Launch (3 months)', amount: 6_900_000, pct: 7, desc: '3 months of compensation for 2,000 faculty before tuition revenue flows.' },
-  { category: 'Hub Pre-Opening (3 months)', amount: 2_000_000, pct: 2, desc: 'Operational costs for college hubs before student occupancy.' },
-  { category: 'Legal Incorporation (25 countries)', amount: 2_000_000, pct: 2, desc: 'Legal framework across 25 jurisdictions — the constitutional backbone of a global institution.' },
-  { category: 'Scholarship Seed (Year 1)', amount: 5_000_000, pct: 5, desc: 'Seed scholarships for 10,000 students in the first cohort who cannot pay the $3,000 tuition.' },
-  { category: 'Excellence — Centers & Projects Startup', amount: 3_000_000, pct: 3, desc: 'Startup capital for 19 Centers of Inquiry and 42 Active Projects.' },
-  { category: 'Progress — Seed Endowment & Infrastructure', amount: 2_000_000, pct: 2, desc: 'The first deposit into the perpetual endowment — $135K/year in perpetuity from Day 1.' },
-  { category: 'IT Infrastructure + Furniture', amount: 2_250_000, pct: 2, desc: 'Digital backbone and physical furnishings for 50 Colleges.' },
-];
-
 const NAMING_OPPORTUNITIES = [
   { title: 'Tier C College', amount: 2_000_000, desc: 'Name a College in cities like Kigali, Dhaka, Kampala, Karachi. ~1,100 students. Your name becomes home to the next generation of leaders in your region.', icon: Building2, type: 'College' },
   { title: 'Tier B College', amount: 5_000_000, desc: 'Name a College in major global cities. ~2,000 students. A permanent physical presence bearing your name, serving scholars for centuries.', icon: Building2, type: 'College' },
@@ -400,7 +389,7 @@ function PhaseSlider() {
 
 /* ─── Main Component ─── */
 export default function FundraisingCampaign({ goToPage }: Props) {
-  const activeSection = useActiveSection(['case', 'pillars', 'ask', 'phases', 'opportunities', 'circles', 'ways', 'give', 'model', 'accountability']);
+  const activeSection = useActiveSection(['case', 'pillars', 'ask', 'phases', 'opportunities', 'circles', 'ways', 'give', 'accountability']);
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
   const [customAmount, setCustomAmount] = useState('');
   const [donorName, setDonorName] = useState('');
@@ -453,7 +442,6 @@ export default function FundraisingCampaign({ goToPage }: Props) {
   const circlesAnim = useInView(0);
   const waysAnim = useInView(0);
   const giveAnim = useInView(0);
-  const modelAnim = useInView(0);
   const beyondAnim = useInView(0);
   const askAnim = useInView(0);
   const accountabilityAnim = useInView(0);
@@ -558,7 +546,6 @@ export default function FundraisingCampaign({ goToPage }: Props) {
           { id: 'circles', label: 'Giving Circles' },
           { id: 'ways', label: 'Ways to Give' },
           { id: 'give', label: 'Give Now' },
-          { id: 'model', label: 'The Math' },
           { id: 'accountability', label: 'Accountability' },
         ]}
         activeSection={activeSection}
@@ -1450,92 +1437,6 @@ export default function FundraisingCampaign({ goToPage }: Props) {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          9. THE MATH — Financial Model & Leverage
-          ══════════════════════════════════════════ */}
-      <section id="model" className="scroll-mt-[110px] bg-gray-50 py-16 sm:py-24 lg:py-36">
-        <div ref={modelAnim.ref} className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
-          <motion.h2 {...clipReveal(modelAnim.visible)} className="text-[32px] sm:text-[44px] md:text-[56px] font-black leading-[0.92] tracking-tighter text-[#141414] mb-4">
-            The math<br />on one page
-          </motion.h2>
-          <motion.p {...fadeUp(modelAnim.visible, 0.15)} className="text-[16px] text-gray-600 max-w-2xl leading-relaxed mb-10 sm:mb-16">$100M campaign &rarr; $300M/yr recurring revenue &rarr; $1.5B 5-year surplus. Every campaign dollar unlocks $15 in 5-year surplus.</motion.p>
-
-          {/* Financial Model Table */}
-          <motion.div {...fadeUp(modelAnim.visible, 0.25)} className="mb-12 sm:mb-20">
-            <div className="bg-white border border-gray-200 overflow-hidden">
-              {/* Header */}
-              <div className="grid grid-cols-12 gap-4 px-4 sm:px-6 py-4 border-b border-gray-200 bg-white">
-                <div className="col-span-6 sm:col-span-7 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Category</div>
-                <div className="col-span-3 sm:col-span-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 text-right">Amount</div>
-                <div className="col-span-3 sm:col-span-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 text-right">Share</div>
-              </div>
-              {/* Rows */}
-              {PILLAR_FINANCIAL_MODEL.map((row, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: i * 0.05, duration: 0.4 }}
-                  viewport={{ once: true }}
-                  className="grid grid-cols-12 gap-4 px-4 sm:px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors items-center"
-                >
-                  <div className="col-span-6 sm:col-span-7">
-                    <h4 className="text-[13px] sm:text-[14px] font-bold text-[#141414]">{row.category}</h4>
-                    <p className="text-[11px] sm:text-[12px] text-gray-500 leading-snug mt-0.5 hidden sm:block">{row.desc}</p>
-                  </div>
-                  <div className="col-span-3 sm:col-span-3 text-right">
-                    <span className="text-[16px] sm:text-[18px] font-black text-[#8A0000] leading-none">{sym}{fmtShort(row.amount)}</span>
-                  </div>
-                  <div className="col-span-3 sm:col-span-2 text-right">
-                    <span className="text-[14px] sm:text-[16px] font-black text-gray-400 leading-none">{row.pct}%</span>
-                  </div>
-                </motion.div>
-              ))}
-              {/* Total row */}
-              <div className="grid grid-cols-12 gap-4 px-4 sm:px-6 py-5 bg-gray-50">
-                <div className="col-span-6 sm:col-span-7 text-[12px] sm:text-[14px] font-black uppercase tracking-widest text-[#141414]">Total</div>
-                <div className="col-span-3 sm:col-span-3 text-right text-[18px] sm:text-[22px] font-black text-[#8A0000]">{sym}{fmtShort(CAMPAIGN.goal)}</div>
-                <div className="col-span-3 sm:col-span-2 text-right text-[14px] sm:text-[16px] font-black text-gray-400">100%</div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Leverage Stats */}
-          <motion.div {...scaleIn(modelAnim.visible, 0.3)} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-20">
-            {[
-              { label: 'Campaign', value: `${sym}100M`, desc: 'One-time founding investment' },
-              { label: 'Annual Revenue', value: `${sym}300M`, desc: 'Recurring from Year 1 tuition' },
-              { label: '5-Year Surplus', value: `${sym}1.5B`, desc: 'Every campaign dollar unlocks $15' },
-            ].map((stat, i) => (
-              <div key={i} className="bg-white border border-gray-200 p-5 sm:p-8 text-center">
-                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A0000] mb-3">{stat.label}</div>
-                <div className="text-[32px] sm:text-[44px] font-black text-[#141414] leading-none tracking-tighter mb-2">{stat.value}</div>
-                <p className="text-[13px] text-gray-500">{stat.desc}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* After Year 1 */}
-          <motion.div {...fadeUp(modelAnim.visible, 0.4)} className="border-l-4 border-[#8A0000] pl-5 sm:pl-8 lg:pl-12 max-w-[900px]">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A0000] block mb-4">After Year 1</span>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-6">
-              {[
-                { value: '100,000', label: 'Students Enrolled' },
-                { value: `${sym}300M`, label: 'Tuition Revenue' },
-                { value: '12.4%', label: 'OPEX Ratio' },
-                { value: `${sym}262M`, label: 'Annual Surplus' },
-              ].map((s, i) => (
-                <div key={i} className="border-l-2 border-gray-200 pl-3">
-                  <div className="text-[20px] sm:text-[28px] font-black text-[#141414] leading-none">{s.value}</div>
-                  <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-gray-500 mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
-            <p className="text-[15px] sm:text-[16px] text-gray-600 leading-relaxed">100,000 students enroll. $300M tuition arrives. OPEX covered at 12.4%. $262M surplus generated. The surplus self-funds scholarships at $40M/year, builds the endowment at $60M/year, and seeds every new College without another campaign dollar. <strong className="text-[#141414]">The fire sustains itself.</strong></p>
-          </motion.div>
         </div>
       </section>
 
