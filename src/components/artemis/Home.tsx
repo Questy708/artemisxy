@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { heroContent, blogArticles } from '@/lib/artemis-data';
 import ArtemisMap from '@/components/artemis/ArtemisMap';
+import SubscribeForm from '@/components/artemis/SubscribeForm';
 
 interface HomeProps {
   goToPage: (page: string, program?: string) => void;
@@ -556,13 +557,7 @@ export default function Home({ goToPage }: HomeProps) {
             in your inbox.
           </p>
         </div>
-        <button
-          onClick={() => goToPage('contact-us')}
-          className="border border-white px-8 py-2 text-[14px] font-bold hover:bg-white hover:text-[#8A0000] transition-colors uppercase tracking-widest whitespace-nowrap"
-          suppressHydrationWarning
-        >
-          Subscribe
-        </button>
+        <SubscribeForm source="homepage" variant="compact" className="" />
       </div>
     </div>
   );

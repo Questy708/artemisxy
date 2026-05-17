@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import SubPageFooter from '@/components/artemis/SubPageFooter';
+import SubscribeForm from '@/components/artemis/SubscribeForm';
 import { blogArticles, type BlogArticle } from '@/lib/artemis-data';
 
 interface BlogProps {
@@ -202,12 +203,7 @@ export default function Blog({ goToPage }: BlogProps) {
               Subscribe to the Artemis Journal for weekly dispatches on research breakthroughs, campus life, and the founding campaign.
             </p>
           </div>
-          <button
-            onClick={() => goToPage('contact-us')}
-            className="border border-white px-8 py-2 text-[14px] font-bold hover:bg-white hover:text-[#8A0000] transition-colors uppercase tracking-widest whitespace-nowrap"
-          >
-            Subscribe
-          </button>
+          <SubscribeForm source="blog" variant="compact" className="w-full md:w-auto" />
         </div>
       </div>
 

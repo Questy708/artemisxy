@@ -36,6 +36,7 @@ import Blog from '@/components/artemis/Blog';
 import BlogArticlePage from '@/components/artemis/BlogArticlePage';
 import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
+import AdminDashboard from '@/components/artemis/AdminDashboard';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
 
@@ -290,6 +291,11 @@ function getBreadcrumbs(currentPage: string, currentProgram: string): { items: B
         items: [{ label: 'About', page: 'about' }],
         currentLabel: 'Visiting the Colleges',
       };
+    case 'admin':
+      return {
+        items: [],
+        currentLabel: 'Admin Dashboard',
+      };
     default:
       return null;
   }
@@ -455,6 +461,8 @@ export default function ArtemisApp() {
         return <GenericAboutSubpage goToPage={goToPage} id="world" title="Institutional Nodes" description="Artemis Collegium academic hubs and specialized research nodes across the globe." />;
       case 'visiting':
         return <GenericAboutSubpage goToPage={goToPage} id="visit" title="Visiting the Colleges" description="Information on opening times and admission protocols for our physical colleges." />;
+      case 'admin':
+        return <AdminDashboard goToPage={goToPage} />;
 
       default:
         return <Home goToPage={goToPage} />;

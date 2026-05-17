@@ -417,6 +417,34 @@ export default function FundraisingCampaign({ goToPage }: Props) {
   const [expandedPillar, setExpandedPillar] = useState<string | null>(null);
   const [expandedCircle, setExpandedCircle] = useState<string | null>(null);
 
+  // Contact form state
+  const [contactName, setContactName] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactArea, setContactArea] = useState('General enquiry');
+  const [contactMessage, setContactMessage] = useState('');
+  const [contactSubmitting, setContactSubmitting] = useState(false);
+  const [contactResult, setContactResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  const handleContactSubmit = useCallback(async () => {
+    if (!contactName || !contactEmail || !contactMessage) return;
+    setContactSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: contactName, email: contactEmail, area: contactArea, message: contactMessage }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setContactResult({ success: true, message: data.message });
+        setContactName(''); setContactEmail(''); setContactArea('General enquiry'); setContactMessage('');
+      } else {
+        setContactResult({ success: false, message: data.error || 'Something went wrong.' });
+      }
+    } catch { setContactResult({ success: false, message: 'Network error.' }); }
+    finally { setContactSubmitting(false); }
+  }, [contactName, contactEmail, contactArea, contactMessage]);
+
   const heroAnim = useInView(0);
   const caseAnim = useInView(0);
   const pillarsAnim = useInView(0);
@@ -437,17 +465,25 @@ export default function FundraisingCampaign({ goToPage }: Props) {
     if (!amount || amount <= 0 || !donorEmail) return;
     setSubmitting(true);
     try {
-      const res = await fetch('/api/donations', {
+      const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          donorEmail, donorName: isAnonymous ? null : donorName, donorAnonymous: isAnonymous,
+          donorEmail, donorName: isAnonymous ? null : donorName, isAnonymous,
           amount, currency: CAMPAIGN.currency, paymentMethod: paymentMethod === 'crypto' ? `crypto_${cryptoCoin.toLowerCase()}` : paymentMethod,
           perkId: selectedPerk, isRecurring, recurringFreq: isRecurring ? recurringFreq : null, message: donorMessage || null,
         }),
       });
       const data = await res.json();
-      setDonationResult(data.success ? { success: true, message: data.message } : { success: false, message: data.error || 'Something went wrong.' });
+      if (data.success && data.checkoutUrl) {
+        // Stripe is configured — redirect to checkout
+        window.location.href = data.checkoutUrl;
+      } else if (data.success) {
+        // No Stripe — donation recorded as pending
+        setDonationResult({ success: true, message: data.message || 'Thank you! Your donation has been recorded. We will follow up with payment details.' });
+      } else {
+        setDonationResult({ success: false, message: data.error || 'Something went wrong.' });
+      }
     } catch { setDonationResult({ success: false, message: 'Network error.' }); }
     finally { setSubmitting(false); }
   }, [selectedAmount, customAmount, donorEmail, donorName, isAnonymous, paymentMethod, cryptoCoin, selectedPerk, isRecurring, recurringFreq, donorMessage]);
@@ -1640,16 +1676,16 @@ export default function FundraisingCampaign({ goToPage }: Props) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-bold text-gray-900 uppercase tracking-[0.15em] mb-2">Your Name *</label>
-                      <input type="text" placeholder="Full name" className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all" />
+                      <input type="text" placeholder="Full name" value={contactName} onChange={e => setContactName(e.target.value)} className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-gray-900 uppercase tracking-[0.15em] mb-2">Email *</label>
-                      <input type="email" placeholder="you@email.com" className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all" />
+                      <input type="email" placeholder="you@email.com" value={contactEmail} onChange={e => setContactEmail(e.target.value)} className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all" />
                     </div>
                   </div>
                   <div className="mt-4">
                     <label className="block text-[10px] font-bold text-gray-900 uppercase tracking-[0.15em] mb-2">Area of Interest</label>
-                    <select className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all">
+                    <select value={contactArea} onChange={e => setContactArea(e.target.value)} className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all">
                       <option>General enquiry</option>
                       <option>Naming opportunities</option>
                       <option>Planned giving / Estate plans</option>
@@ -1663,10 +1699,15 @@ export default function FundraisingCampaign({ goToPage }: Props) {
                   </div>
                   <div className="mt-4">
                     <label className="block text-[10px] font-bold text-gray-900 uppercase tracking-[0.15em] mb-2">Message</label>
-                    <textarea rows={3} placeholder="Tell us about your philanthropic goals..." className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all resize-none" />
+                    <textarea rows={3} placeholder="Tell us about your philanthropic goals..." value={contactMessage} onChange={e => setContactMessage(e.target.value)} className="w-full border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#8A0000]/30 focus:border-[#8A0000] transition-all resize-none" />
                   </div>
-                  <button className="mt-4 w-full py-3 bg-[#8A0000] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors flex items-center justify-center gap-2">
-                    Send Enquiry <ArrowRight size={12} />
+                  {contactResult && (
+                    <div className={`mt-4 p-3 text-[13px] font-medium ${contactResult.success ? 'bg-green-50 border border-green-200 text-green-700' : 'bg-red-50 border border-red-200 text-red-700'}`}>
+                      {contactResult.message}
+                    </div>
+                  )}
+                  <button onClick={handleContactSubmit} disabled={contactSubmitting} className="mt-4 w-full py-3 bg-[#8A0000] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#6B0000] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                    {contactSubmitting ? 'Sending...' : 'Send Enquiry'} <ArrowRight size={12} />
                   </button>
                 </div>
               </div>
