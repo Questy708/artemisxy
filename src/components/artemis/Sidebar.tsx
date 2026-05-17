@@ -28,7 +28,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
       <div className="flex-1 px-8 lg:px-10 py-12 overflow-y-auto">
         <div className="lg:hidden flex items-center justify-between mb-8">
            <span className="font-bold tracking-tighter text-[#8A0000]">MENU</span>
-           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded text-gray-500"><X size={20}/></button>
+           <button onClick={onClose} className="p-1 hover:bg-gray-100 rounded text-gray-500" suppressHydrationWarning><X size={20}/></button>
         </div>
 
         {/* ── Mobile Section Navigation ── */}
@@ -49,6 +49,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
                 key={item.page}
                 onClick={() => { goToPage(item.page); onClose?.(); }}
                 className="block w-full text-left text-[15px] font-bold text-[#141414] py-2.5 hover:text-[#8A0000] hover:pl-1 transition-all"
+                suppressHydrationWarning
               >
                 {item.label}
               </button>
@@ -58,12 +59,14 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
             <button
               onClick={() => { goToPage('fundraising'); onClose?.(); }}
               className="flex-1 py-2.5 border border-[#8A0000] text-[#8A0000] text-[12px] font-bold uppercase tracking-wider hover:bg-[#8A0000] hover:text-white transition-colors text-center"
+              suppressHydrationWarning
             >
               Give
             </button>
             <button
               onClick={() => { goToPage('apply'); onClose?.(); }}
               className="flex-1 py-2.5 bg-[#8A0000] text-white text-[12px] font-bold uppercase tracking-wider hover:bg-[#6B0000] transition-colors text-center"
+              suppressHydrationWarning
             >
               Apply
             </button>
@@ -85,6 +88,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
               }}
               onFocus={() => searchQuery.length > 0 && setIsSearching(true)}
               onBlur={() => setTimeout(() => setIsSearching(false), 200)}
+              suppressHydrationWarning
             />
           </div>
 
@@ -112,23 +116,24 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
         <div className="mb-10">
           <h3 className="text-[14px] font-bold mb-4 uppercase tracking-tight">Top resources for</h3>
           <ul className="text-[14px] space-y-3 font-medium">
-            <li><button onClick={() => { goHome(); onClose?.(); }} className="side-link w-full text-left">Prospective Students</button></li>
-            <li><button onClick={() => { goToPage('education'); onClose?.(); }} className="side-link w-full text-left">Current Students</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">Faculty & Staff</button></li>
-            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left">Alumni</button></li>
-            <li><button onClick={() => { goToPage('campus'); onClose?.(); }} className="side-link w-full text-left">Communities & Partners</button></li>
+            <li><button onClick={() => { goHome(); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Prospective Students</button></li>
+            <li><button onClick={() => { goToPage('education'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Current Students</button></li>
+            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Faculty & Staff</button></li>
+            <li><button onClick={() => { goToPage('about'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Alumni</button></li>
+            <li><button onClick={() => { goToPage('campus'); onClose?.(); }} className="side-link w-full text-left" suppressHydrationWarning>Communities & Partners</button></li>
           </ul>
         </div>
 
         <div className="bg-[#FFF5F5] border border-[#FFDADA] p-5 mb-10">
           <h4 className="text-[14px] font-bold border-b border-[#FFDADA] pb-2 mb-3">Artemis Manifesto</h4>
-          <button onClick={() => { goToPage('about'); onClose?.(); }} className="text-[13px] leading-snug text-left hover:underline">Read the 'The Artemis Project' - our mission to re-engineer human learning.</button>
+          <button onClick={() => { goToPage('about'); onClose?.(); }} className="text-[13px] leading-snug text-left hover:underline" suppressHydrationWarning>Read the 'The Artemis Project' - our mission to re-engineer human learning.</button>
         </div>
 
         <div className="mb-6">
           <button
             onClick={() => { goToPage('blog'); onClose?.(); }}
             className="flex items-center justify-between w-full py-3 border-t border-b border-gray-100 group"
+            suppressHydrationWarning
           >
             <div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-[#8A0000] mb-1">From the Blog</div>
@@ -159,17 +164,17 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
         <p className="text-[12px] text-gray-600 mb-4 leading-tight">A global collegiate model for the collective future of humanity.</p>
         
         <div className="text-[12px] space-x-2 mb-2 font-medium">
-          <button onClick={() => goToPage('visit-us')} className="footer-link">Visit</button>
-          <button onClick={() => goToPage('campus')} className="footer-link">Map</button>
-          <button onClick={() => goToPage('blog')} className="footer-link">Blog</button>
-          <button onClick={() => goToPage('campus')} className="footer-link">Events</button>
-          <button onClick={() => goToPage('jobs')} className="footer-link">Careers</button>
-          <button onClick={() => goToPage('fundraising')} className="footer-link text-[#8A0000]">Give</button>
-          <button onClick={() => goToPage('contact-us')} className="footer-link">Contact</button>
+          <button onClick={() => goToPage('visit-us')} className="footer-link" suppressHydrationWarning>Visit</button>
+          <button onClick={() => goToPage('campus')} className="footer-link" suppressHydrationWarning>Map</button>
+          <button onClick={() => goToPage('blog')} className="footer-link" suppressHydrationWarning>Blog</button>
+          <button onClick={() => goToPage('campus')} className="footer-link" suppressHydrationWarning>Events</button>
+          <button onClick={() => goToPage('jobs')} className="footer-link" suppressHydrationWarning>Careers</button>
+          <button onClick={() => goToPage('fundraising')} className="footer-link text-[#8A0000]" suppressHydrationWarning>Give</button>
+          <button onClick={() => goToPage('contact-us')} className="footer-link" suppressHydrationWarning>Contact</button>
         </div>
         <div className="text-[12px] space-x-2 mb-6 font-medium">
-          <button onClick={() => goToPage('about')} className="footer-link">Privacy</button>
-          <button onClick={() => goToPage('access-at-artemis')} className="footer-link">Accessibility</button>
+          <button onClick={() => goToPage('about')} className="footer-link" suppressHydrationWarning>Privacy</button>
+          <button onClick={() => goToPage('access-at-artemis')} className="footer-link" suppressHydrationWarning>Accessibility</button>
         </div>
         
         <div className="flex space-x-4 grayscale opacity-60 text-sm font-bold">
