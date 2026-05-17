@@ -28,7 +28,11 @@ export async function POST(request: Request) {
     const hash = crypto.createHash('sha256').update(adminPassword + timestamp).digest('base64url').slice(0, 16);
     const token = `adm_${timestamp}_${random}_${hash}`;
 
-    const response = NextResponse.json({ success: true, message: 'Authenticated' });
+    const response = NextResponse.json({
+      success: true,
+      message: 'Authenticated',
+      token, // Return token so client can store in localStorage and send via Authorization header
+    });
 
     // Set HttpOnly cookie — not accessible via JavaScript, only by the server
     response.cookies.set('artemis_admin_token', token, {

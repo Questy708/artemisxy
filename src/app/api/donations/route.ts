@@ -86,7 +86,7 @@ export async function POST(request: Request) {
 // GET /api/donations — fetch recent public donations for the donor wall
 // For the admin dashboard, requires auth. For the public donor wall, returns limited data.
 export async function GET(request: Request) {
-  const isAuth = await verifyAdminAuth();
+  const isAuth = await verifyAdminAuth(request);
 
   try {
     if (isAuth) {

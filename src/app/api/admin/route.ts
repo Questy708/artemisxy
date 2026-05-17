@@ -3,9 +3,9 @@ import { db } from '@/lib/db';
 import { verifyAdminAuth } from '@/lib/admin-auth';
 
 // GET /api/admin — aggregate stats for the admin dashboard
-export async function GET() {
+export async function GET(request: Request) {
   // Require admin authentication
-  const isAuth = await verifyAdminAuth();
+  const isAuth = await verifyAdminAuth(request);
   if (!isAuth) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

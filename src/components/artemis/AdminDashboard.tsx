@@ -104,8 +104,11 @@ function PipelineBar({ segments }: { segments: { label: string; count: number; c
   );
 }
 
+const AUTH_TOKEN_KEY = 'artemis_admin_token';
+
 export default function AdminDashboard({ goToPage }: Props) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState<string | null>(null);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [loginLoading, setLoginLoading] = useState(false);
@@ -131,11 +134,33 @@ export default function AdminDashboard({ goToPage }: Props) {
 
   const PAGE_SIZE = 10;
 
+  // Helper: build auth headers with Bearer token
+  const getAuthHeaders = useCallback((): Record<string, string> => {
+    const headers: Record<string, string> = {};
+    const token = authToken || (typeof window !== 'undefined' ? localStorage.getItem(AUTH_TOKEN_KEY) : null);
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+  }, [authToken]);
+
   useEffect(() => { checkAuth(); }, []);
 
   const checkAuth = async () => {
     try {
-      const res = await fetch('/api/admin', { credentials: 'include' });
+      // Try to use token from localStorage if no in-memory token yet
+      const storedToken = typeof window !== 'undefined' ? localStorage.getItem(AUTH_TOKEN_KEY) : null;
+      const headers: Record<string, string> = {};
+      if (storedToken) {
+        headers['Authorization'] = `Bearer ${storedToken}`;
+      }
+      const res = await fetch('/api/admin', {
+        credentials: 'include',
+        headers,
+      });
+      if (res.ok && storedToken) {
+        setAuthToken(storedToken);
+      }
       setIsAuthenticated(res.ok);
     } catch {
       setIsAuthenticated(false);
@@ -156,14 +181,23 @@ export default function AdminDashboard({ goToPage }: Props) {
         body: JSON.stringify({ password }),
       });
       const json = await res.json();
-      if (json.success) {
-        // Verify the session actually works by checking auth
-        const verifyRes = await fetch('/api/admin', { credentials: 'include' });
+      if (json.success && json.token) {
+        // Store token in localStorage and in-memory state
+        localStorage.setItem(AUTH_TOKEN_KEY, json.token);
+        setAuthToken(json.token);
+
+        // Verify the session works via Authorization header
+        const verifyRes = await fetch('/api/admin', {
+          credentials: 'include',
+          headers: { 'Authorization': `Bearer ${json.token}` },
+        });
         if (verifyRes.ok) {
           setIsAuthenticated(true);
           setPassword('');
         } else {
           setLoginError('Session could not be established. Please try again.');
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          setAuthToken(null);
         }
       } else {
         setLoginError(json.error || 'Authentication failed');
@@ -176,7 +210,9 @@ export default function AdminDashboard({ goToPage }: Props) {
   };
 
   const handleLogout = async () => {
-    try { await fetch('/api/admin/login', { method: 'DELETE', credentials: 'include' }); } catch { /* ignore */ }
+    try { await fetch('/api/admin/login', { method: 'DELETE', credentials: 'include', headers: getAuthHeaders() }); } catch { /* ignore */ }
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    setAuthToken(null);
     setIsAuthenticated(false);
     setAllData(null);
   };
@@ -184,17 +220,20 @@ export default function AdminDashboard({ goToPage }: Props) {
   const fetchAllData = useCallback(async () => {
     setLoading(true);
     setError('');
+    const headers = getAuthHeaders();
     try {
       const [overviewRes, donationsRes, applicationsRes, messagesRes, subscribersRes] = await Promise.all([
-        fetch('/api/admin', { credentials: 'include' }),
-        fetch('/api/donations', { credentials: 'include' }),
-        fetch('/api/applications', { credentials: 'include' }),
-        fetch('/api/contact', { credentials: 'include' }),
-        fetch('/api/subscribe', { credentials: 'include' }),
+        fetch('/api/admin', { credentials: 'include', headers }),
+        fetch('/api/donations', { credentials: 'include', headers }),
+        fetch('/api/applications', { credentials: 'include', headers }),
+        fetch('/api/contact', { credentials: 'include', headers }),
+        fetch('/api/subscribe', { credentials: 'include', headers }),
       ]);
 
       if (overviewRes.status === 401) {
         setIsAuthenticated(false);
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        setAuthToken(null);
         setError('Session expired. Please log in again.');
         return;
       }
@@ -215,7 +254,7 @@ export default function AdminDashboard({ goToPage }: Props) {
       setLoading(false);
       setLastRefresh(new Date());
     }
-  }, []);
+  }, [getAuthHeaders]);
 
   useEffect(() => {
     if (isAuthenticated) fetchAllData();
@@ -525,7 +564,7 @@ export default function AdminDashboard({ goToPage }: Props) {
     try {
       await fetch('/api/contact', {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
         body: JSON.stringify({ id: msgId, read: true }),
       });
       // Optimistically update local state

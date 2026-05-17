@@ -77,8 +77,8 @@ export async function POST(request: Request) {
 }
 
 // GET /api/applications — list all applications (admin only)
-export async function GET() {
-  const isAuth = await verifyAdminAuth();
+export async function GET(request: Request) {
+  const isAuth = await verifyAdminAuth(request);
   if (!isAuth) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

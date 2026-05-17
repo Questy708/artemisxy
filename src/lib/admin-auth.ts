@@ -1,15 +1,30 @@
 import { cookies } from 'next/headers';
 
-// Verify admin session from HttpOnly cookie
-export async function verifyAdminAuth(): Promise<boolean> {
+// Verify admin session from HttpOnly cookie AND/OR Authorization header
+// The dual approach ensures auth works even if cookies are stripped by a reverse proxy
+export async function verifyAdminAuth(request?: Request): Promise<boolean> {
   const adminPassword = process.env.ADMIN_PASSWORD;
 
   // If no password is configured, no admin access
   if (!adminPassword) return false;
 
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('artemis_admin_token')?.value;
+    let token: string | undefined;
+
+    // 1. Try reading from Authorization: Bearer header first (most reliable through proxies)
+    if (request) {
+      const authHeader = request.headers.get('authorization');
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.slice(7);
+      }
+    }
+
+    // 2. Fallback to HttpOnly cookie
+    if (!token) {
+      const cookieStore = await cookies();
+      token = cookieStore.get('artemis_admin_token')?.value;
+    }
+
     if (!token) return false;
 
     // Token format: adm_{timestamp}_{random}_{hash}
@@ -25,10 +40,9 @@ export async function verifyAdminAuth(): Promise<boolean> {
     const secondUnderscore = afterTimestamp.indexOf('_');
     if (secondUnderscore === -1) return false;
 
-    const random = afterTimestamp.slice(0, secondUnderscore);
     const hash = afterTimestamp.slice(secondUnderscore + 1);
 
-    if (!timestamp || !random || !hash) return false;
+    if (!timestamp || !hash) return false;
 
     // Verify the hash matches what we'd generate from the current password + timestamp
     const crypto = await import('crypto');
