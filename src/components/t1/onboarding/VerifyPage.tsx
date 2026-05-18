@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
 
 export function VerifyPage({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
@@ -51,8 +50,8 @@ export function VerifyPage({ onNext, onBack }: { onNext: () => void; onBack: () 
 
   return (
     <div className="flex flex-col items-center justify-center text-center w-full max-w-[360px] mx-auto text-left items-start justify-start">
-      <h1 className="text-3xl font-medium text-black mb-2 text-left w-full">We sent a signal to the future</h1>
-      <p className="text-[14px] text-gray-500 mb-8 text-left w-full">Enter the access code</p>
+      <h1 className="text-3xl font-medium text-black mb-2 text-left w-full">We sent you a code</h1>
+      <p className="text-[14px] text-gray-500 mb-8 text-left w-full">Please wait</p>
 
       <div className="flex space-x-2 w-full justify-between mb-2" onPaste={PasteHandler}>
         {code.map((c, i) => (
@@ -71,7 +70,7 @@ export function VerifyPage({ onNext, onBack }: { onNext: () => void; onBack: () 
       </div>
 
       <button className="text-xs text-gray-500 mb-8 mt-2 text-left w-full hover:text-black">
-        Resend signal
+        Resend code
       </button>
 
       <div className="flex space-x-3 w-full mb-8">
@@ -94,7 +93,7 @@ export function VerifyPage({ onNext, onBack }: { onNext: () => void; onBack: () 
       </div>
 
       <p className="text-[11px] text-gray-400 leading-relaxed text-left">
-        By entering the Artemis Rift, you acknowledge that all dimensions are speculative futures. Your journey data is stored locally. Read our <a href="#" className="underline hover:text-gray-600">Privacy Notice</a> and <a href="#" className="underline hover:text-gray-600">Terms</a>.
+        By signing up to a free account or Team workspace, you agree to the <a href="#" className="underline hover:text-gray-600">MSA</a>, <a href="#" className="underline hover:text-gray-600">Product Terms</a>, <a href="#" className="underline hover:text-gray-600">Policies</a>, <a href="#" className="underline hover:text-gray-600">Privacy Notice</a>, and <a href="#" className="underline hover:text-gray-600">Cookie Notice</a>. By signing up to an Enterprise workspace, you agree to the <a href="#" className="underline hover:text-gray-600">Policies</a>, <a href="#" className="underline hover:text-gray-600">Privacy Notice</a>, and <a href="#" className="underline hover:text-gray-600">Cookie Notice</a>.
       </p>
     </div>
   );

@@ -7,16 +7,7 @@ import { IdentityPage } from './onboarding/IdentityPage';
 import { VerifyPage } from './onboarding/VerifyPage';
 import { WorkspacePage } from './onboarding/WorkspacePage';
 import { AppMockup } from './onboarding/AppMockup';
-import { NavBar, Footer } from './Shared';
-import HomePage from './pages/HomePage';
-import OpenLoopPage from './pages/OpenLoopPage';
-import PacedEducationPage from './pages/PacedEducationPage';
-import AxisFlipPage from './pages/AxisFlipPage';
-import PurposeLearningPage from './pages/PurposeLearningPage';
-import CentersOfInquiryPage from './pages/CentersOfInquiryPage';
-import DarwinVoyagePage from './pages/DarwinVoyagePage';
-import BuildPage from './pages/BuildPage';
-import AboutPage from './pages/AboutPage';
+import { MainApp } from './dashboard/MainApp';
 
 type Step = 'LANDING' | 'AUTH' | 'VERIFY' | 'WORKSPACE' | 'APP';
 
@@ -81,50 +72,9 @@ function parseSnapshot(snapshot: string): AppState {
   }
 }
 
-// ─── T1 Site Content (after onboarding) ───
-function T1SiteContent({ currentPage, goTo, onExit }: { currentPage: string; goTo: (page: string) => void; onExit: () => void }) {
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage goTo={goTo} />;
-      case 'open-loop-learning':
-        return <OpenLoopPage goTo={goTo} />;
-      case 'adaptive-paced-learning':
-        return <PacedEducationPage goTo={goTo} />;
-      case 'global-skills-matrix':
-        return <AxisFlipPage goTo={goTo} />;
-      case 'purpose-learning':
-        return <PurposeLearningPage goTo={goTo} />;
-      case 'centers-of-inquiry':
-        return <CentersOfInquiryPage goTo={goTo} />;
-      case 'darwin-voyage':
-        return <DarwinVoyagePage goTo={goTo} />;
-      case 'build':
-        return <BuildPage goTo={goTo} />;
-      case 'about':
-        return <AboutPage goTo={goTo} />;
-      default:
-        return <HomePage goTo={goTo} />;
-    }
-  };
-
-  return (
-    <div className="w-full min-h-screen flex flex-col bg-white">
-      <NavBar currentPage={currentPage} goTo={goTo} onExit={onExit} />
-      <div className="pt-14 flex-1">
-        {renderPage()}
-      </div>
-      <Footer />
-    </div>
-  );
-}
-
 export default function T1Site({ onExit }: T1SiteProps) {
   const snapshot = useSyncExternalStore(storeSubscribe, storeGetSnapshot, storeGetServerSnapshot);
   const appState = parseSnapshot(snapshot);
-
-  // Internal page state for t1 site content (after onboarding)
-  const [t1Page, setT1Page] = useState('home');
 
   const isClient = snapshot !== '';
 
@@ -147,16 +97,17 @@ export default function T1Site({ onExit }: T1SiteProps) {
 
   const { currentStep, travelerName } = appState;
 
-  // After onboarding: show the actual t1 site with all its pages
+  // Step 5: MainApp dashboard (after onboarding completes)
   if (currentStep === 'APP') {
-    return <T1SiteContent currentPage={t1Page} goTo={setT1Page} onExit={onExit} />;
+    return <MainApp travelerName={travelerName} onExit={onExit} />;
   }
 
+  // Step 1: Landing page (full screen)
   if (currentStep === 'LANDING') {
     return <LandingPage onNext={() => setCurrentStep('AUTH')} />;
   }
 
-  // Use SplitLayout for AUTH, VERIFY, WORKSPACE
+  // Steps 2-4: SplitLayout with left panel form + right panel AppMockup
   return (
     <SplitLayout stepId={currentStep} rightPanel={<AppMockup />}>
       {currentStep === 'AUTH' && (

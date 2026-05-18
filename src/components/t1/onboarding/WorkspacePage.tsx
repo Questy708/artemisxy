@@ -10,21 +10,21 @@ export function WorkspacePage({ onNext, onLogout, travelerName }: { onNext: () =
     setIsCreating(true);
     setTimeout(() => {
       onNext();
-    }, 1500);
+    }, 1500); // fake network delay
   };
 
   return (
     <div className="flex flex-col w-full max-w-[400px] mx-auto text-left">
-      <h1 className="text-3xl font-medium text-black mb-1">Welcome to the Artemis Rift</h1>
-      <p className="text-[15px] text-gray-500 mb-8">Begin or resume your journey</p>
+      <h1 className="text-3xl font-medium text-black mb-1">Welcome to Artemis Agents</h1>
+      <p className="text-[15px] text-gray-500 mb-8">Join or create a workspace</p>
 
       <div className="w-full border-t border-gray-100 mb-8"></div>
 
       <div className="space-y-8">
         <div className="flex items-center justify-between group">
           <div>
-            <h3 className="text-[15px] font-medium text-black mb-1">Create a new journey</h3>
-            <p className="text-[13px] text-gray-500 max-w-[220px]">Start a fresh exploration across all six dimensions</p>
+            <h3 className="text-[15px] font-medium text-black mb-1">Create a new workspace</h3>
+            <p className="text-[13px] text-gray-500 max-w-[220px]">Set something up from scratch and invite your team</p>
           </div>
           <button 
             onClick={handleCreate}
@@ -42,8 +42,8 @@ export function WorkspacePage({ onNext, onLogout, travelerName }: { onNext: () =
 
         <div className="flex items-center justify-between group">
           <div>
-            <h3 className="text-[15px] font-medium text-black mb-1">Not seeing your journey?</h3>
-            <p className="text-[13px] text-gray-500 max-w-[220px]">Try entering with a different traveler name</p>
+            <h3 className="text-[15px] font-medium text-black mb-1">Not seeing your workspace?</h3>
+            <p className="text-[13px] text-gray-500 max-w-[220px]">Try logging in with a different name</p>
           </div>
           <button 
             onClick={onLogout}
@@ -56,7 +56,7 @@ export function WorkspacePage({ onNext, onLogout, travelerName }: { onNext: () =
 
       <div className="w-full absolute bottom-8 left-0 px-6 md:px-0">
         <p className="text-[13px] text-gray-400">
-          Signed in as <span className="font-medium text-black">{travelerName || "Traveler"}</span>
+          Signed in as <span className="font-medium text-black">{travelerName || "explorer@artemis-rift"}</span>
         </p>
       </div>
     </div>

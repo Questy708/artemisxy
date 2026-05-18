@@ -22,22 +22,22 @@ export function AppMockup() {
         {/* Fake sidebar */}
         <div className="w-64 border-r border-white/10 flex flex-col py-4 px-3 flex-shrink-0">
           <div className="flex items-center space-x-2 mb-8 px-2">
-            <div className="w-6 h-6 rounded border border-white/30 flex items-center justify-center font-bold italic text-white text-xs">A</div>
+            <div className="w-6 h-6 rounded bg-[#8A0000] flex items-center justify-center font-serif font-bold text-white text-xs">A</div>
             <span className="text-white font-medium">Artemis</span>
           </div>
 
           <div className="space-y-1 text-sm text-gray-400">
             <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer flex items-center justify-between">
-              <span>Dimensions</span>
-              <span className="text-gray-500 text-xs">⌘D</span>
+              <span>Chat</span>
+              <span className="text-gray-500 text-xs">&#8984;</span>
             </div>
             <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer flex items-center justify-between">
                 <span>Search</span>
-                 <span className="text-gray-500 text-xs">⌘K</span>
+                 <span className="text-gray-500 text-xs">&#8984;K</span>
             </div>
-            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">SkillPrints</div>
-            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">Oath</div>
-            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer mt-4">More</div>
+            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">Assistants</div>
+            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">Tasks</div>
+            <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer mt-4">Integrations</div>
             <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">Collections</div>
             <div className="px-2 py-1.5 rounded hover:bg-white/5 cursor-pointer">Your content</div>
           </div>
@@ -49,22 +49,24 @@ export function AppMockup() {
            {/* Top nav */}
            <div className="flex space-x-6 text-sm mb-12">
             <span className="text-white font-medium">For you</span>
+            <span className="text-gray-500">Learning Agent</span>
+            <span className="text-gray-500">Skills Intern</span>
             <span className="text-gray-500">Dimension 01</span>
-            <span className="text-gray-500">SkillPrints</span>
-            <span className="text-gray-500">Oath</span>
-            <span className="text-gray-500">Browse dimensions</span>
+            <span className="text-gray-500">Browse agents</span>
            </div>
 
            {/* Grid layout */}
            <div className="grid grid-cols-2 gap-6 max-w-4xl">
               <div className="bg-[#8A0000] rounded-3xl p-6 text-white flex flex-col justify-between h-56 shadow-lg shadow-[#8A0000]/10 relative overflow-hidden">
                 <div>
-                   <div className="text-sm font-medium mb-2 opacity-80 flex items-center"><span className="w-2 h-2 rounded-full bg-white mr-2"></span> Suggested exploration</div>
+                   <div className="text-sm font-medium mb-2 opacity-80 flex items-center"><span className="w-2 h-2 rounded-full bg-white mr-2"></span> Suggested task</div>
                    <h3 className="text-2xl font-medium leading-tight">Map your skills<br/>across six<br/>dimensions</h3>
                 </div>
                 <div className="flex items-center mt-4">
-                  <div className="w-8 h-8 rounded-full bg-white/10 overflow-hidden mr-3 flex items-center justify-center text-xs font-bold">A</div>
-                  <div className="text-xs font-medium">Dimension 03: SkillPrints<br/><span className="opacity-60">Adaptive assessment</span></div>
+                  <div className="w-8 h-8 rounded-full bg-white/10 overflow-hidden mr-3">
+                     <img src="https://i.pravatar.cc/100?img=1" alt="avatar" />
+                  </div>
+                  <div className="text-xs font-medium">Explorer x Mentor: Skills sync<br/><span className="opacity-60">From 9:00am</span></div>
                 </div>
               </div>
 
@@ -73,15 +75,15 @@ export function AppMockup() {
                   <div className="text-xs text-[#8A0000] font-medium mb-1 flex items-center"><span className="w-2 h-2 rounded-full bg-[#8A0000] mr-2"></span> Recent journey</div>
                   <h4 className="text-lg font-medium mb-2">Explore the Infinite Learning Continuum</h4>
                   <div className="flex -space-x-2">
-                     <div className="w-6 h-6 rounded-full border-2 border-[#1F1F1F] bg-white/10 flex items-center justify-center text-[8px] font-bold">01</div>
-                     <div className="w-6 h-6 rounded-full border-2 border-[#1F1F1F] bg-white/10 flex items-center justify-center text-[8px] font-bold">02</div>
-                     <div className="w-6 h-6 rounded-full border-2 border-[#1F1F1F] bg-white/10 flex items-center justify-center text-[8px] font-bold">03</div>
-                     <span className="text-xs text-gray-500 ml-4 pl-3 flex items-center">6 dimensions</span>
+                     <img src="https://i.pravatar.cc/100?img=1" className="w-6 h-6 rounded-full border-2 border-[#1F1F1F]" />
+                     <img src="https://i.pravatar.cc/100?img=2" className="w-6 h-6 rounded-full border-2 border-[#1F1F1F]" />
+                     <img src="https://i.pravatar.cc/100?img=3" className="w-6 h-6 rounded-full border-2 border-[#1F1F1F]" />
+                     <span className="text-xs text-gray-500 ml-4 pl-3 flex items-center">5 explorers</span>
                   </div>
                 </div>
                 <div className="bg-[#1F1F1F] rounded-2xl p-4 text-white">
-                   <div className="text-xs text-[#8A0000] font-medium mb-1">■ Recently explored</div>
-                   <h4 className="text-lg font-medium mb-2">Take the Artemis Oath for your learning journey</h4>
+                   <div className="text-xs text-[#8A0000] font-medium mb-1">&#9632; Recently updated</div>
+                   <h4 className="text-lg font-medium mb-2">Help me finalize these learning guidelines for my team</h4>
                 </div>
               </div>
 
@@ -89,7 +91,7 @@ export function AppMockup() {
            
            {/* Chat input mockup */}
            <div className="absolute bottom-8 left-8 right-8 bg-[#2A2A2A] rounded-2xl p-3 px-4 flex items-center justify-between border border-white/5">
-              <span className="text-gray-400">Ask about any dimension...</span>
+              <span className="text-gray-400">Ask Learning Agent anything</span>
               <div className="w-8 h-8 bg-[#8A0000] rounded-full flex items-center justify-center">
                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
               </div>

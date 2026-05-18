@@ -17,16 +17,18 @@ export function SplitLayout({ children, rightPanel, stepId }: SplitLayoutProps) 
       <div className="w-full md:w-1/2 flex flex-col h-screen relative bg-white z-10 px-6 md:px-16 py-8">
         <header className="flex justify-between items-center w-full z-20 top-0 pt-4">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 border-2 border-gray-900 flex items-center justify-center text-xs font-bold italic text-gray-900">
-              A
+            <div className="w-8 h-8 grid grid-cols-2 gap-1 rotate-45 transform">
+              <div className="bg-[#8A0000] rounded-full" />
+              <div className="bg-[#8A0000] rounded-full" />
+              <div className="bg-[#8A0000] rounded-full" />
+              <div className="bg-[#8A0000] rounded-full" />
             </div>
-            <span className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900">Artemis</span>
           </div>
           
           <nav className="hidden md:flex items-center space-x-6 text-sm text-gray-500 font-medium bg-gray-50 px-4 py-1.5 rounded-full">
             <a href="#" className="hover:text-black transition-colors text-black">Overview</a>
-            <a href="#" className="hover:text-black transition-colors">Dimensions</a>
-            <a href="#" className="hover:text-black transition-colors">Privacy</a>
+            <a href="#" className="hover:text-black transition-colors">Pricing</a>
+            <a href="#" className="hover:text-black transition-colors">Privacy and terms</a>
             <a href="#" className="hover:text-black transition-colors">FAQ</a>
           </nav>
         </header>
