@@ -37,7 +37,7 @@ import BlogArticlePage from '@/components/artemis/BlogArticlePage';
 import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
 import AdminDashboard from '@/components/artemis/AdminDashboard';
-import Artemis2100 from '@/components/artemis/Artemis2100';
+import Artemis2100Site from '@/components/artemis2100/Artemis2100Site';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
 
@@ -297,11 +297,7 @@ function getBreadcrumbs(currentPage: string, currentProgram: string): { items: B
         items: [],
         currentLabel: 'Admin Dashboard',
       };
-    case 'artemis-2100':
-      return {
-        items: [],
-        currentLabel: 'Artemis 2100',
-      };
+
     default:
       return null;
   }
@@ -484,8 +480,6 @@ export default function ArtemisApp() {
         return <GenericAboutSubpage goToPage={goToPage} id="visit" title="Visiting the Colleges" description="Information on opening times and admission protocols for our physical colleges." />;
       case 'admin':
         return <AdminDashboard goToPage={goToPage} />;
-      case 'artemis-2100':
-        return <Artemis2100 goToPage={goToPage} />;
 
       default:
         return <Home goToPage={goToPage} />;
@@ -493,9 +487,19 @@ export default function ArtemisApp() {
   };
 
   const isHome = currentPage === 'home';
+  const isMicroSite = currentPage === 'artemis-2100';
 
   // Get breadcrumbs for current page
-  const breadcrumbData = !isHome ? getBreadcrumbs(currentPage, currentProgram) : null;
+  const breadcrumbData = !isHome && !isMicroSite ? getBreadcrumbs(currentPage, currentProgram) : null;
+
+  // Artemis 2100 micro-site renders fullscreen with its own navbar/footer
+  if (isMicroSite) {
+    return (
+      <div className="w-full min-h-screen">
+        <Artemis2100Site onExit={() => goToPage('home')} />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full min-h-screen bg-white flex flex-col font-sans text-[#141414]">
