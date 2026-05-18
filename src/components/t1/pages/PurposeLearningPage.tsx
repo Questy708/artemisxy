@@ -15,7 +15,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
         description="A look back from 2100 to the era when Stanford students began declaring missions, not majors."
         bgGradientClass="bg-[#f2b90f]"
       />
-      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>

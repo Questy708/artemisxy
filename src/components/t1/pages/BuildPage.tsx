@@ -14,7 +14,7 @@ export default function BuildPage({ goTo }: Props) {
         description="Resources for designing the future of living & learning where you are"
         bgGradientClass="bg-[#d92231]"
       />
-      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
         <section className="space-y-6 max-w-3xl">
           <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Why Future Stanford?</h2>

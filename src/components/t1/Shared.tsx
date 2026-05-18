@@ -113,7 +113,7 @@ export function ExploreAnotherFuture({ currentPage, goTo }: ExploreAnotherFuture
   ].filter(l => l.slug !== currentPage);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-24 border-t border-gray-200 mt-24">
+    <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-24 border-t border-gray-200 mt-24">
       <SectionHeading>Explore Another Future</SectionHeading>
       
       <div className="flex flex-wrap justify-center gap-4 mt-12 w-full text-center">
@@ -151,7 +151,7 @@ export function HeroHeader({ title, description, bgGradientClass }: { title: str
         <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] rounded-full border-[20px] border-white/20" />
       </div>
       
-      <div className="max-w-5xl mx-auto px-6 relative z-10 w-full">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 relative z-10">
         <div className="bg-white p-8 md:p-12 w-full md:w-2/3 lg:w-[600px] border border-gray-100 shadow-xl relative mt-16">
           <h1 className="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-gray-900 mb-6 border-b-2 border-black inline-block pb-1">
             {title}
