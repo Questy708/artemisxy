@@ -31,7 +31,7 @@ export default function BuildPage({ goTo }: Props) {
                   <p className="text-xs text-gray-500 mt-4 leading-relaxed px-4">Our vision is to nurture a global community of lifelong learners who will drive positive change across cultures and continents.</p>
                </div>
                <div className="md:border-l md:border-r border-gray-200">
-                  <h3 className="font-bold text-lg uppercase tracking-wider">Our Provocations, Your Innovations</h3>
+                  <h3 className="font-bold text-lg uppercase tracking-wider">Our Dimensions, Your Innovations</h3>
                   <p className="text-xs text-gray-500 mt-4 leading-relaxed px-4">The futures we&apos;ve envisioned are springboards. Adapt them, challenge them, or create entirely new paradigms. Your unique perspective is vital.</p>
                </div>
                <div>
@@ -53,7 +53,7 @@ export default function BuildPage({ goTo }: Props) {
                  </div>
                  <h3 className="font-bold text-xl text-gray-900 italic">Try</h3>
                  <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Reach Through the Rift</p>
-                 <p className="text-xs text-gray-600">The Try cards invite you to step into the unknown. Each card presents a provocation from the Artemis 2100 exhibit — a fragment of a possible future pulled through the Rift. <strong>Reflection Worksheets</strong> encourage you to engage deeply: What would this future feel like? Who would it serve? What would it require?</p>
+                 <p className="text-xs text-gray-600">The Try cards invite you to step into the unknown. Each card presents a dimension from the Artemis 2100 exhibit — a fragment of a possible future pulled through the Rift. <strong>Reflection Worksheets</strong> encourage you to engage deeply: What would this future feel like? Who would it serve? What would it require?</p>
                  <button className="text-sm font-bold uppercase tracking-wider hover:text-red-600 transition-colors">Download Try Cards &gt;</button>
               </div>
               <div className="space-y-4 text-center">
@@ -84,11 +84,11 @@ export default function BuildPage({ goTo }: Props) {
            <div className="grid md:grid-cols-2 gap-12 text-sm text-gray-600 leading-relaxed">
               <div className="space-y-4">
                  <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Step 1: Encounter the Rift</h4>
-                 <p>Begin by exploring the four provocations on this site — the Infinite Learning Continuum, Adaptive Paced Learning, the Global Skills Matrix & SkillPrints, and Purpose Learning. Let them challenge your assumptions. As you read, note the moments that surprise, provoke, or inspire you. These are your signals from the other side.</p>
+                 <p>Begin by exploring the dimensions on this site — the Infinite Learning Continuum, Adaptive Paced Learning, SkillPrints, and The Artemis Oath. Let them challenge your assumptions. As you read, note the moments that surprise, provoke, or inspire you. These are your signals from the other side.</p>
               </div>
               <div className="space-y-4">
                  <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Step 2: Draw Your Cards</h4>
-                 <p>Select one Try card, one Imagine card, and one Act card. Use the Try card to ground yourself in a specific provocation. Let the Imagine card push your thinking further. Then use the Act card to design a micro-experiment — something small enough to try this week, but bold enough to matter.</p>
+                 <p>Select one Try card, one Imagine card, and one Act card. Use the Try card to ground yourself in a specific dimension. Let the Imagine card push your thinking further. Then use the Act card to design a micro-experiment — something small enough to try this week, but bold enough to matter.</p>
               </div>
               <div className="space-y-4">
                  <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Step 3: Run Your Experiment</h4>

@@ -8,7 +8,7 @@ const SECTIONS = [
   { id: "intro", title: "Learning & Living at Artemis", desc: "An exploration of educational experiences for the future", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398817302287-HSJD6LY65BUT5GMUT8V7/Exhibit_Title.jpg" },
   { id: "context-1", title: "A Complex and Special Moment", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398882588280-1K4AKDL84P3BAIJZE9OH/IMG_9794.jpg" },
   { id: "context-3-1-1", title: "Our Process", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398882987952-X2GZ3OY7F53PLB1XL17Z/IMG_0350.jpg" },
-  { id: "context-3-1-1-1", title: "Provocations to Spark Experiments", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398883065287-E99ZFQRMG4VM7XFARP97/IMG_0772.jpg" },
+  { id: "context-3-1-1-1", title: "Dimensions to Spark Experiments", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398883065287-E99ZFQRMG4VM7XFARP97/IMG_0772.jpg" },
   { id: "context-4", title: "Moments in Time", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1406175906356-COAZHHD5LC8DP29XT15T/Time+Machine+1.jpg" },
   { id: "fast-forward", title: "Let's fast forward to a possible future...", desc: "What might the university experience be then?", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398817195405-5BBO5QHPZPCZM28UISFD/calibcolors.jpg" },
 ];
@@ -115,7 +115,7 @@ export default function HomePage({ goTo }: HomePageProps) {
           <div className="grid md:grid-cols-2 gap-16">
              <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
                 <p>A dedicated design team from the Artemis Project collaborated with hundreds of insightful, creative, and committed students, faculty, and administrators over the course of a year. They embraced the complexity — not as a problem to be solved, but as a landscape to be understood, questioned, and reimagined.</p>
-                <p>The process was deliberately iterative and inclusive. Every insight was tested against the lived reality of learners, every provocation refined through dialogue. The goal was never a single answer, but to open a multiplicity of possible futures — and equip others with the tools to imagine their own.</p>
+                <p>The process was deliberately iterative and inclusive. Every insight was tested against the lived reality of learners, every dimension refined through dialogue. The goal was never a single answer, but to open a multiplicity of possible futures — and equip others with the tools to imagine their own.</p>
              </div>
              <div>
               <blockquote className="border-l-4 border-[#d92231] pl-6 space-y-4">
@@ -138,7 +138,7 @@ export default function HomePage({ goTo }: HomePageProps) {
           <div className="grid md:grid-cols-2 gap-16">
              <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
                 <p>The project culminated in an experiential exhibit entitled &ldquo;Artemis 2100&rdquo; — a first-of-its-kind immersive event that dissolved the boundaries between physical and virtual attendance. To foster an exploratory mindset, the event was staged as a time-travel journey. The community traveled to the distant future — landing at the moment when the University of Artemis was looking back at paradigm shifts that &ldquo;happened&rdquo; around 2100.</p>
-                <p>These shifts were shared as provocations — not predictions, nor prescriptions, but invitations to stretch the imagination and catalyze conversation. We invite you to travel with us, explore these possible futures, and then use the tools on this site to spark your own experiments.</p>
+                <p>These shifts were shared as dimensions — not predictions, nor prescriptions, but invitations to stretch the imagination and catalyze conversation. We invite you to travel with us, explore these possible futures, and then use the tools on this site to spark your own experiments.</p>
              </div>
              <div>
               <blockquote className="border-l-4 border-[#461e68] pl-6 space-y-4">
@@ -232,15 +232,15 @@ export default function HomePage({ goTo }: HomePageProps) {
                    </div>
                 </button>
                 <button onClick={() => goTo('global-skills-matrix')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902001655-AHTZLR3OYOOL337G49HW/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Global Skills Matrix" />
+                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902001655-AHTZLR3OYOOL337G49HW/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="SkillPrints" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">Global Skills<br/>Matrix</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">SkillPrints</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('purpose-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902073224-40XEGRCIXAE6GKIU1YL7/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Purpose Learning" />
+                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902073224-40XEGRCIXAE6GKIU1YL7/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The Artemis Oath" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">Purpose<br/>Learning</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">The Artemis<br/>Oath</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-[#0f3460] overflow-hidden cursor-pointer">

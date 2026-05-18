@@ -11,7 +11,7 @@ export default function AxisFlipPage({ goTo }: Props) {
   return (
     <>
       <HeroHeader
-        title="Global Skills Matrix & SkillPrints"
+        title="SkillPrints"
         description="In 2100, we examine the era when Artemis replaced the traditional transcript with biometric, AI-powered SkillPrints — dynamic portraits of capability that evolve alongside the learner."
         bgGradientClass="bg-[#461e68]"
       />
@@ -20,7 +20,7 @@ export default function AxisFlipPage({ goTo }: Props) {
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
           <p className="text-sm text-gray-600">
-            Step into a virtual time capsule to discover how Artemis transformed qualifications worldwide through the Global Skills Matrix — replacing static disciplinary silos and paper transcripts with a dynamic, biometric, AI-powered system for mapping human capability.
+            Step into a virtual time capsule to discover how Artemis transformed qualifications worldwide through SkillPrints — replacing static disciplinary silos and paper transcripts with a dynamic, biometric, AI-powered system for mapping human capability.
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
@@ -42,7 +42,7 @@ export default function AxisFlipPage({ goTo }: Props) {
             <hr className="border-t border-gray-200" />
           </div>
           <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="Global Skills Matrix & SkillPrints Diagram" />
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="SkillPrints Diagram" />
           </div>
         </section>
 
@@ -65,7 +65,7 @@ export default function AxisFlipPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm">From Transcript to SkillPrint</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The traditional academic transcript — a static list of courses and grades — was a 19th-century invention that persisted well into the 21st. It told employers almost nothing about what a graduate could actually do. The Global Skills Matrix replaced this relic with the SkillPrint: a dynamic, evolving record of a learner&apos;s abilities, experiences, and potential, powered by neural mapping and AI analysis.
+                The traditional academic transcript — a static list of courses and grades — was a 19th-century invention that persisted well into the 21st. It told employers almost nothing about what a graduate could actually do. SkillPrints replaced this relic: a dynamic, evolving record of a learner&apos;s abilities, experiences, and potential, powered by neural mapping and AI analysis.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Where transcripts captured what you studied, SkillPrints captured what you could do — and what you were capable of becoming. They emphasized skills over grades, competencies over credit hours, and growth over static achievement.
@@ -79,7 +79,7 @@ export default function AxisFlipPage({ goTo }: Props) {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="text-sm text-gray-600 leading-relaxed space-y-4">
               <p>
-                The backbone of the Global Skills Matrix was Neural Skill Mapping — a revolutionary system that used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.
+                The backbone of SkillPrints was Neural Skill Mapping — a revolutionary system that used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.
               </p>
               <p>
                 The data was processed by quantum computers, creating a dynamic, three-dimensional representation of the student&apos;s evolving skill set — a living portrait of capability that grew and shifted with every new experience. This allowed educators and AI mentors to provide precisely targeted interventions, helping students strengthen weak areas and leverage their natural aptitudes more effectively.
@@ -146,7 +146,7 @@ export default function AxisFlipPage({ goTo }: Props) {
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-4 text-sm text-gray-600">
-            <p>In the Global Skills Matrix & SkillPrints:</p>
+            <p>In SkillPrints:</p>
             <ul className="list-disc pl-5 space-y-2 leading-relaxed">
               <li>Artemis replaced rigid disciplines with a flexible, AI-powered system that adapted to global needs in real-time</li>
               <li>Neural Skill Mapping made qualifications visual, dynamic, and deeply personal</li>
@@ -156,7 +156,7 @@ export default function AxisFlipPage({ goTo }: Props) {
               <li>Transcripts were replaced by SkillPrints — dynamic, biometric, evolving records of each learner&apos;s journey</li>
             </ul>
             <p className="pt-4 font-bold italic">
-               The Global Skills Matrix era transformed Artemis into a truly global university, one whose graduates were not just knowledgeable, but capable, adaptable, and deeply connected to the challenges and opportunities of their time.
+               The SkillPrints era transformed Artemis into a truly global university, one whose graduates were not just knowledgeable, but capable, adaptable, and deeply connected to the challenges and opportunities of their time.
             </p>
           </div>
         </section>
@@ -176,7 +176,7 @@ export default function AxisFlipPage({ goTo }: Props) {
                   <h4 className="font-bold italic uppercase tracking-wider text-sm">Neural Skill Mapping: The Technology</h4>
                   <p className="italic text-xs text-gray-500">Holographic interface, quantum computing core, bio-neural feedback sensors</p>
                   <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                    <p>Neural Skill Mapping was the backbone of the Global Skills Matrix. This revolutionary system used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways, identifying strengths, potential connections, and areas for growth. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.</p>
+                    <p>Neural Skill Mapping was the backbone of SkillPrints. This revolutionary system used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways, identifying strengths, potential connections, and areas for growth. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.</p>
                     <p>The data was processed by quantum computers, creating a dynamic, three-dimensional representation of the student&apos;s evolving skill set. This allowed educators and AI mentors to provide precisely targeted interventions, helping students strengthen weak areas and leverage their natural aptitudes more effectively.</p>
                   </div>
                 </div>
