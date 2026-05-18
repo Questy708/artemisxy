@@ -42,19 +42,6 @@ export function WorkspacePage({ onNext, onLogout, travelerName }: { onNext: () =
 
         <div className="flex items-center justify-between group">
           <div>
-            <h3 className="text-[15px] font-medium text-black mb-1">Resume your journey</h3>
-            <p className="text-[13px] text-gray-500 max-w-[220px]">Continue from where you left off in the Rift</p>
-          </div>
-          <button 
-            onClick={onNext}
-            className="text-gray-400 hover:text-black font-medium text-[14px] transition-colors"
-          >
-            Resume
-          </button>
-        </div>
-
-        <div className="flex items-center justify-between group">
-          <div>
             <h3 className="text-[15px] font-medium text-black mb-1">Not seeing your journey?</h3>
             <p className="text-[13px] text-gray-500 max-w-[220px]">Try entering with a different traveler name</p>
           </div>
