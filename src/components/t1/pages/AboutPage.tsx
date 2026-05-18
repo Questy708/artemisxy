@@ -23,27 +23,15 @@ export default function AboutPage({ goTo }: Props) {
            <p>The project included intensive design workshops, global research expeditions, and the development of tools to support individuals who share the goal of experimenting towards a future of education that serves all of humanity. Design work continued for over a year, creating the foundation for the Artemis 2100 exhibit, which debuted as an immersive, globally accessible experience staged as a time-travel journey — provocations designed not as predictions, but as invitations to experiment.</p>
         </section>
 
-        <section className="space-y-12">
-           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">Centers of Inquiry</h2>
-           <p className="text-gray-600 leading-relaxed max-w-3xl">At the heart of Artemis&apos;s structural revolution was a single, radical decision: to abolish the traditional department. In its place, Artemis established Centers of Inquiry — interdisciplinary hubs organized not around academic disciplines, but around the grand challenges facing humanity. Where departments created silos, Centers of Inquiry create bridges.</p>
-           
-           <div className="grid md:grid-cols-2 gap-8 mt-8">
-              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
-                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Technology Development</h3>
-                 <p className="text-sm text-gray-600 leading-relaxed">Where engineering, computer science, materials research, and quantum physics converge to create the tools and systems that will define the next century. This Center attracts everyone from AI architects to biotechnology pioneers, fostering collaboration between builders and theorists who would never have crossed paths in a traditional departmental structure.</p>
-              </div>
-              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
-                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Translational Programs</h3>
-                 <p className="text-sm text-gray-600 leading-relaxed">Where knowledge moves from theory to practice. This Center bridges academic research and real-world application, pairing scholars with community leaders, policymakers, and industry partners. It is the engine of impact — ensuring that the insights generated within Artemis don&apos;t remain confined to journals and conferences but reach the communities and contexts where they are needed most.</p>
-              </div>
-              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
-                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Human Flourishing</h3>
-                 <p className="text-sm text-gray-600 leading-relaxed">Where psychology, philosophy, neuroscience, and the arts converge to explore what it means to live a meaningful life. This Center addresses the questions that disciplines alone cannot answer — about purpose, well-being, identity, and the nature of human potential. It is the soul of Artemis, ensuring that technological and structural innovation never loses sight of the human beings they are meant to serve.</p>
-              </div>
-              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
-                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Planetary Systems</h3>
-                 <p className="text-sm text-gray-600 leading-relaxed">Where climate science, ecology, economics, and governance come together to address the existential challenges of the Planetary Phase of Civilization. This Center trains the leaders and thinkers who will navigate the Great Transition — the progressive transformation from industrial-era civilization to a sustainable, equitable, and globally coordinated future.</p>
-              </div>
+        <section className="space-y-6">
+           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">The Provocations</h2>
+           <p className="text-gray-600 leading-relaxed max-w-3xl">The Artemis 2100 exhibit presented five provocations — each a window into a possible future where a different dimension of the university was reimagined. Together, they formed a complete vision: when (Infinite Learning Continuum), how fast (Adaptive Paced Learning), what (Global Skills Matrix & SkillPrints), why (Purpose Learning), and where (Centers of Inquiry).</p>
+           <div className="flex flex-wrap gap-3 mt-4">
+             <button onClick={() => goTo('open-loop-learning')} className="bg-[#66B83B] hover:bg-[#4A9F2F] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Infinite Learning Continuum</button>
+             <button onClick={() => goTo('adaptive-paced-learning')} className="bg-[#007f9c] hover:bg-[#006e87] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Adaptive Paced Learning</button>
+             <button onClick={() => goTo('global-skills-matrix')} className="bg-[#461e68] hover:bg-[#391854] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer border-l-[6px] border-yellow-400">Global Skills Matrix</button>
+             <button onClick={() => goTo('purpose-learning')} className="bg-[#f2b90f] hover:bg-[#d6a40d] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Purpose Learning</button>
+             <button onClick={() => goTo('centers-of-inquiry')} className="bg-[#0f3460] hover:bg-[#0a2647] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer border-l-[6px] border-white">Centers of Inquiry</button>
            </div>
         </section>
 

@@ -218,29 +218,35 @@ export default function HomePage({ goTo }: HomePageProps) {
             <div className="space-y-12">
               <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Choose a future to explore.</h2>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 w-full font-serif text-white">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 w-full font-serif text-white">
                 <button onClick={() => goTo('open-loop-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902059821-RP15PQTSY8SOKL2MGTOS/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Open Loop Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Open Loop<br/>Learning</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">Infinite Learning<br/>Continuum</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('adaptive-paced-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902029404-08X95JWIUC0ET7E7EMWQ/nav_paced_education.jpg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('global-skills-matrix')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902001655-AHTZLR3OYOOL337G49HW/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Global Skills Matrix" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Global Skills<br/>Matrix</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">Global Skills<br/>Matrix</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('purpose-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902073224-40XEGRCIXAE6GKIU1YL7/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Purpose Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Purpose<br/>Learning</span>
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">Purpose<br/>Learning</span>
+                   </div>
+                </button>
+                <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-[#0f3460] overflow-hidden cursor-pointer">
+                   <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
+                   <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
+                      <span className="text-base md:text-lg font-bold italic tracking-wide">Centers of<br/>Inquiry</span>
                    </div>
                 </button>
               </div>

@@ -19,7 +19,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
 
-  const provocationSlugs = ['open-loop-learning', 'adaptive-paced-learning', 'global-skills-matrix', 'purpose-learning'];
+  const provocationSlugs = ['open-loop-learning', 'adaptive-paced-learning', 'global-skills-matrix', 'purpose-learning', 'centers-of-inquiry'];
   const isExplorePath = provocationSlugs.includes(currentPage);
 
   return (
@@ -54,6 +54,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
                 <button onClick={() => { goTo('adaptive-paced-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'adaptive-paced-learning' && "font-bold text-gray-900")}>Adaptive Paced Learning</button>
                 <button onClick={() => { goTo('global-skills-matrix'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'global-skills-matrix' && "font-bold text-gray-900")}>Global Skills Matrix</button>
                 <button onClick={() => { goTo('purpose-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'purpose-learning' && "font-bold text-gray-900")}>Purpose Learning</button>
+                <button onClick={() => { goTo('centers-of-inquiry'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'centers-of-inquiry' && "font-bold text-gray-900")}>Centers of Inquiry</button>
               </div>
             </div>
           )}
@@ -81,6 +82,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
                 <button onClick={() => { goTo('adaptive-paced-learning'); setIsMobileMenuOpen(false); }}>Adaptive Paced Learning</button>
                 <button onClick={() => { goTo('global-skills-matrix'); setIsMobileMenuOpen(false); }}>Global Skills Matrix</button>
                 <button onClick={() => { goTo('purpose-learning'); setIsMobileMenuOpen(false); }}>Purpose Learning</button>
+                <button onClick={() => { goTo('centers-of-inquiry'); setIsMobileMenuOpen(false); }}>Centers of Inquiry</button>
               </div>
            </div>
            <button onClick={() => { goTo('build'); setIsMobileMenuOpen(false); }}>Build</button>
@@ -113,6 +115,7 @@ export function ExploreAnotherFuture({ currentPage, goTo }: ExploreAnotherFuture
     { slug: 'adaptive-paced-learning', label: 'Adaptive Paced<br/>Learning', bg: 'bg-[#007f9c] hover:bg-[#006e87]', border: '' },
     { slug: 'global-skills-matrix', label: 'Global Skills<br/>Matrix', bg: 'bg-[#461e68] hover:bg-[#391854]', border: 'border-l-[8px] border-yellow-400' },
     { slug: 'purpose-learning', label: 'Purpose<br/>Learning', bg: 'bg-[#f2b90f] hover:bg-[#d6a40d]', border: '' },
+    { slug: 'centers-of-inquiry', label: 'Centers of<br/>Inquiry', bg: 'bg-[#0f3460] hover:bg-[#0a2647]', border: 'border-l-[8px] border-white' },
     { slug: 'build', label: 'Design a<br/>Future', bg: 'bg-[#d92231] hover:bg-[#b91d29]', border: 'border-l-[8px] border-[#007f9c]', isSpecial: true },
   ].filter(l => l.slug !== currentPage);
 

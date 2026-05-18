@@ -7,6 +7,7 @@ import OpenLoopPage from './pages/OpenLoopPage';
 import PacedEducationPage from './pages/PacedEducationPage';
 import GlobalSkillsMatrixPage from './pages/AxisFlipPage';
 import PurposeLearningPage from './pages/PurposeLearningPage';
+import CentersOfInquiryPage from './pages/CentersOfInquiryPage';
 import BuildPage from './pages/BuildPage';
 import AboutPage from './pages/AboutPage';
 
@@ -16,6 +17,7 @@ type T1Page =
   | 'adaptive-paced-learning'
   | 'global-skills-matrix'
   | 'purpose-learning'
+  | 'centers-of-inquiry'
   | 'build'
   | 'about';
 
@@ -43,6 +45,8 @@ export default function T1Site({ onExit }: T1SiteProps) {
         return <GlobalSkillsMatrixPage goTo={goTo} />;
       case 'purpose-learning':
         return <PurposeLearningPage goTo={goTo} />;
+      case 'centers-of-inquiry':
+        return <CentersOfInquiryPage goTo={goTo} />;
       case 'build':
         return <BuildPage goTo={goTo} />;
       case 'about':
