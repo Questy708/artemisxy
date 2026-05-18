@@ -14,6 +14,7 @@ export default function OpenLoopPage({ goTo }: Props) {
         title="The Infinite Learning Continuum"
         description="Open Loop Learning evolved from a radical idea into a cradle-to-grave model — where learning never ends, it only transforms. From Early Explorers to Legacy Builders, Artemis redefined what it means to be a lifelong learner."
         bgGradientClass="bg-gradient-to-tr from-[#66B83B] via-[#7BCE44] to-[#4A9F2F]"
+        bgImage="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         <section className="space-y-6">

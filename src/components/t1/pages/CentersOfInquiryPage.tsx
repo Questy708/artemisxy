@@ -52,6 +52,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
         title="Centers of Inquiry"
         description="In 2100, we look back at the moment Artemis abolished the department and replaced it with interdisciplinary hubs organized around grand challenges — reimagining not just what students learn, but where learning happens, and who it happens with."
         bgGradientClass="bg-gradient-to-tr from-[#1a1a2e] via-[#16213e] to-[#0f3460]"
+        bgImage="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 

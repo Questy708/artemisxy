@@ -13,6 +13,7 @@ export default function AboutPage({ goTo }: Props) {
         title="About"
         description="The Artemis Project — a global collegiate university that dares to re-engineer the way humanity learns in a world of accelerating change."
         bgGradientClass="bg-gray-800"
+        bgImage="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-16">

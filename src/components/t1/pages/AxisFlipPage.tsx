@@ -14,6 +14,7 @@ export default function AxisFlipPage({ goTo }: Props) {
         title="SkillPrints"
         description="In 2100, we examine the era when Artemis replaced the traditional transcript with biometric, AI-powered SkillPrints — dynamic portraits of capability that evolve alongside the learner."
         bgGradientClass="bg-[#461e68]"
+        bgImage="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 
@@ -38,11 +39,67 @@ export default function AxisFlipPage({ goTo }: Props) {
 
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>Key Details</SectionHeading>
+            <SectionHeading>The SkillPrint</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=2000" className="w-full h-64 object-cover" alt="SkillPrints Diagram" />
+          <p className="text-sm text-gray-600 max-w-2xl">A SkillPrint is not a transcript — it is a living portrait of capability. Where transcripts list courses, SkillPrints map competencies across six dimensions, revealing not just what you studied, but what you can do, who you collaborate with, and where you are headed.</p>
+          <div className="w-full max-w-3xl mx-auto">
+            <svg viewBox="0 0 500 440" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Radar chart background */}
+              <g transform="translate(250,210)">
+                {/* Grid rings */}
+                <polygon points="0,-180 156,-51 96,132 -96,132 -156,-51" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                <polygon points="0,-135 117,-38 72,99 -72,99 -117,-38" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                <polygon points="0,-90 78,-26 48,66 -48,66 -78,-26" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                <polygon points="0,-45 39,-13 24,33 -24,33 -39,-13" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
+                {/* Axes */}
+                <line x1="0" y1="0" x2="0" y2="-180" stroke="#d1d5db" strokeWidth="1"/>
+                <line x1="0" y1="0" x2="156" y2="-51" stroke="#d1d5db" strokeWidth="1"/>
+                <line x1="0" y1="0" x2="96" y2="132" stroke="#d1d5db" strokeWidth="1"/>
+                <line x1="0" y1="0" x2="-96" y2="132" stroke="#d1d5db" strokeWidth="1"/>
+                <line x1="0" y1="0" x2="-156" y2="-51" stroke="#d1d5db" strokeWidth="1"/>
+                {/* Data polygon - the SkillPrint */}
+                <polygon points="0,-162 133,-43 67,99 -82,112 -140,-46" fill="rgba(70,30,104,0.15)" stroke="#461e68" strokeWidth="2.5"/>
+                {/* Data points */}
+                <circle cx="0" cy="-162" r="5" fill="#461e68"/>
+                <circle cx="133" cy="-43" r="5" fill="#461e68"/>
+                <circle cx="67" cy="99" r="5" fill="#461e68"/>
+                <circle cx="-82" cy="112" r="5" fill="#461e68"/>
+                <circle cx="-140" cy="-46" r="5" fill="#461e68"/>
+                {/* Center dot */}
+                <circle cx="0" cy="0" r="3" fill="#461e68"/>
+              </g>
+              {/* Labels */}
+              <text x="250" y="22" textAnchor="middle" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Critical Thinking</text>
+              <text x="430" y="172" textAnchor="start" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Technical Mastery</text>
+              <text x="366" y="370" textAnchor="start" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Collaborative Impact</text>
+              <text x="134" y="370" textAnchor="end" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Civic Adaptability</text>
+              <text x="70" y="172" textAnchor="end" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Creative Synthesis</text>
+              {/* Title */}
+              <text x="250" y="432" textAnchor="middle" className="text-[10px] font-mono fill-gray-400 uppercase tracking-widest" style={{fontSize:'10px', letterSpacing:'0.15em'}}>SAMPLE SKILLPRINT — ARTEMIS CLASS OF 2084</text>
+            </svg>
+          </div>
+          <div className="grid grid-cols-5 gap-4 max-w-3xl mx-auto text-center">
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#461e68]">90%</div>
+              <div className="text-[10px] text-gray-500">Critical Thinking</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#461e68]">85%</div>
+              <div className="text-[10px] text-gray-500">Technical Mastery</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#461e68]">75%</div>
+              <div className="text-[10px] text-gray-500">Collaborative Impact</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#461e68]">62%</div>
+              <div className="text-[10px] text-gray-500">Civic Adaptability</div>
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-bold text-[#461e68]">78%</div>
+              <div className="text-[10px] text-gray-500">Creative Synthesis</div>
+            </div>
           </div>
         </section>
 

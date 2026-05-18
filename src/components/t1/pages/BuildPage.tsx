@@ -13,6 +13,7 @@ export default function BuildPage({ goTo }: Props) {
         title="Design a Future"
         description="A Rift in Spacetime has opened — and you are the architect of what comes through it. Step into an immersive design exercise to shape the future of learning where you are."
         bgGradientClass="bg-[#d92231]"
+        bgImage="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         

@@ -14,6 +14,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
         title="The Artemis Oath"
         description="Every learner takes an oath to pursue something that matters. A look back from 2100 to the era when Artemis students declared what they would change in the world — and built their education around that commitment."
         bgGradientClass="bg-[#f2b90f]"
+        bgImage="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
@@ -72,8 +73,44 @@ export default function PurposeLearningPage({ goTo }: Props) {
               <p>The goal was to help students select a meaningful course of study while in school, and then scaffold a clear arc for the first 10–15 years of their professional lives. It wasn&apos;t about the career trajectory, but the reasons behind it.</p>
               <p>This reorientation fundamentally changed the culture of Artemis. Conversations shifted from &ldquo;What are you majoring in?&rdquo; to &ldquo;What problem are you solving?&rdquo; Faculty reported that students arrived to class not merely prepared, but possessed by a sense of urgency and relevance that elevated every seminar and lab.</p>
             </div>
-            <div>
-               <img src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Students embracing The Artemis Oath at Artemis"/>
+            <div className="flex items-center justify-center">
+              <svg viewBox="0 0 340 400" className="w-full max-w-[320px]" xmlns="http://www.w3.org/2000/svg">
+                {/* Oath Scroll */}
+                <rect x="40" y="20" width="260" height="360" rx="8" fill="#fffbeb" stroke="#f2b90f" strokeWidth="2"/>
+                <rect x="40" y="20" width="260" height="40" rx="8" fill="#f2b90f"/>
+                <text x="170" y="46" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.15em'}}>THE ARTEMIS OATH</text>
+                
+                {/* Seal */}
+                <circle cx="170" cy="100" r="30" fill="none" stroke="#d6a40d" strokeWidth="2"/>
+                <circle cx="170" cy="100" r="22" fill="none" stroke="#d6a40d" strokeWidth="1"/>
+                <text x="170" y="96" textAnchor="middle" fill="#d6a40d" style={{fontSize:'8px', fontWeight:'bold'}}>ARTEMIS</text>
+                <text x="170" y="108" textAnchor="middle" fill="#d6a40d" style={{fontSize:'7px'}}>2100</text>
+                
+                {/* Oath text lines */}
+                <text x="170" y="155" textAnchor="middle" fill="#92400e" style={{fontSize:'10px', fontStyle:'italic'}}>I declare not a major,</text>
+                <text x="170" y="172" textAnchor="middle" fill="#92400e" style={{fontSize:'10px', fontStyle:'italic'}}>but a mission.</text>
+                
+                <line x1="80" y1="188" x2="260" y2="188" stroke="#e5e7eb" strokeWidth="0.5"/>
+                
+                <text x="170" y="210" textAnchor="middle" fill="#78716c" style={{fontSize:'9px'}}>I commit my learning</text>
+                <text x="170" y="225" textAnchor="middle" fill="#78716c" style={{fontSize:'9px'}}>to the service of</text>
+                <text x="170" y="240" textAnchor="middle" fill="#78716c" style={{fontSize:'9px'}}>something that matters.</text>
+                
+                <line x1="80" y1="258" x2="260" y2="258" stroke="#e5e7eb" strokeWidth="0.5"/>
+                
+                {/* Signature line */}
+                <line x1="80" y1="310" x2="220" y2="310" stroke="#a8a29e" strokeWidth="1"/>
+                <text x="150" y="325" textAnchor="middle" fill="#a8a29e" style={{fontSize:'8px'}}>Learner&apos;s Signature</text>
+                
+                <line x1="80" y1="350" x2="220" y2="350" stroke="#a8a29e" strokeWidth="1"/>
+                <text x="150" y="365" textAnchor="middle" fill="#a8a29e" style={{fontSize:'8px'}}>Witness</text>
+                
+                {/* Decorative corners */}
+                <line x1="50" y1="30" x2="50" y2="55" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
+                <line x1="50" y1="30" x2="75" y2="30" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
+                <line x1="290" y1="30" x2="290" y2="55" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
+                <line x1="290" y1="30" x2="265" y2="30" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
+              </svg>
             </div>
           </div>
         </section>

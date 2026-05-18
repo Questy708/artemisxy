@@ -149,10 +149,14 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function HeroHeader({ title, description, bgGradientClass }: { title: string; description: string; bgGradientClass: string }) {
+export function HeroHeader({ title, description, bgGradientClass, bgImage }: { title: string; description: string; bgGradientClass: string; bgImage?: string }) {
   return (
     <section className="relative w-full overflow-hidden">
       <div className={cn("max-w-[1600px] mx-auto relative w-full h-[45vh] min-h-[360px] overflow-hidden", bgGradientClass)}>
+        {/* Background image */}
+        {bgImage && (
+          <img src={bgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay pointer-events-none" />
+        )}
         {/* Abstract background shapes */}
         <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
           <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] rounded-full border-[10px] border-white/40 border-dashed" />
@@ -160,7 +164,7 @@ export function HeroHeader({ title, description, bgGradientClass }: { title: str
         </div>
 
         <div className="relative z-10 flex flex-col justify-end h-full max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 pb-16">
-          <div className="bg-white p-8 md:p-12 w-full md:w-2/3 lg:w-[600px] border border-gray-100 shadow-xl">
+          <div className="bg-white/95 backdrop-blur-sm p-8 md:p-12 w-full md:w-2/3 lg:w-[600px] border border-gray-100 shadow-xl">
             <h1 className="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-gray-900 mb-6 border-b-2 border-black inline-block pb-1">
               {title}
             </h1>

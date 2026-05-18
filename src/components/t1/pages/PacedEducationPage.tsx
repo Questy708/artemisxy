@@ -14,6 +14,7 @@ export default function PacedEducationPage({ goTo }: Props) {
         title="Adaptive Paced Learning"
         description="Calibrate. Elevate. Activate. In 2100, we reflect on how Artemis replaced the archaic Freshman-Senior model with a three-stage learning lifecycle attuned to each individual's cognitive and emotional rhythm."
         bgGradientClass="bg-[#007f9c]"
+        bgImage="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
@@ -38,11 +39,76 @@ export default function PacedEducationPage({ goTo }: Props) {
 
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>Key Details</SectionHeading>
+            <SectionHeading>The Lifecycle</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=2000" className="w-full h-64 object-cover" alt="Diagram" />
+          <p className="text-sm text-gray-600 max-w-2xl">The Freshman-to-Senior ladder was replaced by a three-phase lifecycle — each phase attuned to a different mode of growth. A learner does not advance by calendar, but by readiness.</p>
+          <div className="w-full max-w-4xl mx-auto">
+            <svg viewBox="0 0 900 280" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Connecting arrows */}
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#9ca3af"/>
+                </marker>
+              </defs>
+              
+              {/* Phase 1: Calibrate */}
+              <g transform="translate(50,40)">
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#007f9c"/>
+                <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>CALIBRATE</text>
+                <text x="115" y="68" textAnchor="middle" fill="#007f9c" style={{fontSize:'10px', fontWeight:'bold'}}>3–18 MONTHS</text>
+                {/* Waveform - exploring */}
+                <path d="M 30,110 Q 55,80 80,110 T 130,110 T 180,110 T 200,110" fill="none" stroke="#007f9c" strokeWidth="2" opacity="0.5"/>
+                <circle cx="50" cy="130" r="4" fill="#007f9c" opacity="0.3"/>
+                <circle cx="90" cy="130" r="6" fill="#007f9c" opacity="0.4"/>
+                <circle cx="140" cy="130" r="8" fill="#007f9c" opacity="0.5"/>
+                <circle cx="190" cy="130" r="5" fill="#007f9c" opacity="0.3"/>
+                <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Explore · Sample · Reflect</text>
+                <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Find your direction</text>
+              </g>
+              
+              {/* Arrow 1 */}
+              <line x1="290" y1="140" x2="330" y2="140" stroke="#9ca3af" strokeWidth="2" markerEnd="url(#arrowhead)"/>
+              
+              {/* Phase 2: Elevate */}
+              <g transform="translate(335,40)">
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#005f7c"/>
+                <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>ELEVATE</text>
+                <text x="115" y="68" textAnchor="middle" fill="#005f7c" style={{fontSize:'10px', fontWeight:'bold'}}>6–36 MONTHS</text>
+                {/* Ascending bars - deepening */}
+                <rect x="40" y="150" width="20" height="30" rx="2" fill="#005f7c" opacity="0.3"/>
+                <rect x="70" y="130" width="20" height="50" rx="2" fill="#005f7c" opacity="0.4"/>
+                <rect x="100" y="110" width="20" height="70" rx="2" fill="#005f7c" opacity="0.5"/>
+                <rect x="130" y="95" width="20" height="85" rx="2" fill="#005f7c" opacity="0.6"/>
+                <rect x="160" y="80" width="20" height="100" rx="2" fill="#005f7c" opacity="0.7"/>
+                <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Focus · Deepen · Master</text>
+                <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Build your expertise</text>
+              </g>
+              
+              {/* Arrow 2 */}
+              <line x1="575" y1="140" x2="615" y2="140" stroke="#9ca3af" strokeWidth="2" markerEnd="url(#arrowhead)"/>
+              
+              {/* Phase 3: Activate */}
+              <g transform="translate(620,40)">
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#003f5c"/>
+                <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>ACTIVATE</text>
+                <text x="115" y="68" textAnchor="middle" fill="#003f5c" style={{fontSize:'10px', fontWeight:'bold'}}>3–12 MONTHS (ONGOING)</text>
+                {/* Radiating lines - deploying */}
+                <circle cx="115" cy="120" r="25" fill="none" stroke="#003f5c" strokeWidth="2" opacity="0.5"/>
+                <circle cx="115" cy="120" r="40" fill="none" stroke="#003f5c" strokeWidth="1.5" opacity="0.3"/>
+                <circle cx="115" cy="120" r="55" fill="none" stroke="#003f5c" strokeWidth="1" opacity="0.15"/>
+                <circle cx="115" cy="120" r="6" fill="#003f5c"/>
+                <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Apply · Deploy · Impact</text>
+                <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Change the world</text>
+              </g>
+
+              {/* Return loop arrow */}
+              <path d="M 735,250 Q 450,290 165,250" fill="none" stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="6,4" markerEnd="url(#arrowhead)"/>
+              <text x="450" y="272" textAnchor="middle" fill="#9ca3af" style={{fontSize:'9px', fontStyle:'italic'}}>Return to any phase at any time — learning never ends</text>
+            </svg>
           </div>
         </section>
 
