@@ -7,9 +7,28 @@ import { motion, AnimatePresence } from 'motion/react';
 interface MainAppProps {
   travelerName?: string;
   onExit: () => void;
+  goTo: (page: string) => void;
 }
 
-export function MainApp({ travelerName, onExit }: MainAppProps) {
+const DIMENSIONS = [
+  { slug: 'open-loop-learning', label: '01 Infinite Learning', icon: Compass },
+  { slug: 'adaptive-paced-learning', label: '02 Adaptive Paced', icon: Folder },
+  { slug: 'global-skills-matrix', label: '03 SkillPrints', icon: Zap },
+  { slug: 'purpose-learning', label: '04 Artemis Oath', icon: BookOpen },
+  { slug: 'centers-of-inquiry', label: '05 Centers of Inquiry', icon: Folder },
+  { slug: 'darwin-voyage', label: '06 World as Campus', icon: Folder },
+];
+
+const TASK_ITEMS = [
+  { slug: 'open-loop-learning', num: '01', label: 'Explore the', highlight: 'Infinite Learning Continuum', accent: true },
+  { slug: 'adaptive-paced-learning', num: '02', label: 'Discover', highlight: 'Adaptive Paced Learning', accent: false },
+  { slug: 'global-skills-matrix', num: '03', label: 'Map your', highlight: 'SkillPrints', accent: true },
+  { slug: 'purpose-learning', num: '04', label: 'Take the', highlight: 'Artemis Oath', accent: false },
+  { slug: 'centers-of-inquiry', num: '05', label: 'Visit the', highlight: 'Centers of Inquiry', accent: false },
+  { slug: 'darwin-voyage', num: '06', label: 'Experience', highlight: 'The World as Campus', accent: false },
+];
+
+export function MainApp({ travelerName, onExit, goTo }: MainAppProps) {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showAnalyticsModal, setShowAnalyticsModal] = useState(false);
 
@@ -42,40 +61,47 @@ export function MainApp({ travelerName, onExit }: MainAppProps) {
           </div>
 
           <div className="px-1 mb-6">
-            <button className="w-full bg-white border border-gray-200 shadow-sm rounded-lg py-1.5 px-3 flex items-center text-sm font-medium hover:bg-gray-50 transition-colors">
+            <button 
+              onClick={() => goTo('home')}
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg py-1.5 px-3 flex items-center text-sm font-medium hover:bg-gray-50 transition-colors"
+            >
               <Plus className="w-4 h-4 mr-2" />
               New exploration
             </button>
           </div>
 
           <nav className="space-y-0.5 px-1 mb-8">
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            <button onClick={() => goTo('home')} className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <Compass className="w-4 h-4 mr-2 opacity-70" /> Dimensions
-            </a>
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            </button>
+            <button className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <Search className="w-4 h-4 mr-2 opacity-70" /> Search
-            </a>
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            </button>
+            <button onClick={() => goTo('global-skills-matrix')} className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <Zap className="w-4 h-4 mr-2 opacity-70" /> SkillPrints
-            </a>
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            </button>
+            <button onClick={() => goTo('purpose-learning')} className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <BookOpen className="w-4 h-4 mr-2 opacity-70" /> Oath
-            </a>
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            </button>
+            <button className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <MoreHorizontal className="w-4 h-4 mr-2 opacity-70" /> More
-            </a>
+            </button>
           </nav>
 
           <div className="px-1">
             <div className="px-3 text-xs font-medium text-gray-500 mb-2">Dimensions</div>
-            {['01 Infinite Learning', '02 Adaptive Paced', '03 SkillPrints', '04 Artemis Oath'].map((d) => (
-              <a key={d} href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
-                 <Folder className="w-4 h-4 mr-2 opacity-70" /> {d}
-              </a>
+            {DIMENSIONS.slice(0, 4).map((d) => (
+              <button 
+                key={d.slug} 
+                onClick={() => goTo(d.slug)} 
+                className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left"
+              >
+                 <d.icon className="w-4 h-4 mr-2 opacity-70" /> {d.label}
+              </button>
             ))}
-            <a href="#" className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700">
+            <button className="flex items-center px-3 py-1.5 text-sm hover:bg-gray-200/50 rounded-lg text-gray-700 w-full text-left">
                <MoreHorizontal className="w-4 h-4 mr-2 opacity-70" /> View all
-            </a>
+            </button>
           </div>
         </div>
 
@@ -152,55 +178,28 @@ export function MainApp({ travelerName, onExit }: MainAppProps) {
                 </button>
               </div>
 
-              {/* Task List */}
+              {/* Task List — all items navigate to their provocation pages */}
               <div className="space-y-1">
-                 
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors group border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-[#8A0000]/10 flex items-center justify-center mr-4">
-                      <span className="text-[10px] font-bold text-[#8A0000]">01</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Explore the <span className="text-black">Infinite Learning Continuum</span></div>
-                 </div>
+                 {TASK_ITEMS.map((task) => (
+                   <button
+                     key={task.slug}
+                     onClick={() => goTo(task.slug)}
+                     className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors group border border-transparent hover:border-gray-100 shadow-sm hover:shadow w-full text-left"
+                   >
+                     <div className={`w-6 h-6 rounded flex items-center justify-center mr-4 ${task.accent ? 'bg-[#8A0000]/10' : 'bg-gray-200'}`}>
+                        <span className={`text-[10px] font-bold ${task.accent ? 'text-[#8A0000]' : ''}`}>{task.num}</span>
+                     </div>
+                     <div className="text-sm font-medium text-gray-600">{task.label} <span className="text-black">{task.highlight}</span></div>
+                   </button>
+                 ))}
 
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-gray-200 flex items-center justify-center mr-4">
-                      <span className="text-[10px] font-bold">02</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Discover <span className="text-black">Adaptive Paced Learning</span></div>
-                 </div>
-
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-[#8A0000]/10 flex items-center justify-center mr-4">
-                      <span className="text-[10px] font-bold text-[#8A0000]">03</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Map your <span className="text-black">SkillPrints</span> across dimensions</div>
-                 </div>
-
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-gray-100 flex items-center justify-center mr-4">
-                      <span className="text-[10px]">04</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Take the <span className="text-black">Artemis Oath</span></div>
-                 </div>
-
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-gray-200 flex items-center justify-center mr-4">
-                      <span className="text-[10px] font-bold">05</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Visit the <span className="text-black">Centers of Inquiry</span></div>
-                 </div>
-
-                 <div className="flex items-center px-4 py-3 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-gray-100 shadow-sm hover:shadow">
-                   <div className="w-6 h-6 rounded bg-gray-100 flex items-center justify-center mr-4">
-                      <span className="text-[10px]">06</span>
-                   </div>
-                   <div className="text-sm font-medium text-gray-600">Experience <span className="text-black">The World as Campus</span></div>
-                 </div>
-
-                 <div className="flex items-center px-4 py-3 mt-4 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors">
+                 <button
+                   onClick={() => goTo('home')}
+                   className="flex items-center px-4 py-3 mt-4 hover:bg-gray-50 rounded-xl cursor-pointer transition-colors w-full text-left"
+                 >
                    <span className="text-gray-400 mr-4">...</span>
-                   <div className="text-sm font-medium text-gray-500">Connect your dimensions for deeper insights &rarr;</div>
-                 </div>
+                   <div className="text-sm font-medium text-gray-500">Explore all six dimensions &rarr;</div>
+                 </button>
 
               </div>
 
