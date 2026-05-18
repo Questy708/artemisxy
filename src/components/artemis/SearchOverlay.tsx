@@ -63,6 +63,8 @@ const searchIndex: SearchResult[] = [
   { title: 'Strategic Plan', page: 'strategic-plan', category: 'About' },
   { title: 'Sustainability', page: 'sustainability', category: 'About' },
   { title: 'Equality and Diversity', page: 'equality', category: 'About' },
+  // Experience
+  { title: 'Artemis 2100 — Future of Education', page: 'artemis-2100', category: 'Experience' },
 ];
 
 export default function SearchOverlay({ isOpen, onClose, goToPage }: SearchOverlayProps) {

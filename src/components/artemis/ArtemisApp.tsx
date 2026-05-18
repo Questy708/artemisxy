@@ -37,6 +37,7 @@ import BlogArticlePage from '@/components/artemis/BlogArticlePage';
 import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
 import AdminDashboard from '@/components/artemis/AdminDashboard';
+import Artemis2100 from '@/components/artemis/Artemis2100';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
 
@@ -296,6 +297,11 @@ function getBreadcrumbs(currentPage: string, currentProgram: string): { items: B
         items: [],
         currentLabel: 'Admin Dashboard',
       };
+    case 'artemis-2100':
+      return {
+        items: [],
+        currentLabel: 'Artemis 2100',
+      };
     default:
       return null;
   }
@@ -478,6 +484,8 @@ export default function ArtemisApp() {
         return <GenericAboutSubpage goToPage={goToPage} id="visit" title="Visiting the Colleges" description="Information on opening times and admission protocols for our physical colleges." />;
       case 'admin':
         return <AdminDashboard goToPage={goToPage} />;
+      case 'artemis-2100':
+        return <Artemis2100 goToPage={goToPage} />;
 
       default:
         return <Home goToPage={goToPage} />;
