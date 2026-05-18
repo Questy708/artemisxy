@@ -61,3 +61,33 @@ Stage Summary:
 - Renders fullscreen with its own "Stanford2025" branded NavBar and Footer
 - All 4 provocations (Open Loop, Paced Education, Axis Flip, Purpose Learning) + Build + About pages included
 - "Back to Artemis" button returns to main site
+---
+Task ID: 1
+Agent: Main
+Task: Add dropdown menus to main Artemis University site navbar (like t1 Dimensions dropdown) to decongest navigation
+
+Work Log:
+- Read t1 Shared.tsx to understand the dropdown pattern (Dimensions dropdown with hover trigger, ChevronDown icon, dropdown panel with children)
+- Read main site Header.tsx — had 8 flat nav links (Education, Research, Innovation, Admissions, Campus Life, Colleges, About, Journal) causing congestion
+- Read ArtemisApp.tsx to understand page hierarchy and subpages under each section
+- Read Sidebar.tsx for additional context on navigation structure
+- Rewrote Header.tsx with dropdown menus:
+  - Education dropdown: Undergraduate Study, Programs of Study (with descriptions)
+  - Research dropdown: Centers of Inquiry, Collegium Alliance
+  - Innovation: standalone (no subpages)
+  - Admissions dropdown: Tuition & Expenses, International Students, Transfer Students, Application Deadlines, Visit Campus, Graduate Programs
+  - Campus Life: standalone
+  - Colleges: standalone
+  - About dropdown: The University, How We Are Run, Our People, History, Access at Artemis, Careers, Contact Us
+  - Journal: standalone
+- Added currentPage prop to Header for active state highlighting
+- Added mobile accordion-style dropdown menus (tap to expand/collapse)
+- Updated ArtemisApp.tsx to pass currentPage to Header
+- Build passes successfully
+
+Stage Summary:
+- Main site navbar now has dropdown menus matching t1's "Dimensions" pattern
+- Navigation reorganized: 4 dropdowns (Education, Research, Admissions, About) + 4 standalone links
+- Each dropdown shows subpages with descriptions
+- Mobile menu has accordion-style expandable sections
+- Active page state is highlighted in the navbar

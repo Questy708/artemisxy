@@ -517,6 +517,7 @@ export default function ArtemisApp() {
         goHome={() => { setCurrentPage('home'); setSidebarOpen(false); }}
         goToPage={goToPage}
         onSearchClick={() => setSearchOpen(true)}
+        currentPage={currentPage}
       />
 
       {/* Search Overlay */}
