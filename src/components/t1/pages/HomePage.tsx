@@ -67,7 +67,7 @@ export default function HomePage({ goTo }: HomePageProps) {
         <div className="space-y-12">
           <SectionHeading>This is a fascinating time to be at Stanford.</SectionHeading>
           <div className="grid md:grid-cols-2 gap-16">
-            <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
+            <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
               <p>Our university—like most—was designed around a model of education that has remained fairly constant for hundreds of years. But many schools and educators are currently looking at this model with fresh eyes. The potential disruption posed by online learning allows us to question how time, space, expertise, accreditation, and student agency may also change within higher education. Many parts of the undergraduate experience are ripe for reinvention.</p>
             </div>
             <div>
@@ -87,9 +87,9 @@ export default function HomePage({ goTo }: HomePageProps) {
       {/* Context 1 */}
       <ParallaxSection section={SECTIONS[1]}>
         <div className="space-y-12">
-          <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">Exploring the on-campus experience</h2>
+          <h2 className="text-3xl font-bold max-w-3xl text-gray-900 leading-tight">Exploring the on-campus experience</h2>
           <div className="grid md:grid-cols-2 gap-16">
-             <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
+             <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
                 <p>College has multiple aims: it&apos;s a place to gain expertise and develop abilities, but also to come of age. These are entwined together in a residential college experience—a complex and special setting. Enormous energy and investment are now being placed in experimentation and pioneering in the <em>online</em> learning space. We wanted to complement these efforts with an exploration of learning and living <em>on campus</em>, now and in the future.</p>
              </div>
              <div>
@@ -109,9 +109,9 @@ export default function HomePage({ goTo }: HomePageProps) {
       {/* Context 3-1-1 */}
       <ParallaxSection section={SECTIONS[2]}>
         <div className="space-y-12">
-          <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">Our Process</h2>
+          <h2 className="text-3xl font-bold max-w-3xl text-gray-900 leading-tight">Our Process</h2>
           <div className="grid md:grid-cols-2 gap-16">
-             <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
+             <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
                 <p>A design team from the Stanford d.school worked with hundreds of perceptive, creative, and generous students, faculty, and administrators over the course of a year to explore this territory. We considered many lenses—from how students prepare for a Stanford education while still in high school, to patterns of undergraduate decision-making about what and how they study, to the shifting needs and expectations from future employers.</p>
              </div>
              <div>
@@ -131,9 +131,9 @@ export default function HomePage({ goTo }: HomePageProps) {
       {/* Context 3-1-1-1 */}
       <ParallaxSection section={SECTIONS[3]}>
         <div className="space-y-12">
-          <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">An invitation to travel through time</h2>
+          <h2 className="text-3xl font-bold max-w-3xl text-gray-900 leading-tight">An invitation to travel through time</h2>
           <div className="grid md:grid-cols-2 gap-16">
-             <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
+             <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
                 <p>The project culminated with an experiential exhibit entitled &ldquo;Stanford 2025,&rdquo; held at the d.school in May 2014. To encourage an exploratory mindset, the event was staged as a time-travel journey. The community embarked to the distant future—and landed just at the moment when Stanford was looking back retrospectively at major paradigm shifts that &ldquo;happened&rdquo; around 2025. These possible shifts were shared as provocations—a subjective, student-centered imagining of what could happen as the future unfolds.</p>
                 <p>Here, on this website, we invite you to travel with us and explore these possible futures. Then, we hope you will use the provocations—and the tools available on the site—to spark your own vision for the future of higher education by trying some experiments.</p>
                 <p>Now, strap in, and let&apos;s go to the year 2100…</p>
@@ -155,10 +155,10 @@ export default function HomePage({ goTo }: HomePageProps) {
       {/* Context 4 */}
       <ParallaxSection section={SECTIONS[4]}>
         <div className="space-y-12">
-          <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">Show Don&apos;t Tell</h2>
+          <h2 className="text-3xl font-bold max-w-3xl text-gray-900 leading-tight">Show Don&apos;t Tell</h2>
           <p className="text-sm md:text-base text-gray-600 leading-relaxed">Take a quick look at the journey of faculty, staff, students, and guests at the Stanford 2025 experience.</p>
           
-          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden border border-gray-300 max-w-4xl">
+          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden border border-gray-300 max-w-[1000px]">
               <img
                 src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1406177443557-T7R0F6NBRQXIAIQCI2SJ/Space+6.jpg?format=1000w"
                 alt="Video Thumbnail"
@@ -173,7 +173,7 @@ export default function HomePage({ goTo }: HomePageProps) {
 
           <hr className="border-t border-gray-200 !my-16" />
 
-          <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
             <h3 className="font-bold text-xl text-gray-900">Your time to travel</h3>
             <p>Now it&apos;s your turn! Be pulled back into history before launching into the future. Hear the moments that made Stanford what it is today and listen for the moments that will make it to tomorrow.</p>
             <p className="italic">Headphones recommended</p>
@@ -197,7 +197,7 @@ export default function HomePage({ goTo }: HomePageProps) {
             className="fixed top-0 left-0 w-[100vw] h-[100vh] object-[center_20%] object-cover pointer-events-none -z-10 opacity-40 mix-blend-overlay"
           />
           <div className="absolute inset-0 bg-transparent pointer-events-none -z-10" />
-          <div className="relative z-10 p-6 md:p-12 w-full max-w-5xl mx-auto space-y-4">
+          <div className="relative z-10 p-6 md:p-12 w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4">
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] drop-shadow-md">
               {SECTIONS[5].title}
             </h2>
@@ -208,7 +208,7 @@ export default function HomePage({ goTo }: HomePageProps) {
         </div>
 
         <div className="bg-white w-full relative z-20 shadow-[0_-15px_30px_rgba(0,0,0,0.1)]">
-          <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+          <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
             <div className="space-y-12">
               <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Choose a future to explore.</h2>
               
@@ -251,7 +251,7 @@ function ParallaxSection({ section, children }: { section: typeof SECTIONS[0]; c
   return (
     <div id={section.id} className="w-full relative shadow-[0_-15px_30px_rgba(0,0,0,0.15)] bg-white">
       <div
-        className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-gray-900"
+        className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden bg-gray-900"
         style={{ clipPath: "inset(0 0 0 0)" }}
       >
         <img
@@ -260,7 +260,7 @@ function ParallaxSection({ section, children }: { section: typeof SECTIONS[0]; c
           className="fixed top-0 left-0 w-[100vw] h-[100vh] object-cover pointer-events-none -z-10 opacity-70"
         />
         <div className="absolute inset-0 bg-black/40 pointer-events-none -z-10" />
-        <div className="relative z-10 p-6 md:p-12 w-full max-w-5xl mx-auto space-y-4 pt-24 pb-12">
+        <div className="relative z-10 w-full max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4 pt-24 pb-12">
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] uppercase drop-shadow-lg">
             {section.title}
           </h2>
@@ -273,7 +273,7 @@ function ParallaxSection({ section, children }: { section: typeof SECTIONS[0]; c
       </div>
 
       <div className="bg-white w-full relative z-20 shadow-[0_-15px_30px_rgba(0,0,0,0.15)]">
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
           {children}
         </div>
       </div>

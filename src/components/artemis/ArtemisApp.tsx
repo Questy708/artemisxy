@@ -481,6 +481,8 @@ export default function ArtemisApp() {
         return <GenericAboutSubpage goToPage={goToPage} id="visit" title="Visiting the Colleges" description="Information on opening times and admission protocols for our physical colleges." />;
       case 'admin':
         return <AdminDashboard goToPage={goToPage} />;
+      case 't1':
+        return <T1Site onExit={() => goToPage('home')} />;
 
       default:
         return <Home goToPage={goToPage} />;
@@ -488,20 +490,14 @@ export default function ArtemisApp() {
   };
 
   const isHome = currentPage === 'home';
-  const isMicroSite = currentPage === 'artemis-2100' || currentPage === 't1';
+  const isMicroSite = currentPage === 'artemis-2100';
+  const isT1 = currentPage === 't1';
 
   // Get breadcrumbs for current page
-  const breadcrumbData = !isHome && !isMicroSite ? getBreadcrumbs(currentPage, currentProgram) : null;
+  const breadcrumbData = !isHome && !isMicroSite && !isT1 ? getBreadcrumbs(currentPage, currentProgram) : null;
 
-  // Micro-sites render fullscreen with their own navbar/footer
+  // Only Artemis 2100 renders fullscreen with its own navbar/footer
   if (isMicroSite) {
-    if (currentPage === 't1') {
-      return (
-        <div className="w-full min-h-screen">
-          <T1Site onExit={() => goToPage('home')} />
-        </div>
-      );
-    }
     return (
       <div className="w-full min-h-screen">
         <Artemis2100Site onExit={() => goToPage('home')} />

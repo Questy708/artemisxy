@@ -15,7 +15,7 @@ export default function PacedEducationPage({ goTo }: Props) {
         description="In 2100, we examine the eras when Stanford abolished the class year and embraced adaptive learning."
         bgGradientClass="bg-[#007f9c]"
       />
-      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
@@ -41,7 +41,7 @@ export default function PacedEducationPage({ goTo }: Props) {
             <SectionHeading>Key Details</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <div className="w-full max-w-4xl pb-12">
+          <div className="w-full max-w-[1000px] pb-12">
             <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="Diagram" />
           </div>
         </section>

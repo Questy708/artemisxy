@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { NavBar, Footer } from './Shared';
+import { T1NavBar, T1Footer } from './Shared';
 import HomePage from './pages/HomePage';
 import OpenLoopPage from './pages/OpenLoopPage';
 import PacedEducationPage from './pages/PacedEducationPage';
@@ -53,12 +53,13 @@ export default function T1Site({ onExit }: T1SiteProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-800 antialiased selection:bg-green-200 flex flex-col">
-      <NavBar currentPage={currentPage} goTo={goTo} onExit={onExit} />
+    <div className="flex flex-col bg-white">
+      {/* T1 Sub-navigation bar — sits below the Artemis Header */}
+      <T1NavBar currentPage={currentPage} goTo={goTo} onExit={onExit} />
       <div className="flex-1">
         {renderPage()}
       </div>
-      <Footer />
+      <T1Footer />
     </div>
   );
 }
