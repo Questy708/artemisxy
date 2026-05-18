@@ -195,13 +195,13 @@ export default function HomePage({ goTo }: HomePageProps) {
       {/* Fast Forward */}
       <section id={SECTIONS[5].id} className="relative w-full overflow-hidden">
         <div className="max-w-[1600px] mx-auto">
-          <div style={{ clipPath: "inset(0 0 0 0)" }} className="relative w-full min-h-[50vh] md:min-h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#461e68]">
+          <div style={{ clipPath: "inset(0 0 0 0)" }} className="relative w-full min-h-[50vh] md:min-h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden bg-gray-900">
             <img
               src={SECTIONS[5].img}
               alt={SECTIONS[5].title}
-              className="fixed top-0 left-0 w-[100vw] h-[100vh] object-[center_20%] object-cover pointer-events-none -z-10 opacity-40 mix-blend-overlay"
+              className="fixed top-0 left-0 w-[100vw] h-[100vh] object-[center_20%] object-cover pointer-events-none -z-10 opacity-60"
             />
-            <div className="absolute inset-0 bg-transparent pointer-events-none -z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40 pointer-events-none -z-10" />
             <div className="relative z-10 p-6 md:p-12 w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4">
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] drop-shadow-md">
                 {SECTIONS[5].title}
@@ -273,6 +273,8 @@ function ParallaxSection({ section, children }: { section: typeof SECTIONS[0]; c
             className="fixed top-0 left-0 w-[100vw] h-[100vh] object-cover pointer-events-none -z-10 opacity-70"
           />
           <div className="absolute inset-0 bg-black/40 pointer-events-none -z-10" />
+          {/* Top gradient for fixed navbar */}
+          <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/50 to-transparent pointer-events-none -z-10" />
           <div className="relative z-10 p-6 md:p-12 w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4 pt-24 pb-12">
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] uppercase drop-shadow-lg">
               {section.title}

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronDown, Menu, X, ArrowLeft } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -18,76 +18,120 @@ interface NavBarProps {
 export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const dimensionSlugs = ['open-loop-learning', 'adaptive-paced-learning', 'global-skills-matrix', 'purpose-learning', 'centers-of-inquiry'];
   const isExplorePath = dimensionSlugs.includes(currentPage);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const dimensions = [
+    { slug: 'open-loop-learning', label: 'Infinite Learning Continuum', num: '01' },
+    { slug: 'adaptive-paced-learning', label: 'Adaptive Paced Learning', num: '02' },
+    { slug: 'global-skills-matrix', label: 'SkillPrints', num: '03' },
+    { slug: 'purpose-learning', label: 'The Artemis Oath', num: '04' },
+    { slug: 'centers-of-inquiry', label: 'Centers of Inquiry', num: '05' },
+  ];
+
   return (
-    <header className="w-full relative z-50">
-      <div className="flex items-center justify-between py-6 max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
-      <div className="flex items-center gap-2">
-        <button onClick={() => goTo('home')} className="text-2xl font-semibold italic tracking-tight text-gray-900 cursor-pointer">
-          Artemis<span className="font-light">2100</span>
+    <header className={cn(
+      "w-full fixed top-0 left-0 z-50 transition-all duration-300",
+      scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]" : "bg-transparent"
+    )}>
+      <div className="flex items-center justify-between h-14 max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
+        {/* Logo */}
+        <button onClick={() => goTo('home')} className="flex items-center gap-3 cursor-pointer group">
+          <div className={cn(
+            "w-7 h-7 border-2 flex items-center justify-center text-[10px] font-bold italic transition-colors",
+            scrolled ? "border-gray-900 text-gray-900" : "border-white text-white"
+          )}>
+            A
+          </div>
+          <span className={cn(
+            "text-sm font-semibold tracking-[0.2em] uppercase transition-colors",
+            scrolled ? "text-gray-900" : "text-white"
+          )}>
+            Artemis<span className="font-light opacity-60">2100</span>
+          </span>
         </button>
-      </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest text-gray-400 uppercase">
-        <button
-          onClick={() => goTo('home')}
-          className={cn("hover:text-gray-900 transition-colors cursor-pointer", currentPage === 'home' && "text-gray-900 border-b border-gray-900 pb-1")}
-        >
-          Home
-        </button>
-        <div
-          className="relative group cursor-pointer"
-          onMouseEnter={() => setIsExploreOpen(true)}
-          onMouseLeave={() => setIsExploreOpen(false)}
-        >
-          <span className={cn("flex items-center gap-1 hover:text-gray-900 transition-colors pb-1", isExplorePath && "text-gray-900 border-b border-gray-900")}>
-            Explore <ChevronDown className="w-3 h-3" />
-          </span>
-          {isExploreOpen && (
-            <div className="absolute top-full right-0 pt-4">
-              <div className="bg-white border border-gray-100 shadow-xl shadow-black/5 rounded flex flex-col min-w-[220px] overflow-hidden whitespace-nowrap">
-                <button onClick={() => { goTo('open-loop-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'open-loop-learning' && "font-bold text-gray-900")}>Open Loop Learning</button>
-                <button onClick={() => { goTo('adaptive-paced-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'adaptive-paced-learning' && "font-bold text-gray-900")}>Adaptive Paced Learning</button>
-                <button onClick={() => { goTo('global-skills-matrix'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'global-skills-matrix' && "font-bold text-gray-900")}>SkillPrints</button>
-                <button onClick={() => { goTo('purpose-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'purpose-learning' && "font-bold text-gray-900")}>The Artemis Oath</button>
-                <button onClick={() => { goTo('centers-of-inquiry'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'centers-of-inquiry' && "font-bold text-gray-900")}>Centers of Inquiry</button>
+        <nav className={cn(
+          "hidden md:flex items-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors",
+          scrolled ? "text-gray-500" : "text-white/70"
+        )}>
+          <button
+            onClick={() => goTo('home')}
+            className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'home' && (scrolled ? "text-gray-900" : "text-white"))}
+          >
+            Home
+          </button>
+          <div
+            className="relative cursor-pointer"
+            onMouseEnter={() => setIsExploreOpen(true)}
+            onMouseLeave={() => setIsExploreOpen(false)}
+          >
+            <span className={cn("flex items-center gap-1 hover:opacity-100 transition-opacity", isExplorePath && (scrolled ? "text-gray-900" : "text-white"))}>
+              Dimensions <ChevronDown className="w-3 h-3" />
+            </span>
+            {isExploreOpen && (
+              <div className="absolute top-full right-0 pt-3">
+                <div className="bg-white border border-gray-100 shadow-2xl shadow-black/10 flex flex-col min-w-[280px] overflow-hidden">
+                  {dimensions.map((d) => (
+                    <button
+                      key={d.slug}
+                      onClick={() => { goTo(d.slug); setIsExploreOpen(false); }}
+                      className={cn(
+                        "px-6 py-3.5 hover:bg-gray-50 transition-colors text-[11px] text-left cursor-pointer flex items-center gap-4 border-b border-gray-50 last:border-0",
+                        currentPage === d.slug ? "text-gray-900 font-bold" : "text-gray-500"
+                      )}
+                    >
+                      <span className="text-[9px] font-mono text-gray-300 w-5">{d.num}</span>
+                      {d.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-        <button onClick={() => goTo('build')} className={cn("hover:text-gray-900 transition-colors cursor-pointer", currentPage === 'build' && "text-gray-900 border-b border-gray-900 pb-1")}>Build</button>
-        <button onClick={() => goTo('about')} className={cn("hover:text-gray-900 transition-colors cursor-pointer", currentPage === 'about' && "text-gray-900 border-b border-gray-900 pb-1")}>About</button>
-          <span className="hover:text-gray-900 transition-colors cursor-pointer">Part 2 (New!)</span>
-          <button onClick={onExit} className="hover:text-gray-900 transition-colors cursor-pointer text-[#8A0000]">Back to Artemis</button>
+            )}
+          </div>
+          <button onClick={() => goTo('build')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'build' && (scrolled ? "text-gray-900" : "text-white"))}>Build</button>
+          <button onClick={() => goTo('about')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'about' && (scrolled ? "text-gray-900" : "text-white"))}>About</button>
+          <button onClick={onExit} className={cn(
+            "hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-1",
+            scrolled ? "text-[#8A0000]" : "text-red-300"
+          )}>
+            <ArrowLeft className="w-3 h-3" /> Exit
+          </button>
         </nav>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <button className={cn("md:hidden", scrolled ? "text-gray-900" : "text-white")} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="w-full bg-white shadow-xl shadow-black/10 flex flex-col p-6 md:hidden gap-6 font-bold text-sm tracking-widest text-gray-400 uppercase max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20">
-           <button onClick={() => { goTo('home'); setIsMobileMenuOpen(false); }}>Home</button>
-           <div className="space-y-4">
-              <span className="text-gray-900 border-b border-gray-900 pb-1 w-fit">Explore</span>
-              <div className="flex flex-col gap-4 pl-4 border-l border-gray-100">
-                <button onClick={() => { goTo('open-loop-learning'); setIsMobileMenuOpen(false); }}>Open Loop Learning</button>
-                <button onClick={() => { goTo('adaptive-paced-learning'); setIsMobileMenuOpen(false); }}>Adaptive Paced Learning</button>
-                <button onClick={() => { goTo('global-skills-matrix'); setIsMobileMenuOpen(false); }}>SkillPrints</button>
-                <button onClick={() => { goTo('purpose-learning'); setIsMobileMenuOpen(false); }}>The Artemis Oath</button>
-                <button onClick={() => { goTo('centers-of-inquiry'); setIsMobileMenuOpen(false); }}>Centers of Inquiry</button>
-              </div>
+        <div className="w-full bg-white shadow-xl shadow-black/10 flex flex-col p-6 md:hidden gap-1 text-xs font-bold tracking-[0.2em] uppercase text-gray-500">
+           <button onClick={() => { goTo('home'); setIsMobileMenuOpen(false); }} className="py-3 text-left">Home</button>
+           <div className="py-3">
+              <span className="text-gray-900">Dimensions</span>
            </div>
-           <button onClick={() => { goTo('build'); setIsMobileMenuOpen(false); }}>Build</button>
-           <button onClick={() => { goTo('about'); setIsMobileMenuOpen(false); }}>About</button>
-           <button onClick={() => { onExit(); setIsMobileMenuOpen(false); }} className="text-[#8A0000]">Back to Artemis</button>
+           <div className="flex flex-col gap-0 pl-6 border-l-2 border-gray-100">
+             {dimensions.map((d) => (
+               <button key={d.slug} onClick={() => { goTo(d.slug); setIsMobileMenuOpen(false); }} className="py-2.5 text-left text-[11px]">
+                 <span className="font-mono text-gray-300 mr-2">{d.num}</span>{d.label}
+               </button>
+             ))}
+           </div>
+           <button onClick={() => { goTo('build'); setIsMobileMenuOpen(false); }} className="py-3 text-left">Build</button>
+           <button onClick={() => { goTo('about'); setIsMobileMenuOpen(false); }} className="py-3 text-left">About</button>
+           <button onClick={() => { onExit(); setIsMobileMenuOpen(false); }} className="py-3 text-left text-[#8A0000]">Back to Artemis</button>
         </div>
       )}
     </header>
@@ -95,11 +139,46 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
 }
 
 export function Footer() {
+  const currentYear = 2100;
+
+  const dimensionLinks = [
+    { slug: 'open-loop-learning', label: 'Infinite Learning Continuum' },
+    { slug: 'adaptive-paced-learning', label: 'Adaptive Paced Learning' },
+    { slug: 'global-skills-matrix', label: 'SkillPrints' },
+    { slug: 'purpose-learning', label: 'The Artemis Oath' },
+    { slug: 'centers-of-inquiry', label: 'Centers of Inquiry' },
+  ];
+
   return (
-    <footer className="bg-[#171717] text-white py-16 mt-auto w-full">
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 text-center text-xs space-y-2">
-        <p>Copyright &copy; 2100 The University of Artemis. All ideas experimental.</p>
-        <p className="text-gray-400">This website was made possible by the courageous women and men who are inventing the future of global education.</p>
+    <footer className="bg-[#0a0a0a] text-white w-full mt-auto">
+      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
+        {/* Top: Logo + tagline */}
+        <div className="py-12 border-b border-white/10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 border-2 border-white/30 flex items-center justify-center text-xs font-bold italic text-white/50">A</div>
+              <span className="text-lg font-semibold tracking-[0.2em] uppercase text-white/80">Artemis<span className="font-light opacity-40">2100</span></span>
+            </div>
+            <p className="text-xs text-white/30 max-w-sm leading-relaxed">An experiment in imagining the future of learning. All ideas speculative. All futures possible.</p>
+          </div>
+          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em]">Est. 2025 — Projected 2100</p>
+        </div>
+
+        {/* Middle: Dimensions grid */}
+        <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {dimensionLinks.map((d, i) => (
+            <div key={d.slug} className="group cursor-pointer">
+              <div className="text-[9px] font-mono text-white/20 mb-1">0{i + 1}</div>
+              <div className="text-[11px] text-white/40 group-hover:text-white/80 transition-colors leading-tight">{d.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom: Copyright */}
+        <div className="py-6 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <p className="text-[10px] text-white/20">Copyright &copy; {currentYear} The University of Artemis. All ideas experimental.</p>
+          <p className="text-[10px] text-white/15">Made possible by the courageous women and men inventing the future of global education.</p>
+        </div>
       </div>
     </footer>
   );
@@ -149,26 +228,27 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function HeroHeader({ title, description, bgGradientClass, bgImage }: { title: string; description: string; bgGradientClass: string; bgImage?: string }) {
+export function HeroHeader({ title, description, bgImage }: { title: string; description: string; bgGradientClass?: string; bgImage?: string }) {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className={cn("max-w-[1600px] mx-auto relative w-full h-[45vh] min-h-[360px] overflow-hidden", bgGradientClass)}>
-        {/* Background image */}
+      <div className="max-w-[1600px] mx-auto relative w-full h-[55vh] min-h-[420px] overflow-hidden">
+        {/* Full-bleed background image — no color overlay */}
         {bgImage && (
-          <img src={bgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay pointer-events-none" />
+          <img src={bgImage} alt="" className="absolute inset-0 w-full h-full object-cover" />
         )}
-        {/* Abstract background shapes */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-          <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] rounded-full border-[10px] border-white/40 border-dashed" />
-          <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] rounded-full border-[20px] border-white/20" />
-        </div>
 
-        <div className="relative z-10 flex flex-col justify-end h-full max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 pb-16">
-          <div className="bg-white/95 backdrop-blur-sm p-8 md:p-12 w-full md:w-2/3 lg:w-[600px] border border-gray-100 shadow-xl">
-            <h1 className="text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-gray-900 mb-6 border-b-2 border-black inline-block pb-1">
+        {/* Bottom gradient for title readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+        {/* Top gradient for navbar readability */}
+        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/40 to-transparent" />
+
+        {/* Text content — bottom-left, over the image */}
+        <div className="relative z-10 flex flex-col justify-end h-full max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 pb-12 pt-24">
+          <div className="max-w-2xl">
+            <h1 className="text-2xl md:text-4xl font-bold tracking-[0.15em] uppercase text-white mb-5 leading-tight">
               {title}
             </h1>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+            <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-xl">
               {description}
             </p>
           </div>
