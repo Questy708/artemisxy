@@ -232,3 +232,23 @@ Stage Summary:
 - Neural Constellation replaces radar chart on SkillPrints page
 - 18 alternative exhibit proposals delivered (3 per dimension)
 - All changes pushed to GitHub
+---
+Task ID: 1
+Agent: Main Agent
+Task: Integrate all t1 pages into unified web app, add LinkedIn-style feed, add z.ai-powered tutor chat
+
+Work Log:
+- Read all current t1 components (T1Site.tsx, MainApp.tsx, Shared.tsx, all page components)
+- Planned unified architecture: Onboarding → MainApp with sidebar + content + chat
+- Created /src/app/api/t1-tutor/route.ts - z.ai-powered tutor with dimension-specific system prompt
+- Created /src/components/t1/dashboard/FeedPanel.tsx - LinkedIn-style feed with posts, likes, comments, bookmarks, dimension tags
+- Created /src/components/t1/dashboard/TutorChat.tsx - Intelligent tutor chat panel with z.ai backend, suggested prompts, dimension context
+- Rewrote /src/components/t1/dashboard/MainApp.tsx - Unified app with sidebar (Feed, Home, Dimensions, Build, About, Tutor, Settings), collapsible sidebar, top navbar, and integrated chat panel
+- Simplified /src/components/t1/T1Site.tsx - Removed the jarring NavBar/Footer page switch, now just renders MainApp for APP step
+
+Stage Summary:
+- Unified t1 web app: All pages (Feed, Home, 6 Dimensions, Build, About) now render inside MainApp's content area via sidebar navigation
+- LinkedIn-style Feed: Posts from various dimension authors, like/comment/share/bookmark actions, new post creation with dimension tags
+- Intelligent Tutor: Slide-in chat panel powered by z.ai, dimension-aware context, Socratic tutoring style, suggested quick prompts
+- Provocation navigation fixed: All dimensions accessible directly from sidebar without leaving the app
+- No more routing mismatch: Single unified routing via activeView state in MainApp
