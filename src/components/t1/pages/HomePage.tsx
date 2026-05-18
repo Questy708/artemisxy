@@ -68,9 +68,8 @@ export default function HomePage({ goTo }: HomePageProps) {
           <SectionHeading>This is a pivotal moment for the future of learning.</SectionHeading>
           <div className="grid md:grid-cols-2 gap-16">
             <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
-              <p>The Artemis Project dares to re-engineer the way humanity learns in a world of accelerating change. We recognize the advent of the &lsquo;Homo Eruditus&rsquo; — the learned and adaptable human — and the urgent need to transition from archaic Industrial Revolution-era educational models to dynamic, cross-disciplinary, globally collaborative frameworks. The old paradigm, built for the factory floor and the assembly line, cannot serve a civilization racing toward planetary-scale challenges and exponential technological transformation.</p>
-              <p>Higher education stands at a critical juncture. Increasing student debt burdens millions, while the widening skills gap grows ever more alarming: 49% of entry-level jobs now require digital skills, yet only 23% of graduates possess them. Attrition rates across institutions remain disheartening, and systemic inequities continue to exclude vast populations from meaningful educational opportunity. A landmark study by Richard Arum and Josipa Roksa revealed that 36% of college students showed no significant improvement in critical thinking after four years of study. The disconnect between perception and reality is equally striking — only 43.5% of employers felt graduates were well-prepared for the workforce, while 78.7% of graduates believed they were ready. The Georgetown University Center on Education and the Workforce estimated a potential loss of $196 billion in annual earnings due to the skills gap alone.</p>
-              <p>These are not merely statistics — they are a summons. The Artemis Project was born from the conviction that education must evolve or risk becoming obsolete, and that the reimagination of how we learn, live, and grow is among the most consequential design challenges of our era.</p>
+              <p>The Artemis Project dares to re-engineer the way humanity learns. We recognize the advent of the &lsquo;Homo Eruditus&rsquo; — the learned, adaptable human — and the urgent need to transition from Industrial Revolution-era educational models to dynamic, globally collaborative frameworks.</p>
+              <p>Higher education stands at a critical juncture. Student debt burdens millions. The skills gap widens: 49% of entry-level jobs require digital skills, yet only 23% of graduates possess them. A landmark study revealed that 36% of college students showed no significant improvement in critical thinking after four years. These are not merely statistics — they are a summons.</p>
             </div>
             <div>
               <blockquote className="border-l-4 border-yellow-400 pl-6 space-y-4">
@@ -92,9 +91,8 @@ export default function HomePage({ goTo }: HomePageProps) {
           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">A world in transformation demands transformation in learning</h2>
           <div className="grid md:grid-cols-2 gap-16">
              <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
-                <p>The pursuit of knowledge has long been the driving force behind the evolution of human civilization, yet as we stand on the precipice of the 22nd century, the ivory tower of academia finds itself at a crossroads. Disruptive technologies were launching faster than humans could learn them, and the newly globalized economy meant unprecedented interconnectedness — a world where a breakthrough in one hemisphere could render an entire curriculum obsolete in another.</p>
-                <p>Schools — society&apos;s core mechanism for strengthening people&apos;s ability to adapt — were mired in conventional approaches and struggling to change. The institutional inertia was staggering: curricula designed for the industrial age persisted well into the information age, assessment models rewarded compliance over creativity, and the very architecture of classrooms — rows of seats facing a single authority — reinforced passivity rather than the active, collaborative inquiry that the modern world demands.</p>
-                <p>Meanwhile, the world outside the academy was undergoing seismic shifts. Artificial intelligence, biotechnology, quantum computing, and climate engineering were redrawing the boundaries of what humans needed to know and be able to do. The gap between what institutions taught and what civilization needed was widening into a chasm, and the stakes had never been higher.</p>
+                <p>Disruptive technologies were launching faster than humans could learn them. The globalized economy meant unprecedented interconnectedness — a breakthrough in one hemisphere could render an entire curriculum obsolete in another. Schools — society&apos;s core mechanism for strengthening adaptability — were mired in convention and struggling to change.</p>
+                <p>Artificial intelligence, biotechnology, quantum computing, and climate engineering were redrawing the boundaries of what humans needed to know. The gap between what institutions taught and what civilization needed was widening into a chasm.</p>
              </div>
              <div>
               <blockquote className="border-l-4 border-[#007f9c] pl-6 space-y-4">
@@ -116,9 +114,8 @@ export default function HomePage({ goTo }: HomePageProps) {
           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">Our Process</h2>
           <div className="grid md:grid-cols-2 gap-16">
              <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
-                <p>A dedicated design team from the Artemis Project collaborated with hundreds of insightful, creative, and committed students, faculty, and administrators over the course of a year to delve into the future of education. Together, they embraced the complexity of the challenge — not as a problem to be solved, but as a landscape to be understood, questioned, and reimagined.</p>
-                <p>They considered various perspectives — from how students prepare for a transformative education while still in high school, to patterns of decision-making about what and how they study, to the evolving needs and expectations of future employers. They conducted immersive interviews, facilitated design workshops across continents, synthesized longitudinal data on career trajectories, and prototyped radical alternatives to every assumption about what a university could be.</p>
-                <p>The process was deliberately iterative and inclusive, drawing on voices from the margins as much as from the centers of power. Every insight was tested against the lived reality of learners, every provocation refined through dialogue with those who would inherit its consequences. The goal was never to arrive at a single answer, but to open a multiplicity of possible futures — and to equip others with the tools to imagine their own.</p>
+                <p>A dedicated design team from the Artemis Project collaborated with hundreds of insightful, creative, and committed students, faculty, and administrators over the course of a year. They embraced the complexity — not as a problem to be solved, but as a landscape to be understood, questioned, and reimagined.</p>
+                <p>The process was deliberately iterative and inclusive. Every insight was tested against the lived reality of learners, every provocation refined through dialogue. The goal was never a single answer, but to open a multiplicity of possible futures — and equip others with the tools to imagine their own.</p>
              </div>
              <div>
               <blockquote className="border-l-4 border-[#d92231] pl-6 space-y-4">
@@ -126,7 +123,7 @@ export default function HomePage({ goTo }: HomePageProps) {
                   &ldquo;According to the Bureau of Labor Statistics, the average worker today stays at each of his or her jobs for 4.4 years, but the expected tenure of the workforce&apos;s youngest employees is about half that.&rdquo;
                 </p>
                 <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest mt-2 block leading-[1.6]">
-                  &mdash; Jeanne Meister, &ldquo;Job Hopping Is the &lsquo;New Normal&apos; for Millennials,&rdquo; Forbes, August 14, 2012
+                  &mdash; Jeanne Meister, &ldquo;Job Hopping Is the &lsquo;New Normal&apos; for Millennials,&rdquo; Forbes, 2012
                 </footer>
               </blockquote>
             </div>
@@ -140,9 +137,8 @@ export default function HomePage({ goTo }: HomePageProps) {
           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">An invitation to travel through time</h2>
           <div className="grid md:grid-cols-2 gap-16">
              <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
-                <p>The project culminated in an experiential exhibit entitled &ldquo;Artemis 2100,&rdquo; accessible to participants globally — a first-of-its-kind immersive event that dissolved the boundaries between physical and virtual attendance. To foster an exploratory mindset, the event was staged as a time-travel journey. The community embarked to the distant future — landing just at the moment when the University of Artemis was looking back retrospectively at major paradigm shifts that &ldquo;happened&rdquo; around 2100.</p>
-                <p>These possible shifts were shared as provocations — a subjective, student-centered imagining of what could occur as the future unfolds. They were not predictions, nor prescriptions, but invitations — designed to stretch the imagination, challenge assumptions, and catalyze conversation. Each provocation emerged from a rich synthesis of research, dialogue, and speculation, and each was accompanied by artifacts from a possible future: course catalogs that never existed, diploma frameworks yet to be invented, campus maps of places that might one day be built.</p>
-                <p>We invite you to travel with us and explore these possible futures. Then, we hope you will use the provocations and the tools available on this site to spark your own vision for the future of higher education by trying some experiments of your own. The future belongs to those who dare to imagine it differently.</p>
+                <p>The project culminated in an experiential exhibit entitled &ldquo;Artemis 2100&rdquo; — a first-of-its-kind immersive event that dissolved the boundaries between physical and virtual attendance. To foster an exploratory mindset, the event was staged as a time-travel journey. The community traveled to the distant future — landing at the moment when the University of Artemis was looking back at paradigm shifts that &ldquo;happened&rdquo; around 2100.</p>
+                <p>These shifts were shared as provocations — not predictions, nor prescriptions, but invitations to stretch the imagination and catalyze conversation. We invite you to travel with us, explore these possible futures, and then use the tools on this site to spark your own experiments.</p>
              </div>
              <div>
               <blockquote className="border-l-4 border-[#461e68] pl-6 space-y-4">
@@ -163,9 +159,7 @@ export default function HomePage({ goTo }: HomePageProps) {
         <div className="space-y-12">
           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 leading-tight">The Grand Transition</h2>
           <div className="space-y-6 text-gray-600 leading-relaxed max-w-lg text-sm md:text-base">
-            <p>Humanity has undergone two significant macro-transformations in its history: the shift from the Stone Age to Early Civilization around 10,000 years ago, and the transition from Early Civilization to the Modern Era. Each transformation rewrote the rules of how societies organized, how knowledge was transmitted, and how individuals understood their place in the world.</p>
-            <p>Currently, we are entering what scholars call the Planetary Phase of Civilization — characterized by globalization and an urgent need for sustainability. Three branching channels define the possible paths forward. Conventional Worlds represent incremental adjustments — societies that muddle through with market-driven and policy-driven reforms, adapting just enough to survive but never enough to thrive. Barbarization describes a calamitous decline — a world where breakdown outruns breakthrough, where inequality hardens into apartheid, and where the institutions of learning collapse under the weight of crisis. And then there are the Great Transitions — progressive transformations that reimagine the very foundations of civilization, where education becomes not merely a system of credentialing but a force for human flourishing at planetary scale.</p>
-            <p>Take a quick look at the journey of faculty, staff, students, and guests at the Artemis 2100 experience.</p>
+            <p>Humanity has undergone two macro-transformations in its history. Currently, we are entering the Planetary Phase of Civilization — characterized by globalization and an urgent need for sustainability. Conventional Worlds represent incremental adjustments. Barbarization describes calamitous decline. And then there are the Great Transitions — progressive transformations that reimagine the very foundations of civilization, where education becomes a force for human flourishing at planetary scale.</p>
           </div>
           
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden border border-gray-300 max-w-4xl">
@@ -231,10 +225,10 @@ export default function HomePage({ goTo }: HomePageProps) {
                       <span className="text-lg md:text-xl font-bold italic tracking-wide">Open Loop<br/>Learning</span>
                    </div>
                 </button>
-                <button onClick={() => goTo('adaptive-paced-education')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902029404-08X95JWIUC0ET7E7EMWQ/nav_paced_education.jpg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Education" />
+                <button onClick={() => goTo('adaptive-paced-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
+                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902029404-08X95JWIUC0ET7E7EMWQ/nav_paced_education.jpg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Adaptive Paced<br/>Education</span>
+                      <span className="text-lg md:text-xl font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('global-skills-matrix')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">

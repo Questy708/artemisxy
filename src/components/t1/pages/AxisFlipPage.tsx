@@ -1,6 +1,6 @@
 'use client';
 
-import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play } from "lucide-react";
 import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
 
 interface Props {
@@ -11,8 +11,8 @@ export default function AxisFlipPage({ goTo }: Props) {
   return (
     <>
       <HeroHeader
-        title="Global Skills Matrix"
-        description="In 2100, we examine the era when Artemis revolutionized education by introducing the Global Skills Matrix, transcending traditional disciplines and geographical boundaries."
+        title="Global Skills Matrix & SkillPrints"
+        description="In 2100, we examine the era when Artemis replaced the traditional transcript with biometric, AI-powered SkillPrints — dynamic portraits of capability that evolve alongside the learner."
         bgGradientClass="bg-[#461e68]"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
@@ -20,7 +20,7 @@ export default function AxisFlipPage({ goTo }: Props) {
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
           <p className="text-sm text-gray-600">
-            Step into a virtual time capsule to discover how learning was transformed worldwide through Artemis&apos;s innovative Global Skills Matrix.
+            Step into a virtual time capsule to discover how Artemis transformed qualifications worldwide through the Global Skills Matrix — replacing static disciplinary silos and paper transcripts with a dynamic, biometric, AI-powered system for mapping human capability.
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
@@ -42,7 +42,7 @@ export default function AxisFlipPage({ goTo }: Props) {
             <hr className="border-t border-gray-200" />
           </div>
           <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="Global Skills Matrix Diagram" />
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="Global Skills Matrix & SkillPrints Diagram" />
           </div>
         </section>
 
@@ -56,57 +56,67 @@ export default function AxisFlipPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm">The Setting</h4>
               <p className="font-bold italic text-sm text-gray-800 leading-relaxed">
-                Memorize, test, forget, repeat: this was the typical experience of students worldwide at the dawn of the 21st century. The global economy was evolving at an unprecedented pace, with emerging technologies and shifting job markets creating a skills gap that traditional education struggled to bridge. Students were increasingly finding their degrees obsolete before they even entered the workforce.
+                Memorize, test, forget, repeat: this was the typical experience of students worldwide at the dawn of the 21st century. The global economy was evolving at an unprecedented pace, with emerging technologies and shifting job markets creating a skills gap that traditional education struggled to bridge.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Education systems varied wildly across countries, creating uneven opportunities and hindering global collaboration. The world needed a unified approach to learning that could adapt to rapid change while celebrating cultural diversity.
+                Students were increasingly finding their degrees obsolete before they even entered the workforce. Education systems varied wildly across countries, creating uneven opportunities and hindering global collaboration. The world needed a unified approach that could adapt to rapid change while celebrating cultural diversity.
               </p>
             </div>
             <div className="space-y-4">
-              <h4 className="font-bold italic uppercase tracking-wider text-sm">The Shift</h4>
+              <h4 className="font-bold italic uppercase tracking-wider text-sm">From Transcript to SkillPrint</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                From the 20th century until 2025, most educational institutions organized knowledge into rigid disciplines and measured progress through standardized testing. Artemis recognized the limitations of this approach and in 2026 introduced the Global Skills Matrix.
+                The traditional academic transcript — a static list of courses and grades — was a 19th-century invention that persisted well into the 21st. It told employers almost nothing about what a graduate could actually do. The Global Skills Matrix replaced this relic with the SkillPrint: a dynamic, evolving record of a learner&apos;s abilities, experiences, and potential, powered by neural mapping and AI analysis.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The Matrix was built on three interwoven dimensions, each designed to develop not just knowledge, but the ability to apply that knowledge across contexts, cultures, and challenges. It was a radical departure from the one-size-fits-all model that had dominated education for over a century.
+                Where transcripts captured what you studied, SkillPrints captured what you could do — and what you were capable of becoming. They emphasized skills over grades, competencies over credit hours, and growth over static achievement.
               </p>
             </div>
           </div>
         </section>
 
         <section className="space-y-12">
-          <SectionHeading>The Shift</SectionHeading>
+          <SectionHeading>Neural Skill Mapping</SectionHeading>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="text-sm text-gray-600 leading-relaxed space-y-4">
               <p>
-                The Global Skills Matrix replaced static disciplinary silos with a dynamic, interconnected framework. Instead of declaring a major in a single field, students navigated through a rich landscape of competencies, guided by AI mentors and global demand signals.
+                The backbone of the Global Skills Matrix was Neural Skill Mapping — a revolutionary system that used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.
               </p>
               <p>
-                The three dimensions of the Matrix&mdash;Core Competencies, Specialization Pathways, and Global Implementation&mdash;were not sequential steps but overlapping, reinforcing layers. Students moved fluidly between them, deepening their skills and broadening their perspectives with each cycle.
+                The data was processed by quantum computers, creating a dynamic, three-dimensional representation of the student&apos;s evolving skill set — a living portrait of capability that grew and shifted with every new experience. This allowed educators and AI mentors to provide precisely targeted interventions, helping students strengthen weak areas and leverage their natural aptitudes more effectively.
+              </p>
+              <p>
+                Neural Skill Mapping provided a highly visual and futuristic way to think about qualifications. No longer were students reduced to a GPA or a degree title. Their entire cognitive landscape — strengths, connections, growth edges, and untapped potential — was rendered visible and actionable.
               </p>
             </div>
             <div>
-               <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800" className="w-full h-full object-cover" alt="Skills Matrix Hub Map" />
+               <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800" className="w-full h-full object-cover" alt="Neural Skill Mapping Visualization" />
             </div>
+          </div>
+        </section>
+
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>The Matrix Dimensions</SectionHeading>
+            <hr className="border-t border-gray-200" />
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 pt-8">
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Core Competencies (6-12 months)</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Students began by developing a strong foundation in universal skills such as critical thinking, digital literacy, and cross-cultural communication. This phase used advanced AI tutors and virtual reality simulations to provide personalized, immersive learning experiences. Learners engaged in global micro-projects, collaborating with peers from different continents to solve real-world challenges.
+                Students began by developing a strong foundation in universal skills — critical thinking, digital literacy, and cross-cultural communication. This phase used advanced AI tutors and virtual reality simulations to provide personalized, immersive learning experiences. Learners engaged in global micro-projects, collaborating with peers from different continents to solve real-world challenges.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                This approach not only built core skills but also fostered a sense of global citizenship from the outset. By working alongside teammates from diverse backgrounds, students developed the empathy, adaptability, and communication abilities that would serve as the bedrock of their entire educational journey.
+                This approach not only built core skills but fostered a sense of global citizenship from the outset. By working alongside teammates from diverse backgrounds, students developed the empathy, adaptability, and communication abilities that would serve as the bedrock of their entire journey.
               </p>
             </div>
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Specialization Pathways (12-24 months)</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Based on their interests, aptitudes, and global demand, students chose multiple specialization pathways. These weren&apos;t traditional majors, but flexible routes through the Skills Matrix that combined knowledge areas in unique ways. For example, a student might forge a path that blended environmental science, blockchain technology, and indigenous wisdom to create innovative solutions for climate change.
+                Based on their interests, aptitudes, and global demand, students chose multiple specialization pathways — not traditional majors, but flexible routes through the Skills Matrix that combined knowledge areas in unique ways. A student might blend environmental science, blockchain technology, and indigenous wisdom to create innovative solutions for climate change.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The AI-driven system continuously suggested new connections and learning opportunities based on the student&apos;s progress and emerging global trends. This meant that no two students followed the same trajectory, yet all emerged with complementary skill sets that could interlock in powerful ways when they later collaborated.
+                The AI-driven system continuously suggested new connections and learning opportunities based on the student&apos;s progress and emerging global trends. No two students followed the same trajectory, yet all emerged with complementary skill sets that could interlock in powerful ways.
               </p>
             </div>
           </div>
@@ -115,19 +125,19 @@ export default function AxisFlipPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Global Implementation (12-18 months)</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                In this phase, students applied their unique skill combinations to real-world projects across the globe. Using Artemis&apos;s network of partner organizations, students engaged in a series of international internships, research projects, and entrepreneurial ventures. Students used advanced augmented reality tools to collaborate with local experts and communities, ensuring their solutions were culturally appropriate and truly impactful.
+                Students applied their unique skill combinations to real-world projects across the globe. Using Artemis&apos;s network of partner organizations, they engaged in international internships, research projects, and entrepreneurial ventures. Advanced augmented reality tools ensured solutions were culturally appropriate and truly impactful.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The Global Implementation phase was where theory met reality, and where students discovered the true power of their interdisciplinary skill combinations. Projects ranged from designing sustainable water systems in sub-Saharan Africa to developing AI-driven healthcare diagnostics in Southeast Asia, each one leaving a tangible mark on the world while shaping the student into a versatile, globally-minded professional.
+                Projects ranged from designing sustainable water systems in sub-Saharan Africa to developing AI-driven healthcare diagnostics in Southeast Asia, each leaving a tangible mark on the world while shaping the student into a versatile, globally-minded professional.
               </p>
             </div>
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">The SkillPrint</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The SkillPrint replaced traditional academic transcripts as a dynamic, evolving record of a student&apos;s abilities, experiences, and potential. Unlike static transcripts, SkillPrints captured academic achievements, co-curricular activities, work experiences, personal projects, and micro-credentials.
+                The SkillPrint replaced traditional academic transcripts as a dynamic, evolving record of a student&apos;s abilities, experiences, and potential. Unlike static transcripts, SkillPrints captured academic achievements, co-curricular activities, work experiences, personal projects, and micro-credentials — all mapped through neural analysis and verified through AI-driven competency assessment.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Powered by sophisticated algorithms, they emphasized skills over grades, highlighting competencies such as critical thinking, creativity, collaboration, and leadership. SkillPrints grew and evolved alongside the learner, providing a living portrait of their capabilities that employers, collaborators, and institutions could access and interpret in real-time.
+                Powered by sophisticated algorithms, SkillPrints emphasized skills over grades, highlighting competencies such as critical thinking, creativity, collaboration, and leadership. They grew and evolved alongside the learner, providing a living portrait of capabilities that employers, collaborators, and institutions could access and interpret in real-time.
               </p>
             </div>
           </div>
@@ -136,14 +146,14 @@ export default function AxisFlipPage({ goTo }: Props) {
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-4 text-sm text-gray-600">
-            <p>In the Global Skills Matrix:</p>
+            <p>In the Global Skills Matrix & SkillPrints:</p>
             <ul className="list-disc pl-5 space-y-2 leading-relaxed">
               <li>Artemis replaced rigid disciplines with a flexible, AI-powered system that adapted to global needs in real-time</li>
+              <li>Neural Skill Mapping made qualifications visual, dynamic, and deeply personal</li>
               <li>Students graduated with a unique portfolio of transferable skills rather than a traditional degree</li>
               <li>The gap between education and employment disappeared as learning became directly tied to evolving global challenges</li>
               <li>Cultural intelligence and adaptability became core components of every educational journey</li>
-              <li>A new global standard for skills and competencies emerged, facilitating international collaboration and mobility</li>
-              <li>Transcripts were replaced by SkillPrints&mdash;dynamic, evolving records of each learner&apos;s journey</li>
+              <li>Transcripts were replaced by SkillPrints — dynamic, biometric, evolving records of each learner&apos;s journey</li>
             </ul>
             <p className="pt-4 font-bold italic">
                The Global Skills Matrix era transformed Artemis into a truly global university, one whose graduates were not just knowledgeable, but capable, adaptable, and deeply connected to the challenges and opportunities of their time.
@@ -163,10 +173,10 @@ export default function AxisFlipPage({ goTo }: Props) {
               <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 42</h3>
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="space-y-4">
-                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Neural Skill Mapping</h4>
+                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Neural Skill Mapping: The Technology</h4>
                   <p className="italic text-xs text-gray-500">Holographic interface, quantum computing core, bio-neural feedback sensors</p>
                   <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                    <p>The Neural Skill Mapping technology was the backbone of the Global Skills Matrix. This revolutionary system used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways, identifying strengths, potential connections, and areas for growth. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.</p>
+                    <p>Neural Skill Mapping was the backbone of the Global Skills Matrix. This revolutionary system used advanced brain-computer interfaces to create a real-time map of a learner&apos;s neural pathways, identifying strengths, potential connections, and areas for growth. Students wore non-invasive, graphene-based sensors that monitored brain activity during learning and problem-solving tasks.</p>
                     <p>The data was processed by quantum computers, creating a dynamic, three-dimensional representation of the student&apos;s evolving skill set. This allowed educators and AI mentors to provide precisely targeted interventions, helping students strengthen weak areas and leverage their natural aptitudes more effectively.</p>
                   </div>
                 </div>
@@ -187,7 +197,7 @@ export default function AxisFlipPage({ goTo }: Props) {
                   <p className="italic text-xs text-gray-500">Immersive holodeck, swarm intelligence algorithms, haptic feedback suits</p>
                   <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
                     <p>The Global Challenge Simulator was a cornerstone of the Core Competencies phase. This advanced facility allowed students to tackle complex, multifaceted global issues in a safe, simulated environment. Using holographic technology, haptic feedback, and swarm intelligence algorithms, the simulator created realistic scenarios that adapted in real-time to students&apos; decisions.</p>
-                    <p>The system&apos;s AI moderator ensured that teams were balanced and that each participant had opportunities to lead and contribute meaningfully. Scenarios ranged from pandemic response coordination to climate adaptation planning, giving students a depth of experiential learning that would have been impossible in the physical world alone.</p>
+                    <p>Scenarios ranged from pandemic response coordination to climate adaptation planning, giving students a depth of experiential learning that would have been impossible in the physical world alone. The system&apos;s AI moderator ensured balanced teams and meaningful participation for every student.</p>
                   </div>
                 </div>
                 <div className="space-y-4">

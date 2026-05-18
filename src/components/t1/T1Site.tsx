@@ -13,7 +13,7 @@ import AboutPage from './pages/AboutPage';
 type T1Page =
   | 'home'
   | 'open-loop-learning'
-  | 'adaptive-paced-education'
+  | 'adaptive-paced-learning'
   | 'global-skills-matrix'
   | 'purpose-learning'
   | 'build'
@@ -37,7 +37,7 @@ export default function T1Site({ onExit }: T1SiteProps) {
         return <HomePage goTo={goTo} />;
       case 'open-loop-learning':
         return <OpenLoopPage goTo={goTo} />;
-      case 'adaptive-paced-education':
+      case 'adaptive-paced-learning':
         return <PacedEducationPage goTo={goTo} />;
       case 'global-skills-matrix':
         return <GlobalSkillsMatrixPage goTo={goTo} />;

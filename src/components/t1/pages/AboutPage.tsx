@@ -18,9 +18,33 @@ export default function AboutPage({ goTo }: Props) {
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-16">
         
         <section className="space-y-6 text-gray-700 leading-relaxed">
-           <p>The Artemis Project was sparked by a fundamental question: what if the entire architecture of higher education was redesigned for the 21st century and beyond? While institutions around the world were experimenting at the margins — adding online courses, updating curricula, launching innovation labs — the Artemis Project asked whether the very foundations of the university needed reimagining. The pursuit of knowledge has long been the driving force behind the evolution of human civilization. Yet, as we stand on the precipice of the 21st century, the ivory tower of academia finds itself at a crossroads, faced with the daunting task of adapting to a rapidly changing world.</p>
+           <p>The Artemis Project was sparked by a fundamental question: what if the entire architecture of higher education was redesigned for the 21st century and beyond? While institutions around the world were experimenting at the margins — adding online courses, updating curricula, launching innovation labs — the Artemis Project asked whether the very foundations of the university needed reimagining.</p>
            <p>Recognizing the advent of the &apos;Homo Eruditus&apos; — the learned and adaptable human — the project sought to transition from archaic, Industrial Revolution-era educational models to dynamic, cross-disciplinary, and globally collaborative frameworks accessible to all. The project drew on insights from hundreds of students, faculty, administrators, and visionaries across multiple continents, combining design thinking, futures methodology, and rigorous academic research.</p>
-           <p>The project included intensive design workshops, global research expeditions, and the development of tools to support individuals who share the goal of experimenting towards a future of education that serves all of humanity. Design work continued for over a year, creating the foundation for the Artemis 2100 exhibit, which debuted as an immersive, globally accessible experience. The exhibit was staged as a time-travel journey, inviting participants to visit the year 2100 and look back at the paradigm shifts that &apos;happened&apos; — provocations designed not as predictions, but as invitations to experiment.</p>
+           <p>The project included intensive design workshops, global research expeditions, and the development of tools to support individuals who share the goal of experimenting towards a future of education that serves all of humanity. Design work continued for over a year, creating the foundation for the Artemis 2100 exhibit, which debuted as an immersive, globally accessible experience staged as a time-travel journey — provocations designed not as predictions, but as invitations to experiment.</p>
+        </section>
+
+        <section className="space-y-12">
+           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">Centers of Inquiry</h2>
+           <p className="text-gray-600 leading-relaxed max-w-3xl">At the heart of Artemis&apos;s structural revolution was a single, radical decision: to abolish the traditional department. In its place, Artemis established Centers of Inquiry — interdisciplinary hubs organized not around academic disciplines, but around the grand challenges facing humanity. Where departments created silos, Centers of Inquiry create bridges.</p>
+           
+           <div className="grid md:grid-cols-2 gap-8 mt-8">
+              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
+                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Technology Development</h3>
+                 <p className="text-sm text-gray-600 leading-relaxed">Where engineering, computer science, materials research, and quantum physics converge to create the tools and systems that will define the next century. This Center attracts everyone from AI architects to biotechnology pioneers, fostering collaboration between builders and theorists who would never have crossed paths in a traditional departmental structure.</p>
+              </div>
+              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
+                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Translational Programs</h3>
+                 <p className="text-sm text-gray-600 leading-relaxed">Where knowledge moves from theory to practice. This Center bridges academic research and real-world application, pairing scholars with community leaders, policymakers, and industry partners. It is the engine of impact — ensuring that the insights generated within Artemis don&apos;t remain confined to journals and conferences but reach the communities and contexts where they are needed most.</p>
+              </div>
+              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
+                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Human Flourishing</h3>
+                 <p className="text-sm text-gray-600 leading-relaxed">Where psychology, philosophy, neuroscience, and the arts converge to explore what it means to live a meaningful life. This Center addresses the questions that disciplines alone cannot answer — about purpose, well-being, identity, and the nature of human potential. It is the soul of Artemis, ensuring that technological and structural innovation never loses sight of the human beings they are meant to serve.</p>
+              </div>
+              <div className="space-y-4 p-6 border border-gray-200 bg-gray-50">
+                 <h3 className="font-bold uppercase tracking-wider text-sm text-gray-900">Planetary Systems</h3>
+                 <p className="text-sm text-gray-600 leading-relaxed">Where climate science, ecology, economics, and governance come together to address the existential challenges of the Planetary Phase of Civilization. This Center trains the leaders and thinkers who will navigate the Great Transition — the progressive transformation from industrial-era civilization to a sustainable, equitable, and globally coordinated future.</p>
+              </div>
+           </div>
         </section>
 
         <section className="space-y-12">
