@@ -504,51 +504,83 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
           </div>
         </section>
 
-        {/* ── Exhibit Article Archive ── */}
-        <section className="space-y-24">
-          <div>
-            <hr className="border-t border-gray-200 mb-12" />
-            <SectionHeading>Exhibit Article Archive</SectionHeading>
-            <p className="text-sm text-gray-600 mt-4">Browse below to search through video archives of the exhibits displayed on May 1st, 2100.</p>
+        {/* ── Field Dispatches ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <hr className="border-t border-gray-200" />
+            <SectionHeading>Field Dispatches</SectionHeading>
+            <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Live reports from the 45 global nodes — transmitted from the field, unedited, urgent.</p>
           </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 61</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">The Last Department: A Requiem</h4>
-                <p className="italic text-xs text-gray-500">Archived documentation from the Department Closure Ceremonies, 2027–2032</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The abolition of departments was a carefully orchestrated transition over five years. Each department held a Closure Ceremony — part celebration, part mourning, part provocation — in which faculty and students publicly reflected on what the department had given the world and what its boundaries had cost.</p>
-                  <p>The last department to close was Philosophy. Its Closure Ceremony became one of the most-watched events in Artemis history, with the department&apos;s final chair declaring: &ldquo;We do not end. We dissolve into everything. Philosophy was never a container — it was a way of asking. And asking has no department.&rdquo;</p>
+          <div className="space-y-6 mt-8">
+            {/* Dispatch 1 - Nairobi */}
+            <div className="border-l-4 border-[#8A0000] bg-[#faf8f5] p-5 md:p-6" style={{ transform: 'rotate(-0.5deg)' }}>
+              <div className="font-mono text-[10px] text-gray-500 space-y-1 mb-3">
+                <div className="flex flex-wrap gap-x-6 gap-y-1">
+                  <span>FROM: <span className="text-gray-900">Nairobi Node</span></span>
+                  <span>CENTER: <span className="text-gray-900">Next-Gen Education</span></span>
+                  <span>DATE: <span className="text-gray-900">2087.03.14</span></span>
+                  <span>PRIORITY: <span className="text-gray-700">STANDARD</span></span>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch the Department Closure Ceremonies compilation.</p>
-              </div>
+              <div className="h-px bg-gray-200 mb-3" />
+              <p className="text-sm text-gray-700 leading-relaxed">Third cohort of Junior Fellows completes Sprint Cycle on AI-assisted indigenous language preservation. 12 languages documented that had no written form. The Swahili NLP Engine has been deployed to 340 community centers across East Africa. Local collaborators report a 67% increase in youth engagement with heritage materials. Requesting extension for Phase II: oral tradition mapping.</p>
             </div>
-          </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 87</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">The Kampala Hub: Architecture as Pedagogy</h4>
-                <p className="italic text-xs text-gray-500">Design documentation and impact assessment from the first Artemis Center of Inquiry building</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The Kampala Hub was the first purpose-built Center of Inquiry — and its architecture was itself a provocation. There were no corridors, no offices with doors, no lecture halls. Instead, the building was organized around overlapping &ldquo;convexities&rdquo; — open spaces where different activities naturally intersected. A quantum computing lab opened onto a ceramics studio. A policy simulation room shared a wall with a meditation garden.</p>
-                  <p>The building forced encounters that departmental architecture had spent centuries preventing. Within a decade, its design principles had been adapted for hubs on every inhabited continent, demonstrating that the physical environment of learning is not neutral — it either enables or prevents the kind of thinking the future requires.</p>
+            {/* Dispatch 2 - Accra */}
+            <div className="border-l-4 border-[#8A0000] bg-[#faf8f5] p-5 md:p-6" style={{ transform: 'rotate(0.3deg)' }}>
+              <div className="font-mono text-[10px] text-gray-500 space-y-1 mb-3">
+                <div className="flex flex-wrap gap-x-6 gap-y-1">
+                  <span>FROM: <span className="text-gray-900">Accra Node</span></span>
+                  <span>CENTER: <span className="text-gray-900">Civilization Architecture</span></span>
+                  <span>DATE: <span className="text-gray-900">2079.11.02</span></span>
+                  <span>PRIORITY: <span className="text-[#8A0000] font-bold">HIGH</span></span>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
+              <div className="h-px bg-gray-200 mb-3" />
+              <p className="text-sm text-gray-700 leading-relaxed">Constitutional design sprint completed. Working with 14 West African communities to develop governance frameworks that integrate traditional council structures with digital democracy tools. The key insight: technology should amplify existing decision-making traditions, not replace them. One community rejected our prototype entirely — they said their system had worked for 400 years and didn&apos;t need &lsquo;optimization.&rsquo; We listened. The result was better than anything we could have designed alone.</p>
+            </div>
+
+            {/* Dispatch 3 - Seoul (URGENT) */}
+            <div className="border-l-4 border-[#8A0000] bg-[#fef2f2] p-5 md:p-6">
+              <div className="font-mono text-[10px] text-gray-500 space-y-1 mb-3">
+                <div className="flex flex-wrap gap-x-6 gap-y-1">
+                  <span>FROM: <span className="text-gray-900">Seoul Node</span></span>
+                  <span>CENTER: <span className="text-gray-900">Emerging Technologies</span></span>
+                  <span>DATE: <span className="text-gray-900">2091.06.28</span></span>
+                  <span>PRIORITY: <span className="text-[#8A0000] font-bold">URGENT</span></span>
                 </div>
-                <p className="text-xs text-gray-500 italic">Watch the Kampala Hub design walkthrough.</p>
               </div>
+              <div className="h-px bg-[#8A0000]/20 mb-3" />
+              <p className="text-sm text-gray-700 leading-relaxed">Quantum-biological interface breakthrough. A team of 3 Core Investigators and 8 Junior Fellows has achieved stable quantum coherence at room temperature using a protein scaffold derived from deep-ocean organisms. This changes everything — quantum computing is no longer confined to cryogenic labs. Three Centers have already requested access for parallel research. Sprint Cycle initiated.</p>
+            </div>
+
+            {/* Dispatch 4 - Valletta */}
+            <div className="border-l-4 border-[#8A0000] bg-[#faf8f5] p-5 md:p-6" style={{ transform: 'rotate(-0.3deg)' }}>
+              <div className="font-mono text-[10px] text-gray-500 space-y-1 mb-3">
+                <div className="flex flex-wrap gap-x-6 gap-y-1">
+                  <span>FROM: <span className="text-gray-900">Valletta Node</span></span>
+                  <span>CENTER: <span className="text-gray-900">Frontiers of Artemis Research</span></span>
+                  <span>DATE: <span className="text-gray-900">2075.01.01</span></span>
+                  <span>PRIORITY: <span className="text-gray-700">STANDARD</span></span>
+                </div>
+              </div>
+              <div className="h-px bg-gray-200 mb-3" />
+              <p className="text-sm text-gray-700 leading-relaxed">Annual report: The coordinating hub has seeded 47 interdisciplinary inquiries this year across all 15 Centers. The most promising: a collaboration between Civilization Architecture and Planetary Systems on &lsquo;governance for climate refugees&apos; — a project that began as a Sprint Cycle and has now become a full Residency Cycle spanning 6 nodes. The boundaries between Centers are dissolving faster than we planned. This is good.</p>
+            </div>
+
+            {/* Dispatch 5 - Santiago */}
+            <div className="border-l-4 border-[#8A0000] bg-[#faf8f5] p-5 md:p-6" style={{ transform: 'rotate(0.5deg)' }}>
+              <div className="font-mono text-[10px] text-gray-500 space-y-1 mb-3">
+                <div className="flex flex-wrap gap-x-6 gap-y-1">
+                  <span>FROM: <span className="text-gray-900">Santiago Node</span></span>
+                  <span>CENTER: <span className="text-gray-900">Energy Systems</span></span>
+                  <span>DATE: <span className="text-gray-900">2083.08.15</span></span>
+                  <span>PRIORITY: <span className="text-[#8A0000] font-bold">HIGH</span></span>
+                </div>
+              </div>
+              <div className="h-px bg-gray-200 mb-3" />
+              <p className="text-sm text-gray-700 leading-relaxed">Post-carbon prototype passes field test. Modular solar micro-grids deployed in 14 Atacama Desert communities now operating at 99.7% autonomy. The innovation: each unit is assembled and maintained by local technicians with 3 days of training. Open-source schematics have been downloaded 12,000 times. A Legacy Builder from the Circumpolar Return adapted the design for Antarctic research stations. Knowledge flows in every direction.</p>
             </div>
           </div>
         </section>

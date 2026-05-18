@@ -33,6 +33,94 @@ const headlines = [
   "Medellín Urban Peace Lab credited with 40% reduction in youth violence since founding",
 ];
 
+/* ─── Oath Registry Data ─── */
+const oathEntries = [
+  { text: "I pledge to dismantle the structures that make hunger possible in a world of abundance.", name: "Amara Okafor", year: "2038" },
+  { text: "I will learn quantum physics and African philosophy to reimagine energy sovereignty for underserved communities.", name: "Kwame Asante", year: "2042" },
+  { text: "My purpose is to build legal systems that hear the voices traditional courts have silenced for centuries.", name: "Elena Vasquez", year: "2045" },
+  { text: "I commit to designing cities that breathe — where concrete yields to living systems and every street is a watershed.", name: "Jian Wei", year: "2051" },
+  { text: "I will use narrative and memory to ensure that no culture is ever again reduced to a footnote in someone else's history.", name: "Fatima Al-Rashid", year: "2047" },
+  { text: "My oath is to the oceans — I will learn to listen to what the tides are telling us before it's too late to respond.", name: "Ingrid Solberg", year: "2058" },
+  { text: "I pledge to make justice algorithmic — not by removing human judgment, but by revealing the biases that corrupt it.", name: "Priya Sharma", year: "2055" },
+  { text: "I will spend my life proving that the boundary between art and engineering is a fiction that both disciplines outgrew long ago.", name: "Yuki Tanaka", year: "2061" },
+];
+
+/* ─── Oath Registry Wall Component ─── */
+function OathRegistryWall() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+      {oathEntries.map((oath, i) => (
+        <div
+          key={i}
+          className="relative border border-gray-200 bg-[#fffbeb] p-5 hover:border-[#8A0000] transition-colors group"
+        >
+          {/* Crimson seal/stamp in corner */}
+          <div className="absolute top-3 right-3 w-8 h-8 rounded-full border-2 border-[#8A0000] flex items-center justify-center opacity-30 group-hover:opacity-60 transition-opacity">
+            <div className="w-4 h-4 rounded-full border border-[#8A0000]" />
+          </div>
+
+          <p className="text-sm text-gray-800 leading-relaxed italic pr-8">&ldquo;{oath.text}&rdquo;</p>
+          <div className="mt-3 pt-3 border-t border-gray-200/50 flex items-center justify-between">
+            <span className="text-xs text-gray-500 font-serif">{oath.name}</span>
+            <span className="text-[10px] text-gray-400 font-mono">{oath.year}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Draft Your Oath Component ─── */
+function DraftOathCard() {
+  const [oathText, setOathText] = useState("");
+  const [sealed, setSealed] = useState(false);
+
+  return (
+    <div className={`mt-8 border p-6 md:p-8 transition-all ${sealed ? 'border-[#8A0000] bg-[#fef2f2]' : 'border-gray-200 bg-white'}`}>
+      <h4 className="font-bold text-sm uppercase tracking-wider text-gray-900 mb-4">Draft Your Oath</h4>
+      <textarea
+        value={oathText}
+        onChange={(e) => !sealed && setOathText(e.target.value)}
+        readOnly={sealed}
+        placeholder="Write your oath here — what will you commit your learning to?"
+        className={`w-full h-32 p-4 text-sm leading-relaxed resize-none border transition-colors placeholder:text-gray-400 focus:outline-none ${
+          sealed
+            ? 'border-[#8A0000] bg-[#fff7f7] text-gray-800 cursor-default'
+            : 'border-gray-200 bg-gray-50 text-gray-800 focus:border-[#8A0000]'
+        }`}
+      />
+      <div className="flex items-center justify-between mt-4">
+        {!sealed ? (
+          <button
+            onClick={() => oathText.trim() && setSealed(true)}
+            disabled={!oathText.trim()}
+            className={`px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              oathText.trim()
+                ? 'bg-[#8A0000] text-white hover:bg-[#6B0000]'
+                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            Seal Your Oath
+          </button>
+        ) : (
+          <div className="flex items-center gap-3">
+            {/* Seal icon */}
+            <div className="w-10 h-10 rounded-full border-2 border-[#8A0000] flex items-center justify-center bg-[#8A0000]/10">
+              <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#8A0000]" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-[#8A0000]">Your oath has been sealed into the Artemis Registry.</p>
+              <p className="text-xs text-gray-500 italic">The future is listening.</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 interface Props {
   goTo: (page: string) => void;
 }
@@ -335,6 +423,21 @@ export default function PurposeLearningPage({ goTo }: Props) {
               <text x="970" y="485" textAnchor="end" style={{fontSize:'9px', letterSpacing:'0.15em', fill:'#9CA3AF'}} className="font-mono uppercase">Global Impact Labs — Artemis 2100</text>
             </svg>
           </div>
+        </section>
+
+        {/* ── Oath Registry ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Oath Registry</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">The signed oaths of Artemis learners — each one a commitment to purpose, each one a thread in the fabric of a better world.</p>
+
+          {/* Registry Wall */}
+          <OathRegistryWall />
+
+          {/* Draft Your Oath */}
+          <DraftOathCard />
         </section>
 
         {/* ── Timeline ── */}

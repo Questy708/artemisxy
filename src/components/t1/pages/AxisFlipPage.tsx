@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from "react";
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
 import type { TimelineEvent } from "../Shared";
 
@@ -99,6 +99,178 @@ const skillPrintHeadlines = [
   "SkillPrint-based hiring now mandatory in 89 countries; GPA references drop to zero",
   "Artemis learner's SkillPrint reveals cross-disciplinary genius missed by 3 traditional institutions",
 ];
+
+/* ─── Specimen Cabinet Data ─── */
+const specimenData = [
+  {
+    specimenNo: "SKP-4471",
+    date: "2068.09.14",
+    classification: "Civic Engineering",
+    title: "Amara Okafor — Lagos Node",
+    brief: "Floating infrastructure designer and community financier. First SkillPrint to achieve dual specializations in Urban Systems and Community Finance.",
+    bars: [
+      { label: "Critical Thinking", pct: 92 },
+      { label: "Technical Mastery", pct: 65 },
+      { label: "Collaborative Impact", pct: 88 },
+      { label: "Civic Adaptability", pct: 95 },
+      { label: "Creative Synthesis", pct: 72 },
+    ],
+    impact: "Designed floating school in Lagos · Deployed microfinance platform in Medellín",
+    specializations: ["Data & Policy", "Urban Systems", "Community Finance"],
+  },
+  {
+    specimenNo: "SKP-8934",
+    date: "2074.03.22",
+    classification: "Computational Art",
+    title: "Kenji Tanaka — Osaka Node",
+    brief: "Quantum circuit visualizer and algorithmic composer. Only SkillPrint with verified mastery in both quantum computing and generative art.",
+    bars: [
+      { label: "Critical Thinking", pct: 71 },
+      { label: "Technical Mastery", pct: 94 },
+      { label: "Collaborative Impact", pct: 60 },
+      { label: "Civic Adaptability", pct: 55 },
+      { label: "Creative Synthesis", pct: 89 },
+    ],
+    impact: "Built quantum circuit visualizer for 12 labs · Composed algorithmic symphony for Osaka Philharmonic",
+    specializations: ["Quantum Computing", "Generative Art", "Systems Design"],
+  },
+  {
+    specimenNo: "SKP-12671",
+    date: "2081.11.07",
+    classification: "Transdisciplinary Bridge",
+    title: "Elena Vasquez — Bogotá Node",
+    brief: "Indigenous knowledge cartographer and participatory governance architect. The most balanced SkillPrint in the 2081 cohort.",
+    bars: [
+      { label: "Critical Thinking", pct: 78 },
+      { label: "Technical Mastery", pct: 73 },
+      { label: "Collaborative Impact", pct: 82 },
+      { label: "Civic Adaptability", pct: 80 },
+      { label: "Creative Synthesis", pct: 85 },
+    ],
+    impact: "Mapped indigenous knowledge across 3 Andean communities · Designed governance toolkit for 14 municipalities",
+    specializations: ["Civic Innovation", "Andean Ecology", "Narrative Design"],
+  },
+  {
+    specimenNo: "SKP-00442",
+    date: "2091.02.28",
+    classification: "Polar Systems",
+    title: "Ingrid Solberg — Svalbard Node",
+    brief: "The last legacy SkillPrint issued before the Universal Learner Profile made individual specimens obsolete. A transitional artifact.",
+    bars: [
+      { label: "Critical Thinking", pct: 88 },
+      { label: "Technical Mastery", pct: 76 },
+      { label: "Collaborative Impact", pct: 90 },
+      { label: "Civic Adaptability", pct: 94 },
+      { label: "Creative Synthesis", pct: 68 },
+    ],
+    impact: "Polar governance framework adopted by 14 climate-vulnerable regions · Antarctic Treaty renewal architect",
+    specializations: ["Polar Governance", "Climate Systems", "Memory Architecture"],
+  },
+];
+
+function SpecimenCabinet() {
+  const [openDrawer, setOpenDrawer] = useState<number | null>(null);
+
+  return (
+    <div className="grid md:grid-cols-2 gap-6">
+      {specimenData.map((specimen, idx) => (
+        <div
+          key={specimen.specimenNo}
+          className="border border-gray-300 bg-[#faf8f5] overflow-hidden transition-all duration-500"
+        >
+          {/* Drawer pull — crimson bar at top */}
+          <div className="h-1.5 bg-[#8A0000]" />
+
+          {/* Label plate */}
+          <div className="px-5 pt-4 pb-2 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">
+                Specimen No. {specimen.specimenNo}
+              </span>
+              <span className="text-[9px] text-gray-300">|</span>
+              <span className="text-[9px] font-mono text-gray-400">{specimen.date}</span>
+            </div>
+            <span className="text-[8px] font-mono uppercase tracking-widest text-[#8A0000]/60 border border-[#8A0000]/20 px-2 py-0.5">
+              {specimen.classification}
+            </span>
+          </div>
+
+          {/* Collapsed view: title + brief */}
+          <div className="px-5 pb-4">
+            <h4 className="font-bold text-sm text-gray-900 mb-2">{specimen.title}</h4>
+            <p className="text-xs text-gray-500 leading-relaxed">{specimen.brief}</p>
+
+            {/* Open / close toggle */}
+            <button
+              onClick={() => setOpenDrawer(openDrawer === idx ? null : idx)}
+              className="mt-3 text-[10px] font-mono uppercase tracking-widest text-[#8A0000] hover:text-[#6A0000] transition-colors cursor-pointer flex items-center gap-1.5"
+            >
+              {openDrawer === idx ? (
+                <>
+                  <X className="w-3 h-3" /> Close Drawer
+                </>
+              ) : (
+                <>
+                  <span className="inline-block w-4 h-0.5 bg-[#8A0000]" /> Pull Open
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Expanded drawer content */}
+          {openDrawer === idx && (
+            <div className="border-t border-gray-200 bg-white px-5 py-5 space-y-5 animate-in fade-in duration-300">
+              {/* Mini SkillPrint visualization — horizontal bars */}
+              <div className="space-y-3">
+                <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400 mb-2">Competency Map</p>
+                {specimen.bars.map((bar) => (
+                  <div key={bar.label} className="space-y-1">
+                    <div className="flex justify-between text-[11px]">
+                      <span className="text-gray-700 font-medium">{bar.label}</span>
+                      <span className="font-bold text-[#8A0000]">{bar.pct}%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#8A0000] rounded-full transition-all duration-500"
+                        style={{ width: `${bar.pct}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Verified Impact */}
+              <div className="space-y-2">
+                <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400">Verified Impact</p>
+                {specimen.impact.split(" · ").map((item, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <span className="text-[#8A0000] mt-0.5 shrink-0">&#9654;</span>
+                    <p className="text-[11px] font-bold text-gray-800">{item}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Specializations */}
+              <div className="space-y-2 pt-2 border-t border-gray-100">
+                <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400">Specializations</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {specimen.specializations.map((spec) => (
+                    <span
+                      key={spec}
+                      className="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider border border-[#8A0000]/30 text-[#8A0000] bg-[#8A0000]/5"
+                    >
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function AxisFlipPage({ goTo }: Props) {
   /* ─── Interactive Radar State ─── */
@@ -779,6 +951,17 @@ export default function AxisFlipPage({ goTo }: Props) {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ═══ Specimen Cabinet ═══ */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Specimen Cabinet</SectionHeading>
+            <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Open each drawer to examine a SkillPrint specimen — a living portrait of capability captured at a moment in time.</p>
+            <hr className="border-t border-gray-200" />
+          </div>
+
+          <SpecimenCabinet />
         </section>
 
       </div>

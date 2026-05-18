@@ -1,6 +1,7 @@
 'use client';
 
-import { Play } from "lucide-react";
+import { useState } from "react";
+import { Play, X } from "lucide-react";
 import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
 import type { TimelineEvent } from "../Shared";
 
@@ -22,6 +23,95 @@ const headlines = [
   "Traditional age-based grade levels officially abolished in 130 countries",
   "Average learner now completes 3 full Calibrate-Elevate-Activate cycles over lifetime",
 ];
+
+/* ─── Pulse Chamber Card Data ─── */
+const pulseRecordings = [
+  {
+    badge: "BIOFEEDBACK",
+    title: "Learner #4471 — Calibrate Phase",
+    date: "October 12, 2041",
+    content: "Cognitive load readings from a 23-year-old Pathfinder during her first month of Calibrate. The Mirror showed what she couldn't yet articulate: that her attention peaked between 10pm and 2am, and that traditional morning lectures were systematically undermining her potential. Chronos adjusted. She accelerated.",
+  },
+  {
+    badge: "COGNITIVE MIRROR",
+    title: "The Flow State Archive",
+    date: "Archived 2055–2088",
+    content: "Over three decades, the Cognitive Biofeedback Mirror captured 1.2 million flow-state events across 94,000 learners. The data revealed something the old model never could: flow was not random. It was patternable. Once a learner's flow signature was mapped, Chronos could predict — with 94% accuracy — the conditions under which they would enter deep focus. The Mirror didn't just reflect the learner. It reflected the path to their best work.",
+  },
+  {
+    badge: "CHRONOS DISPATCH",
+    title: "Pace Anomaly Report #891",
+    date: "March 3, 2063",
+    content: "Chronos flagged Learner #89234 for a pace anomaly: he had completed Elevate in 7 months — the fastest on record — but his biofeedback data showed stress markers consistent with performative speed rather than genuine mastery. Chronos recommended a mandatory 3-month reflective pause. The learner protested. He later called it the most important three months of his life.",
+  },
+  {
+    badge: "AUDIO LOG",
+    title: "The Fourteen-Month Calibrate",
+    date: "April 22, 2071",
+    content: "Audio recording of a Navigator reflecting on spending fourteen months in Calibrate — the longest in her cohort. 'My advisor said readiness wasn't a race. She was right. When I finally elevated, I elevated with purpose. Not the purpose someone assigned me — the purpose I discovered by giving myself permission to be uncertain.'",
+  },
+];
+
+/* ─── Pulse Chamber Cards Component ─── */
+function PulseChamberCards() {
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const badgeColors: Record<string, string> = {
+    BIOFEEDBACK: "bg-[#8A0000] text-white",
+    "COGNITIVE MIRROR": "bg-gray-900 text-white",
+    "CHRONOS DISPATCH": "bg-gray-700 text-white",
+    "AUDIO LOG": "bg-[#4A0000] text-white",
+  };
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+      {pulseRecordings.map((rec, i) => (
+        <div
+          key={i}
+          className={`border cursor-pointer transition-all duration-300 ${
+            expandedCard === i
+              ? "border-[#8A0000] bg-[#fef2f2] col-span-1 sm:col-span-2"
+              : "border-gray-200 hover:border-[#8A0000] bg-white"
+          }`}
+          onClick={() => setExpandedCard(expandedCard === i ? null : i)}
+        >
+          {expandedCard === i ? (
+            /* Expanded state */
+            <div className="p-6 md:p-8 relative">
+              <button
+                onClick={(e) => { e.stopPropagation(); setExpandedCard(null); }}
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-[#8A0000] transition-colors cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${badgeColors[rec.badge]}`}>
+                  {rec.badge}
+                </span>
+                <span className="text-xs text-gray-400 font-mono">{rec.date}</span>
+              </div>
+              <h4 className="font-bold text-lg text-gray-900 mb-4 italic">{rec.title}</h4>
+              <p className="text-sm text-gray-600 leading-relaxed max-w-3xl">{rec.content}</p>
+            </div>
+          ) : (
+            /* Collapsed state */
+            <div className="p-5">
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${badgeColors[rec.badge]}`}>
+                  {rec.badge}
+                </span>
+                <span className="text-[10px] text-gray-400 font-mono">{rec.date}</span>
+              </div>
+              <h4 className="font-bold text-sm text-gray-900 leading-tight">{rec.title}</h4>
+              <p className="text-xs text-gray-400 mt-2 italic">Click to expand recording</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 interface Props {
   goTo: (page: string) => void;
@@ -478,50 +568,43 @@ export default function PacedEducationPage({ goTo }: Props) {
           </div>
         </section>
 
-        <section className="space-y-24">
-          <div>
-            <hr className="border-t border-gray-200 mb-12" />
-            <SectionHeading>Exhibit Article Archive</SectionHeading>
-            <p className="text-sm text-gray-600 mt-4">Browse below to search through video archives of the exhibits displayed on May 1st, 2100.</p>
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <hr className="border-t border-gray-200" />
+            <SectionHeading>Pulse Chamber</SectionHeading>
+            <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Step into the rhythm. These are the biofeedback recordings, cognitive mirror sessions, and Chronos dispatches that defined how Artemis learned to learn at the pace of each individual.</p>
           </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 23</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-               <div className="space-y-4">
-                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Chronos: The Learning Rhythm Optimizer</h4>
-                  <p className="italic text-xs text-gray-500">Biometric Sensors, Cognitive Assessments, Holographic Interface</p>
-                  <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                     <p>Chronos was the AI system at the heart of Adaptive Paced Learning. Named after the Greek god of time, this advanced AI used biometric data, cognitive assessments, and learning analytics to determine each student&apos;s optimal learning rhythm.</p>
-                     <p>Students wore non-invasive biometric sensors monitoring sleep patterns, stress levels, and cognitive load. Chronos analyzed this data to continuously adjust learning schedules and content delivery, ensuring that each learner was always operating in their zone of peak receptivity.</p>
-                     <p>The holographic interface allowed students to visualize their learning journey as a dynamic, rhythmic pattern — a living map of their intellectual growth that pulsed and evolved in real time. Chronos didn&apos;t just optimize schedules; it helped learners understand themselves.</p>
-                  </div>
-               </div>
-               <div className="space-y-4">
-                  <div className="aspect-video bg-gray-900 flex items-center justify-center text-white">
-                    <span className="text-sm">Video placeholder</span>
-                  </div>
-               </div>
-            </div>
-          </div>
+          <PulseChamberCards />
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 56</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-               <div className="space-y-4">
-                  <h4 className="font-bold italic uppercase tracking-wider text-sm">The Cognitive Biofeedback Mirror</h4>
-                  <p className="italic text-xs text-gray-500">Neural Display Arrays, Emotional Resonance Mapping, Real-Time Biofeedback</p>
-                  <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                     <p>The Cognitive Biofeedback Mirror was perhaps the most personally transformative technology in Adaptive Paced Learning. It rendered a learner&apos;s cognitive and emotional state as a living visual portrait — part data visualization, part mirror, part mentor. Students could see their attention patterns, emotional responses, and cognitive load rendered in real time as shifting colors, forms, and rhythms.</p>
-                     <p>The Mirror made the invisible visible. It taught learners to recognize when they were in flow, when they were pushing too hard, and when they needed to step back and integrate. Over time, students developed an almost instinctive awareness of their own cognitive rhythms — a skill that served them far beyond the classroom and into every challenging moment of their professional and personal lives.</p>
-                  </div>
-               </div>
-               <div className="space-y-4">
-                  <div className="aspect-video bg-gray-900 flex items-center justify-center text-white">
-                    <span className="text-sm">Video placeholder</span>
-                  </div>
-               </div>
+          {/* Rhythm Waveform */}
+          <div className="mt-8">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">Old Model: Uniform Pace</span>
+              <div className="flex-1" />
+              <span className="text-[10px] font-mono text-[#8A0000] uppercase tracking-widest">New Model: Adaptive Pace</span>
             </div>
+            <svg viewBox="0 0 800 120" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Old model: flat gray line */}
+              <line x1="0" y1="30" x2="800" y2="30" stroke="#d1d5db" strokeWidth="2" />
+              {/* New model: dynamic crimson waveform */}
+              <path
+                d="M 0,80 Q 25,80 50,70 T 100,80 T 140,90 T 180,65 T 220,85 T 260,75 T 300,55 T 340,80 T 370,90 T 400,60 T 440,80 T 470,95 T 500,70 T 530,50 T 560,80 T 590,85 T 620,65 T 660,80 T 700,75 T 740,85 T 800,80"
+                fill="none"
+                stroke="#8A0000"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              {/* Subtle glow under waveform */}
+              <path
+                d="M 0,80 Q 25,80 50,70 T 100,80 T 140,90 T 180,65 T 220,85 T 260,75 T 300,55 T 340,80 T 370,90 T 400,60 T 440,80 T 470,95 T 500,70 T 530,50 T 560,80 T 590,85 T 620,65 T 660,80 T 700,75 T 740,85 T 800,80 L 800,120 L 0,120 Z"
+                fill="#8A0000"
+                opacity="0.06"
+              />
+              {/* Labels */}
+              <text x="12" y="26" style={{fontSize:'8px', fill:'#9ca3af', fontFamily:'monospace'}}>UNIFORM</text>
+              <text x="12" y="116" style={{fontSize:'8px', fill:'#8A0000', fontFamily:'monospace'}}>ADAPTIVE</text>
+            </svg>
           </div>
         </section>
       </div>

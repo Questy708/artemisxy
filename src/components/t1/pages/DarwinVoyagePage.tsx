@@ -187,6 +187,53 @@ interface Props {
   goTo: (page: string) => void;
 }
 
+/* ─── Voyage Log Data ─── */
+const voyageLogEntries = [
+  {
+    leg: "I",
+    name: "The Atlantic Awakening",
+    dateRange: "2035–2042",
+    image: "https://images.pexels.com/photos/31792594/pexels-photo-31792594.jpeg?auto=compress&cs=tinysrgb&w=800",
+    entry: "Day 142. Salvador. The Candomblé ceremony lasted until dawn. I watched as traditions that survived the Middle Passage reinvented themselves for a new century. My Field Notebook is full of questions I never thought to ask in a classroom. The Atlantic is not a barrier — it is a bridge built by the people who were forced to cross it. I am beginning to understand why the Continuum begins here.",
+  },
+  {
+    leg: "II",
+    name: "The Indian Ocean Circuit",
+    dateRange: "2043–2051",
+    image: "https://images.pexels.com/photos/29889182/pexels-photo-29889182.jpeg?auto=compress&cs=tinysrgb&w=800",
+    entry: "Day 89. Zanzibar. The dhow builders do not use blueprints. They use embodied knowledge passed from father to son for 800 years. When I asked about the keel angle, they looked at me as if I had asked a bird to explain the physics of flight. Some knowledge refuses to be written. It must be lived. The Indian Ocean teaches what the Atlantic cannot: that trade routes carried ideas as readily as spices, and that the monsoon was the world's first educational calendar.",
+  },
+  {
+    leg: "III",
+    name: "The Pacific Archipelago",
+    dateRange: "2052–2060",
+    image: "https://images.pexels.com/photos/33715477/pexels-photo-33715477.jpeg?auto=compress&cs=tinysrgb&w=800",
+    entry: "Day 203. Suva. The Pacific Islanders have been adapting to rising seas for 3,000 years. They did not wait for permission or funding. They built floating infrastructure, community-governed marine reserves, and decision-making systems that make Western democracy look slow and unresponsive. The Fa'a Samoa — the Samoan way — is a governance system older than any European parliament. I came here to study adaptation. I am learning revolution.",
+  },
+  {
+    leg: "IV",
+    name: "The Continental Traverse",
+    dateRange: "2061–2070",
+    image: "https://images.pexels.com/photos/35762336/pexels-photo-35762336.jpeg?auto=compress&cs=tinysrgb&w=800",
+    entry: "Day 312. Bogotá. The Andes teach verticality — not just in terrain, but in thinking. At 2,640 meters, the air is thin and every thought must be efficient. Indigenous agricultural wisdom — terracing, microclimate management, seed banking — coexists with quantum computing labs in the same valley. The traverse taught me that the world's most important knowledge is not in any one place. It is in the movement between places.",
+  },
+  {
+    leg: "V",
+    name: "The Circumpolar Return",
+    dateRange: "2071–2082",
+    image: "https://images.pexels.com/photos/35228123/pexels-photo-35228123.jpeg?auto=compress&cs=tinysrgb&w=800",
+    entry: "Day 47. Svalbard. Minus 34 degrees. The seed vault hums behind its steel door — 1.1 million samples of the world's agricultural memory, preserved against the possibility that we might forget how to grow things. Antarctica was governed by treaty, not territory — the only continent on Earth that belongs to science rather than sovereigns. The Circumpolar Return gave me a perspective no classroom could: the planet as a single system, fragile and resilient, worth every effort to sustain.",
+  },
+];
+
+/* ─── Voyage Specimen Drawer Data ─── */
+const voyageSpecimens = [
+  { name: "Dhow Schematic", location: "Zanzibar, 2046", desc: "Hand-drawn keel diagram from an 800-year-old boat-building tradition" },
+  { name: "Atoll Core Sample", location: "Suva, 2057", desc: "Coral growth record spanning 400 years of Pacific climate history" },
+  { name: "Seed Vault Access Key", location: "Svalbard, 2074", desc: "Biometric credential granting entry to the world's agricultural memory" },
+  { name: "Continental Traverse Map", location: "Bogotá, 2065", desc: "Hand-annotated topographic map marking 47 indigenous knowledge sites" },
+];
+
 export default function DarwinVoyagePage({ goTo }: Props) {
   const [hoveredCity, setHoveredCity] = useState<string | null>(null);
 
@@ -647,51 +694,83 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           <HeadlinesFrom2100 headlines={voyageHeadlines} />
         </section>
 
-        {/* ── Exhibit Article Archive ── */}
-        <section className="space-y-24">
-          <div>
-            <hr className="border-t border-gray-200 mb-12" />
-            <SectionHeading>Exhibit Article Archive</SectionHeading>
-            <p className="text-sm text-gray-600 mt-4">Browse below to search through video archives of the exhibits displayed on May 1st, 2100.</p>
+        {/* ── Voyage Log ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Voyage Log</SectionHeading>
+            <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
+              Captain&rsquo;s logs, crew dispatches, and observations from the five legs of the Voyage Rotation — preserved exactly as they were transmitted.
+            </p>
+            <hr className="border-t border-gray-200" />
           </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 112</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">The Lagos Docking: A Field Notebook</h4>
-                <p className="italic text-xs text-gray-500">Archived Field Notebook, Leg I, Anchor City: Lagos, 2037</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The first Field Notebook from the inaugural Voyage Rotation became the most-cited document in Artemis history. Its author, Amara Okafor, spent four months in Makoko — Lagos&rsquo;s floating community — without proposing a single intervention. Her notebook recorded the ingenuity of a community building a civilization on water: the floating schools, the mobile markets, the governance structures that operated entirely outside the formal economy.</p>
-                  <p>When she finally entered the Surveying phase, her Working Paper on &ldquo;Adaptive Infrastructure in Aquatic Communities&rdquo; was initially rejected by the community review panel — they felt it didn&rsquo;t adequately capture the role of women in the governance structure. She spent three more months in Docking. The revised paper became the foundation for floating city designs deployed across three continents.</p>
+          <div className="space-y-8">
+            {voyageLogEntries.map((log) => (
+              <div key={log.leg} className="bg-[#faf8f5] border border-gray-200 overflow-hidden">
+                <div className="flex items-stretch">
+                  {/* Image column */}
+                  <div className="hidden md:block w-56 shrink-0">
+                    <img
+                      src={log.image}
+                      alt={log.name}
+                      className="w-full h-full object-cover grayscale opacity-50"
+                    />
+                  </div>
+
+                  {/* Log content */}
+                  <div className="flex-1 p-6 space-y-4">
+                    {/* Header */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-9 h-9 bg-[#8A0000] flex items-center justify-center text-white text-xs font-bold italic shrink-0">
+                        {log.leg}
+                      </div>
+                      <div>
+                        <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">
+                          Leg {log.leg} — {log.name}
+                        </h4>
+                        <p className="text-[10px] font-mono text-gray-400">{log.dateRange}</p>
+                      </div>
+                    </div>
+
+                    {/* Log entry — styled like handwritten captain's log */}
+                    <div className="bg-white/60 border border-gray-100 p-4 relative">
+                      <div className="absolute inset-0 pointer-events-none" style={{
+                        backgroundImage: 'repeating-linear-gradient(transparent, transparent 27px, #e5e0d8 27px, #e5e0d8 28px)',
+                        backgroundSize: '100% 28px',
+                        backgroundPosition: '0 20px',
+                        opacity: 0.3,
+                      }} />
+                      <p className="font-serif italic text-sm text-gray-700 leading-relaxed relative z-10">
+                        &ldquo;{log.entry}&rdquo;
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch Amara Okafor&rsquo;s Field Notebook reading at the 2038 Voyage Convocation.</p>
-              </div>
+            ))}
+          </div>
+
+          {/* Voyage Specimen Drawer */}
+          <div className="space-y-6 pt-4">
+            <div className="flex items-center gap-3">
+              <div className="h-px bg-gray-200 flex-1" />
+              <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400">Voyage Specimen Drawer</p>
+              <div className="h-px bg-gray-200 flex-1" />
             </div>
-          </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 147</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">The Svalbard Specimen: Seeds of Governance</h4>
-                <p className="italic text-xs text-gray-500">Specimen Archive, Leg V, Anchor City: Svalbard, 2074</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The most celebrated Specimen in Voyage Rotation history was produced not by a single learner but by a team of twelve — six from the Arctic, six from the Equator. Their project, &ldquo;Seeds of Governance,&rdquo; asked a question that had haunted the Circumpolar Return: could the Antarctic Treaty System — the world&rsquo;s most successful experiment in collective governance — be adapted for contested territories in the tropics?</p>
-                  <p>The team spent eighteen months designing a governance framework that combined the Antarctic Treaty&rsquo;s principles of scientific cooperation with indigenous consensus-building traditions from the Amazon, the Sahel, and the Pacific. The resulting model was adopted by three West African nations for transboundary water management, and by 2100 had influenced governance frameworks across fourteen climate-vulnerable regions.</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {voyageSpecimens.map((spec) => (
+                <div
+                  key={spec.name}
+                  className="bg-[#faf8f5] border border-gray-200 p-4 space-y-2 hover:border-[#8A0000]/30 transition-colors"
+                >
+                  {/* Small crimson accent at top */}
+                  <div className="h-0.5 w-6 bg-[#8A0000] mb-1" />
+                  <h5 className="font-bold text-xs text-gray-900 leading-snug">{spec.name}</h5>
+                  <p className="text-[9px] font-mono text-gray-400">{spec.location}</p>
+                  <p className="text-[10px] text-gray-500 leading-relaxed">{spec.desc}</p>
                 </div>
-              </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch the Seeds of Governance presentation at the 2074 Voyage Convocation.</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

@@ -1,6 +1,7 @@
 'use client';
 
-import { Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { Play, ChevronLeft, ChevronRight, BookOpen, Mic, Mail, FileText, Video, Volume2, X } from "lucide-react";
 import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
 import type { TimelineEvent } from "../Shared";
 
@@ -23,11 +24,124 @@ const headlines = [
   "Lifelong learning tax incentives credited with 15% increase in workforce adaptability",
 ];
 
+/* ─── Artifact Data ─── */
+const artifacts = [
+  {
+    type: "DIARY ENTRY",
+    icon: BookOpen,
+    title: "The Day I Looped Out",
+    date: "March 14, 2042",
+    teaser: "A Pathfinder's handwritten account of the moment they chose to leave — and why coming back mattered.",
+    full: "I remember the exact bench. Third floor of the Athenaeum, overlooking the courtyard where Catalysts held their morning councils. My advisor said looping out wasn't failure — it was data. She was right. I spent eleven months in Kigali working with community health workers, and when I returned, I understood epidemiology not as a subject but as a practice. The Continuum didn't break. It breathed."
+  },
+  {
+    type: "AUDIO LOG",
+    icon: Mic,
+    title: "Populi Network Dispatch #447",
+    date: "January 8, 2071",
+    teaser: "A recorded dispatch from the global populi network — 4.2 million learners, one signal.",
+    full: "This is Populi Dispatch 447, coming to you from the Nairobi Node. This week: a Navigator in Osaka shares how her third return to Artemis led to the development of a quantum-resistant cryptography standard now used by 14 central banks. A Catalyst in Valletta publishes his 40th paper — at age 78 — proving that institutional memory is not a burden but a catalyst for innovation. The network is alive. The Continuum continues."
+  },
+  {
+    type: "POSTCARD",
+    icon: Mail,
+    title: "From the Calibrate Phase",
+    date: "Summer, 2038",
+    teaser: "A digital postcard from a first-year Pathfinder discovering the Continuum for the first time.",
+    full: "Dear Future Me — I'm writing this from the observation deck of the Helsinki Node. It's 2am and the sky is the color of old silver. I came here to study architecture, but tonight I attended a Catalyst's lecture on the mathematics of trust networks, and I can't stop thinking about it. The Continuum says I don't have to choose. I can study architecture AND trust networks. I can loop out and loop back. For the first time in my life, learning doesn't feel like a hallway with locked doors. It feels like an open field."
+  },
+  {
+    type: "POLICY DOC",
+    icon: FileText,
+    title: "The Lifelong Learning Mandate",
+    date: "November 3, 2055",
+    teaser: "The landmark legislation that made paid learning leave a universal right.",
+    full: "THIRTY NATIONS SIGN THE LIFELONG LEARNING MANDATE — In a ceremony at the Artemis Geneva Node, representatives from thirty nations signed the Mandate into international law, requiring all employers with more than 50 employees to provide a minimum of 40 days of paid learning leave per year. The Mandate was directly influenced by Artemis's Infinite Learning Continuum, which demonstrated that learners who returned to education mid-career were 3.7 times more likely to produce breakthrough innovations than those who did not."
+  },
+  {
+    type: "VIDEO ARCHIVE",
+    icon: Video,
+    title: "The Last Graduation Ceremony",
+    date: "May 1, 2033",
+    teaser: "Footage from the final traditional graduation at Artemis — the event that ended all endings.",
+    full: "The Last Graduation was not a funeral. It was a transformation. When Chancellor Adebayo declared 'There will be no more graduates at Artemis — only populi,' the audience of 4,000 fell silent for exactly seven seconds before erupting into the longest standing ovation in the university's history. The caps were thrown. The degrees were conferred. And then the ceremony dissolved into a sign-up for the Continuum's first return cycle. Nobody left. Everyone simply... continued."
+  },
+  {
+    type: "SOUND BITE",
+    icon: Volume2,
+    title: "Legacy Builder Testimonial",
+    date: "April 22, 2091",
+    teaser: "A 94-year-old populi reflects on 73 years of continuous learning.",
+    full: "I've been part of Artemis for seventy-three years. I entered as a Pathfinder in 2018 — before the Continuum even existed. I became a Navigator, then a Catalyst, and now I am a Legacy Builder. People ask me if I'm tired of learning. I tell them: I am tired the way a river is tired of flowing. The Continuum didn't extend my education. It revealed that education was never supposed to end. It was supposed to deepen."
+  }
+];
+
+/* ─── Carousel Photos ─── */
+const carouselPhotos = [
+  { src: "https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Children engaged in early exploratory learning" },
+  { src: "https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Young adults studying in a collaborative environment" },
+  { src: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Professionals collaborating on innovative projects" },
+  { src: "https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Mature mentor guiding the next generation" },
+  { src: "https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Elder learner in a continued education context" },
+  { src: "https://images.pexels.com/photos/7176045/pexels-photo-7176045.jpeg?auto=compress&cs=tinysrgb&w=1200", alt: "Community of lifelong learners gathering together" },
+];
+
+/* ─── Stage Data ─── */
+const stages = [
+  {
+    symbol: "α",
+    name: "Early Explorers",
+    ages: "5–17",
+    image: "https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "The Continuum begins before university. Young learners engage with Artemis through immersive digital camps, mentorship circles, and curiosity-driven micro-courses. These aren\u2019t pre-college prep programs \u2014 they\u2019re genuine encounters with interdisciplinary thinking, designed to ignite purpose and wonder early. Early Explorers discover what questions excite them, building a foundation of intrinsic motivation that shapes their entire learning journey."
+  },
+  {
+    symbol: "β",
+    name: "Pathfinders",
+    ages: "18–25",
+    image: "https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "The traditional \u201Cundergraduate\u201D phase was reconceived entirely. Pathfinders navigate through Calibrate, Elevate, and Activate cycles (as described in Adaptive Paced Learning), entering and exiting as their life demands. They declare missions, not majors. They move between Centers of Inquiry rather than departments. Some loop out for real-world immersion and loop back with fresh perspective. The fixed four-year window dissolved into a flexible, purpose-driven arc."
+  },
+  {
+    symbol: "γ",
+    name: "Navigators",
+    ages: "25–45",
+    image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "Working professionals return to Artemis \u2014 not as \u201Calumni\u201D visiting their past, but as Navigators charting new territory. They loop back for mid-career accelerators, specialized micro-credentials, and collaborative sabbaticals. Navigators bring real-world complexity into the classroom, enriching discourse and bridging theory with practice. Their presence transforms Artemis from a place of preparation into a living laboratory of applied wisdom."
+  },
+  {
+    symbol: "δ",
+    name: "Catalysts",
+    ages: "45–65",
+    image: "https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "Later-career practitioners return as Catalysts \u2014 part mentor, part co-learner, part provocateur. They teach in Centers of Inquiry, lead transdisciplinary research pods, and guide the next generation of Pathfinders. But they also learn: emerging fields, new methodologies, and the fresh perspectives that only young minds can provide. The Catalyst stage dissolves the boundary between teacher and student entirely, creating a community where expertise flows in every direction."
+  },
+  {
+    symbol: "Ω",
+    name: "Legacy Builders",
+    ages: "65+",
+    image: "https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=800",
+    description: "The Continuum\u2019s final stage is perhaps its most revolutionary. Legacy Builders remain engaged with Artemis as scholars-in-residence, community elders, and architects of institutional memory. They curate knowledge across generations, write the narratives that shape Artemis\u2019s evolving identity, and ensure that wisdom is never lost to time. Legacy Builders prove that the hunger for learning does not diminish with age \u2014 it only deepens."
+  }
+];
+
+/* ─── Finite Loop Steps ─── */
+const finiteSteps = ["School", "College", "Work", "Retire", "END"];
+
+/* ─── Continuum Nodes ─── */
+const continuumNodes = ["Explore", "Pathfind", "Navigate", "Catalyze", "Legacy"];
+
 interface Props {
   goTo: (page: string) => void;
 }
 
 export default function OpenLoopPage({ goTo }: Props) {
+  const [expandedArtifact, setExpandedArtifact] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const prevSlide = () => setCurrentSlide((s) => (s === 0 ? carouselPhotos.length - 1 : s - 1));
+  const nextSlide = () => setCurrentSlide((s) => (s === carouselPhotos.length - 1 ? 0 : s + 1));
+
   return (
     <>
       <HeroHeader
@@ -37,6 +151,10 @@ export default function OpenLoopPage({ goTo }: Props) {
         bgImage="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
+
+        {/* ════════════════════════════════════════════════════════════════
+            SUMMARY SECTION (kept as-is)
+        ════════════════════════════════════════════════════════════════ */}
         <section className="space-y-6">
           <SectionHeading>A Summary</SectionHeading>
           <p className="text-sm text-gray-600">
@@ -60,59 +178,126 @@ export default function OpenLoopPage({ goTo }: Props) {
           </div>
         </section>
 
+        {/* ════════════════════════════════════════════════════════════════
+            THE FINITE LOOP vs THE INFINITE CONTINUUM (NEW)
+        ════════════════════════════════════════════════════════════════ */}
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>Key Details</SectionHeading>
+            <SectionHeading>The Finite Loop vs The Infinite Continuum</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 md:gap-24 relative">
-            {/* Left Column */}
-            <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-gray-900">Linear</div>
-              <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* LEFT CARD: The Finite Loop */}
+            <div className="bg-gray-100 border border-gray-200 p-6 sm:p-8 space-y-6">
+              <h3 className="text-lg font-bold uppercase tracking-wider text-gray-500">The Finite Loop</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Education was segmented into distinct phases: primary, secondary, tertiary, then professional development. Learning had a clear beginning and end — a finite loop that closed the moment a degree was conferred.
-              </h3>
+              </p>
 
-              <div className="h-40 flex items-center justify-center border-b border-gray-200 relative">
-                <svg width="100%" height="100%" viewBox="0 0 400 100" className="absolute stroke-black stroke-2 fill-none stroke-current text-gray-800">
-                  <path d="M 0,50 L 50,50 L 50,20 L 150,20 L 150,80 L 200,80 L 200,50 L 400,50" />
-                </svg>
+              {/* Conveyor belt visual */}
+              <div className="py-6">
+                <div className="flex items-center gap-0 overflow-x-auto">
+                  {finiteSteps.map((step, i) => (
+                    <div key={step} className="flex items-center shrink-0">
+                      <div className={`px-4 py-3 border-2 text-xs font-bold uppercase tracking-wider ${
+                        step === "END"
+                          ? "bg-gray-300 border-gray-400 text-gray-600 line-through"
+                          : "bg-gray-200 border-gray-300 text-gray-500"
+                      }`}>
+                        {step}
+                      </div>
+                      {i < finiteSteps.length - 1 && (
+                        <div className="flex items-center text-gray-400 mx-1">
+                          <div className="w-4 h-px bg-gray-400" />
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 6 10">
+                            <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  {/* Dead-end block */}
+                  <div className="flex items-center shrink-0 ml-1">
+                    <div className="w-6 h-px bg-gray-400" />
+                    <div className="w-6 h-6 border-2 border-gray-400 bg-gray-300 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-gray-500" />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <ul className="text-xs text-gray-600 space-y-3 divide-y divide-gray-100">
-                 <li className="pt-2">Fixed 4-year degree window</li>
-                 <li className="pt-2">Learning confined to classroom years</li>
-                 <li className="pt-2">Limited access to academic settings later in life</li>
-                 <li className="pt-2">Adults returning to school overwhelmed by outdated curricula</li>
-                 <li className="pt-2">&ldquo;Lifelong learning&rdquo; discussed but rarely implemented</li>
+              <ul className="text-xs text-gray-500 space-y-3 divide-y divide-gray-200">
+                <li className="pt-2">Fixed 4-year degree window</li>
+                <li className="pt-2">Learning confined to classroom years</li>
+                <li className="pt-2">Limited access to academic settings later in life</li>
+                <li className="pt-2">Adults returning to school overwhelmed by outdated curricula</li>
+                <li className="pt-2">&ldquo;Lifelong learning&rdquo; discussed but rarely implemented</li>
               </ul>
             </div>
 
-            {/* Right Column */}
-            <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-gray-900">Infinite</div>
-              <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
+            {/* RIGHT CARD: The Infinite Continuum */}
+            <div className="bg-white border border-[#8A0000]/20 p-6 sm:p-8 space-y-6 shadow-sm">
+              <h3 className="text-lg font-bold uppercase tracking-wider text-[#8A0000]">The Infinite Continuum</h3>
+              <p className="text-sm text-gray-700 leading-relaxed">
                 The Infinite Learning Continuum discarded the idea of education as a finite process. Learning became a cradle-to-grave journey — an infinite loop where individuals evolve through distinct life stages, each with its own rhythm, purpose, and mode of engagement.
-              </h3>
+              </p>
 
-              <div className="h-40 flex items-center justify-center border-b border-gray-200 relative">
-                <svg width="100%" height="100%" viewBox="0 0 400 100" className="absolute stroke-black stroke-2 fill-none stroke-current text-gray-800">
-                  <path d="M 0,50 Q 50,50 100,50 C 120,50 140,20 120,20 C 100,20 100,80 120,80 C 140,80 180,50 200,50 C 220,50 240,20 220,20 C 200,20 200,80 220,80 C 240,80 280,50 300,50 L 400,50" />
-                </svg>
+              {/* Circular loop visual */}
+              <div className="flex justify-center py-4">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64">
+                  {/* SVG circle path with arrows */}
+                  <svg viewBox="0 0 200 200" className="w-full h-full">
+                    {/* Outer ring */}
+                    <circle cx="100" cy="100" r="72" fill="none" stroke="#8A0000" strokeWidth="1.5" strokeDasharray="6 3" />
+                    {/* Arrow markers on the ring */}
+                    <path d="M 100 28 L 105 34 L 100 30 L 95 34 Z" fill="#8A0000" />
+                    <path d="M 172 100 L 166 105 L 170 100 L 166 95 Z" fill="#8A0000" />
+                    <path d="M 100 172 L 95 166 L 100 170 L 105 166 Z" fill="#8A0000" />
+                    <path d="M 28 100 L 34 95 L 30 100 L 34 105 Z" fill="#8A0000" />
+                  </svg>
+
+                  {/* Nodes around the circle */}
+                  {continuumNodes.map((node, i) => {
+                    const angle = (i * 72 - 90) * (Math.PI / 180);
+                    const x = 100 + 72 * Math.cos(angle);
+                    const y = 100 + 72 * Math.sin(angle);
+                    return (
+                      <div
+                        key={node}
+                        className="absolute transform -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: `${x}%`, top: `${y}%` }}
+                      >
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-[#8A0000] bg-white flex items-center justify-center shadow-sm">
+                          <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-[#8A0000] text-center leading-tight px-1">{node}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {/* Center label */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-[9px] font-mono text-[#8A0000]/50 uppercase tracking-widest">∞</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <ul className="text-xs text-gray-600 space-y-3 divide-y divide-gray-100">
-                 <li className="pt-2">Learning begins before university and continues beyond it</li>
-                 <li className="pt-2">Five life stages replace the traditional degree timeline</li>
-                 <li className="pt-2">Every return to Artemis deepens expertise and community</li>
-                 <li className="pt-2">Knowledge flows between generations in both directions</li>
-                 <li className="pt-2">&ldquo;Populi&rdquo; replace &ldquo;alumni&rdquo; — learners for life, not graduates for a day</li>
+                <li className="pt-2">Learning begins before university and continues beyond it</li>
+                <li className="pt-2">Five life stages replace the traditional degree timeline</li>
+                <li className="pt-2">Every return to Artemis deepens expertise and community</li>
+                <li className="pt-2">Knowledge flows between generations in both directions</li>
+                <li className="pt-2">&ldquo;Populi&rdquo; replace &ldquo;alumni&rdquo; — learners for life, not graduates for a day</li>
               </ul>
             </div>
           </div>
         </section>
 
+        {/* ════════════════════════════════════════════════════════════════
+            HISTORICAL NOTES (kept as-is)
+        ════════════════════════════════════════════════════════════════ */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>Historical Notes</SectionHeading>
@@ -139,85 +324,65 @@ export default function OpenLoopPage({ goTo }: Props) {
           </div>
         </section>
 
+        {/* ════════════════════════════════════════════════════════════════
+            THE FIVE STAGES — IMAGE CARDS (NEW)
+        ════════════════════════════════════════════════════════════════ */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>The Five Stages</SectionHeading>
           </div>
 
-          <div className="space-y-16">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Early Explorers (Ages 5–17)</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  The Continuum begins before university. Young learners engage with Artemis through immersive digital camps, mentorship circles, and curiosity-driven micro-courses. These aren&apos;t pre-college prep programs — they&apos;re genuine encounters with interdisciplinary thinking, designed to ignite purpose and wonder early. Early Explorers discover what questions excite them, building a foundation of intrinsic motivation that shapes their entire learning journey.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">α</div>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-8">
+            {stages.map((stage, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <div
+                  key={stage.symbol}
+                  className="group border-l-4 border-transparent hover:border-[#8A0000] transition-all duration-300 bg-white"
+                >
+                  <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-0`}>
+                    {/* Image side */}
+                    <div className="relative w-full md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden">
+                      <img
+                        src={stage.image}
+                        alt={stage.name}
+                        className="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-90 group-hover:grayscale-[50%] transition-all duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      {/* Stage name + age overlaid on image */}
+                      <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                        <div className="text-[9px] font-mono text-white/60 uppercase tracking-widest mb-1">Stage {stage.symbol}</div>
+                        <h4 className="text-xl sm:text-2xl font-bold uppercase tracking-wider text-white">{stage.name}</h4>
+                        <div className="text-sm text-white/70 font-mono mt-1">Ages {stage.ages}</div>
+                      </div>
+                    </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Pathfinders (Ages 18–25)</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  The traditional &ldquo;undergraduate&rdquo; phase was reconceived entirely. Pathfinders navigate through Calibrate, Elevate, and Activate cycles (as described in Adaptive Paced Learning), entering and exiting as their life demands. They declare missions, not majors. They move between Centers of Inquiry rather than departments. Some loop out for real-world immersion and loop back with fresh perspective. The fixed four-year window dissolved into a flexible, purpose-driven arc.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">β</div>
+                    {/* Text side */}
+                    <div className="relative w-full md:w-1/2 p-6 sm:p-8 lg:p-10 flex items-center">
+                      {/* Large watermark symbol */}
+                      <div className="absolute top-4 right-6 text-[120px] sm:text-[160px] font-serif italic text-gray-100 leading-none pointer-events-none select-none">
+                        {stage.symbol}
+                      </div>
+                      <div className="relative z-10">
+                        <div className="text-[9px] font-mono text-[#8A0000] uppercase tracking-widest mb-3">
+                          {i === 0 ? 'Stage I' : i === 1 ? 'Stage II' : i === 2 ? 'Stage III' : i === 3 ? 'Stage IV' : 'Stage V'}
+                        </div>
+                        <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900 mb-4">
+                          {stage.name} (Ages {stage.ages})
+                        </h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          {stage.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Navigators (Ages 25–45)</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Working professionals return to Artemis — not as &ldquo;alumni&rdquo; visiting their past, but as Navigators charting new territory. They loop back for mid-career accelerators, specialized micro-credentials, and collaborative sabbaticals. Navigators bring real-world complexity into the classroom, enriching discourse and bridging theory with practice. Their presence transforms Artemis from a place of preparation into a living laboratory of applied wisdom.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">γ</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Catalysts (Ages 45–65)</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Later-career practitioners return as Catalysts — part mentor, part co-learner, part provocateur. They teach in Centers of Inquiry, lead transdisciplinary research pods, and guide the next generation of Pathfinders. But they also learn: emerging fields, new methodologies, and the fresh perspectives that only young minds can provide. The Catalyst stage dissolves the boundary between teacher and student entirely, creating a community where expertise flows in every direction.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">δ</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Legacy Builders (Ages 65+)</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  The Continuum&apos;s final stage is perhaps its most revolutionary. Legacy Builders remain engaged with Artemis as scholars-in-residence, community elders, and architects of institutional memory. They curate knowledge across generations, write the narratives that shape Artemis&apos;s evolving identity, and ensure that wisdom is never lost to time. Legacy Builders prove that the hunger for learning does not diminish with age — it only deepens.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">Ω</div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </section>
 
-        {/* ── Timeline ── */}
+        {/* ── Timeline (kept as-is) ── */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>Timeline</SectionHeading>
@@ -226,7 +391,7 @@ export default function OpenLoopPage({ goTo }: Props) {
           <Timeline events={timelineEvents} />
         </section>
 
-        {/* ── Headlines from 2100 ── */}
+        {/* ── Headlines from 2100 (kept as-is) ── */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>Headlines from 2100</SectionHeading>
@@ -235,6 +400,9 @@ export default function OpenLoopPage({ goTo }: Props) {
           <HeadlinesFrom2100 headlines={headlines} />
         </section>
 
+        {/* ════════════════════════════════════════════════════════════════
+            THE ACHIEVEMENT (kept as-is)
+        ════════════════════════════════════════════════════════════════ */}
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
@@ -278,115 +446,135 @@ export default function OpenLoopPage({ goTo }: Props) {
           </div>
         </section>
 
-        <section className="space-y-24">
+        {/* ════════════════════════════════════════════════════════════════
+            CONTINUUM CAPSULE (NEW — replaces Exhibit Article Archive + Gallery)
+        ════════════════════════════════════════════════════════════════ */}
+        <section className="space-y-16">
           <div>
             <hr className="border-t border-gray-200 mb-12" />
-            <SectionHeading>Exhibit Article Archive</SectionHeading>
-            <p className="text-sm text-gray-600 mt-4">Browse below to search through video archives of the exhibits displayed on May 1st, 2100.</p>
+            <SectionHeading>Continuum Capsule</SectionHeading>
+            <p className="text-sm text-gray-600 mt-4">Open each artifact to discover what the Continuum left behind.</p>
           </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 101</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">AI-Driven Personalized Learning Platforms</h4>
-                <p className="italic text-xs text-gray-500">Archived research and documentation from 2028&ndash;2045</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>Advanced AI systems revolutionized personalized learning by analyzing data from millions of learners to create customized educational experiences. These platforms adapted in real-time to the learner&apos;s progress, offering tailored content and feedback. By leveraging machine learning algorithms, natural language processing, and behavioral analytics, the platforms identified knowledge gaps, predicted learning difficulties, and dynamically adjusted material to keep each learner in their optimal zone of development.</p>
-                  <p>The impact was profound: completion rates soared, learner satisfaction reached unprecedented levels, and the gap between different socioeconomic groups narrowed significantly as AI tutors provided one-on-one guidance that had previously been available only to the privileged few.</p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch the AI-Driven Learning Platform demonstration.</p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-               <div className="space-y-2">
-                  <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI Learning Platform" className="w-full h-full object-cover grayscale opacity-80" />
+          {/* Artifact Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {artifacts.map((artifact, i) => {
+              const Icon = artifact.icon;
+              const isExpanded = expandedArtifact === i;
+              return (
+                <div
+                  key={i}
+                  className="relative border border-gray-200 bg-white cursor-pointer transition-all duration-300 hover:border-[#8A0000]/40 hover:shadow-lg group overflow-hidden"
+                  onClick={() => setExpandedArtifact(isExpanded ? null : i)}
+                >
+                  {/* Collapsed state */}
+                  <div className={`p-5 sm:p-6 transition-all duration-300 ${isExpanded ? 'opacity-0 h-0 p-0 overflow-hidden' : 'opacity-100'}`}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-7 h-7 bg-[#8A0000]/10 flex items-center justify-center">
+                        <Icon className="w-3.5 h-3.5 text-[#8A0000]" />
+                      </div>
+                      <span className="text-[9px] font-mono font-bold text-[#8A0000] uppercase tracking-widest">{artifact.type}</span>
+                    </div>
+                    <h4 className="font-bold text-sm text-gray-900 mb-2 leading-tight">{artifact.title}</h4>
+                    <p className="text-[10px] font-mono text-gray-400 mb-3">{artifact.date}</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">{artifact.teaser}</p>
+                    <div className="mt-4 text-[9px] font-mono text-[#8A0000] uppercase tracking-widest group-hover:underline">Tap to open →</div>
                   </div>
-                  <p className="text-xs text-gray-500">Early AI-driven personalized learning interface.</p>
-               </div>
-               <div className="space-y-2">
-                  <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Learning analytics" className="w-full h-full object-cover grayscale opacity-80" />
+
+                  {/* Expanded state */}
+                  {isExpanded && (
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-7 h-7 bg-[#8A0000]/10 flex items-center justify-center">
+                            <Icon className="w-3.5 h-3.5 text-[#8A0000]" />
+                          </div>
+                          <span className="text-[9px] font-mono font-bold text-[#8A0000] uppercase tracking-widest">{artifact.type}</span>
+                        </div>
+                        <button
+                          className="text-gray-400 hover:text-gray-600 transition-colors"
+                          onClick={(e) => { e.stopPropagation(); setExpandedArtifact(null); }}
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <h4 className="font-bold text-sm text-gray-900 mb-1 leading-tight">{artifact.title}</h4>
+                      <p className="text-[10px] font-mono text-gray-400 mb-4">{artifact.date}</p>
+                      <div className="border-t border-gray-100 pt-4">
+                        <p className="text-xs text-gray-700 leading-relaxed italic">{artifact.full}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ── Continuum Gallery Carousel ── */}
+          <div className="space-y-8 pt-8">
+            <div className="space-y-2">
+              <SectionHeading>Continuum Gallery</SectionHeading>
+              <p className="text-xs text-gray-400 font-mono mt-2">Artefact visuals from the Continuum archives</p>
+            </div>
+
+            <div className="relative w-full overflow-hidden bg-gray-50 border border-gray-200">
+              {/* Slide container */}
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {carouselPhotos.map((photo, i) => (
+                  <div key={i} className="w-full shrink-0">
+                    <div className="relative w-full aspect-[16/9] sm:aspect-[21/9]">
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        className="w-full h-full object-cover grayscale opacity-80"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      <div className="absolute bottom-4 left-6 text-white/70 text-xs font-mono">
+                        {String(i + 1).padStart(2, '0')} / {String(carouselPhotos.length).padStart(2, '0')}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-500">Learning analytics dashboard in use.</p>
-               </div>
-            </div>
-          </div>
+                ))}
+              </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 102</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">The Rise of Micro-Credentials</h4>
-                <p className="italic text-xs text-gray-500">Policy documents and implementation records from 2030&ndash;2050</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>Micro-credentials became the new standard, allowing learners to acquire specific skills quickly. These credentials could be stacked over time to build comprehensive qualifications, offering a flexible alternative to traditional degrees. Rather than requiring years of continuous enrollment, micro-credentials broke learning into discrete, verifiable units that could be earned in weeks or months and combined incrementally toward larger certifications.</p>
-                  <p>Employers embraced micro-credentials as a more precise signal of competency. At Artemis, the micro-credential ecosystem became a thriving marketplace of knowledge, with learners assembling unique portfolios that reflected not just what they had studied, but what they could demonstrably do.</p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch the Micro-Credentials explainer video.</p>
-              </div>
+              {/* Navigation arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors z-10"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors z-10"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
-          </div>
 
-          <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 103</h3>
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm">From Alumni to Populi: The Distributed Network</h4>
-                <p className="italic text-xs text-gray-500">Case studies and network development records from 2032&ndash;2060</p>
-                <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>As the Infinite Learning Continuum matured, the traditional concept of &ldquo;alumni&rdquo; — people who had once attended an institution — gave way to &ldquo;populi&rdquo;: a distributed network of lifelong learners who remained actively engaged with Artemis and with each other. Populi weren&apos;t merely graduates looking back fondly; they were practitioners, mentors, researchers, and community members who moved fluidly between learning and leading.</p>
-                  <p>This transformation created a self-reinforcing ecosystem. Populi returned as Navigators and Catalysts, bringing real-world challenges into the classroom and carrying new knowledge back into their communities. The distributed network became one of Artemis&apos;s most powerful assets — a living, breathing web of expertise that spanned every continent, every discipline, and every generation.</p>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <div className="aspect-video bg-gray-900 flex items-center justify-center relative group cursor-pointer text-white">
-                  <span className="text-sm">Video unavailable<br/><span className="text-xs text-gray-400">This video is private</span></span>
-                </div>
-                <p className="text-xs text-gray-500 italic">Watch the From Alumni to Populi documentary.</p>
-              </div>
+            {/* Dot indicators */}
+            <div className="flex justify-center gap-2">
+              {carouselPhotos.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    i === currentSlide
+                      ? 'bg-[#8A0000] scale-110'
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
             </div>
-          </div>
-
-          <div className="space-y-6 pt-12">
-             <h4 className="text-center font-bold text-sm uppercase tracking-widest text-gray-900">View Infinite Learning Continuum Gallery</h4>
-             <div className="w-full aspect-[2/1] relative overflow-hidden bg-gray-100 border border-t border-b border-gray-200 flex items-center justify-center flex-col p-12 text-center text-gray-800">
-                <p className="text-xl md:text-3xl font-serif italic max-w-2xl text-black">
-                  &ldquo;I looped out after 2 years at Artemis to observe and reflect on the role of nonviolent communication in international policy.&rdquo;
-                </p>
-                <p className="mt-8 text-lg md:text-2xl font-serif italic max-w-xl text-black">
-                  &ldquo;After my time in Tibet and at the UN, what I was studying at Artemis made sense.&rdquo;
-                </p>
-                <div className="absolute inset-0 z-10 pointer-events-none">
-                   <svg width="100%" height="100%" preserveAspectRatio="none" className="stroke-[#8A0000] stroke-2 fill-none overflow-visible">
-                      <path d="M 0,200 Q 150,50 300,200 T 600,200 T 900,100" />
-                   </svg>
-                </div>
-                <img src="https://images.pexels.com/photos/7176045/pexels-photo-7176045.jpeg?auto=compress&cs=tinysrgb&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply" alt="Gallery preview" />
-             </div>
-             <div className="flex justify-center items-center gap-4 py-4">
-                <ChevronLeft className="w-6 h-6 text-gray-400 cursor-pointer" />
-                <div className="flex gap-2 opacity-50">
-                  <img src="https://images.pexels.com/photos/7176045/pexels-photo-7176045.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                </div>
-                <ChevronRight className="w-6 h-6 text-gray-400 cursor-pointer" />
-             </div>
           </div>
         </section>
+
       </div>
       <ExploreAnotherFuture currentPage="open-loop-learning" goTo={goTo} />
     </>
