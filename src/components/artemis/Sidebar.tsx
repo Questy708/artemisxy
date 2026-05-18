@@ -40,6 +40,7 @@ export default function Sidebar({ isOpen, onClose, goHome, goToPage, hideDesktop
               { label: 'About Artemis', page: 'about' },
               { label: 'Blog', page: 'blog' },
               { label: 'Artemis 2100', page: 'artemis-2100' },
+              { label: 'Stanford 2025 (T1)', page: 't1' },
             ].map((item) => (
               <button
                 key={item.page}

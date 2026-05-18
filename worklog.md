@@ -34,3 +34,30 @@ Stage Summary:
 - Side-dot navigation with scroll spy on home page
 - ExploreAnotherFuture cross-navigation on provocation pages
 - Build passes, site compiles, all features verified working
+
+---
+Task ID: 2
+Agent: Main Agent
+Task: Clone artemis-2300- repo as t1 micro-site (exact replica)
+
+Work Log:
+- Cloned https://github.com/Questy708/artemis-2300- to /home/z/my-project/t1-ref
+- Read all source files from the reference repo (identical to the previous artemis-2300 repo)
+- Created src/components/t1/ directory with Shared.tsx, T1Site.tsx, and pages/ subdirectory
+- Built Shared.tsx: NavBar, Footer, HeroHeader, SectionHeading, ExploreAnotherFuture (all with original Stanford 2025 branding)
+- Built T1Site.tsx: main container with internal state routing for 7 pages
+- Built 6 page files in pages/: HomePage, OpenLoopPage, PacedEducationPage, AxisFlipPage, PurposeLearningPage, BuildPage, AboutPage
+- All content preserved EXACTLY as original — Stanford branding, text, images, SVGs, CSS
+- Only change: react-router-dom Link components converted to button+goTo() for Next.js state routing
+- Integrated T1Site into ArtemisApp with fullscreen rendering (same pattern as Artemis2100Site)
+- Added "T1" button in Header (teal-colored, next to "2100" button)
+- Added "Stanford 2025 (T1)" entry in Sidebar mobile navigation
+- Added "Stanford 2025 — T1 Reference" in SearchOverlay
+- Build passes successfully
+
+Stage Summary:
+- T1 micro-site is an exact clone of the artemis-2300- GitHub repo with original Stanford 2025 content
+- Accessible via "T1" button in header or sidebar/search
+- Renders fullscreen with its own "Stanford2025" branded NavBar and Footer
+- All 4 provocations (Open Loop, Paced Education, Axis Flip, Purpose Learning) + Build + About pages included
+- "Back to Artemis" button returns to main site

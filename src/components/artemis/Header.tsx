@@ -81,6 +81,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick }:
         <button onClick={() => goToPage('about')} className="hover:underline transition-opacity cursor-pointer text-white/90" suppressHydrationWarning>About Artemis</button>
         <button onClick={() => goToPage('blog')} className="hover:underline transition-opacity cursor-pointer text-white/90" suppressHydrationWarning>Blog</button>
         <button onClick={() => goToPage('artemis-2100')} className="border border-[#D4A853]/60 text-[#D4A853] px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-[#D4A853]/10 transition-colors cursor-pointer" suppressHydrationWarning>2100</button>
+        <button onClick={() => goToPage('t1')} className="border border-[#007f9c]/60 text-[#7dd3fc] px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-[#007f9c]/10 transition-colors cursor-pointer" suppressHydrationWarning>T1</button>
         <button onClick={() => goToPage('fundraising')} className="border border-white/40 text-white px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-white/10 transition-colors cursor-pointer" suppressHydrationWarning>Give</button>
         <button onClick={() => goToPage('apply')} className="bg-white text-[#8A0000] px-4 py-1 rounded-sm uppercase tracking-wider text-[11px] hover:bg-gray-100 transition-colors cursor-pointer" suppressHydrationWarning>Apply</button>
       </div>

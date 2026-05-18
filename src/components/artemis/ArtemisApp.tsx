@@ -38,6 +38,7 @@ import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
 import AdminDashboard from '@/components/artemis/AdminDashboard';
 import Artemis2100Site from '@/components/artemis2100/Artemis2100Site';
+import T1Site from '@/components/t1/T1Site';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
 
@@ -487,13 +488,20 @@ export default function ArtemisApp() {
   };
 
   const isHome = currentPage === 'home';
-  const isMicroSite = currentPage === 'artemis-2100';
+  const isMicroSite = currentPage === 'artemis-2100' || currentPage === 't1';
 
   // Get breadcrumbs for current page
   const breadcrumbData = !isHome && !isMicroSite ? getBreadcrumbs(currentPage, currentProgram) : null;
 
-  // Artemis 2100 micro-site renders fullscreen with its own navbar/footer
+  // Micro-sites render fullscreen with their own navbar/footer
   if (isMicroSite) {
+    if (currentPage === 't1') {
+      return (
+        <div className="w-full min-h-screen">
+          <T1Site onExit={() => goToPage('home')} />
+        </div>
+      );
+    }
     return (
       <div className="w-full min-h-screen">
         <Artemis2100Site onExit={() => goToPage('home')} />

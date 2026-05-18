@@ -65,6 +65,7 @@ const searchIndex: SearchResult[] = [
   { title: 'Equality and Diversity', page: 'equality', category: 'About' },
   // Experience
   { title: 'Artemis 2100 — Future of Education', page: 'artemis-2100', category: 'Experience' },
+  { title: 'Stanford 2025 — T1 Reference', page: 't1', category: 'Experience' },
 ];
 
 export default function SearchOverlay({ isOpen, onClose, goToPage }: SearchOverlayProps) {
