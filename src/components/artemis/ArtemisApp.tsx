@@ -511,7 +511,7 @@ export default function ArtemisApp() {
 
   return (
     <div className="w-full min-h-screen bg-white flex flex-col font-sans text-[#141414]">
-      {/* Fixed Header — always full-width */}
+      {/* Fixed Header — always full-width, transparent over hero, opaque on scroll */}
       <Header
         onMenuClick={() => setSidebarOpen(true)}
         goHome={() => { setCurrentPage('home'); setSidebarOpen(false); }}
@@ -525,6 +525,9 @@ export default function ArtemisApp() {
         onClose={() => setSearchOpen(false)}
         goToPage={goToPage}
       />
+
+      {/* Spacer for fixed header height */}
+      <div className="h-14 shrink-0" />
 
       {isHome ? (
         /* ─── Homepage: sidebar + content side-by-side, centered with max-width ─── */

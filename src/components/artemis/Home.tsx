@@ -69,7 +69,9 @@ export default function Home({ goToPage }: HomeProps) {
           alt="Artemis Expedition"
           className="absolute inset-0 w-full h-full object-cover grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+        {/* Top gradient for fixed navbar */}
+        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
         <div className="relative z-10 flex flex-col justify-end h-full max-w-[1000px] mx-auto w-full px-6 lg:px-16 pb-10 sm:pb-16">
           <div
             ref={heroAnim}
