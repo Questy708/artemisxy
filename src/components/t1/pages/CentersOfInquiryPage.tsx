@@ -51,8 +51,8 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
       <HeroHeader
         title="Centers of Inquiry"
         description="In 2100, we look back at the moment Artemis abolished the department and replaced it with interdisciplinary hubs organized around grand challenges — reimagining not just what students learn, but where learning happens, and who it happens with."
-        bgGradientClass="bg-gradient-to-tr from-[#1a1a2e] via-[#16213e] to-[#0f3460]"
-        bgImage="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgGradientClass="bg-[#8A0000]"
+        bgImage="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 
@@ -64,7 +64,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=2500"
+              src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="Video Thumbnail"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -119,16 +119,16 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             {centers.map((c) => (
-              <div key={c.num} className="border border-gray-200 p-5 hover:border-[#0f3460] transition-colors group cursor-default">
+              <div key={c.num} className="border border-gray-200 p-5 hover:border-[#8A0000] transition-colors group cursor-default">
                 <div className="flex items-start justify-between mb-3">
-                  <span className="text-xs font-mono text-[#0f3460] font-bold">{c.num}</span>
+                  <span className="text-xs font-mono text-gray-900 font-bold">{c.num}</span>
                   <div className="flex gap-2 text-[10px] text-gray-400">
                     <span>{c.investigators} CI</span>
                     <span>·</span>
                     <span>{c.fellows} JF</span>
                   </div>
                 </div>
-                <h4 className="font-bold text-sm text-gray-900 leading-tight group-hover:text-[#0f3460] transition-colors">{c.name}</h4>
+                <h4 className="font-bold text-sm text-gray-900 leading-tight group-hover:text-[#8A0000] transition-colors">{c.name}</h4>
                 <p className="text-xs text-gray-500 mt-2 leading-relaxed">{c.desc}</p>
                 <div className="mt-3 pt-3 border-t border-gray-100">
                   <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">{c.nodes}</span>
@@ -155,8 +155,8 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                   onClick={() => setActivePillar(i)}
                   className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
                     activePillar === i
-                      ? 'bg-[#0f3460] text-white border-[#0f3460]'
-                      : 'bg-white text-gray-500 border-gray-200 hover:border-[#0f3460] hover:text-[#0f3460]'
+                      ? 'bg-[#8A0000] text-white border-[#8A0000]'
+                      : 'bg-white text-gray-500 border-gray-200 hover:border-[#8A0000] hover:text-[#8A0000]'
                   }`}
                 >
                   {p.title}
@@ -179,7 +179,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                   key={p.title}
                   onClick={() => setActivePillar(i)}
                   className={`flex-1 max-w-[120px] transition-all duration-500 cursor-pointer flex flex-col items-center justify-end ${
-                    activePillar === i ? 'bg-[#0f3460]' : 'bg-gray-300 hover:bg-gray-400'
+                    activePillar === i ? 'bg-[#8A0000]' : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                   style={{ height: `${60 + (activePillar === i ? 40 : i * 10)}%` }}
                 >
@@ -191,7 +191,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                 </button>
               ))}
             </div>
-            <div className="w-full h-2 bg-[#0f3460] mt-0" />
+            <div className="w-full h-2 bg-[#8A0000] mt-0" />
             <p className="text-center text-[10px] font-mono text-gray-400 uppercase tracking-widest mt-3">Foundation: Centers of Inquiry</p>
           </div>
         </section>
@@ -211,10 +211,10 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                 {guildLayers.map((g, i) => (
                   <div
                     key={g.layer}
-                    className="w-full border border-gray-200 p-4 flex items-center gap-4 hover:border-[#0f3460] transition-colors"
+                    className="w-full border border-gray-200 p-4 flex items-center gap-4 hover:border-[#8A0000] transition-colors"
                     style={{ marginLeft: `${i * 16}px`, marginRight: `${i * 16}px` }}
                   >
-                    <span className="text-lg text-[#0f3460] font-serif">{g.icon}</span>
+                    <span className="text-lg text-[#8A0000] font-serif">{g.icon}</span>
                     <div>
                       <h4 className="font-bold text-xs uppercase tracking-wider text-gray-900">{g.layer}</h4>
                       <p className="text-xs text-gray-500 mt-1">{g.desc}</p>
@@ -236,12 +236,12 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
 
           <div className="grid md:grid-cols-3 gap-8 mt-8">
             <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#0f3460] font-bold">3–6 MONTHS</div>
+              <div className="text-xs font-mono text-gray-900 font-bold">3–6 MONTHS</div>
               <h4 className="font-bold text-lg text-gray-900 italic">Residency Cycles</h4>
               <p className="text-xs text-gray-600 leading-relaxed">Immersive embeds in Guild missions. Students and fellows rotate across global nodes — from Nairobi for urban futures to Zurich for emerging tech — producing capstone prototypes tested in civic contexts.</p>
               <div className="pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-[10px] text-gray-400">
-                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-[#8A0000] rounded-full" />
                   <span>CoI Proposal</span>
                   <span>→</span>
                   <span>Team Formation</span>
@@ -255,12 +255,12 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
               </div>
             </div>
             <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#0f3460] font-bold">2–6 WEEKS</div>
+              <div className="text-xs font-mono text-gray-900 font-bold">2–6 WEEKS</div>
               <h4 className="font-bold text-lg text-gray-900 italic">Sprint Cycles</h4>
               <p className="text-xs text-gray-600 leading-relaxed">High-intensity challenges drawn from CoI priorities. Open to junior fellows and external collaborators, culminating in hackathon-style deliverables. Mandatory for Year 3+ students.</p>
               <div className="pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-[10px] text-gray-400">
-                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-[#8A0000] rounded-full" />
                   <span>Challenge</span>
                   <span>→</span>
                   <span>Team Up</span>
@@ -274,12 +274,12 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
               </div>
             </div>
             <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#0f3460] font-bold">ONGOING · QUARTERLY REVIEWS</div>
+              <div className="text-xs font-mono text-gray-900 font-bold">ONGOING · QUARTERLY REVIEWS</div>
               <h4 className="font-bold text-lg text-gray-900 italic">Deployment Cycles</h4>
               <p className="text-xs text-gray-600 leading-relaxed">Real-world testing in planetary settings, with iterative feedback from civic advisors. Outputs loop back to Inquiry layers for refinement — capstones contribute to the Knowledge Core, not just the classroom.</p>
               <div className="pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-2 text-[10px] text-gray-400">
-                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-[#8A0000] rounded-full" />
                   <span>Select</span>
                   <span>→</span>
                   <span>Field Test</span>
@@ -329,7 +329,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
             <div className="flex flex-wrap justify-center gap-3">
               {centers.map((c) => (
                 <div key={c.num} className="text-center">
-                  <div className="w-8 h-8 bg-[#0f3460] flex items-center justify-center text-white text-[9px] font-bold">{c.num}</div>
+                  <div className="w-8 h-8 bg-gray-900 flex items-center justify-center text-white text-[9px] font-bold">{c.num}</div>
                   <div className="mt-1 text-[8px] text-gray-400 leading-tight max-w-[80px]">{c.nodes}</div>
                 </div>
               ))}
@@ -345,32 +345,32 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">The department abolished:</strong> 15 interdisciplinary hubs replaced siloed disciplines, organized around grand challenges instead of historical divisions of knowledge</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The department abolished (2027–2035):</strong> 15 interdisciplinary hubs replaced siloed disciplines, organized around grand challenges instead of historical divisions of knowledge. The Closure Ceremonies — part celebration, part mourning, part provocation — became iconic cultural moments that were studied and replicated by universities worldwide.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Five structural pillars:</strong> Unified Knowledge, Junior Fellows, Core Investigators, Translational Programs, and Technology Centers form the organizational DNA of every Center</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Five structural pillars (2030–2050):</strong> Unified Knowledge, Junior Fellows, Core Investigators, Translational Programs, and Technology Centers form the organizational DNA of every Center. By mid-century, every major research university had adopted at least three of the five pillars — a testament to the model&apos;s structural integrity and adaptability.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Research never stays in the lab:</strong> Guild Layers and Cycles ensure inquiry moves from foundational research through deployment — every discovery has a pathway to impact</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Research never stays in the lab (2035–2065):</strong> Guild Layers and Cycles ensure inquiry moves from foundational research through deployment — every discovery has a pathway to impact. The translational pipeline produced over 12,000 deployed innovations by 2065, ranging from drought-resistant crop systems to AI-assisted judicial review tools.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">45 global nodes:</strong> The campus became a distributed network spanning every inhabited continent — 15 Centers, 3 nodes each, plus virtual and partner environments</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">45 global nodes (2032–2070):</strong> The campus became a distributed network spanning every inhabited continent — 15 Centers, 3 nodes each, plus virtual and partner environments. By 2070, the Kampala Hub alone had trained more civic engineers than the entire continent&apos;s traditional universities combined.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Place reimagined:</strong> Defined by purpose, not geography — physical, virtual, and hybrid spaces shaped by the challenges they address</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Place reimagined (2040–2075):</strong> Defined by purpose, not geography — physical, virtual, and hybrid spaces shaped by the challenges they address. The Synchrony Pod network became so seamless that by 2070, students routinely collaborated across four continents in a single afternoon without ever leaving their local node.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Global adoption by 2080:</strong> The Centers of Inquiry model spread to 200+ universities worldwide, becoming the dominant framework for research organization</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Global adoption by 2080 (2055–2080):</strong> The Centers of Inquiry model spread to 200+ universities worldwide, becoming the dominant framework for research organization. What began as a radical experiment at a single institution became the new normal — proof that structural imagination, once demonstrated, is contagious.</span>
             </li>
           </ul>
           <div className="mt-8">
-            <blockquote className="border-l-4 border-[#0f3460] pl-6 space-y-4">
+            <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
                 &ldquo;The department was a container built for a world that no longer existed — a world where knowledge sat neatly in labeled boxes. But the most important questions had already escaped those boxes and were roaming free.&rdquo;
               </p>

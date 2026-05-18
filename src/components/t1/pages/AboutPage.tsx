@@ -13,7 +13,7 @@ export default function AboutPage({ goTo }: Props) {
         title="About"
         description="The Artemis Project — a global collegiate university that dares to re-engineer the way humanity learns in a world of accelerating change."
         bgGradientClass="bg-gray-800"
-        bgImage="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgImage="https://images.pexels.com/photos/5900407/pexels-photo-5900407.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-16">
@@ -26,13 +26,13 @@ export default function AboutPage({ goTo }: Props) {
 
         <section className="space-y-6">
            <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">The Dimensions</h2>
-           <p className="text-gray-600 leading-relaxed max-w-3xl">The Artemis 2100 exhibit presented five dimensions — each a window into a possible future where a different dimension of the university was reimagined. Together, they formed a complete vision: when (Infinite Learning Continuum), how fast (Adaptive Paced Learning), what (SkillPrints), why (The Artemis Oath), and where (Centers of Inquiry).</p>
+           <p className="text-gray-600 leading-relaxed max-w-3xl">The Artemis 2100 exhibit presented five dimensions — each a window into a possible future where a different dimension of the university was reimagined. Together, they formed a complete vision: rhythm (Infinite Learning Continuum), pace (Adaptive Paced Learning), identity (SkillPrints), commitment (The Artemis Oath), and place (Centers of Inquiry).</p>
            <div className="flex flex-wrap gap-3 mt-4">
-             <button onClick={() => goTo('open-loop-learning')} className="bg-[#66B83B] hover:bg-[#4A9F2F] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Infinite Learning Continuum</button>
-             <button onClick={() => goTo('adaptive-paced-learning')} className="bg-[#007f9c] hover:bg-[#006e87] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Adaptive Paced Learning</button>
-             <button onClick={() => goTo('global-skills-matrix')} className="bg-[#461e68] hover:bg-[#391854] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer border-l-[6px] border-yellow-400">SkillPrints</button>
-             <button onClick={() => goTo('purpose-learning')} className="bg-[#f2b90f] hover:bg-[#d6a40d] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">The Artemis Oath</button>
-             <button onClick={() => goTo('centers-of-inquiry')} className="bg-[#0f3460] hover:bg-[#0a2647] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer border-l-[6px] border-white">Centers of Inquiry</button>
+             <button onClick={() => goTo('open-loop-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Infinite Learning Continuum</button>
+             <button onClick={() => goTo('adaptive-paced-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Adaptive Paced Learning</button>
+             <button onClick={() => goTo('global-skills-matrix')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">SkillPrints</button>
+             <button onClick={() => goTo('purpose-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">The Artemis Oath</button>
+             <button onClick={() => goTo('centers-of-inquiry')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Centers of Inquiry</button>
            </div>
         </section>
 

@@ -13,7 +13,7 @@ export default function AxisFlipPage({ goTo }: Props) {
       <HeroHeader
         title="SkillPrints"
         description="In 2100, we examine the era when Artemis replaced the traditional transcript with biometric, AI-powered SkillPrints — dynamic portraits of capability that evolve alongside the learner."
-        bgGradientClass="bg-[#461e68]"
+        bgGradientClass="bg-[#8A0000]"
         bgImage="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
@@ -59,15 +59,15 @@ export default function AxisFlipPage({ goTo }: Props) {
                 <line x1="0" y1="0" x2="-96" y2="132" stroke="#d1d5db" strokeWidth="1"/>
                 <line x1="0" y1="0" x2="-156" y2="-51" stroke="#d1d5db" strokeWidth="1"/>
                 {/* Data polygon - the SkillPrint */}
-                <polygon points="0,-162 133,-43 67,99 -82,112 -140,-46" fill="rgba(70,30,104,0.15)" stroke="#461e68" strokeWidth="2.5"/>
+                <polygon points="0,-162 133,-43 67,99 -82,112 -140,-46" fill="rgba(138,0,0,0.15)" stroke="#8A0000" strokeWidth="2.5"/>
                 {/* Data points */}
-                <circle cx="0" cy="-162" r="5" fill="#461e68"/>
-                <circle cx="133" cy="-43" r="5" fill="#461e68"/>
-                <circle cx="67" cy="99" r="5" fill="#461e68"/>
-                <circle cx="-82" cy="112" r="5" fill="#461e68"/>
-                <circle cx="-140" cy="-46" r="5" fill="#461e68"/>
+                <circle cx="0" cy="-162" r="5" fill="#8A0000"/>
+                <circle cx="133" cy="-43" r="5" fill="#8A0000"/>
+                <circle cx="67" cy="99" r="5" fill="#8A0000"/>
+                <circle cx="-82" cy="112" r="5" fill="#8A0000"/>
+                <circle cx="-140" cy="-46" r="5" fill="#8A0000"/>
                 {/* Center dot */}
-                <circle cx="0" cy="0" r="3" fill="#461e68"/>
+                <circle cx="0" cy="0" r="3" fill="#8A0000"/>
               </g>
               {/* Labels */}
               <text x="250" y="22" textAnchor="middle" className="text-[11px] font-bold fill-gray-800" style={{fontSize:'11px', fontWeight:'bold'}}>Critical Thinking</text>
@@ -81,23 +81,23 @@ export default function AxisFlipPage({ goTo }: Props) {
           </div>
           <div className="grid grid-cols-5 gap-4 max-w-3xl mx-auto text-center">
             <div className="space-y-1">
-              <div className="text-xs font-bold text-[#461e68]">90%</div>
+              <div className="text-xs font-bold text-[#8A0000]">90%</div>
               <div className="text-[10px] text-gray-500">Critical Thinking</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-bold text-[#461e68]">85%</div>
+              <div className="text-xs font-bold text-[#8A0000]">85%</div>
               <div className="text-[10px] text-gray-500">Technical Mastery</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-bold text-[#461e68]">75%</div>
+              <div className="text-xs font-bold text-[#8A0000]">75%</div>
               <div className="text-[10px] text-gray-500">Collaborative Impact</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-bold text-[#461e68]">62%</div>
+              <div className="text-xs font-bold text-[#8A0000]">62%</div>
               <div className="text-[10px] text-gray-500">Civic Adaptability</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-bold text-[#461e68]">78%</div>
+              <div className="text-xs font-bold text-[#8A0000]">78%</div>
               <div className="text-[10px] text-gray-500">Creative Synthesis</div>
             </div>
           </div>
@@ -207,32 +207,32 @@ export default function AxisFlipPage({ goTo }: Props) {
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Rigid disciplines dissolved:</strong> Artemis replaced fixed majors with a flexible, AI-powered system that adapted to global needs in real-time</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Rigid disciplines dissolved (2038–2055):</strong> Artemis replaced fixed majors with a flexible, AI-powered system that adapted to global needs in real-time. By 2050, the very concept of a &ldquo;major&rdquo; had become archaic — a relic of the industrial sorting mindset that had outlived its usefulness by at least half a century.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Qualifications became visual:</strong> Neural Skill Mapping made competencies dynamic, deeply personal, and instantly communicable</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Qualifications became visual (2040–2065):</strong> Neural Skill Mapping made competencies dynamic, deeply personal, and instantly communicable. Employers stopped asking for transcripts and started requesting SkillPrint access — a shift that eliminated the information asymmetry that had plagued hiring for generations.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Unique skill portfolios:</strong> Students graduated with a portfolio of transferable skills rather than a traditional degree — no two SkillPrints alike</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Unique skill portfolios (2042–2070):</strong> Students graduated with a portfolio of transferable skills rather than a traditional degree — no two SkillPrints alike. This diversity of capability became one of Artemis&apos;s most celebrated outcomes: a community where every member brought a genuinely irreplaceable combination of strengths.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Education-employment gap eliminated:</strong> Learning became directly tied to evolving global challenges, making graduation synonymous with readiness</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Education-employment gap eliminated (2035–2055):</strong> Learning became directly tied to evolving global challenges, making graduation synonymous with readiness. The phrase &ldquo;entry-level job requiring three years of experience&rdquo; — once a cruel paradox — became unimaginable when every graduate carried a verified, evolving record of demonstrable capability.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Cultural intelligence at the core:</strong> Adaptability and cross-cultural competence became essential components of every educational journey</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Cultural intelligence at the core (2045–2075):</strong> Adaptability and cross-cultural competence became essential components of every educational journey. By 2070, SkillPrints included a &ldquo;Cultural Fluency&rdquo; dimension that employers ranked above technical mastery — a reversal that would have stunned the hiring managers of the 2020s.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Transcripts replaced:</strong> Dynamic, biometric, evolving SkillPrints became the new global standard for recording each learner&apos;s journey</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Transcripts replaced (2050–2080):</strong> Dynamic, biometric, evolving SkillPrints became the new global standard for recording each learner&apos;s journey. By 2080, the last university still issuing paper transcripts was profiled in an academic journal as a &ldquo;living museum&rdquo; — a cautionary tale about institutional inertia.</span>
             </li>
           </ul>
           <div className="mt-8">
-            <blockquote className="border-l-4 border-[#461e68] pl-6 space-y-4">
+            <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
                 &ldquo;My transcript said I took Economics 301. My SkillPrint said I could restructure a failing municipal budget while navigating three stakeholder languages. Which would you hire?&rdquo;
               </p>

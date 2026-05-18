@@ -13,8 +13,8 @@ export default function PurposeLearningPage({ goTo }: Props) {
       <HeroHeader 
         title="The Artemis Oath"
         description="Every learner takes an oath to pursue something that matters. A look back from 2100 to the era when Artemis students declared what they would change in the world — and built their education around that commitment."
-        bgGradientClass="bg-[#f2b90f]"
-        bgImage="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgGradientClass="bg-[#8A0000]"
+        bgImage="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
@@ -25,7 +25,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
-              src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=2500" 
+              src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=2500" 
               alt="Video Thumbnail" 
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -68,27 +68,27 @@ export default function PurposeLearningPage({ goTo }: Props) {
           <SectionHeading>The Shift</SectionHeading>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-              <p>Recognizing the need for a more integrated and purpose-driven approach, Artemis introduced The Artemis Oath. This new paradigm required every learner to take an oath — a personal commitment to pursue something that matters — and encouraged students to declare a mission instead of a major, combining their academic studies with a clear, mission-driven focus anchored in societal impact.</p>
-              <p>&ldquo;I&apos;m a biology major&rdquo; was replaced by &ldquo;I&apos;m learning human biology to eliminate world hunger.&rdquo; Or &ldquo;I&apos;m learning Computer Science and Political Science to rebuild how citizens engage with their governments.&rdquo;</p>
+              <p>Recognizing the need for a more integrated and purpose-driven approach, Artemis introduced The Artemis Oath. This new paradigm required every learner to take an oath — a personal commitment to pursue something that matters — and encouraged students to pledge a purpose, not a program, combining their academic studies with a clear, mission-driven focus anchored in societal impact.</p>
+              <p>&ldquo;I&apos;m studying political science&rdquo; was replaced by &ldquo;I&apos;m learning governance systems to dismantle structural inequality across the Global South.&rdquo; Or &ldquo;I&apos;m learning quantum physics and African philosophy to reimagine energy sovereignty for underserved communities.&rdquo;</p>
               <p>The goal was to help students select a meaningful course of study while in school, and then scaffold a clear arc for the first 10–15 years of their professional lives. It wasn&apos;t about the career trajectory, but the reasons behind it.</p>
               <p>This reorientation fundamentally changed the culture of Artemis. Conversations shifted from &ldquo;What are you majoring in?&rdquo; to &ldquo;What problem are you solving?&rdquo; Faculty reported that students arrived to class not merely prepared, but possessed by a sense of urgency and relevance that elevated every seminar and lab.</p>
             </div>
             <div className="flex items-center justify-center">
               <svg viewBox="0 0 340 400" className="w-full max-w-[320px]" xmlns="http://www.w3.org/2000/svg">
                 {/* Oath Scroll */}
-                <rect x="40" y="20" width="260" height="360" rx="8" fill="#fffbeb" stroke="#f2b90f" strokeWidth="2"/>
-                <rect x="40" y="20" width="260" height="40" rx="8" fill="#f2b90f"/>
+                <rect x="40" y="20" width="260" height="360" rx="8" fill="#fffbeb" stroke="#8A0000" strokeWidth="2"/>
+                <rect x="40" y="20" width="260" height="40" rx="8" fill="#8A0000"/>
                 <text x="170" y="46" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.15em'}}>THE ARTEMIS OATH</text>
                 
                 {/* Seal */}
-                <circle cx="170" cy="100" r="30" fill="none" stroke="#d6a40d" strokeWidth="2"/>
-                <circle cx="170" cy="100" r="22" fill="none" stroke="#d6a40d" strokeWidth="1"/>
-                <text x="170" y="96" textAnchor="middle" fill="#d6a40d" style={{fontSize:'8px', fontWeight:'bold'}}>ARTEMIS</text>
-                <text x="170" y="108" textAnchor="middle" fill="#d6a40d" style={{fontSize:'7px'}}>2100</text>
+                <circle cx="170" cy="100" r="30" fill="none" stroke="#6B0000" strokeWidth="2"/>
+                <circle cx="170" cy="100" r="22" fill="none" stroke="#6B0000" strokeWidth="1"/>
+                <text x="170" y="96" textAnchor="middle" fill="#6B0000" style={{fontSize:'8px', fontWeight:'bold'}}>ARTEMIS</text>
+                <text x="170" y="108" textAnchor="middle" fill="#6B0000" style={{fontSize:'7px'}}>2100</text>
                 
                 {/* Oath text lines */}
-                <text x="170" y="155" textAnchor="middle" fill="#92400e" style={{fontSize:'10px', fontStyle:'italic'}}>I declare not a major,</text>
-                <text x="170" y="172" textAnchor="middle" fill="#92400e" style={{fontSize:'10px', fontStyle:'italic'}}>but a mission.</text>
+                <text x="170" y="155" textAnchor="middle" fill="#4A0000" style={{fontSize:'10px', fontStyle:'italic'}}>I pledge not a program,</text>
+                <text x="170" y="172" textAnchor="middle" fill="#4A0000" style={{fontSize:'10px', fontStyle:'italic'}}>but a purpose.</text>
                 
                 <line x1="80" y1="188" x2="260" y2="188" stroke="#e5e7eb" strokeWidth="0.5"/>
                 
@@ -106,10 +106,10 @@ export default function PurposeLearningPage({ goTo }: Props) {
                 <text x="150" y="365" textAnchor="middle" fill="#a8a29e" style={{fontSize:'8px'}}>Witness</text>
                 
                 {/* Decorative corners */}
-                <line x1="50" y1="30" x2="50" y2="55" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
-                <line x1="50" y1="30" x2="75" y2="30" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
-                <line x1="290" y1="30" x2="290" y2="55" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
-                <line x1="290" y1="30" x2="265" y2="30" stroke="#d6a40d" strokeWidth="1" opacity="0.4"/>
+                <line x1="50" y1="30" x2="50" y2="55" stroke="#6B0000" strokeWidth="1" opacity="0.4"/>
+                <line x1="50" y1="30" x2="75" y2="30" stroke="#6B0000" strokeWidth="1" opacity="0.4"/>
+                <line x1="290" y1="30" x2="290" y2="55" stroke="#6B0000" strokeWidth="1" opacity="0.4"/>
+                <line x1="290" y1="30" x2="265" y2="30" stroke="#6B0000" strokeWidth="1" opacity="0.4"/>
               </svg>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.pexels.com/photos/3662617/pexels-photo-3662617.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clean Water Initiative" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clean Water Initiative" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.pexels.com/photos/9800029/pexels-photo-9800029.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Renewable Energy Solutions" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/4226256/pexels-photo-4226256.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Renewable Energy Solutions" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthcare Innovation" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthcare Innovation" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>
@@ -234,34 +234,34 @@ export default function PurposeLearningPage({ goTo }: Props) {
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Relevance and motivation unlocked:</strong> Students found greater purpose by aligning their studies with societal missions — &ldquo;What&apos;s your verb?&rdquo; replaced &ldquo;What&apos;s your major?&rdquo;</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Relevance and motivation unlocked (2038–2055):</strong> By the late 2030s, students had found greater purpose by aligning their studies with societal commitments — &ldquo;What&apos;s your purpose?&rdquo; replaced &ldquo;What&apos;s your program?&rdquo; The shift was not merely semantic. Students who could articulate a purpose demonstrated 40% higher persistence through difficult coursework and reported substantially deeper engagement with their learning communities.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">The anchoring dimension:</strong> The Artemis Oath connected every other dimension — Infinite Learning, SkillPrints, Centers of Inquiry — into a coherent vision of impact-driven education</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The anchoring dimension (2040–2065):</strong> The Artemis Oath connected every other dimension — Infinite Learning, SkillPrints, Centers of Inquiry — into a coherent vision of impact-driven education. By mid-century, longitudinal studies confirmed that Oath-aligned learners were three times more likely to sustain careers in public-interest fields and twice as likely to found civic enterprises.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Tangible community benefits:</strong> Students&apos; projects delivered measurable improvements in communities and societies around the world</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Tangible community benefits (2045–2080):</strong> Students&apos; projects delivered measurable improvements in communities and societies around the world. From water filtration systems in West Africa to AI-assisted judicial reform in Southeast Asia, the Impact Labs produced outcomes that outlasted any single student&apos;s tenure — a self-renewing engine of applied idealism.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Whole-person development:</strong> Students grew academically, personally, and socially — prepared not just for careers, but for mission-driven lives</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Whole-person development (2050–2075):</strong> Students grew academically, personally, and socially — prepared not just for careers, but for mission-driven lives. The reflective practice framework, initially met with skepticism by quantitative disciplines, became the single most-requested resource by 2060, with faculty across all Centers integrating it into capstone requirements.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">A new cultural vernacular:</strong> &ldquo;What&apos;s your verb?&rdquo; became the defining question of the Artemis experience — a shift from identity to action</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">A new cultural vernacular (2042–2060):</strong> &ldquo;What&apos;s your purpose?&rdquo; became the defining question of the Artemis experience — a shift from identity to action. By 2060, the phrase had migrated beyond Artemis into hiring interviews, fellowship applications, and even parliamentary debates on education reform, seeding a global vernacular of purpose-driven self-description.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Endless contributions:</strong> An uncountable list of impact on poverty, health, infrastructure, renewable energy, global governance, space travel, and artistic and cultural achievement</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Endless contributions (2055–2100):</strong> An uncountable list of impact on poverty, health, infrastructure, renewable energy, global governance, space travel, and artistic and cultural achievement. By the centennial exhibit of 2100, the Oath&apos;s alumni network had produced Nobel laureates, infrastructure architects, and at least three sitting heads of state — each tracing their trajectory to a single pledge made during their first days at Artemis.</span>
             </li>
           </ul>
           <div className="mt-8">
-            <blockquote className="border-l-4 border-[#d6a40d] pl-6 space-y-4">
+            <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
-                &ldquo;I declared a verb, not a major. My verb was &lsquo;restore.&rsquo; Every course, every project, every late night in the lab — it all pointed toward healing what was broken. That clarity changed everything.&rdquo;
+                &ldquo;I pledged a purpose, not a program. My purpose was &lsquo;restore.&rsquo; Every course, every project, every late night in the lab — it all pointed toward healing what was broken. That clarity changed everything.&rdquo;
               </p>
               <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
                 &mdash; Pathfinder, Class of 2058

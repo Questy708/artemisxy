@@ -13,8 +13,8 @@ export default function PacedEducationPage({ goTo }: Props) {
       <HeroHeader 
         title="Adaptive Paced Learning"
         description="Calibrate. Elevate. Activate. In 2100, we reflect on how Artemis replaced the archaic Freshman-Senior model with a three-stage learning lifecycle attuned to each individual's cognitive and emotional rhythm."
-        bgGradientClass="bg-[#007f9c]"
-        bgImage="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgGradientClass="bg-[#8A0000]"
+        bgImage="https://images.pexels.com/photos/8862305/pexels-photo-8862305.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         
@@ -25,7 +25,7 @@ export default function PacedEducationPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
-              src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=2500" 
+              src="https://images.pexels.com/photos/8862305/pexels-photo-8862305.jpeg?auto=compress&cs=tinysrgb&w=2500" 
               alt="Video Thumbnail" 
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -54,16 +54,16 @@ export default function PacedEducationPage({ goTo }: Props) {
               
               {/* Phase 1: Calibrate */}
               <g transform="translate(50,40)">
-                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
-                <rect x="0" y="0" width="230" height="48" rx="4" fill="#007f9c"/>
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#8A0000"/>
                 <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>CALIBRATE</text>
-                <text x="115" y="68" textAnchor="middle" fill="#007f9c" style={{fontSize:'10px', fontWeight:'bold'}}>3–18 MONTHS</text>
+                <text x="115" y="68" textAnchor="middle" fill="#8A0000" style={{fontSize:'10px', fontWeight:'bold'}}>3–18 MONTHS</text>
                 {/* Waveform - exploring */}
-                <path d="M 30,110 Q 55,80 80,110 T 130,110 T 180,110 T 200,110" fill="none" stroke="#007f9c" strokeWidth="2" opacity="0.5"/>
-                <circle cx="50" cy="130" r="4" fill="#007f9c" opacity="0.3"/>
-                <circle cx="90" cy="130" r="6" fill="#007f9c" opacity="0.4"/>
-                <circle cx="140" cy="130" r="8" fill="#007f9c" opacity="0.5"/>
-                <circle cx="190" cy="130" r="5" fill="#007f9c" opacity="0.3"/>
+                <path d="M 30,110 Q 55,80 80,110 T 130,110 T 180,110 T 200,110" fill="none" stroke="#8A0000" strokeWidth="2" opacity="0.5"/>
+                <circle cx="50" cy="130" r="4" fill="#8A0000" opacity="0.3"/>
+                <circle cx="90" cy="130" r="6" fill="#8A0000" opacity="0.4"/>
+                <circle cx="140" cy="130" r="8" fill="#8A0000" opacity="0.5"/>
+                <circle cx="190" cy="130" r="5" fill="#8A0000" opacity="0.3"/>
                 <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Explore · Sample · Reflect</text>
                 <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Find your direction</text>
               </g>
@@ -73,16 +73,16 @@ export default function PacedEducationPage({ goTo }: Props) {
               
               {/* Phase 2: Elevate */}
               <g transform="translate(335,40)">
-                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
-                <rect x="0" y="0" width="230" height="48" rx="4" fill="#005f7c"/>
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#6B0000"/>
                 <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>ELEVATE</text>
-                <text x="115" y="68" textAnchor="middle" fill="#005f7c" style={{fontSize:'10px', fontWeight:'bold'}}>6–36 MONTHS</text>
+                <text x="115" y="68" textAnchor="middle" fill="#6B0000" style={{fontSize:'10px', fontWeight:'bold'}}>6–36 MONTHS</text>
                 {/* Ascending bars - deepening */}
-                <rect x="40" y="150" width="20" height="30" rx="2" fill="#005f7c" opacity="0.3"/>
-                <rect x="70" y="130" width="20" height="50" rx="2" fill="#005f7c" opacity="0.4"/>
-                <rect x="100" y="110" width="20" height="70" rx="2" fill="#005f7c" opacity="0.5"/>
-                <rect x="130" y="95" width="20" height="85" rx="2" fill="#005f7c" opacity="0.6"/>
-                <rect x="160" y="80" width="20" height="100" rx="2" fill="#005f7c" opacity="0.7"/>
+                <rect x="40" y="150" width="20" height="30" rx="2" fill="#6B0000" opacity="0.3"/>
+                <rect x="70" y="130" width="20" height="50" rx="2" fill="#6B0000" opacity="0.4"/>
+                <rect x="100" y="110" width="20" height="70" rx="2" fill="#6B0000" opacity="0.5"/>
+                <rect x="130" y="95" width="20" height="85" rx="2" fill="#6B0000" opacity="0.6"/>
+                <rect x="160" y="80" width="20" height="100" rx="2" fill="#6B0000" opacity="0.7"/>
                 <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Focus · Deepen · Master</text>
                 <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Build your expertise</text>
               </g>
@@ -92,15 +92,15 @@ export default function PacedEducationPage({ goTo }: Props) {
               
               {/* Phase 3: Activate */}
               <g transform="translate(620,40)">
-                <rect x="0" y="0" width="230" height="200" rx="4" fill="#f0fdfa" stroke="#007f9c" strokeWidth="2"/>
-                <rect x="0" y="0" width="230" height="48" rx="4" fill="#003f5c"/>
+                <rect x="0" y="0" width="230" height="200" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="2"/>
+                <rect x="0" y="0" width="230" height="48" rx="4" fill="#4A0000"/>
                 <text x="115" y="30" textAnchor="middle" fill="white" style={{fontSize:'14px', fontWeight:'bold', letterSpacing:'0.1em'}}>ACTIVATE</text>
-                <text x="115" y="68" textAnchor="middle" fill="#003f5c" style={{fontSize:'10px', fontWeight:'bold'}}>3–12 MONTHS (ONGOING)</text>
+                <text x="115" y="68" textAnchor="middle" fill="#4A0000" style={{fontSize:'10px', fontWeight:'bold'}}>3–12 MONTHS (ONGOING)</text>
                 {/* Radiating lines - deploying */}
-                <circle cx="115" cy="120" r="25" fill="none" stroke="#003f5c" strokeWidth="2" opacity="0.5"/>
-                <circle cx="115" cy="120" r="40" fill="none" stroke="#003f5c" strokeWidth="1.5" opacity="0.3"/>
-                <circle cx="115" cy="120" r="55" fill="none" stroke="#003f5c" strokeWidth="1" opacity="0.15"/>
-                <circle cx="115" cy="120" r="6" fill="#003f5c"/>
+                <circle cx="115" cy="120" r="25" fill="none" stroke="#4A0000" strokeWidth="2" opacity="0.5"/>
+                <circle cx="115" cy="120" r="40" fill="none" stroke="#4A0000" strokeWidth="1.5" opacity="0.3"/>
+                <circle cx="115" cy="120" r="55" fill="none" stroke="#4A0000" strokeWidth="1" opacity="0.15"/>
+                <circle cx="115" cy="120" r="6" fill="#4A0000"/>
                 <text x="115" y="170" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Apply · Deploy · Impact</text>
                 <text x="115" y="185" textAnchor="middle" fill="#6b7280" style={{fontSize:'9px'}}>Change the world</text>
               </g>
@@ -146,7 +146,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               <p>The shift was not merely structural but philosophical. The old model assumed all 18-year-olds were ready for the same challenges at the same time. Adaptive Paced Learning assumed the opposite: that every learner arrives at understanding on their own schedule, and that forcing pace creates the illusion of learning without its substance.</p>
             </div>
             <div>
-               <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Adaptive Paced Learning"/>
+               <img src="https://images.pexels.com/photos/8862305/pexels-photo-8862305.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Adaptive Paced Learning"/>
             </div>
           </div>
         </section>
@@ -171,11 +171,11 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
             <div className="flex justify-center items-center">
-              <div className="w-48 h-64 bg-gradient-to-br from-cyan-50 to-teal-50 p-4 border border-gray-300 transform -rotate-3">
-                <div className="w-full h-full border border-dashed border-teal-300 flex items-center justify-center">
+              <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300 transform -rotate-3">
+                <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center">
                   <div className="text-center">
-                    <span className="text-4xl font-serif italic text-teal-400">C</span>
-                    <p className="text-[10px] text-teal-400 uppercase tracking-widest mt-2">Calibrate</p>
+                    <span className="text-4xl font-serif italic text-gray-400">C</span>
+                    <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Calibrate</p>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
             <div>
-              <img src="https://images.pexels.com/photos/4145192/pexels-photo-4145192.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Elevate phase"/>
+              <img src="https://images.pexels.com/photos/8862305/pexels-photo-8862305.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Elevate phase"/>
             </div>
           </div>
 
@@ -211,7 +211,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
             <div>
-              <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Activate phase"/>
+              <img src="https://images.pexels.com/photos/5699456/pexels-photo-5699456.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Activate phase"/>
             </div>
           </div>
         </section>
@@ -251,36 +251,36 @@ export default function PacedEducationPage({ goTo }: Props) {
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Eliminated fixed academic years:</strong> Freshman-Senior was replaced by Calibrate-Elevate-Activate — a lifecycle attuned to cognitive and emotional readiness, not the calendar</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Eliminated fixed academic years (2035–2050):</strong> Freshman-Senior was replaced by Calibrate-Elevate-Activate — a lifecycle attuned to cognitive and emotional readiness, not the calendar. By 2045, no major university on any continent still used the four-year class designation system. The old vocabulary had become a historical curiosity.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Truly personalized learning:</strong> Pace and style adapted to individual needs, cultural contexts, and life circumstances through Chronos AI</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Truly personalized learning (2040–2065):</strong> Pace and style adapted to individual needs, cultural contexts, and life circumstances through Chronos AI. Students who had once been labeled &ldquo;slow&rdquo; or &ldquo;gifted&rdquo; discovered that these categories dissolved entirely when the system bent to the learner instead of the reverse.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Emotional intelligence elevated:</strong> The Cognitive Biofeedback Mirror made meta-cognitive awareness a core competency, producing graduates who were emotionally resilient</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Emotional intelligence elevated (2042–2070):</strong> The Cognitive Biofeedback Mirror made meta-cognitive awareness a core competency, producing graduates who were emotionally resilient. Employers consistently ranked Artemis graduates highest in conflict resolution, collaborative problem-solving, and adaptive leadership — skills that no standardized test had ever measured.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Mastery over deadlines:</strong> The stress of arbitrary deadlines was replaced by a focus on genuine mastery and practical application</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Mastery over deadlines (2038–2055):</strong> The stress of arbitrary deadlines was replaced by a focus on genuine mastery and practical application. Anxiety-related dropout rates at Artemis fell below 2% — compared to the 30% attrition that had plagued the old system — proving that rigor and well-being were not opposites but prerequisites for each other.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Global collaboration integral:</strong> Cross-cultural understanding and innovation became woven into every phase of learning</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Global collaboration integral (2045–2075):</strong> Cross-cultural understanding and innovation became woven into every phase of learning. By 2070, the average Artemis student had collaborated with peers in over 15 countries before completing the Activate phase — a statistic that would have been inconceivable under the old model.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Inclusive by design:</strong> Diverse learning styles and life situations accommodated — the system bent to the learner, not the learner to the system</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Inclusive by design (2040–2060):</strong> Diverse learning styles and life situations accommodated — the system bent to the learner, not the learner to the system. Adaptive Paced Learning became the model that disability rights advocates had been demanding for decades: universal design not as accommodation, but as architecture.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">The Artemis rhythm:</strong> Calibrate, elevate, activate, reflect, adapt — and repeat. This became the lived experience of every Artemis learner</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The Artemis rhythm (2050–2100):</strong> Calibrate, elevate, activate, reflect, adapt — and repeat. This became the lived experience of every Artemis learner. The rhythm became so intuitive that by the 2080s, populi reported unconsciously applying the Calibrate-Elevate-Activate cycle to every new challenge in their professional and personal lives.</span>
             </li>
           </ul>
           <div className="mt-8">
-            <blockquote className="border-l-4 border-[#007f9c] pl-6 space-y-4">
+            <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
                 &ldquo;I spent fourteen months in Calibrate. My advisor said that was fine — that readiness wasn&apos;t a race. She was right. When I finally elevated, I elevated with purpose.&rdquo;
               </p>

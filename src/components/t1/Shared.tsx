@@ -178,30 +178,51 @@ interface ExploreAnotherFutureProps {
 }
 
 export function ExploreAnotherFuture({ currentPage, goTo }: ExploreAnotherFutureProps) {
-  const links = [
-    { slug: 'adaptive-paced-learning', label: 'Adaptive Paced<br/>Learning', bg: 'bg-[#007f9c] hover:bg-[#006e87]', border: '' },
-    { slug: 'global-skills-matrix', label: 'SkillPrints', bg: 'bg-[#461e68] hover:bg-[#391854]', border: 'border-l-[8px] border-yellow-400' },
-    { slug: 'purpose-learning', label: 'The Artemis<br/>Oath', bg: 'bg-[#f2b90f] hover:bg-[#d6a40d]', border: '' },
-    { slug: 'centers-of-inquiry', label: 'Centers of<br/>Inquiry', bg: 'bg-[#0f3460] hover:bg-[#0a2647]', border: 'border-l-[8px] border-white' },
-    { slug: 'build', label: 'Design a<br/>Future', bg: 'bg-[#d92231] hover:bg-[#b91d29]', border: 'border-l-[8px] border-[#007f9c]', isSpecial: true },
+  const dimensions = [
+    { slug: 'open-loop-learning', label: 'Infinite Learning Continuum', short: 'ILC', num: '01' },
+    { slug: 'adaptive-paced-learning', label: 'Adaptive Paced Learning', short: 'APL', num: '02' },
+    { slug: 'global-skills-matrix', label: 'SkillPrints', short: 'SP', num: '03' },
+    { slug: 'purpose-learning', label: 'The Artemis Oath', short: 'OATH', num: '04' },
+    { slug: 'centers-of-inquiry', label: 'Centers of Inquiry', short: 'CoI', num: '05' },
+    { slug: 'build', label: 'Design a Future', short: 'BUILD', num: '\u2192', isSpecial: true },
   ].filter(l => l.slug !== currentPage);
 
   return (
     <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-24 border-t border-gray-200 mt-24">
-      <SectionHeading>Explore Another Future</SectionHeading>
+      <SectionHeading>Shift Dimensions</SectionHeading>
       
-      <div className="flex flex-wrap justify-center gap-4 mt-12 w-full text-center">
-        {links.map((l) => (
-          <button
-            key={l.slug}
-            onClick={() => goTo(l.slug)}
-            className={`${l.bg} transition-colors text-white font-bold w-48 h-24 flex items-center justify-center italic text-xl ${l.border} relative overflow-hidden group cursor-pointer`}
-          >
-            {l.isSpecial && (
-              <div className="absolute left-0 top-0 w-10 h-10 bg-yellow-400 -translate-x-5 -translate-y-5 rotate-45 group-hover:scale-110 transition-transform" />
+      <div className="flex flex-wrap items-center justify-center gap-6 mt-12">
+        {dimensions.map((d, i) => (
+          <div key={d.slug} className="flex items-center gap-4">
+            <button
+              onClick={() => goTo(d.slug)}
+              className={`group cursor-pointer flex flex-col items-center gap-2 transition-all ${
+                d.isSpecial 
+                  ? 'w-24 h-24 border-2 border-gray-900 rounded-full flex items-center justify-center hover:bg-gray-900 hover:text-white' 
+                  : 'w-24 h-24 bg-gray-900 rounded-full flex items-center justify-center text-white hover:bg-[#8A0000] transition-colors'
+              }`}
+            >
+              <span className="text-[9px] font-mono opacity-50">{d.num}</span>
+              <span className="text-[10px] font-bold tracking-wider">{d.short}</span>
+            </button>
+            {/* Connector line between nodes */}
+            {i < dimensions.length - 1 && (
+              <div className="hidden sm:block w-8 border-t border-dashed border-gray-300" />
             )}
-            <span dangerouslySetInnerHTML={{ __html: l.label }} />
-          </button>
+            {/* Mobile: just a dot connector */}
+            {i < dimensions.length - 1 && (
+              <div className="sm:hidden w-1.5 h-1.5 rounded-full bg-gray-300" />
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {/* Labels below nodes */}
+      <div className="flex flex-wrap items-center justify-center gap-6 mt-6">
+        {dimensions.map((d) => (
+          <div key={d.slug} className="w-24 text-center">
+            <span className="text-[9px] text-gray-400 uppercase tracking-wider leading-tight">{d.label}</span>
+          </div>
         ))}
       </div>
     </div>

@@ -13,8 +13,8 @@ export default function OpenLoopPage({ goTo }: Props) {
       <HeroHeader
         title="The Infinite Learning Continuum"
         description="Open Loop Learning evolved from a radical idea into a cradle-to-grave model — where learning never ends, it only transforms. From Early Explorers to Legacy Builders, Artemis redefined what it means to be a lifelong learner."
-        bgGradientClass="bg-gradient-to-tr from-[#66B83B] via-[#7BCE44] to-[#4A9F2F]"
-        bgImage="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgGradientClass="bg-gradient-to-tr from-[#8A0000] via-[#A50000] to-[#6B0000]"
+        bgImage="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
         <section className="space-y-6">
@@ -24,7 +24,7 @@ export default function OpenLoopPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=2500"
+              src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="Video Thumbnail"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -49,7 +49,7 @@ export default function OpenLoopPage({ goTo }: Props) {
           <div className="grid md:grid-cols-2 gap-12 md:gap-24 relative">
             {/* Left Column */}
             <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-[#66B83B]">Linear</div>
+              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-gray-900">Linear</div>
               <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
                 Education was segmented into distinct phases: primary, secondary, tertiary, then professional development. Learning had a clear beginning and end — a finite loop that closed the moment a degree was conferred.
               </h3>
@@ -71,7 +71,7 @@ export default function OpenLoopPage({ goTo }: Props) {
 
             {/* Right Column */}
             <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-[#66B83B]">Infinite</div>
+              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-gray-900">Infinite</div>
               <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
                 The Infinite Learning Continuum discarded the idea of education as a finite process. Learning became a cradle-to-grave journey — an infinite loop where individuals evolve through distinct life stages, each with its own rhythm, purpose, and mode of engagement.
               </h3>
@@ -133,8 +133,8 @@ export default function OpenLoopPage({ goTo }: Props) {
                 </p>
               </div>
               <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-green-50 to-green-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-green-300 flex items-center justify-center text-green-500 text-6xl font-serif italic">α</div>
+                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
+                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">α</div>
                 </div>
               </div>
             </div>
@@ -147,8 +147,8 @@ export default function OpenLoopPage({ goTo }: Props) {
                 </p>
               </div>
               <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-teal-50 to-teal-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-teal-300 flex items-center justify-center text-teal-500 text-6xl font-serif italic">β</div>
+                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
+                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">β</div>
                 </div>
               </div>
             </div>
@@ -161,8 +161,8 @@ export default function OpenLoopPage({ goTo }: Props) {
                 </p>
               </div>
               <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-purple-50 to-purple-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-purple-300 flex items-center justify-center text-purple-500 text-6xl font-serif italic">γ</div>
+                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
+                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">γ</div>
                 </div>
               </div>
             </div>
@@ -175,8 +175,8 @@ export default function OpenLoopPage({ goTo }: Props) {
                 </p>
               </div>
               <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-amber-50 to-amber-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-amber-300 flex items-center justify-center text-amber-500 text-6xl font-serif italic">δ</div>
+                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
+                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">δ</div>
                 </div>
               </div>
             </div>
@@ -189,8 +189,8 @@ export default function OpenLoopPage({ goTo }: Props) {
                 </p>
               </div>
               <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-yellow-300 flex items-center justify-center text-yellow-500 text-6xl font-serif italic">Ω</div>
+                <div className="w-48 h-64 bg-gradient-to-br from-gray-50 to-gray-100 p-4 border border-gray-300">
+                  <div className="w-full h-full border border-dashed border-gray-300 flex items-center justify-center text-gray-500 text-6xl font-serif italic">Ω</div>
                 </div>
               </div>
             </div>
@@ -204,32 +204,32 @@ export default function OpenLoopPage({ goTo }: Props) {
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">De-stigmatized alternative learning paths:</strong> Students used their time wisely and for greater impact, free from the pressure of arbitrary timelines</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">De-stigmatized alternative learning paths (2042–2055):</strong> By the mid-2040s, the stigma of &ldquo;non-traditional&rdquo; learning paths had all but vanished. Students who once felt pressured to conform to arbitrary timelines were cycling through the Continuum at their own rhythm — and producing outcomes that consistently outperformed their clock-bound predecessors. The data was irrefutable: flexibility was not indulgence; it was the precondition for excellence.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Career pivoting with academic grounding:</strong> Adults at any stage could redirect their professional lives and reconnect with meaningful social contexts</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Career pivoting with academic grounding (2035–2060):</strong> Adults at any stage could redirect their professional lives and reconnect with meaningful social contexts. By 2050, the average Artemis populi had pivoted careers 2.3 times — each return to the Continuum deepening both expertise and purpose, not restarting from zero.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Revitalized the student body:</strong> On-ramps at many ages enabled populations traditionally underrepresented at elite institutions to gain greater access</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Revitalized the student body (2040–2065):</strong> On-ramps at many ages enabled populations traditionally underrepresented at elite institutions to gain greater access. The Continuum&apos;s flexible entry points drew learners from every demographic, transforming Artemis from a homogeneous institution into a genuine cross-section of global humanity.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">From alumni to populi:</strong> Transformed &ldquo;alumni&rdquo; into a lifelong community of learners who remain active, engaged, and evolving</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">From alumni to populi (2032–2055):</strong> Transformed &ldquo;alumni&rdquo; into a lifelong community of learners who remain active, engaged, and evolving. The populi network became one of the most powerful intellectual and social ecosystems on the planet — a distributed brain trust that no graduation ceremony could ever dissolve.</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Cradle-to-grave model:</strong> Established learning as an infinite human endeavor, not a finite transaction — 5 life stages replaced the traditional degree timeline</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Cradle-to-grave model (2030–2100):</strong> Established learning as an infinite human endeavor, not a finite transaction — 5 life stages replaced the traditional degree timeline. By the turn of the 22nd century, the Continuum had produced five generations of learners who never conceived of education as something that could be &ldquo;finished.&rdquo;</span>
             </li>
             <li className="flex gap-4">
-              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Expert practitioners return:</strong> Capitalized on the remarkable accomplishments of its populi through the invitation to return at every life stage</span>
+              <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Expert practitioners return (2045–2080):</strong> Capitalized on the remarkable accomplishments of its populi through the invitation to return at every life stage. The returning-practitioner pipeline became Artemis&apos;s most distinctive competitive advantage — a perpetual flow of real-world insight that kept every Center of Inquiry tethered to the challenges that actually mattered.</span>
             </li>
           </ul>
           <div className="mt-8">
-            <blockquote className="border-l-4 border-[#66B83B] pl-6 space-y-4">
+            <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
                 &ldquo;I looped out after two years to observe the role of nonviolent communication in international policy. When I returned, I understood what I was studying — and why it mattered.&rdquo;
               </p>
@@ -269,13 +269,13 @@ export default function OpenLoopPage({ goTo }: Props) {
             <div className="grid md:grid-cols-2 gap-6">
                <div className="space-y-2">
                   <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI Learning Platform" className="w-full h-full object-cover grayscale opacity-80" />
+                    <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI Learning Platform" className="w-full h-full object-cover grayscale opacity-80" />
                   </div>
                   <p className="text-xs text-gray-500">Early AI-driven personalized learning interface.</p>
                </div>
                <div className="space-y-2">
                   <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Learning analytics" className="w-full h-full object-cover grayscale opacity-80" />
+                    <img src="https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Learning analytics" className="w-full h-full object-cover grayscale opacity-80" />
                   </div>
                   <p className="text-xs text-gray-500">Learning analytics dashboard in use.</p>
                </div>
@@ -332,18 +332,18 @@ export default function OpenLoopPage({ goTo }: Props) {
                   &ldquo;After my time in Tibet and at the UN, what I was studying at Artemis made sense.&rdquo;
                 </p>
                 <div className="absolute inset-0 z-10 pointer-events-none">
-                   <svg width="100%" height="100%" preserveAspectRatio="none" className="stroke-[#66B83B] stroke-2 fill-none overflow-visible">
+                   <svg width="100%" height="100%" preserveAspectRatio="none" className="stroke-[#8A0000] stroke-2 fill-none overflow-visible">
                       <path d="M 0,200 Q 150,50 300,200 T 600,200 T 900,100" />
                    </svg>
                 </div>
-                <img src="https://images.pexels.com/photos/3184311/pexels-photo-3184311.jpeg?auto=compress&cs=tinysrgb&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply" alt="Gallery preview" />
+                <img src="https://images.pexels.com/photos/7176045/pexels-photo-7176045.jpeg?auto=compress&cs=tinysrgb&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply" alt="Gallery preview" />
              </div>
              <div className="flex justify-center items-center gap-4 py-4">
                 <ChevronLeft className="w-6 h-6 text-gray-400 cursor-pointer" />
                 <div className="flex gap-2 opacity-50">
-                  <img src="https://images.pexels.com/photos/3184311/pexels-photo-3184311.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/7176045/pexels-photo-7176045.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/8195369/pexels-photo-8195369.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
                 </div>
                 <ChevronRight className="w-6 h-6 text-gray-400 cursor-pointer" />
              </div>
