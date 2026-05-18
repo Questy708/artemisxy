@@ -8,6 +8,7 @@ import PacedEducationPage from './pages/PacedEducationPage';
 import GlobalSkillsMatrixPage from './pages/AxisFlipPage';
 import PurposeLearningPage from './pages/PurposeLearningPage';
 import CentersOfInquiryPage from './pages/CentersOfInquiryPage';
+import DarwinVoyagePage from './pages/DarwinVoyagePage';
 import BuildPage from './pages/BuildPage';
 import AboutPage from './pages/AboutPage';
 
@@ -18,6 +19,7 @@ type T1Page =
   | 'global-skills-matrix'
   | 'purpose-learning'
   | 'centers-of-inquiry'
+  | 'darwin-voyage'
   | 'build'
   | 'about';
 
@@ -47,6 +49,8 @@ export default function T1Site({ onExit }: T1SiteProps) {
         return <PurposeLearningPage goTo={goTo} />;
       case 'centers-of-inquiry':
         return <CentersOfInquiryPage goTo={goTo} />;
+      case 'darwin-voyage':
+        return <DarwinVoyagePage goTo={goTo} />;
       case 'build':
         return <BuildPage goTo={goTo} />;
       case 'about':

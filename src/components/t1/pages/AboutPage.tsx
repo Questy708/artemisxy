@@ -26,13 +26,14 @@ export default function AboutPage({ goTo }: Props) {
 
         <section className="space-y-6">
            <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">The Dimensions</h2>
-           <p className="text-gray-600 leading-relaxed max-w-3xl">The Artemis 2100 exhibit presented five dimensions — each a window into a possible future where a different dimension of the university was reimagined. Together, they formed a complete vision: rhythm (Infinite Learning Continuum), pace (Adaptive Paced Learning), identity (SkillPrints), commitment (The Artemis Oath), and place (Centers of Inquiry).</p>
+           <p className="text-gray-600 leading-relaxed max-w-3xl">The Artemis 2100 exhibit presented six dimensions — each a window into a possible future where a different dimension of the university was reimagined. Together, they formed a complete vision: rhythm (Infinite Learning Continuum), pace (Adaptive Paced Learning), identity (SkillPrints), commitment (The Artemis Oath), place (Centers of Inquiry), and movement (The World as Campus).</p>
            <div className="flex flex-wrap gap-3 mt-4">
              <button onClick={() => goTo('open-loop-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Infinite Learning Continuum</button>
              <button onClick={() => goTo('adaptive-paced-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Adaptive Paced Learning</button>
              <button onClick={() => goTo('global-skills-matrix')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">SkillPrints</button>
              <button onClick={() => goTo('purpose-learning')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">The Artemis Oath</button>
              <button onClick={() => goTo('centers-of-inquiry')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">Centers of Inquiry</button>
+             <button onClick={() => goTo('darwin-voyage')} className="bg-[#8A0000] hover:bg-[#6B0000] transition-colors text-white font-bold px-5 py-3 italic text-sm cursor-pointer">The World as Campus</button>
            </div>
         </section>
 

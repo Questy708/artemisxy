@@ -218,35 +218,41 @@ export default function HomePage({ goTo }: HomePageProps) {
             <div className="space-y-12">
               <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Choose a future to explore.</h2>
               
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 w-full font-serif text-white">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8 w-full font-serif text-white">
                 <button onClick={() => goTo('open-loop-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Open Loop Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">Infinite Learning<br/>Continuum</span>
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">Infinite Learning<br/>Continuum</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('adaptive-paced-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('global-skills-matrix')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="SkillPrints" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">SkillPrints</span>
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">SkillPrints</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('purpose-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
                    <img src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The Artemis Oath" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">The Artemis<br/>Oath</span>
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">The Artemis<br/>Oath</span>
                    </div>
                 </button>
-                <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-[#0f3460] overflow-hidden cursor-pointer">
-                   <img src="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
+                <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
+                   <img src="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
-                      <span className="text-base md:text-lg font-bold italic tracking-wide">Centers of<br/>Inquiry</span>
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">Centers of<br/>Inquiry</span>
+                   </div>
+                </button>
+                <button onClick={() => goTo('darwin-voyage')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
+                   <img src="https://images.pexels.com/photos/1000653/pexels-photo-1000653.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The World as Campus" />
+                   <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
+                      <span className="text-sm md:text-base font-bold italic tracking-wide">The World as<br/>Campus</span>
                    </div>
                 </button>
               </div>

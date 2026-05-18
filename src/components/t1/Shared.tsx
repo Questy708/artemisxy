@@ -20,7 +20,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const dimensionSlugs = ['open-loop-learning', 'adaptive-paced-learning', 'global-skills-matrix', 'purpose-learning', 'centers-of-inquiry'];
+  const dimensionSlugs = ['open-loop-learning', 'adaptive-paced-learning', 'global-skills-matrix', 'purpose-learning', 'centers-of-inquiry', 'darwin-voyage'];
   const isExplorePath = dimensionSlugs.includes(currentPage);
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
     { slug: 'global-skills-matrix', label: 'SkillPrints', num: '03' },
     { slug: 'purpose-learning', label: 'The Artemis Oath', num: '04' },
     { slug: 'centers-of-inquiry', label: 'Centers of Inquiry', num: '05' },
+    { slug: 'darwin-voyage', label: 'The World as Campus', num: '06' },
   ];
 
   return (
@@ -135,6 +136,7 @@ export function Footer() {
     { slug: 'global-skills-matrix', label: 'SkillPrints' },
     { slug: 'purpose-learning', label: 'The Artemis Oath' },
     { slug: 'centers-of-inquiry', label: 'Centers of Inquiry' },
+    { slug: 'darwin-voyage', label: 'The World as Campus' },
   ];
 
   return (
@@ -153,10 +155,10 @@ export function Footer() {
         </div>
 
         {/* Middle: Dimensions grid */}
-        <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        <div className="py-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {dimensionLinks.map((d, i) => (
             <div key={d.slug} className="group cursor-pointer">
-              <div className="text-[9px] font-mono text-white/20 mb-1">0{i + 1}</div>
+              <div className="text-[9px] font-mono text-white/20 mb-1">{i < 9 ? `0${i + 1}` : i + 1}</div>
               <div className="text-[11px] text-white/40 group-hover:text-white/80 transition-colors leading-tight">{d.label}</div>
             </div>
           ))}
@@ -184,6 +186,7 @@ export function ExploreAnotherFuture({ currentPage, goTo }: ExploreAnotherFuture
     { slug: 'global-skills-matrix', label: 'SkillPrints', short: 'SP', num: '03' },
     { slug: 'purpose-learning', label: 'The Artemis Oath', short: 'OATH', num: '04' },
     { slug: 'centers-of-inquiry', label: 'Centers of Inquiry', short: 'CoI', num: '05' },
+    { slug: 'darwin-voyage', label: 'The World as Campus', short: 'WAC', num: '06' },
     { slug: 'build', label: 'Design a Future', short: 'BUILD', num: '\u2192', isSpecial: true },
   ].filter(l => l.slug !== currentPage);
 
