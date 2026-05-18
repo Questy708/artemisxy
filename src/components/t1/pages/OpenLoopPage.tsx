@@ -15,13 +15,13 @@ export default function OpenLoopPage({ goTo }: Props) {
         description="We look back from 2100 at the era when Stanford brought an end to a society of alumni in favor of lifetime learning."
         bgGradientClass="bg-gradient-to-tr from-[#66B83B] via-[#7BCE44] to-[#4A9F2F]"
       />
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20 py-16 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         <section className="space-y-6">
           <SectionHeading>A Summary</SectionHeading>
           <p className="text-sm text-gray-600">
             Take a look at archival footage recovered from the future to discover how Stanford was transformed by Open Loop University.
           </p>
-          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-5xl border border-gray-300">
+          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
               src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=2500" 
               alt="Video Thumbnail" 

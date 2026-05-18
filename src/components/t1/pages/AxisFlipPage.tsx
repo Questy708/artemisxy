@@ -15,14 +15,14 @@ export default function AxisFlipPage({ goTo }: Props) {
         description="A view from 2100 of the era in which Stanford flipped the axes of knowledge and competency."
         bgGradientClass="bg-[#461e68]"
       />
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20 py-16 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
           <p className="text-sm text-gray-600">
             Take a look into archival footage returned from the future to discover how the university model was turned over by Axis Flip.
           </p>
-          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-5xl border border-gray-300">
+          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
               src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2500" 
               alt="Video Thumbnail" 

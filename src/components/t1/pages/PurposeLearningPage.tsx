@@ -15,14 +15,14 @@ export default function PurposeLearningPage({ goTo }: Props) {
         description="A look back from 2100 to the era when Stanford students began declaring missions, not majors."
         bgGradientClass="bg-[#f2b90f]"
       />
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20 py-16 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
           <p className="text-sm text-gray-600">
             Take a peek into archival footage brought from the future to discover how the learning paths were transformed by Purpose Learning.
           </p>
-          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-5xl border border-gray-300">
+          <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2500" 
               alt="Video Thumbnail" 
