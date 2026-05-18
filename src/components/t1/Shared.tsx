@@ -51,7 +51,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
             A
           </div>
           <span className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900">
-            Artemis<span className="font-light opacity-60">2100</span>
+            Artemis
           </span>
         </button>
 
@@ -147,7 +147,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-8 h-8 border-2 border-white/30 flex items-center justify-center text-xs font-bold italic text-white/50">A</div>
-              <span className="text-lg font-semibold tracking-[0.2em] uppercase text-white/80">Artemis<span className="font-light opacity-40">2100</span></span>
+              <span className="text-lg font-semibold tracking-[0.2em] uppercase text-white/80">Artemis</span>
             </div>
             <p className="text-xs text-white/30 max-w-sm leading-relaxed">An experiment in imagining the future of learning. All ideas speculative. All futures possible.</p>
           </div>
