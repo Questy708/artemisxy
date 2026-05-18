@@ -229,16 +229,44 @@ export default function PurposeLearningPage({ goTo }: Props) {
 
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
-          <div className="space-y-4 text-sm text-gray-600">
-            <p>In The Artemis Oath:</p>
-            <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Students found greater relevance and motivation by aligning their studies with societal missions</li>
-              <li>The Artemis Oath anchored the entire Artemis vision in impact — every dimension, from the Infinite Learning Continuum to SkillPrints, pointed toward this: learning in service of the world</li>
-              <li>Students&apos; projects had tangible benefits for their communities and society at large</li>
-              <li>Students developed academically, personally, and socially, preparing them for mission-driven careers</li>
-              <li>The cultural shift at Artemis was captured in a new vernacular: students began asking each other, &ldquo;What&apos;s your verb?&rdquo;</li>
-              <li>An endless list of contributions to issues of poverty, health, infrastructure, renewable energy, global governance, space travel, and artistic and cultural achievement</li>
-            </ul>
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            <p>The Artemis Oath anchored the entire Artemis vision in impact — every dimension, from the Infinite Learning Continuum to SkillPrints, pointed toward this: learning in service of the world.</p>
+          </div>
+          <ul className="space-y-4 text-gray-700 text-sm md:text-base">
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Relevance and motivation unlocked:</strong> Students found greater purpose by aligning their studies with societal missions — &ldquo;What&apos;s your verb?&rdquo; replaced &ldquo;What&apos;s your major?&rdquo;</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The anchoring dimension:</strong> The Artemis Oath connected every other dimension — Infinite Learning, SkillPrints, Centers of Inquiry — into a coherent vision of impact-driven education</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Tangible community benefits:</strong> Students&apos; projects delivered measurable improvements in communities and societies around the world</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Whole-person development:</strong> Students grew academically, personally, and socially — prepared not just for careers, but for mission-driven lives</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">A new cultural vernacular:</strong> &ldquo;What&apos;s your verb?&rdquo; became the defining question of the Artemis experience — a shift from identity to action</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#d6a40d] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Endless contributions:</strong> An uncountable list of impact on poverty, health, infrastructure, renewable energy, global governance, space travel, and artistic and cultural achievement</span>
+            </li>
+          </ul>
+          <div className="mt-8">
+            <blockquote className="border-l-4 border-[#d6a40d] pl-6 space-y-4">
+              <p className="font-serif italic text-2xl text-gray-800 leading-snug">
+                &ldquo;I declared a verb, not a major. My verb was &lsquo;restore.&rsquo; Every course, every project, every late night in the lab — it all pointed toward healing what was broken. That clarity changed everything.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                &mdash; Pathfinder, Class of 2058
+              </footer>
+            </blockquote>
           </div>
         </section>
 

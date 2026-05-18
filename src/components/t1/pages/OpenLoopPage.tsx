@@ -199,16 +199,44 @@ export default function OpenLoopPage({ goTo }: Props) {
 
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
-          <div className="space-y-4 text-sm text-gray-600">
-            <p>The Infinite Learning Continuum:</p>
-            <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>De-stigmatized a range of legitimate patterns of learning so that students used their time wisely and for greater impact</li>
-              <li>Provided a way for adults at any stage to pivot careers with academic grounding and reconnect with meaningful social contexts</li>
-              <li>Revitalized Artemis with a broader mix of students by creating on-ramps at many ages; enabled populations traditionally underrepresented at elite institutions to gain greater access</li>
-              <li>Transformed &ldquo;alumni&rdquo; into &ldquo;populi&rdquo; — a lifelong community of learners who remain active, engaged, and evolving</li>
-              <li>Established a cradle-to-grave model that treats learning as an infinite human endeavor, not a finite transaction</li>
-              <li>Capitalized on the remarkable accomplishments of its populi through the invitation to return as expert practitioners at every life stage</li>
-            </ul>
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            <p>The Infinite Learning Continuum transformed the fundamental relationship between learners and institutions — not by extending the old model, but by replacing it entirely.</p>
+          </div>
+          <ul className="space-y-4 text-gray-700 text-sm md:text-base">
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">De-stigmatized alternative learning paths:</strong> Students used their time wisely and for greater impact, free from the pressure of arbitrary timelines</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Career pivoting with academic grounding:</strong> Adults at any stage could redirect their professional lives and reconnect with meaningful social contexts</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Revitalized the student body:</strong> On-ramps at many ages enabled populations traditionally underrepresented at elite institutions to gain greater access</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">From alumni to populi:</strong> Transformed &ldquo;alumni&rdquo; into a lifelong community of learners who remain active, engaged, and evolving</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Cradle-to-grave model:</strong> Established learning as an infinite human endeavor, not a finite transaction — 5 life stages replaced the traditional degree timeline</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#66B83B] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Expert practitioners return:</strong> Capitalized on the remarkable accomplishments of its populi through the invitation to return at every life stage</span>
+            </li>
+          </ul>
+          <div className="mt-8">
+            <blockquote className="border-l-4 border-[#66B83B] pl-6 space-y-4">
+              <p className="font-serif italic text-2xl text-gray-800 leading-snug">
+                &ldquo;I looped out after two years to observe the role of nonviolent communication in international policy. When I returned, I understood what I was studying — and why it mattered.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                &mdash; Pathfinder Class of 2062, reflecting on the Continuum
+              </footer>
+            </blockquote>
           </div>
         </section>
 

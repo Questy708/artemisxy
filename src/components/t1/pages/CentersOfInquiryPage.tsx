@@ -340,16 +340,44 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
         {/* ── The Achievement ── */}
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
-          <div className="space-y-4 text-sm text-gray-600">
-            <p>In Centers of Inquiry:</p>
-            <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Artemis abolished the department, replacing siloed disciplines with 15 interdisciplinary hubs organized around grand challenges</li>
-              <li>Five structural pillars — Unified Knowledge, Junior Fellows, Core Investigators, Translational Programs, Technology Centers — form the organizational DNA</li>
-              <li>Guild Layers and Cycles ensure research cycles from inquiry through deployment, never staying in the lab</li>
-              <li>The campus became a distributed network of 45 global nodes across every inhabited continent</li>
-              <li>Place was reimagined: defined by purpose, not geography — physical, virtual, and hybrid</li>
-              <li>By 2080, the Centers of Inquiry model had spread to 200+ universities worldwide</li>
-            </ul>
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            <p>Centers of Inquiry did not just reorganize the university — they rewired how knowledge itself was produced, shared, and deployed in the world.</p>
+          </div>
+          <ul className="space-y-4 text-gray-700 text-sm md:text-base">
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The department abolished:</strong> 15 interdisciplinary hubs replaced siloed disciplines, organized around grand challenges instead of historical divisions of knowledge</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Five structural pillars:</strong> Unified Knowledge, Junior Fellows, Core Investigators, Translational Programs, and Technology Centers form the organizational DNA of every Center</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Research never stays in the lab:</strong> Guild Layers and Cycles ensure inquiry moves from foundational research through deployment — every discovery has a pathway to impact</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">45 global nodes:</strong> The campus became a distributed network spanning every inhabited continent — 15 Centers, 3 nodes each, plus virtual and partner environments</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Place reimagined:</strong> Defined by purpose, not geography — physical, virtual, and hybrid spaces shaped by the challenges they address</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#0f3460] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Global adoption by 2080:</strong> The Centers of Inquiry model spread to 200+ universities worldwide, becoming the dominant framework for research organization</span>
+            </li>
+          </ul>
+          <div className="mt-8">
+            <blockquote className="border-l-4 border-[#0f3460] pl-6 space-y-4">
+              <p className="font-serif italic text-2xl text-gray-800 leading-snug">
+                &ldquo;The department was a container built for a world that no longer existed — a world where knowledge sat neatly in labeled boxes. But the most important questions had already escaped those boxes and were roaming free.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                &mdash; Dr. Lena Vasquez, 2028
+              </footer>
+            </blockquote>
           </div>
         </section>
 

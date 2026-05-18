@@ -202,19 +202,44 @@ export default function AxisFlipPage({ goTo }: Props) {
 
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
-          <div className="space-y-4 text-sm text-gray-600">
-            <p>In SkillPrints:</p>
-            <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Artemis replaced rigid disciplines with a flexible, AI-powered system that adapted to global needs in real-time</li>
-              <li>Neural Skill Mapping made qualifications visual, dynamic, and deeply personal</li>
-              <li>Students graduated with a unique portfolio of transferable skills rather than a traditional degree</li>
-              <li>The gap between education and employment disappeared as learning became directly tied to evolving global challenges</li>
-              <li>Cultural intelligence and adaptability became core components of every educational journey</li>
-              <li>Transcripts were replaced by SkillPrints — dynamic, biometric, evolving records of each learner&apos;s journey</li>
-            </ul>
-            <p className="pt-4 font-bold italic">
-               The SkillPrints era transformed Artemis into a truly global university, one whose graduates were not just knowledgeable, but capable, adaptable, and deeply connected to the challenges and opportunities of their time.
-            </p>
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            <p>SkillPrints did not merely update the transcript — they redefined what it meant to be qualified, replacing static records of coursework with living portraits of capability.</p>
+          </div>
+          <ul className="space-y-4 text-gray-700 text-sm md:text-base">
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Rigid disciplines dissolved:</strong> Artemis replaced fixed majors with a flexible, AI-powered system that adapted to global needs in real-time</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Qualifications became visual:</strong> Neural Skill Mapping made competencies dynamic, deeply personal, and instantly communicable</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Unique skill portfolios:</strong> Students graduated with a portfolio of transferable skills rather than a traditional degree — no two SkillPrints alike</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Education-employment gap eliminated:</strong> Learning became directly tied to evolving global challenges, making graduation synonymous with readiness</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Cultural intelligence at the core:</strong> Adaptability and cross-cultural competence became essential components of every educational journey</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#461e68] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Transcripts replaced:</strong> Dynamic, biometric, evolving SkillPrints became the new global standard for recording each learner&apos;s journey</span>
+            </li>
+          </ul>
+          <div className="mt-8">
+            <blockquote className="border-l-4 border-[#461e68] pl-6 space-y-4">
+              <p className="font-serif italic text-2xl text-gray-800 leading-snug">
+                &ldquo;My transcript said I took Economics 301. My SkillPrint said I could restructure a failing municipal budget while navigating three stakeholder languages. Which would you hire?&rdquo;
+              </p>
+              <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                &mdash; Catalyst, Class of 2084
+              </footer>
+            </blockquote>
           </div>
         </section>
 

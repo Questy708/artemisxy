@@ -246,17 +246,48 @@ export default function PacedEducationPage({ goTo }: Props) {
 
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
-          <div className="space-y-4 text-sm text-gray-600">
-            <p>In Adaptive Paced Learning:</p>
-            <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Artemis eliminated the concept of fixed academic years, replacing Freshman-Senior with Calibrate-Elevate-Activate</li>
-              <li>Learning became truly personalized, adaptable to individual needs, cultural contexts, and life circumstances</li>
-              <li>Emotional intelligence was elevated to a core competency through the Cognitive Biofeedback Mirror</li>
-              <li>The stress of arbitrary deadlines was replaced by a focus on genuine mastery and practical application</li>
-              <li>Global collaboration became integral, fostering cross-cultural understanding and innovation</li>
-              <li>The system became more inclusive, accommodating diverse learning styles and life situations</li>
-              <li>Calibrate, elevate, activate, reflect, adapt... and repeat: this was the experience of an Artemis learner.</li>
-            </ul>
+          <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
+            <p>Adaptive Paced Learning dismantled the tyranny of the academic calendar, replacing it with a system that honoured the individual rhythm of every learner.</p>
+          </div>
+          <ul className="space-y-4 text-gray-700 text-sm md:text-base">
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Eliminated fixed academic years:</strong> Freshman-Senior was replaced by Calibrate-Elevate-Activate — a lifecycle attuned to cognitive and emotional readiness, not the calendar</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Truly personalized learning:</strong> Pace and style adapted to individual needs, cultural contexts, and life circumstances through Chronos AI</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Emotional intelligence elevated:</strong> The Cognitive Biofeedback Mirror made meta-cognitive awareness a core competency, producing graduates who were emotionally resilient</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Mastery over deadlines:</strong> The stress of arbitrary deadlines was replaced by a focus on genuine mastery and practical application</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Global collaboration integral:</strong> Cross-cultural understanding and innovation became woven into every phase of learning</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">Inclusive by design:</strong> Diverse learning styles and life situations accommodated — the system bent to the learner, not the learner to the system</span>
+            </li>
+            <li className="flex gap-4">
+              <span className="text-[#007f9c] font-bold mt-1 shrink-0">&#9632;</span>
+              <span><strong className="text-gray-900">The Artemis rhythm:</strong> Calibrate, elevate, activate, reflect, adapt — and repeat. This became the lived experience of every Artemis learner</span>
+            </li>
+          </ul>
+          <div className="mt-8">
+            <blockquote className="border-l-4 border-[#007f9c] pl-6 space-y-4">
+              <p className="font-serif italic text-2xl text-gray-800 leading-snug">
+                &ldquo;I spent fourteen months in Calibrate. My advisor said that was fine — that readiness wasn&apos;t a race. She was right. When I finally elevated, I elevated with purpose.&rdquo;
+              </p>
+              <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
+                &mdash; Navigator, Class of 2071
+              </footer>
+            </blockquote>
           </div>
         </section>
 
