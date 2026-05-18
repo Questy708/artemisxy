@@ -5,16 +5,16 @@ import { NavBar, Footer } from './Shared';
 import HomePage from './pages/HomePage';
 import OpenLoopPage from './pages/OpenLoopPage';
 import PacedEducationPage from './pages/PacedEducationPage';
-import AxisFlipPage from './pages/AxisFlipPage';
+import GlobalSkillsMatrixPage from './pages/AxisFlipPage';
 import PurposeLearningPage from './pages/PurposeLearningPage';
 import BuildPage from './pages/BuildPage';
 import AboutPage from './pages/AboutPage';
 
 type T1Page =
   | 'home'
-  | 'open-loop-university'
-  | 'paced-education'
-  | 'axis-flip'
+  | 'open-loop-learning'
+  | 'adaptive-paced-education'
+  | 'global-skills-matrix'
   | 'purpose-learning'
   | 'build'
   | 'about';
@@ -35,12 +35,12 @@ export default function T1Site({ onExit }: T1SiteProps) {
     switch (currentPage) {
       case 'home':
         return <HomePage goTo={goTo} />;
-      case 'open-loop-university':
+      case 'open-loop-learning':
         return <OpenLoopPage goTo={goTo} />;
-      case 'paced-education':
+      case 'adaptive-paced-education':
         return <PacedEducationPage goTo={goTo} />;
-      case 'axis-flip':
-        return <AxisFlipPage goTo={goTo} />;
+      case 'global-skills-matrix':
+        return <GlobalSkillsMatrixPage goTo={goTo} />;
       case 'purpose-learning':
         return <PurposeLearningPage goTo={goTo} />;
       case 'build':

@@ -19,7 +19,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
 
-  const provocationSlugs = ['open-loop-university', 'paced-education', 'axis-flip', 'purpose-learning'];
+  const provocationSlugs = ['open-loop-learning', 'adaptive-paced-education', 'global-skills-matrix', 'purpose-learning'];
   const isExplorePath = provocationSlugs.includes(currentPage);
 
   return (
@@ -27,7 +27,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
       <div className="flex items-center justify-between py-6 max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
       <div className="flex items-center gap-2">
         <button onClick={() => goTo('home')} className="text-2xl font-semibold italic tracking-tight text-gray-900 cursor-pointer">
-          Stanford<span className="font-light">2025</span>
+          Artemis<span className="font-light">2100</span>
         </button>
       </div>
 
@@ -50,9 +50,9 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
           {isExploreOpen && (
             <div className="absolute top-full right-0 pt-4">
               <div className="bg-white border border-gray-100 shadow-xl shadow-black/5 rounded flex flex-col min-w-[220px] overflow-hidden whitespace-nowrap">
-                <button onClick={() => { goTo('open-loop-university'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'open-loop-university' && "font-bold text-gray-900")}>Open Loop University</button>
-                <button onClick={() => { goTo('paced-education'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'paced-education' && "font-bold text-gray-900")}>Paced Education</button>
-                <button onClick={() => { goTo('axis-flip'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'axis-flip' && "font-bold text-gray-900")}>Axis Flip</button>
+                <button onClick={() => { goTo('open-loop-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'open-loop-learning' && "font-bold text-gray-900")}>Open Loop Learning</button>
+                <button onClick={() => { goTo('adaptive-paced-education'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'adaptive-paced-education' && "font-bold text-gray-900")}>Adaptive Paced Education</button>
+                <button onClick={() => { goTo('global-skills-matrix'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'global-skills-matrix' && "font-bold text-gray-900")}>Global Skills Matrix</button>
                 <button onClick={() => { goTo('purpose-learning'); setIsExploreOpen(false); }} className={cn("px-6 py-4 hover:bg-gray-50 transition-colors text-xs text-gray-600 text-left cursor-pointer", currentPage === 'purpose-learning' && "font-bold text-gray-900")}>Purpose Learning</button>
               </div>
             </div>
@@ -77,9 +77,9 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
            <div className="space-y-4">
               <span className="text-gray-900 border-b border-gray-900 pb-1 w-fit">Explore</span>
               <div className="flex flex-col gap-4 pl-4 border-l border-gray-100">
-                <button onClick={() => { goTo('open-loop-university'); setIsMobileMenuOpen(false); }}>Open Loop University</button>
-                <button onClick={() => { goTo('paced-education'); setIsMobileMenuOpen(false); }}>Paced Education</button>
-                <button onClick={() => { goTo('axis-flip'); setIsMobileMenuOpen(false); }}>Axis Flip</button>
+                <button onClick={() => { goTo('open-loop-learning'); setIsMobileMenuOpen(false); }}>Open Loop Learning</button>
+                <button onClick={() => { goTo('adaptive-paced-education'); setIsMobileMenuOpen(false); }}>Adaptive Paced Education</button>
+                <button onClick={() => { goTo('global-skills-matrix'); setIsMobileMenuOpen(false); }}>Global Skills Matrix</button>
                 <button onClick={() => { goTo('purpose-learning'); setIsMobileMenuOpen(false); }}>Purpose Learning</button>
               </div>
            </div>
@@ -96,8 +96,8 @@ export function Footer() {
   return (
     <footer className="bg-[#171717] text-white py-16 mt-auto w-full">
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 text-center text-xs space-y-2">
-        <p>Copyright &copy; 2100 Stanford University. All ideas experimental.</p>
-        <p className="text-gray-400">This website was made possible by the courageous women and men who invented the future of Stanford University.</p>
+        <p>Copyright &copy; 2100 The University of Artemis. All ideas experimental.</p>
+        <p className="text-gray-400">This website was made possible by the courageous women and men who are inventing the future of global education.</p>
       </div>
     </footer>
   );
@@ -110,10 +110,10 @@ interface ExploreAnotherFutureProps {
 
 export function ExploreAnotherFuture({ currentPage, goTo }: ExploreAnotherFutureProps) {
   const links = [
-    { slug: 'paced-education', label: 'Paced<br/>Education', bg: 'bg-[#007f9c] hover:bg-[#006e87]', border: '' },
-    { slug: 'axis-flip', label: 'Axis Flip', bg: 'bg-[#461e68] hover:bg-[#391854]', border: 'border-l-[8px] border-yellow-400' },
+    { slug: 'adaptive-paced-education', label: 'Adaptive Paced<br/>Education', bg: 'bg-[#007f9c] hover:bg-[#006e87]', border: '' },
+    { slug: 'global-skills-matrix', label: 'Global Skills<br/>Matrix', bg: 'bg-[#461e68] hover:bg-[#391854]', border: 'border-l-[8px] border-yellow-400' },
     { slug: 'purpose-learning', label: 'Purpose<br/>Learning', bg: 'bg-[#f2b90f] hover:bg-[#d6a40d]', border: '' },
-    { slug: 'build', label: 'Design a<br/>Future', bg: 'bg-[#d92231] hover:bg-[#b91d29]', border: 'border-l-[8px] border-[#007f9c]', isSpecial: true },
+    { slug: 'build', label: 'Design Your<br/>Future', bg: 'bg-[#d92231] hover:bg-[#b91d29]', border: 'border-l-[8px] border-[#007f9c]', isSpecial: true },
   ].filter(l => l.slug !== currentPage);
 
   return (

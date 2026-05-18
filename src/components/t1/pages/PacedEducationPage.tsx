@@ -11,8 +11,8 @@ export default function PacedEducationPage({ goTo }: Props) {
   return (
     <>
       <HeroHeader 
-        title="Paced Education"
-        description="In 2100, we examine the eras when Stanford abolished the class year and embraced adaptive learning."
+        title="Adaptive Paced Education"
+        description="In 2100, we reflect on the era when Artemis revolutionized global learning by introducing Adaptive Paced Education, breaking free from rigid timelines and embracing personalized learning journeys."
         bgGradientClass="bg-[#007f9c]"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
@@ -20,7 +20,7 @@ export default function PacedEducationPage({ goTo }: Props) {
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>
           <p className="text-sm text-gray-600">
-            Take a peek into archival footage rescued from the future to discover how learning on campus was transformed by Paced Education.
+            Immerse yourself in a virtual time capsule to discover how Artemis transformed education worldwide through its innovative Adaptive Paced Education system.
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
@@ -55,13 +55,13 @@ export default function PacedEducationPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm">The Setting</h4>
               <p className="font-bold italic text-sm text-gray-800 leading-relaxed">
-                Prepare, apply, cram, conform, get through, graduate ... then search, flounder, flail: this was the archetypal experience of a university student at the turn of the 21st century.
+                Rush, cram, stress, repeat: this was the universal rhythm of students worldwide at the beginning of the 21st century.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Disruptive technologies were launching faster than humans could learn them, and the newly globalized economy meant an unprecedented level of interconnectedness. It was a polarized, class-divided, risk-averse, but thrill-seeking world.
+                The global education landscape was marked by arbitrary timelines, standardized curricula, and a one-size-fits-all approach that failed to account for individual learning styles, cultural differences, and the varying pace at which students mastered different subjects. This system often led to burnout, imposter syndrome, and a disconnect between education and real-world applicability.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Schools at that time&mdash;society&apos;s core mechanism for strengthening people&apos;s ability to adapt&mdash;were mired in conventional approaches and struggling to change. The K-12 education system in the United States was still built upon a metronomic, industrial approach, while the working world was more chaotic and ambiguous than ever before.
+                As the world became increasingly interconnected and the pace of change accelerated, it became clear that a more flexible, personalized approach to education was needed — one that could adapt to the needs of diverse learners across the globe while maintaining high standards of academic rigor.
               </p>
             </div>
             <div className="space-y-4">
@@ -79,7 +79,7 @@ export default function PacedEducationPage({ goTo }: Props) {
           <SectionHeading>The Shift</SectionHeading>
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="text-sm text-gray-600 leading-relaxed">
-              <p>From 1891-2019, students at Stanford were slotted into one of four groups based on age: Freshman, Sophomore, Junior, and Senior. They moved through this legacy organizational system year after year, but in 2019 the landscape changed.</p>
+              <p>From the 19th century until 2025, most educational institutions worldwide adhered to fixed academic years and standardized progression. Recognizing the limitations of this approach, Artemis introduced Adaptive Paced Education in 2026, revolutionizing the global learning landscape.</p>
             </div>
             <div>
                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Student Shift"/>
@@ -88,18 +88,17 @@ export default function PacedEducationPage({ goTo }: Props) {
           
           <div className="grid md:grid-cols-2 gap-12 mt-12 items-start">
             <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">The ducks before the ducks</h4>
-               <p>Unlike today, Duck Syndrome used to be a pejorative term. Linguistic historians determined that, pre-2019, it was used to characterize the appearance of sun-soaked, laid-back ease while Stanford students were actually paddling furiously below the surface to keep up. This syndrome, with complete disregard for mental health, was not only accepted, but expected to affect all students.</p>
-               <p>In the early 2010s, multiple pilots were launched with the express intent of curbing Duck Syndrome and building students&apos; resilience. With increasing success from new programs on reflection, longevity, and personalized learning, Stanford leaders concluded that the arbitrary definition of progress based on the calendar year and students&apos; ages was driving the &ldquo;get through&rdquo; mentality, and simply outdated.</p>
-               <p>The University decided to part ways with the class-year system and adopt Paced education. Over time, Duck Syndrome became synonymous with personal growth and the ability to adapt to a variety of environments&mdash;to walk, run, swim or fly as needed.</p>
-               <p>In other words, the process of becoming.</p>
+               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">The rhythm before the rhythm</h4>
+               <p>Before Artemis, the concept of a &ldquo;learning rhythm&rdquo; was virtually nonexistent in formal education. Students were expected to march in lockstep through predetermined curricula, regardless of their individual readiness, interests, or circumstances. The idea that learning could — or should — be paced according to a student&apos;s cognitive and emotional state was considered radical, even heretical by some traditionalists.</p>
+               <p>In the early 2020s, pilot programs across several continents began experimenting with flexible pacing and AI-assisted learning pathways. The results were striking: students in adaptive programs demonstrated not only deeper mastery of content but also significantly higher levels of engagement, well-being, and long-term retention. Artemis synthesized these findings into a coherent, scalable framework that would become Adaptive Paced Education.</p>
+               <p>The organization declared that the arbitrary definition of progress based on calendar years and age cohorts was not only outdated but actively harmful to genuine learning. A new paradigm was needed — one built around the learner, not the calendar.</p>
             </div>
             <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-              <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">From Frantic to Paced</h4>
-              <p>Paced education was designed to promote academic exploration and then push rigor within disciplines. Students now moved through phases of learning based on their individual readiness, allowing them to transform at their own pace.</p>
-              <p>The three distinct phases were called: Calibration, Elevation, and Activation. While undergraduates, students cycled through these phases multiple times.</p>
-              <p>Advanced learning technologies gave students and faculty new types of bio-cognitive feedback to ground this process.</p>
-              <p>To balance these unparalleled technological resources, the University made an equal commitment to meditative modes like personal reflection through the now ubiquitous zones of digital silence, not-spots. Stanford humanists then helped pioneer the Slow Cognition movement.</p>
+              <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">From Frantic to Adaptive</h4>
+              <p>Adaptive Paced Education was designed to promote global exploration, deep mastery, and real-world integration. Learners now moved through phases of education based on their individual readiness and circumstances, allowing them to transform at their own pace — and to cycle back through phases as their needs evolved.</p>
+              <p>The three distinct phases were called: Exploration, Mastery, and Integration. Rather than a linear progression, these phases formed a dynamic cycle that learners could revisit throughout their lives, reflecting the reality that learning is never truly &ldquo;complete.&rdquo;</p>
+              <p>Advanced learning technologies — including AI-powered cognitive assessments, biometric feedback systems, and immersive virtual reality environments — gave students and educators unprecedented insight into the learning process, grounding each learner&apos;s journey in data-informed personalization.</p>
+              <p>To balance these unparalleled technological resources, Artemis made an equal commitment to meditative modes like personal reflection, mindfulness practices, and designated &ldquo;digital silence&rdquo; zones that encouraged deep cognitive processing. The organization championed the Slow Cognition movement, recognizing that true understanding requires not just speed, but stillness.</p>
             </div>
           </div>
         </section>
@@ -107,15 +106,15 @@ export default function PacedEducationPage({ goTo }: Props) {
         <section className="space-y-12">
            <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Calibration (6-18 months)</h4>
+                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Exploration (Variable duration: 3-18 months)</h4>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   We now know that students need to learn how they learn best. Calibration offered short (one day to one week), immersive, introductory experiences designed by faculty and practitioners, so students experienced a wide range of subject areas, learning models, and career trajectories.
+                   In this phase, learners embarked on a journey of self-discovery and broad exposure to various fields of knowledge. Using advanced AI-powered assessment tools and virtual reality experiences, students explored different subjects, learning styles, and potential career paths. The Exploration phase was characterized by short, intensive modules that allowed students to sample a wide range of disciplines.
                  </p>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   Students remained in Calibration mode for varying lengths of time depending on personal readiness. Some stayed only six months, while others took nearly 18 months to sample interest areas, self-reflect (using both their GritBits and non-technological means), find learning gaps, and build the confidence to move forward with intention.
+                   Cultural exchange was a key component, with learners engaging in virtual and physical global experiences to broaden their perspectives. Students remained in Exploration mode for varying lengths of time depending on personal readiness — some found their direction in just three months, while others took up to eighteen months to sample interest areas, self-reflect, identify learning gaps, and build the confidence to move forward with intention.
                  </p>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   Faculty, initially wary of offering short courses, soon developed a taste for teaching bite-size introductions and experimental offerings. Not only intellectually invigorating, these courses also allowed professors to interact with a wider range of students. They were able to identify and nurture those who were best suited to their domains of expertise more easily.
+                   Educators worldwide, initially wary of offering such flexible and varied introductory experiences, soon developed a passion for curating Exploration modules. These bite-size introductions allowed them to interact with a far more diverse range of learners and to identify those who were naturally drawn to their domains of expertise, creating organic mentoring relationships that would flourish in the Mastery phase.
                  </p>
               </div>
               <div className="flex justify-center items-center">
@@ -127,34 +126,34 @@ export default function PacedEducationPage({ goTo }: Props) {
 
            <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Elevation (12-24 months)</h4>
+                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Mastery (Flexible duration: 6-36 months)</h4>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   Elevation took students deep into a content area with a singular focus. In this phase, intellectual rigor was paramount. Students entered the Elevation phase by coordinating with their self-selected personal Board of Advisors (BOA). Composed of academic and personal mentors, as well as more advanced students and trusted confidantes, the BOA had replaced all other forms of academic advising by 2018.
+                   Based on their experiences in the Exploration phase, learners chose areas of focus for deep study. The Mastery phase was highly personalized, with AI tutors adapting the pace and style of instruction to each student&apos;s needs. Learners could pursue multiple areas of Mastery simultaneously or sequentially, depending on their goals and cognitive patterns.
                  </p>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   Elevation held a special place in the hearts of both faculty and students. When Stanford gutted all of the lecture halls in the Main Quad area of campus in 2016, Elevation-specific living and learning quarters were created. In true Stanford tradition, these quickly became referred to as the &ldquo;LivLerns.&rdquo;
+                   Progress was measured through practical application and demonstration of skills rather than traditional exams. A unique feature was the &ldquo;Global Mastery Network,&rdquo; where students studying similar subjects across different cultures collaborated on projects, sharing diverse perspectives and approaches that enriched everyone&apos;s understanding.
                  </p>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   The new hybrid environments were lauded for their ability to foster meaningful relationships between professors and students. Those relationships contributed to the accelerated achievement, often equivalent to a pre-2015 PhD, that students reached in just 18-24 months.
+                   The Mastery phase held a special place in the hearts of both educators and learners. Dedicated Mastery environments — part research lab, part creative studio, part collaborative workspace — were established in cities around the world. These spaces were designed to foster deep focus and meaningful mentorship, enabling learners to achieve levels of expertise that previously took decades, often in a fraction of the time.
                  </p>
               </div>
               <div>
-                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Elevation phase"/>
+                 <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Mastery phase"/>
               </div>
            </div>
 
            <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Activation (12-18 months)</h4>
+                 <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Integration (Ongoing, with intensive periods of 3-12 months)</h4>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   After learning how to acquire deep expertise in Elevation, students translated their knowledge to several real-world applications throughout the Activation phase. This allowed them to exercise and iterate upon their academic knowledge in the context of internships, service projects, high-caliber research, and entrepreneurship.
+                   The Integration phase focused on applying knowledge to real-world challenges. Students engaged in a series of global internships, research projects, and entrepreneurial ventures, putting their skills to the test in diverse cultural and professional contexts. This phase was characterized by its flexibility, allowing students to cycle between periods of intensive real-world application and further study.
                  </p>
                  <p className="text-sm text-gray-600 leading-relaxed">
-                   Activation was a time to apply skills and knowledge in a range of different modes. Students cherished the opportunity to try on career vectors while still within the context and explorational safety of the university.
+                   The boundaries between education and career became increasingly blurred, with lifelong learning becoming the norm. Integration was not a final step but an ongoing process — learners could return to Exploration or Mastery at any point in their lives, continuously expanding their capabilities and adapting to an ever-changing world.
                  </p>
               </div>
               <div>
-                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Activation phase"/>
+                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Integration phase"/>
               </div>
            </div>
         </section>
@@ -162,14 +161,15 @@ export default function PacedEducationPage({ goTo }: Props) {
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-4 text-sm text-gray-600">
-            <p>In Paced Education:</p>
+            <p>In Adaptive Paced Education:</p>
             <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Stanford moved from the four-year system to three phases that were individually paced: Calibration, Elevation, and Activation.</li>
-              <li>Students made better choices about what to study deeply, and graduated with mastery not just of what they learned, but also how they learned.</li>
-              <li>Faculty developed new Calibration micro-courses, allowing them to experiment with new offerings and better identify potential students for their Elevation phase.</li>
-              <li>New spaces were created for reflection, as well as rigorous professor-student learning.</li>
-              <li>Duck Syndrome became synonymous with bravery, resilience, and self-reflection.</li>
-              <li>Taste, try, reflect, achieve, fail, reflect, pursue, succeed, apply, apply, apply... then again: this was the experience of a Stanford student in the era of Paced education.</li>
+              <li>Artemis eliminated the concept of fixed academic years, allowing students to progress at their optimal pace.</li>
+              <li>Learning became a truly personalized experience, adaptable to individual needs, cultural contexts, and life circumstances.</li>
+              <li>The stress of arbitrary deadlines was replaced by a focus on genuine mastery and practical application.</li>
+              <li>Global collaboration became integral to the learning process, fostering cross-cultural understanding and innovation.</li>
+              <li>The education system became more inclusive, accommodating diverse learning styles and life situations.</li>
+              <li>Lifelong learning was normalized, with seamless transitions between periods of study and real-world application.</li>
+              <li>Explore, focus, master, apply, reflect, adapt... and repeat: this was the experience of an Artemis learner in the era of Adaptive Paced Education.</li>
             </ul>
           </div>
         </section>
@@ -182,15 +182,35 @@ export default function PacedEducationPage({ goTo }: Props) {
           </div>
 
           <div className="space-y-12">
-            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 67</h3>
+            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 23</h3>
             <div className="grid md:grid-cols-2 gap-12">
                <div className="space-y-4">
-                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Grit Bit &amp; Growth Grid</h4>
-                  <p className="italic text-xs text-gray-500">Organic Semiconductors, &amp; Molecular electronics, Acetate Applicator</p>
+                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Chronos: The Learning Rhythm Optimizer</h4>
+                  <p className="italic text-xs text-gray-500">Biometric Sensors, Cognitive Assessments, Holographic Interface</p>
                   <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                     <p>Applied as a temporary tattoo, even these early 1st generation Grit Bits were able to provide context around learning goals, helping students become self-aware, adaptable learners.</p>
-                     <p>The original Grit Bit tracked stress &amp; mood, physical &amp; social activity, and location. Detailed data were available only to the individual student, while a small amount of anonymous aggregate data were available to the university on an opt-in basis.</p>
-                     <p>Student Growth Grids (displayed here on Apple iPads&mdash;early &ldquo;tablet&rdquo; computers) were used to set learning goals, place them in context, and set activity reminders; allowing students to reflect on the conditions contributing to their learning progress and to experiment with new ways to learn and live.</p>
+                     <p>Chronos was the AI system at the heart of Adaptive Paced Education. Named after the Greek god of time, this advanced AI used a combination of biometric data, cognitive assessments, and learning analytics to determine each student&apos;s optimal learning rhythm.</p>
+                     <p>Students wore non-invasive biometric sensors monitoring sleep patterns, stress levels, and cognitive load. Chronos analyzed this data to continuously adjust learning schedules and content delivery, ensuring that each learner was always operating in their zone of peak receptivity.</p>
+                     <p>The holographic interface allowed students to visualize their learning journey as a dynamic, rhythmic pattern — a living map of their intellectual growth that pulsed and evolved in real time. Chronos didn&apos;t just optimize schedules; it helped learners understand themselves, transforming the invisible art of learning into something visible, tangible, and deeply personal.</p>
+                  </div>
+               </div>
+               <div className="space-y-4">
+                  <div className="aspect-video bg-gray-900 flex items-center justify-center text-white">
+                    <span className="text-sm">Video placeholder</span>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          <div className="space-y-12">
+            <h3 className="text-center font-bold text-xl uppercase tracking-widest text-gray-900">Article 56</h3>
+            <div className="grid md:grid-cols-2 gap-12">
+               <div className="space-y-4">
+                  <h4 className="font-bold italic uppercase tracking-wider text-sm">Global Synchrony Pods</h4>
+                  <p className="italic text-xs text-gray-500">Immersive Telepresence Chambers, Real-Time Translation AI, Haptic Feedback Systems</p>
+                  <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
+                     <p>Global Synchrony Pods were groundbreaking technology enabling truly immersive collaboration between students across the world, regardless of time zones or language barriers. Advanced telepresence technology created the illusion of being in the same physical space, while haptic feedback systems allowed students to manipulate virtual objects together.</p>
+                     <p>Real-time translation AI eliminated language barriers entirely, allowing students to communicate naturally in their native tongues while their peers heard seamless translations. The pods themselves were sleek, egg-shaped chambers lined with adaptive neural displays that could simulate any environment — from a bustling marketplace in Marrakech to a serene laboratory in Kyoto.</p>
+                     <p>Perhaps most remarkably, the Synchrony Pods learned from each session, gradually optimizing the collaborative experience for each group of students. They adjusted lighting, acoustics, and even virtual spatial arrangements to maximize creative flow and interpersonal connection, making global collaboration feel as natural as sitting across a table from a friend.</p>
                   </div>
                </div>
                <div className="space-y-4">
@@ -202,7 +222,7 @@ export default function PacedEducationPage({ goTo }: Props) {
           </div>
         </section>
       </div>
-      <ExploreAnotherFuture currentPage="paced-education" goTo={goTo} />
+      <ExploreAnotherFuture currentPage="adaptive-paced-education" goTo={goTo} />
     </>
   );
 }

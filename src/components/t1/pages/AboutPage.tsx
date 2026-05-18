@@ -11,16 +11,16 @@ export default function AboutPage({ goTo }: Props) {
     <>
       <HeroHeader 
         title="About"
-        description="The @Stanford Project, which ultimately generated the Stanford2025 exhibit and website you're reading now, was sparked at the d.school in Spring 2013."
+        description="The Artemis Project — a global collegiate university that dares to re-engineer the way humanity learns in a world of accelerating change."
         bgGradientClass="bg-gray-800"
       />
       
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-16">
         
         <section className="space-y-6 text-gray-700 leading-relaxed">
-           <p>Given the contemporary emphasis being placed on experimentation with online learning, we wondered what interesting changes were also starting to happen in the in-person, physical learning environment? To explore this question further, the project was funded by Dean of the School of Engineering, Jim Plummer.</p>
-           <p>The project included three classes, a series of workshops and the development of tools to support individuals who share the goal of experimenting towards a future Stanford, and an experienced project team that worked currently to synthesize and build on the ideas and research initiated by the students and project partners. Design work continued both inside and outside of class for a year, creating the foundation for the exhibit, which debuted in May 2014.</p>
-           <p>For media inquiries, please contact <a href="#" className="font-bold underline">debbe@debbestern.com</a></p>
+           <p>The Artemis Project was sparked by a fundamental question: what if the entire architecture of higher education was redesigned for the 21st century and beyond? While institutions around the world were experimenting at the margins — adding online courses, updating curricula, launching innovation labs — the Artemis Project asked whether the very foundations of the university needed reimagining. The pursuit of knowledge has long been the driving force behind the evolution of human civilization. Yet, as we stand on the precipice of the 21st century, the ivory tower of academia finds itself at a crossroads, faced with the daunting task of adapting to a rapidly changing world.</p>
+           <p>Recognizing the advent of the &apos;Homo Eruditus&apos; — the learned and adaptable human — the project sought to transition from archaic, Industrial Revolution-era educational models to dynamic, cross-disciplinary, and globally collaborative frameworks accessible to all. The project drew on insights from hundreds of students, faculty, administrators, and visionaries across multiple continents, combining design thinking, futures methodology, and rigorous academic research.</p>
+           <p>The project included intensive design workshops, global research expeditions, and the development of tools to support individuals who share the goal of experimenting towards a future of education that serves all of humanity. Design work continued for over a year, creating the foundation for the Artemis 2100 exhibit, which debuted as an immersive, globally accessible experience. The exhibit was staged as a time-travel journey, inviting participants to visit the year 2100 and look back at the paradigm shifts that &apos;happened&apos; — provocations designed not as predictions, but as invitations to experiment.</p>
         </section>
 
         <section className="space-y-12">
@@ -28,38 +28,36 @@ export default function AboutPage({ goTo }: Props) {
            
            <div className="space-y-10 text-sm">
              <div className="space-y-2">
-                <h3 className="font-bold uppercase tracking-wider text-gray-900">The @Stanford Core Team</h3>
-                <p className="text-gray-600 leading-relaxed">Tania Anaissie, Carissa Carter, Scott Doorley, Sarah Stein Greenberg, Ashish Goel, Stacey Gray, Seamus Harte, Jessica Munro &amp; Kelly Schmutte with Charlotte Burgess-Auburn, Jon Feiber, &amp; David Kelley</p>
+                <h3 className="font-bold uppercase tracking-wider text-gray-900">The Artemis Project Core Team</h3>
+                <p className="text-gray-600 leading-relaxed">Abraham Kyeyune, Founding Visionary &amp; Principal — with a global team of designers, educators, researchers, and technologists spanning multiple continents</p>
              </div>
 
              <div className="space-y-2">
-                <h3 className="font-bold uppercase tracking-wider text-gray-900">Our Students</h3>
-                <p className="text-gray-500 italic">who helped uncover important insights and sparked many of the key ideas in the exhibit</p>
-                <p className="text-gray-600 leading-relaxed">Andy Donohue, Anna Lena Schindl, Aparna Surendra, Borui Wang, Chad Kamisugi, Chris Barber, Chuck Allen, Claire Margolis, David Herman, Ellora Israni, Eric Smalls, Ethan Kessinger, Ivy Guo, Jason Randolph, Jennifer Lau, Jesse Day, Jingshu Chen, Julia Landauer, Katie Kirsch, Katie Topper, Kelsey Dang, Lemiece Zarka, Mariam Semaan, Maurizio Calo Caligaris, Natasha Prats, Nina Church, Pam Shime, Paolo Martin, Petr Johanes, Quyen Nguyen, Rachel Lee, Robert Ruhlandt, Seamus Harte, Shigeki Saito, Sohaib Shaikh, Tania Anaissie, Tara Viswanathan, &amp; Ximena Rivera</p>
+                <h3 className="font-bold uppercase tracking-wider text-gray-900">Our Scholars &amp; Contributors</h3>
+                <p className="text-gray-500 italic">who helped uncover important insights and sparked many of the key ideas in the project</p>
+                <p className="text-gray-600 leading-relaxed">Over 350 founding scholars from the inaugural cohort, alongside faculty, administrators, and community partners who contributed their perspectives and expertise</p>
              </div>
 
              <div className="space-y-2">
-                <h3 className="font-bold uppercase tracking-wider text-gray-900">Our Partners</h3>
-                <p className="text-gray-500 italic">who served as inspiration and helped us frame key design challenges &amp; activities</p>
+                <h3 className="font-bold uppercase tracking-wider text-gray-900">Our Global Partners</h3>
+                <p className="text-gray-500 italic">who served as inspiration and helped frame key design challenges &amp; activities</p>
                 <ul className="text-gray-600 leading-relaxed list-disc pl-5">
-                   <li>The Experience Institute</li>
-                   <li>Mozilla Foundation - Open Badges Project</li>
-                   <li>Stanford University Libraries</li>
-                   <li>Stanford University Residential Education</li>
-                   <li>Office of the Vice Provost for Online Learning</li>
+                   <li>The African Union Commission — Education Division</li>
+                   <li>UNESCO — Institute for Lifelong Learning</li>
+                   <li>Oxford University — Department of Education</li>
+                   <li>MIT Media Lab — Lifelong Kindergarten Group</li>
+                   <li>National University of Singapore — Institute for Applied Learning</li>
                 </ul>
              </div>
 
              <div className="space-y-2">
                 <h3 className="font-bold uppercase tracking-wider text-gray-900">Our Production Team</h3>
-                <p className="text-gray-600 leading-relaxed">Delicate Productions, Rachel Pearl, Tyler Winick</p>
+                <p className="text-gray-600 leading-relaxed">The Artemis Digital Studio — immersive design, technology, and storytelling</p>
              </div>
 
              <div className="space-y-2">
                 <h3 className="font-bold uppercase tracking-wider text-gray-900">And Special Thanks to...</h3>
-                <p className="text-gray-600 leading-relaxed">Everyone who gave their time, insights, perspectives, feedback, ideas, and critique to this project over the past year, including:</p>
-                <p className="text-gray-600 leading-relaxed">Aaron Buzay, Adina Glickman, Alex Scully, Alice Gardner, Alice Munoz-Shvarts, Alice Petty, Amy Collier, Andrew Todhunter, Arik Lifschitz, Bernd Girod, Brianne Hunt, Brie Bunge, Bruce Boyd, Candace Thille, Carissa Little, Chris Kong, Christina Medina, Colleen Cotter, Dan Klein, David Larsen, Dayo Mitchell, Deborah Golder, Deni Wicklund, Dennis Xu, Devika Patel, Devon Young, Elizabeth Hadly, Ellie Buckley, Emi Kolawole, Emily Goligoski, Eugene Korsunskiy, Glenn Katz, Gretchen Wustrack, Harmandeep Madra, Harry Elam, Helen Josephine, Jarreau Bowen, Jason Oppenheimer, Jim Campbell, Jim Plummer, Jo Boaler, Johan Ismael, Johan Olesund, John Edmark, John Mitchell, Joseph Jay Williams, Joseph Makokha, Katherine Preston, Katie Kirsch, Katie Krummeck, Katie Wang, Kim Kendall-Humphreys, Kyle Barnes, Kyle Keahey, Laura Breyfogle, Lewis Kaneshiro, Lucy LaPier, Luke Terra, Malgorzata Schaefer, Mark Grundberg, Martha Russell, Michael Rouan, Mike Yu, Mindy Hollar, Mitchell Stevens, Natalie Whearley, Paul Hegarty, Paul Marca, Paul Yock, Paul Zenke, Peter Mangiafico, Rachel our UPS Delivery Superstar who would have driven to Kentucky help us if we&apos;d asked her, Richard Shaw, Rob Reich, Robert Prakash, Robert Siegel, Roberta Katz, Robyn Dunbar, Ronnie Fields, Sally Mentzer, Sarah Lester, Sarah Truebe, Scott Calvert, Scott Witthoft, Shari Palmer, Skybox Imaging, Surya Narayanan, Suzanne M Gaulocher, Taylor Cone, Taylor Lemmon, Tim Stearns, Tom Maiorana, Victor Saad, Zac Sargeant</p>
-                <p className="text-gray-600 leading-relaxed italic mt-4">...and the many other experimenters and innovators in this field who inspired us along the way!</p>
+                <p className="text-gray-600 leading-relaxed">Everyone who gave their time, insights, perspectives, feedback, ideas, and critique to this project — including the hundreds of students, faculty, and community members who participated in workshops, design sessions, and pilot programs around the world. And to the visionaries, experimenters, and innovators in education who inspired us along the way — those who dared to imagine that another university is possible.</p>
              </div>
            </div>
         </section>
