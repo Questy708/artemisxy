@@ -5,12 +5,12 @@ import { cn, SectionHeading } from '../Shared';
 import { Play } from 'lucide-react';
 
 const SECTIONS = [
-  { id: "intro", title: "Learning & Living at Artemis", desc: "An exploration of educational experiences for the future", img: "https://images.pexels.com/photos/6238198/pexels-photo-6238198.jpeg?auto=compress&cs=tinysrgb&w=2000" },
-  { id: "context-1", title: "A Complex and Special Moment", desc: "", img: "https://images.pexels.com/photos/5940845/pexels-photo-5940845.jpeg?auto=compress&cs=tinysrgb&w=2000" },
-  { id: "context-3-1-1", title: "Our Process", desc: "", img: "https://images.pexels.com/photos/5940839/pexels-photo-5940839.jpeg?auto=compress&cs=tinysrgb&w=2000" },
-  { id: "context-3-1-1-1", title: "Dimensions to Spark Experiments", desc: "", img: "https://images.pexels.com/photos/6238027/pexels-photo-6238027.jpeg?auto=compress&cs=tinysrgb&w=2000" },
-  { id: "context-4", title: "Moments in Time", desc: "", img: "https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=2000" },
-  { id: "fast-forward", title: "Let's fast forward to a possible future...", desc: "What might the university experience be then?", img: "https://images.pexels.com/photos/8872471/pexels-photo-8872471.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "intro", title: "Learning & Living at Artemis", desc: "An exploration of educational experiences for the future", img: "https://images.pexels.com/photos/5940713/pexels-photo-5940713.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-1", title: "A Complex and Special Moment", desc: "", img: "https://images.pexels.com/photos/31367498/pexels-photo-31367498.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-3-1-1", title: "Our Process", desc: "", img: "https://images.pexels.com/photos/5940844/pexels-photo-5940844.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-3-1-1-1", title: "Dimensions to Spark Experiments", desc: "", img: "https://images.pexels.com/photos/6238029/pexels-photo-6238029.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-4", title: "Moments in Time", desc: "", img: "https://images.pexels.com/photos/8872466/pexels-photo-8872466.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "fast-forward", title: "Let's fast forward to a possible future...", desc: "What might the university experience be then?", img: "https://images.pexels.com/photos/7235894/pexels-photo-7235894.jpeg?auto=compress&cs=tinysrgb&w=2000" },
 ];
 
 interface HomePageProps {
@@ -164,7 +164,7 @@ export default function HomePage({ goTo }: HomePageProps) {
           
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden border border-gray-300 max-w-4xl">
               <img
-                src="https://images.pexels.com/photos/6238198/pexels-photo-6238198.jpeg?auto=compress&cs=tinysrgb&w=2000"
+                src="https://images.pexels.com/photos/5940713/pexels-photo-5940713.jpeg?auto=compress&cs=tinysrgb&w=2000"
                 alt="Artemis 2100 Experience"
                 className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
               />
@@ -220,13 +220,13 @@ export default function HomePage({ goTo }: HomePageProps) {
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8 w-full font-serif text-white">
                 <button onClick={() => goTo('open-loop-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.pexels.com/photos/5940840/pexels-photo-5940840.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Infinite Learning Continuum" />
+                   <img src="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Infinite Learning Continuum" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-sm md:text-base font-bold italic tracking-wide">Infinite Learning<br/>Continuum</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('adaptive-paced-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.pexels.com/photos/6238027/pexels-photo-6238027.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
+                   <img src="https://images.pexels.com/photos/6238029/pexels-photo-6238029.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-sm md:text-base font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
                    </div>
@@ -244,13 +244,13 @@ export default function HomePage({ goTo }: HomePageProps) {
                    </div>
                 </button>
                 <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
+                   <img src="https://images.pexels.com/photos/5940844/pexels-photo-5940844.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-sm md:text-base font-bold italic tracking-wide">Centers of<br/>Inquiry</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('darwin-voyage')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.pexels.com/photos/18702957/pexels-photo-18702957.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The World as Campus" />
+                   <img src="https://images.pexels.com/photos/36622095/pexels-photo-36622095.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The World as Campus" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-sm md:text-base font-bold italic tracking-wide">The World as<br/>Campus</span>
                    </div>

@@ -109,7 +109,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
       <HeroHeader
         title="The World as Campus"
         description="In 2100, we look back at how two radical ideas — Minerva's global rotation that dissolved the campus into cities, and Darwin's five-year voyage that dissolved the classroom into the planet — merged to create Artemis's most transformative dimension: the Voyage Rotation."
-        bgImage="https://images.pexels.com/photos/18702957/pexels-photo-18702957.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        bgImage="https://images.pexels.com/photos/36622095/pexels-photo-36622095.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 
@@ -121,7 +121,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=2500"
+              src="https://images.pexels.com/photos/36622095/pexels-photo-36622095.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="The World as Campus"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -323,11 +323,11 @@ export default function DarwinVoyagePage({ goTo }: Props) {
                 <div className="bg-gray-100 aspect-video overflow-hidden border border-gray-200">
                   <img 
                     src={
-                      idx === 0 ? "https://images.pexels.com/photos/6238198/pexels-photo-6238198.jpeg?auto=compress&cs=tinysrgb&w=800" :
-                      idx === 1 ? "https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=800" :
-                      idx === 2 ? "https://images.pexels.com/photos/5940839/pexels-photo-5940839.jpeg?auto=compress&cs=tinysrgb&w=800" :
-                      idx === 3 ? "https://images.pexels.com/photos/5940845/pexels-photo-5940845.jpeg?auto=compress&cs=tinysrgb&w=800" :
-                      "https://images.pexels.com/photos/6238027/pexels-photo-6238027.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      idx === 0 ? "https://images.pexels.com/photos/31792594/pexels-photo-31792594.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 1 ? "https://images.pexels.com/photos/29889182/pexels-photo-29889182.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 2 ? "https://images.pexels.com/photos/33715477/pexels-photo-33715477.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 3 ? "https://images.pexels.com/photos/35762336/pexels-photo-35762336.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      "https://images.pexels.com/photos/35228123/pexels-photo-35228123.jpeg?auto=compress&cs=tinysrgb&w=800"
                     }
                     alt={leg.name}
                     className="w-full h-full object-cover grayscale opacity-60" 
