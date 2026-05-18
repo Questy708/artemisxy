@@ -189,25 +189,27 @@ export default function HomePage({ goTo }: HomePageProps) {
       </ParallaxSection>
 
       {/* Fast Forward */}
-      <div id={SECTIONS[5].id} className="w-full relative shadow-[0_-15px_30px_rgba(0,0,0,0.1)]">
-        <div style={{ clipPath: "inset(0 0 0 0)" }} className="relative w-full min-h-[50vh] md:min-h-[70vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-[#461e68]">
-          <img
-            src={SECTIONS[5].img}
-            alt={SECTIONS[5].title}
-            className="fixed top-0 left-0 w-[100vw] h-[100vh] object-[center_20%] object-cover pointer-events-none -z-10 opacity-40 mix-blend-overlay"
-          />
-          <div className="absolute inset-0 bg-transparent pointer-events-none -z-10" />
-          <div className="relative z-10 p-6 md:p-12 w-full max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4">
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] drop-shadow-md">
-              {SECTIONS[5].title}
-            </h2>
-            <p className="text-xl md:text-2xl font-serif text-gray-100 italic drop-shadow-md">
-              {SECTIONS[5].desc}
-            </p>
+      <section id={SECTIONS[5].id} className="relative w-full overflow-hidden">
+        <div className="max-w-[1600px] mx-auto">
+          <div style={{ clipPath: "inset(0 0 0 0)" }} className="relative w-full min-h-[50vh] md:min-h-[70vh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#461e68]">
+            <img
+              src={SECTIONS[5].img}
+              alt={SECTIONS[5].title}
+              className="fixed top-0 left-0 w-[100vw] h-[100vh] object-[center_20%] object-cover pointer-events-none -z-10 opacity-40 mix-blend-overlay"
+            />
+            <div className="absolute inset-0 bg-transparent pointer-events-none -z-10" />
+            <div className="relative z-10 p-6 md:p-12 w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] drop-shadow-md">
+                {SECTIONS[5].title}
+              </h2>
+              <p className="text-xl md:text-2xl font-serif text-gray-100 italic drop-shadow-md">
+                {SECTIONS[5].desc}
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="bg-white w-full relative z-20 shadow-[0_-15px_30px_rgba(0,0,0,0.1)]">
+        <div className="bg-white w-full relative z-20">
           <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
             <div className="space-y-12">
               <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Choose a future to explore.</h2>
@@ -241,7 +243,7 @@ export default function HomePage({ goTo }: HomePageProps) {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
   );
@@ -249,34 +251,36 @@ export default function HomePage({ goTo }: HomePageProps) {
 
 function ParallaxSection({ section, children }: { section: typeof SECTIONS[0]; children: React.ReactNode }) {
   return (
-    <div id={section.id} className="w-full relative shadow-[0_-15px_30px_rgba(0,0,0,0.15)] bg-white">
-      <div
-        className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden bg-gray-900"
-        style={{ clipPath: "inset(0 0 0 0)" }}
-      >
-        <img
-          src={section.img}
-          alt={section.title}
-          className="fixed top-0 left-0 w-[100vw] h-[100vh] object-cover pointer-events-none -z-10 opacity-70"
-        />
-        <div className="absolute inset-0 bg-black/40 pointer-events-none -z-10" />
-        <div className="relative z-10 p-6 md:p-12 w-full max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4 pt-24 pb-12">
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] uppercase drop-shadow-lg">
-            {section.title}
-          </h2>
-          {section.desc && (
-            <p className="text-xl md:text-3xl font-serif text-gray-200 mt-6 italic drop-shadow-md">
-              {section.desc}
-            </p>
-          )}
+    <section id={section.id} className="relative w-full overflow-hidden bg-white">
+      <div className="max-w-[1600px] mx-auto">
+        <div
+          className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center text-center overflow-hidden bg-gray-900"
+          style={{ clipPath: "inset(0 0 0 0)" }}
+        >
+          <img
+            src={section.img}
+            alt={section.title}
+            className="fixed top-0 left-0 w-[100vw] h-[100vh] object-cover pointer-events-none -z-10 opacity-70"
+          />
+          <div className="absolute inset-0 bg-black/40 pointer-events-none -z-10" />
+          <div className="relative z-10 p-6 md:p-12 w-full max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-20 space-y-4 pt-24 pb-12">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-[0.10em] uppercase drop-shadow-lg">
+              {section.title}
+            </h2>
+            {section.desc && (
+              <p className="text-xl md:text-3xl font-serif text-gray-200 mt-6 italic drop-shadow-md">
+                {section.desc}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="bg-white w-full relative z-20 shadow-[0_-15px_30px_rgba(0,0,0,0.15)]">
+      <div className="bg-white w-full relative z-20">
         <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24">
           {children}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
