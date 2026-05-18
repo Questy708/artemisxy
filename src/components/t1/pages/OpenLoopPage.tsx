@@ -15,7 +15,7 @@ export default function OpenLoopPage({ goTo }: Props) {
         description="We look back from 2100 at the era when Stanford brought an end to a society of alumni in favor of lifetime learning."
         bgGradientClass="bg-gradient-to-tr from-[#66B83B] via-[#7BCE44] to-[#4A9F2F]"
       />
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         <section className="space-y-6">
           <SectionHeading>A Summary</SectionHeading>
           <p className="text-sm text-gray-600">

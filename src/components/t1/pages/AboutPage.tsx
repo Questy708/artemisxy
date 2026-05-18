@@ -15,7 +15,7 @@ export default function AboutPage({ goTo }: Props) {
         bgGradientClass="bg-gray-800"
       />
       
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-16">
+      <div className="max-w-3xl mx-auto px-6 py-24 space-y-16">
         
         <section className="space-y-6 text-gray-700 leading-relaxed">
            <p>Given the contemporary emphasis being placed on experimentation with online learning, we wondered what interesting changes were also starting to happen in the in-person, physical learning environment? To explore this question further, the project was funded by Dean of the School of Engineering, Jim Plummer.</p>
@@ -24,7 +24,7 @@ export default function AboutPage({ goTo }: Props) {
         </section>
 
         <section className="space-y-12">
-           <h2 className="text-3xl font-bold max-w-3xl text-gray-900 border-b pb-2">Acknowledgements</h2>
+           <h2 className="text-3xl font-bold max-w-2xl text-gray-900 border-b pb-2">Acknowledgements</h2>
            
            <div className="space-y-10 text-sm">
              <div className="space-y-2">

@@ -15,7 +15,7 @@ export default function AxisFlipPage({ goTo }: Props) {
         description="A view from 2100 of the era in which Stanford flipped the axes of knowledge and competency."
         bgGradientClass="bg-[#461e68]"
       />
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         
         <section className="space-y-6">
           <SectionHeading>The Summary</SectionHeading>

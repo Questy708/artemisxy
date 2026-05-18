@@ -14,9 +14,9 @@ export default function BuildPage({ goTo }: Props) {
         description="Resources for designing the future of living & learning where you are"
         bgGradientClass="bg-[#d92231]"
       />
-      <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
+      <div className="max-w-5xl mx-auto px-6 py-16 space-y-24">
         
-        <section className="space-y-6 max-w-[1000px]">
+        <section className="space-y-6 max-w-3xl">
           <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">Why Future Stanford?</h2>
           <div className="space-y-4 text-sm text-gray-600 leading-relaxed font-serif">
              <p className="italic">We are in a moment of disruption and change catalyzed in part by the growth of online learning and educational technology. But what about the physical learning environment?</p>
@@ -45,7 +45,7 @@ export default function BuildPage({ goTo }: Props) {
 
         <section className="space-y-12">
            <h2 className="text-3xl font-bold text-gray-900 border-b pb-2 w-fit italic">How to Use This Toolkit</h2>
-           <p className="text-gray-600 max-w-3xl">We made this toolkit to help you build off of four provocations that can inspire exploration of what the future of living and learning on campus might be. This toolkit has three pieces that you can download below, titled <strong>Reflect</strong>, <strong>Imagine</strong>, and <strong>Try</strong>.</p>
+           <p className="text-gray-600 max-w-2xl">We made this toolkit to help you build off of four provocations that can inspire exploration of what the future of living and learning on campus might be. This toolkit has three pieces that you can download below, titled <strong>Reflect</strong>, <strong>Imagine</strong>, and <strong>Try</strong>.</p>
            
            <div className="grid md:grid-cols-3 gap-8">
               <div className="space-y-4 text-center">
