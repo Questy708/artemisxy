@@ -19,7 +19,7 @@ const voyageLegs = [
     name: 'The Indian Ocean Circuit',
     region: 'East Africa → South Asia → Southeast Asia',
     years: '2043–2051',
-    desc: 'Darwin\'s Beagle never sailed the Indian Ocean, but his intellectual descendants did. The second rotation followed the monsoon routes that for millennia connected Zanzibar to Kerala, Mogadishu to Mumbai, Mombasa to Malacca. Learners studied how the ocean — not the land — was the true connective tissue of civilizations. In Zanzibar, they mapped the remains of the spice trade. In Kerala, they investigated how ancient mathematical traditions prefigured modern computing. In Jakarta, they witnessed the collision of megacity growth and subsidence — a civilization building upward while its ground sank below sea level.',
+    desc: 'The second rotation followed the monsoon routes that for millennia connected Zanzibar to Kerala, Mogadishu to Mumbai, Mombasa to Malacca. Learners studied how the ocean — not the land — was the true connective tissue of civilizations. In Zanzibar, they mapped the remains of the spice trade and the architecture of cosmopolitan coexistence. In Kerala, they investigated how ancient mathematical traditions prefigured modern computing. In Jakarta, they witnessed the collision of megacity growth and subsidence — a civilization building upward while its ground sank below sea level.',
     anchor: 'Zanzibar · Kochi · Jakarta',
     duration: '12–24 months',
   },
@@ -37,7 +37,7 @@ const voyageLegs = [
     name: 'The Continental Traverse',
     region: 'Southern Africa → Andes → Mediterranean',
     years: '2061–2070',
-    desc: 'The fourth rotation crossed landmasses — tracing the Great Rift Valley from Johannesburg to Addis Ababa, scaling the Andes from Patagonia to Bogotá, and navigating the Mediterranean from Tangier to Athens. Darwin had traversed the Andes and been transformed. Artemis learners were transformed too: by the sheer verticality of human adaptation, by the ingenuity of communities building at altitude, by the coexistence of ancient agricultural wisdom and quantum computing labs in the same valley. The Continental Traverse taught that the world\'s most important knowledge is not in any one place — it is in the movement between places.',
+    desc: 'The fourth rotation crossed landmasses — tracing the Great Rift Valley from Johannesburg to Addis Ababa, scaling the Andes from Patagonia to Bogotá, and navigating the Mediterranean from Tangier to Athens. Learners were transformed by the sheer verticality of human adaptation, by the ingenuity of communities building at altitude, by the coexistence of ancient agricultural wisdom and quantum computing labs in the same valley. The Continental Traverse taught that the world\'s most important knowledge is not in any one place — it is in the movement between places.',
     anchor: 'Johannesburg → Addis Ababa · Patagonia → Bogotá · Tangier → Athens',
     duration: '18–36 months',
   },
@@ -46,33 +46,56 @@ const voyageLegs = [
     name: 'The Circumpolar Return',
     region: 'Arctic → Antarctic → Equator',
     years: '2071–2082',
-    desc: 'The final rotation went where Darwin never could — the poles. In Svalbard, learners studied the Global Seed Vault and the ethics of preserving biodiversity in frozen chambers. In Antarctica, they witnessed the only continent governed by scientific treaty rather than sovereign claim — a living experiment in collective governance. In the equatorial return, they came full circle, applying polar lessons to tropical urgency. The Circumpolar Return was the most demanding rotation — extreme conditions, extreme isolation, extreme beauty. Those who completed it carried a perspective that no classroom could ever provide: the view from above, the planet as a single system, the fragility and resilience of a world learning to sustain itself.',
+    desc: 'The final rotation went to the poles. In Svalbard, learners studied the Global Seed Vault and the ethics of preserving biodiversity in frozen chambers. In Antarctica, they witnessed the only continent governed by scientific treaty rather than sovereign claim — a living experiment in collective governance. In the equatorial return, they came full circle, applying polar lessons to tropical urgency. The Circumpolar Return was the most demanding rotation — extreme conditions, extreme isolation, extreme beauty. Those who completed it carried a perspective that no classroom could ever provide: the view from above, the planet as a single system, the fragility and resilience of a world learning to sustain itself.',
     anchor: 'Svalbard · McMurdo · Quito',
     duration: '12–24 months',
   },
 ];
 
-/* ─── Darwin's Principles Adapted ─── */
-const darwinPrinciples = [
+/* ─── Two Lineages, One Framework ─── */
+const dualLineage = [
   {
-    principle: 'Observation Before Theory',
-    darwin: 'Darwin spent 5 years observing before publishing a single word. The Voyage Rotation demands the same: learners must spend a minimum of three months in immersive observation at each anchor before proposing any hypothesis or intervention.',
-    artemis: 'At Artemis, this became the "Slow Knowing" doctrine — the radical insistence that understanding must precede action, that the urgency to solve must never outpace the commitment to comprehend.',
+    source: 'Minerva\'s Global Rotation',
+    icon: 'M',
+    principles: [
+      { name: 'No Campus, Only Cities', desc: 'Minerva University proved that a university could exist without a campus — its students rotated through seven cities over four years, each location becoming both classroom and laboratory. The city was not a backdrop; it was the curriculum. Artemis adopted this principle and scaled it: not seven cities, but entire oceanic and continental circuits, each rotation leg lasting up to three years rather than a semester.' },
+      { name: 'Sequential Immersion', desc: 'Minerva\'s rotation was not random — each city was chosen to build on the previous one, creating a cumulative learning arc. Artemis refined this into the Voyage Rotation: the Atlantic Awakening preceded the Indian Ocean Circuit because the history of forced migration demanded understanding before the study of voluntary trade routes. The Pacific followed because isolation could only be understood after connection. The sequence was pedagogy.' },
+      { name: 'Location as Pedagogy', desc: 'At Minerva, the city was not supplementary to the curriculum — it was integral. Students in Berlin studied the architecture of memory; students in Buenos Aires examined the economics of recovery. Artemis made this principle absolute: each anchor city was selected because the problems it contained could not be understood anywhere else. Lagos could not teach what Kyoto taught. Svalbard could not teach what Salvador taught. The location was the lesson.' },
+    ],
   },
   {
-    principle: 'Variation as Insight',
-    darwin: 'Darwin\'s breakthrough came not from finding what was the same, but from cataloguing what was different — the finches, the tortoises, the mockingbirds. Variation was not noise; it was signal.',
-    artemis: 'The Voyage Rotation trains learners to seek variation across cultures, ecosystems, and knowledge systems. A solution that works in Quito may fail in Lagos — and that failure is data, not defeat.',
+    source: 'Darwin\'s Voyages',
+    icon: 'D',
+    principles: [
+      { name: 'Observation Before Theory', desc: 'Darwin spent five years observing before publishing a single word. The Voyage Rotation demanded the same: learners must spend a minimum of three months in immersive observation at each anchor before proposing any hypothesis or intervention. At Artemis, this became the "Slow Knowing" doctrine — the radical insistence that understanding must precede action, that the urgency to solve must never outpace the commitment to comprehend.' },
+      { name: 'Variation as Insight', desc: 'Darwin\'s breakthrough came not from finding what was the same, but from cataloguing what was different — the finches, the tortoises, the mockingbirds. Variation was not noise; it was signal. The Voyage Rotation trained learners to seek variation across cultures, ecosystems, and knowledge systems. A solution that works in Quito may fail in Lagos — and that failure is data, not defeat.' },
+      { name: 'The Voyage as Method', desc: 'Darwin did not understand natural selection in a laboratory. He understood it on a ship, in a storm, on a volcanic island, in conversation with a gaúcho. The method was the journey itself. The Voyage Rotation was not preparation for the real world — it was the real world. Every rotation leg produced publishable research, deployable solutions, and irrevocably changed perspectives.' },
+    ],
+  },
+];
+
+/* ─── The Rotation Protocol ─── */
+const rotationProtocol = [
+  {
+    phase: 'A',
+    name: 'Docking',
+    duration: '3–6 months',
+    desc: 'Learners arrive at an anchor city and spend a minimum of three months in immersive observation. No interventions, no proposals, no solutions. The Docking phase demands humility: listen, watch, map, question. Live in the community. Eat the food. Learn the language — not Duolingo proficiency, but the language of the streets, the markets, the council chambers. The Docking phase produces a Field Notebook — a detailed ethnographic and ecological record that becomes the foundation for all subsequent work.',
+    output: 'Field Notebook',
   },
   {
-    principle: 'Adaptation as Process, Not Destination',
-    darwin: 'Evolution has no endpoint. Species do not arrive at perfection — they arrive at sufficiency for the current environment, and must adapt again when conditions change.',
-    artemis: 'The World as Campus teaches that education is not a journey toward a final state of knowledge but a continuous process of adaptation. Learners do not "arrive" — they learn to move.',
+    phase: 'B',
+    name: 'Surveying',
+    duration: '3–9 months',
+    desc: 'With the Field Notebook as guide, learners begin systematic inquiry — partnering with local institutions, conducting research, testing hypotheses against the reality they have now come to understand. Surveying teams are always mixed: at least one local collaborator for every visiting learner. The power dynamic is explicit: local partners hold veto authority over any project. Surveying produces Working Papers — draft analyses that must be reviewed by both academic and community panels before proceeding.',
+    output: 'Working Papers',
   },
   {
-    principle: 'The Voyage as Method',
-    darwin: 'Darwin did not understand natural selection in a laboratory. He understood it on a ship, in a storm, on a volcanic island, in conversation with a gaúcho. The method was the journey itself.',
-    artemis: 'The Voyage Rotation is not preparation for the real world — it is the real world. Every rotation leg produces publishable research, deployable solutions, and irrevocably changed perspectives.',
+    phase: 'C',
+    name: 'Specimen',
+    duration: '3–9 months',
+    desc: 'The final phase produces a Specimen — a concrete, deployable contribution. It might be a technology, a policy framework, a work of art, a community infrastructure project, or a published research paper. Every Specimen must meet dual criteria: epistemic rigour (it must be true) and civic impact (it must matter). Specimens are presented at the annual Voyage Convocation — a gathering of all rotating learners, faculty, and community partners that became one of the most important knowledge events in the world.',
+    output: 'Voyage Convocation',
   },
 ];
 
@@ -85,20 +108,20 @@ export default function DarwinVoyagePage({ goTo }: Props) {
     <>
       <HeroHeader
         title="The World as Campus"
-        description="In 2100, we look back at how Charles Darwin's five-year voyage on HMS Beagle became the blueprint for Artemis's most radical innovation: the Voyage Rotation — a global circumnavigation that replaced the classroom with the planet itself."
-        bgImage="https://images.pexels.com/photos/1000653/pexels-photo-1000653.jpeg?auto=compress&cs=tinysrgb&w=2000"
+        description="In 2100, we look back at how two radical ideas — Minerva's global rotation that dissolved the campus into cities, and Darwin's five-year voyage that dissolved the classroom into the planet — merged to create Artemis's most transformative dimension: the Voyage Rotation."
+        bgImage="https://images.pexels.com/photos/18702957/pexels-photo-18702957.jpeg?auto=compress&cs=tinysrgb&w=2000"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 
         {/* ── Summary ── */}
         <section className="space-y-6">
           <SectionHeading>A Summary</SectionHeading>
-          <p className="text-sm text-gray-600">
-            Step into a virtual time capsule to discover how Artemis replaced the campus with the planet — the Voyage Rotation, a five-leg global circumnavigation inspired by Charles Darwin&rsquo;s legendary five-year journey aboard HMS Beagle, that transformed every Artemis learner into a witness, a participant, and a contributor to the world&rsquo;s most urgent challenges.
+          <p className="text-sm text-gray-600 leading-relaxed">
+            Step into a virtual time capsule to discover how Artemis replaced the campus with the planet itself. The Voyage Rotation — a five-leg global circumnavigation born from the merger of two lineages — transformed every Artemis learner into a witness, a participant, and a contributor to the world&rsquo;s most urgent challenges. From Minerva, it inherited the structural logic of sequential rotation: the city as curriculum, the absence of a campus, the insistence that place shapes understanding. From Darwin, it inherited the methodological logic of observational voyage: slow knowing before swift action, variation as insight, the journey itself as epistemology.
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.pexels.com/photos/1000653/pexels-photo-1000653.jpeg?auto=compress&cs=tinysrgb&w=2500"
+              src="https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="The World as Campus"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -114,6 +137,38 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
         </section>
 
+        {/* ── Two Lineages ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Two Lineages, One Framework</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
+            The World as Campus was not the invention of a single mind. It was the convergence of two radical educational traditions — one that reimagined where learning happens, and one that reimagined how learning happens. Minerva University proved that the campus could be dissolved into cities; Darwin proved that the classroom could be dissolved into the voyage. Artemis merged both into a single, unified framework: the Voyage Rotation.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {dualLineage.map((lineage) => (
+              <div key={lineage.source} className="border border-gray-200 p-8 space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-[#8A0000] flex items-center justify-center text-white text-sm font-bold italic">
+                    {lineage.icon}
+                  </div>
+                  <h4 className="font-bold italic uppercase tracking-wider text-sm text-[#8A0000]">{lineage.source}</h4>
+                </div>
+                <div className="space-y-6">
+                  {lineage.principles.map((p) => (
+                    <div key={p.name} className="space-y-2">
+                      <h5 className="font-bold text-sm text-gray-900">{p.name}</h5>
+                      <p className="text-xs text-gray-600 leading-relaxed">{p.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── Historical Notes ── */}
         <section className="space-y-12">
           <div className="space-y-4">
@@ -123,21 +178,21 @@ export default function DarwinVoyagePage({ goTo }: Props) {
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-4">
-              <h4 className="font-bold italic uppercase tracking-wider text-sm">The Setting</h4>
+              <h4 className="font-bold italic uppercase tracking-wider text-sm">The Minerva Provocation</h4>
               <p className="font-bold italic text-sm text-gray-800 leading-relaxed">
-                In the early 21st century, the world&rsquo;s most pressing challenges — climate collapse, pandemics, democratic erosion, mass migration — were fundamentally global. Yet education remained stubbornly local: a campus, a classroom, a postcode. The university was a point on the map when the problems were the map itself.
+                In 2014, Minerva University launched with a provocation: what if a university had no campus at all? Its students rotated through seven cities — San Francisco, Berlin, Buenos Aires, Seoul, Hyderabad, London, Taipei — living and learning in each for a semester. There were no lecture halls, no quad, no library building. The city was the campus. The world was the infrastructure.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Students graduated with degrees but without a lived understanding of the world their degrees were meant to serve. International exposure, when it existed, came as semester-abroad tourism — a curated taste of elsewhere, never the full meal. The gap between the scale of the world&rsquo;s problems and the scale of the educational experience had become unconscionable.
+                Minerva proved that the campus was not a necessity but an inheritance — a legacy of medieval monasticism that had calcified into architectural assumption. Students who rotated through cities developed a kind of cultural fluency that no residential campus could provide. They learned to navigate difference, to adapt to unfamiliar systems, to see their own assumptions reflected in the mirror of other cultures. But Minerva&rsquo;s rotations were brief — a semester per city — and its students remained, in a sense, visitors. The Artemis Project asked: what would happen if the rotation were not a semester but years? What if learners were not visitors but witnesses?
               </p>
             </div>
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm">The Darwin Provocation</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                In 1831, a 22-year-old naturalist boarded HMS Beagle and spent five years circumnavigating the globe. Charles Darwin did not discover evolution in a laboratory at Cambridge. He discovered it in the volcanic soils of the Galápagos, in the fossils of Patagonia, in the coral atolls of the Pacific. The voyage was not supplementary to his education — it was his education.
+                In 1831, a 22-year-old naturalist boarded HMS Beagle and spent five years circumnavigating the globe. Charles Darwin did not discover evolution in a laboratory at Cambridge. He discovered it in the volcanic soils of the Galápagos, in the fossils of Patagonia, in the coral atolls of the Pacific. The voyage was not supplementary to his education — it was his education. The method of knowing was the journey itself.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                The Artemis Project asked a provocation that became a dimension: what if every learner&rsquo;s education included a voyage of comparable scope and transformative potential? Not a field trip. Not a gap year. A structured, rigorous, multi-year global rotation — the planet as campus, the world as curriculum, every continent a classroom.
+                But Darwin&rsquo;s voyage was solitary, unstructured, and privileged — the observations of a single man from a single empire. The Artemis Project asked another provocation: what if the voyage were collective, structured, and equitable? What if every learner&rsquo;s education included a voyage of comparable scope, but designed with the methodological rigour and ethical framework that Darwin&rsquo;s era lacked? What if the Beagle carried not one observer but hundreds, from every continent, and the voyage produced not just theory but tangible contributions to the communities it touched?
               </p>
             </div>
           </div>
@@ -149,7 +204,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
             <SectionHeading>The Voyage Rotation</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <p className="text-sm text-gray-600 max-w-3xl">Five legs. Five years. Every learner completes at least two. Each leg follows the routes of the Beagle — and the routes the Beagle never took, into the oceans and continents that Darwin&rsquo;s era could not imagine.</p>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Five legs. Five years. Every learner completes at least two. Each leg combines Minerva&rsquo;s sequential immersion — the city as curriculum — with Darwin&rsquo;s observational methodology — the voyage as method. The routes follow the arcs of history and the circuits of contemporary challenge: the Atlantic world, the Indian Ocean, the Pacific, the continental interiors, the poles.</p>
 
           {/* SVG Route Map */}
           <div className="w-full max-w-4xl mx-auto border border-gray-200 bg-gray-50 p-4">
@@ -248,7 +303,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
 
           <div className="space-y-16">
-            {voyageLegs.map((leg) => (
+            {voyageLegs.map((leg, idx) => (
               <div key={leg.num} className="grid md:grid-cols-2 gap-12">
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
@@ -267,7 +322,13 @@ export default function DarwinVoyagePage({ goTo }: Props) {
                 </div>
                 <div className="bg-gray-100 aspect-video overflow-hidden border border-gray-200">
                   <img 
-                    src="https://images.pexels.com/photos/1000653/pexels-photo-1000653.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                    src={
+                      idx === 0 ? "https://images.pexels.com/photos/6238198/pexels-photo-6238198.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 1 ? "https://images.pexels.com/photos/5301733/pexels-photo-5301733.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 2 ? "https://images.pexels.com/photos/5940839/pexels-photo-5940839.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      idx === 3 ? "https://images.pexels.com/photos/5940845/pexels-photo-5940845.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                      "https://images.pexels.com/photos/6238027/pexels-photo-6238027.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    }
                     alt={leg.name}
                     className="w-full h-full object-cover grayscale opacity-60" 
                   />
@@ -277,60 +338,28 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
         </section>
 
-        {/* ── Darwin's Principles Adapted ── */}
+        {/* ── The Rotation Protocol ── */}
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>Darwin&rsquo;s Principles, Adapted</SectionHeading>
+            <SectionHeading>The Rotation Protocol</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <p className="text-sm text-gray-600 max-w-3xl">The Voyage Rotation was not merely inspired by Darwin — it was structurally governed by four principles extracted from his method. Each principle was translated from natural science into educational practice.</p>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Every Voyage Rotation follows the Rotation Protocol — a structured methodology that merges Minerva&rsquo;s location-based pedagogy with Darwin&rsquo;s observational discipline. The protocol ensures that the voyage produces rigorous knowledge, not mere travel, and that every city becomes a true classroom, not a postcard.</p>
 
-          <div className="grid md:grid-cols-2 gap-8 mt-8">
-            {darwinPrinciples.map((dp) => (
-              <div key={dp.principle} className="border border-gray-200 p-6 space-y-4 hover:border-[#8A0000] transition-colors">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-[#8A0000]">{dp.principle}</h4>
-                <div className="space-y-3">
-                  <div>
-                    <span className="text-[9px] font-mono text-gray-400 uppercase tracking-wider">Darwin&rsquo;s Method</span>
-                    <p className="text-xs text-gray-600 leading-relaxed mt-1">{dp.darwin}</p>
-                  </div>
-                  <div className="border-t border-gray-100 pt-3">
-                    <span className="text-[9px] font-mono text-[#8A0000] uppercase tracking-wider">Artemis Adaptation</span>
-                    <p className="text-xs text-gray-600 leading-relaxed mt-1">{dp.artemis}</p>
-                  </div>
+          <div className="grid md:grid-cols-3 gap-8 mt-8">
+            {rotationProtocol.map((phase) => (
+              <div key={phase.phase} className="border border-gray-200 p-6 space-y-4">
+                <div className="text-xs font-mono text-[#8A0000] font-bold">PHASE {phase.phase} · {phase.duration.toUpperCase()}</div>
+                <h4 className="font-bold text-lg text-gray-900 italic">{phase.name}</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">{phase.desc}</p>
+                <div className="pt-2 border-t border-gray-100">
+                  <span className="text-[10px] font-mono text-[#8A0000] uppercase tracking-wider">Output: {phase.output}</span>
                 </div>
               </div>
             ))}
           </div>
-        </section>
 
-        {/* ── The Beagle Protocol ── */}
-        <section className="space-y-12">
-          <div className="space-y-4">
-            <SectionHeading>The Beagle Protocol</SectionHeading>
-            <hr className="border-t border-gray-200" />
-          </div>
-          <p className="text-sm text-gray-600 max-w-3xl">Every Voyage Rotation follows the Beagle Protocol — a structured methodology that ensures the voyage produces rigorous knowledge, not mere travel. Named after Darwin&rsquo;s ship, the protocol defines how learners move, observe, and produce.</p>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-8">
-            <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#8A0000] font-bold">PHASE A · 3–6 MONTHS</div>
-              <h4 className="font-bold text-lg text-gray-900 italic">Docking</h4>
-              <p className="text-xs text-gray-600 leading-relaxed">Learners arrive at an anchor city and spend a minimum of three months in immersive observation. No interventions, no proposals, no solutions. The Docking phase demands humility: listen, watch, map, question. Live in the community. Eat the food. Learn the language — not Duolingo proficiency, but the language of the streets, the markets, the council chambers. The Docking phase produces a Field Notebook — a detailed ethnographic and ecological record that becomes the foundation for all subsequent work.</p>
-            </div>
-            <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#8A0000] font-bold">PHASE B · 3–9 MONTHS</div>
-              <h4 className="font-bold text-lg text-gray-900 italic">Surveying</h4>
-              <p className="text-xs text-gray-600 leading-relaxed">With the Field Notebook as guide, learners begin systematic inquiry — partnering with local institutions, conducting research, testing hypotheses against the reality they have now come to understand. Surveying teams are always mixed: at least one local collaborator for every visiting learner. The power dynamic is explicit: local partners hold veto authority over any project. Surveying produces Working Papers — draft analyses that must be reviewed by both academic and community panels before proceeding.</p>
-            </div>
-            <div className="border border-gray-200 p-6 space-y-4">
-              <div className="text-xs font-mono text-[#8A0000] font-bold">PHASE C · 3–9 MONTHS</div>
-              <h4 className="font-bold text-lg text-gray-900 italic">Specimen</h4>
-              <p className="text-xs text-gray-600 leading-relaxed">The final phase produces a Specimen — a concrete, deployable contribution. It might be a technology, a policy framework, a work of art, a community infrastructure project, or a published research paper. Every Specimen must meet dual criteria: epistemic rigour (it must be true) and civic impact (it must matter). Specimens are presented at the annual Voyage Convocation — a gathering of all rotating learners, faculty, and community partners that has become one of the most important knowledge events in the world.</p>
-            </div>
-          </div>
-
-          {/* Visual: The Beagle Protocol Cycle */}
+          {/* Visual: The Rotation Protocol Cycle */}
           <div className="w-full max-w-3xl mx-auto mt-12">
             <svg viewBox="0 0 600 200" className="w-full" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -375,7 +404,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
 
               {/* Return loop */}
               <path d="M 495,160 Q 350,195 105,160" fill="none" stroke="#d1d5db" strokeWidth="1.5" strokeDasharray="6,4" markerEnd="url(#arrowWAC)"/>
-              <text x="300" y="185" textAnchor="middle" fill="#9ca3af" style={{fontSize:'8px', fontStyle:'italic'}}>Return to Docking at the next anchor — the voyage continues</text>
+              <text x="300" y="185" textAnchor="middle" fill="#9ca3af" style={{fontSize:'8px', fontStyle:'italic'}}>Return to Docking at the next anchor — the rotation continues</text>
             </svg>
           </div>
         </section>
@@ -384,24 +413,24 @@ export default function DarwinVoyagePage({ goTo }: Props) {
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
-            <p>The World as Campus did not merely send students abroad — it dismantled the very concept of &ldquo;abroad,&rdquo; replacing it with a planet understood as a single, interconnected system of knowledge and challenge.</p>
+            <p>The World as Campus did not merely send students abroad — it dismantled the very concept of &ldquo;abroad,&rdquo; replacing it with a planet understood as a single, interconnected system of knowledge and challenge. By merging Minerva&rsquo;s structural insight — that the campus could be dissolved into cities — with Darwin&rsquo;s methodological insight — that the voyage could be a form of knowing — Artemis created something that neither lineage could have produced alone.</p>
           </div>
           <ul className="space-y-4 text-gray-700 text-sm md:text-base">
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">The campus dissolved (2040–2055):</strong> By the 2040s, the notion that learning happened inside buildings had come to seem as quaint as the notion that the Earth was flat. The Voyage Rotation proved that the most transformative learning occurred at the intersection of difference — cultural, ecological, linguistic, economic. Campuses did not disappear; they became nodes in a global network rather than the centre of the educational universe.</span>
+              <span><strong className="text-gray-900">The campus dissolved (2040–2055):</strong> By the 2040s, the notion that learning happened inside buildings had come to seem as quaint as the notion that the Earth was flat. The Voyage Rotation proved that the most transformative learning occurred at the intersection of difference — cultural, ecological, linguistic, economic. Campuses did not disappear; they became nodes in a global network rather than the centre of the educational universe, exactly as Minerva had first demonstrated at a smaller scale.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Darwin&rsquo;s method institutionalised (2038–2065):</strong> The four principles — Observation Before Theory, Variation as Insight, Adaptation as Process, The Voyage as Method — became the epistemological backbone of Artemis. They were not metaphors; they were operational protocols that shaped how every learner approached every problem. The &ldquo;Slow Knowing&rdquo; doctrine alone reversed a century of educational impatience.</span>
+              <span><strong className="text-gray-900">Sequential immersion institutionalised (2035–2065):</strong> Minerva&rsquo;s insight that each rotation city must build on the previous one became the governing logic of the Voyage Rotation. The Atlantic Awakening preceded the Indian Ocean Circuit because the history of forced migration demanded understanding before the study of voluntary trade routes. The sequence was not arbitrary — it was pedagogy, each leg a chapter in a cumulative education that no single location could provide.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">The Beagle Protocol exported (2050–2080):</strong> Docking, Surveying, Specimen became the global standard for immersive learning. Over 200 universities on six continents adopted the protocol, adapting it to their own contexts while preserving its essential structure: observe before you act, partner before you lead, contribute before you leave.</span>
+              <span><strong className="text-gray-900">The Rotation Protocol exported (2050–2080):</strong> Docking, Surveying, Specimen became the global standard for immersive learning. Over 200 universities on six continents adopted the protocol, adapting it to their own contexts while preserving its essential structure: observe before you act, partner before you lead, contribute before you leave. The protocol proved that Minerva&rsquo;s rotation logic and Darwin&rsquo;s observational discipline were not competitors but complements — structure without method was tourism, method without structure was wandering.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Community veto power (2035–present):</strong> The insistence that local partners hold veto authority over visiting projects was initially controversial — some faculty saw it as an infringement on academic freedom. Within a decade, it was universally recognised as the protocol&rsquo;s most important safeguard. It prevented the extractive research that had characterised Western academia&rsquo;s relationship with the Global South for centuries.</span>
+              <span><strong className="text-gray-900">Community veto power (2035–present):</strong> The insistence that local partners hold veto authority over visiting projects was initially controversial — some faculty saw it as an infringement on academic freedom. Within a decade, it was universally recognised as the protocol&rsquo;s most important safeguard. It prevented the extractive research that had characterised Western academia&rsquo;s relationship with the Global South for centuries and ensured that the rotation was a partnership, not a passage.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
@@ -409,13 +438,13 @@ export default function DarwinVoyagePage({ goTo }: Props) {
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">A new kind of graduate (2055–present):</strong> Artemis learners who completed the Voyage Rotation carried something no traditional graduate possessed: a planetary perspective. They had seen the world&rsquo;s problems from multiple vantage points, understood that every solution is local before it is global, and possessed the humility that only sustained encounter with difference can teach. Employers, governments, and communities recognised them immediately — not by their credentials, but by their questions.</span>
+              <span><strong className="text-gray-900">A new kind of graduate (2055–present):</strong> Artemis learners who completed the Voyage Rotation carried something no traditional graduate possessed: a planetary perspective grounded in both structure and method. They had seen the world&rsquo;s problems from multiple vantage points, understood that every solution is local before it is global, and possessed the humility that only sustained encounter with difference can teach. Employers, governments, and communities recognised them immediately — not by their credentials, but by their questions.</span>
             </li>
           </ul>
           <div className="mt-8">
             <blockquote className="border-l-4 border-[#8A0000] pl-6 space-y-4">
               <p className="font-serif italic text-2xl text-gray-800 leading-snug">
-                &ldquo;Darwin spent five years on a ship and changed how we understand life itself. We spent five years on the planet and changed how we understand each other. The voyage was never the vessel. The voyage was always the method.&rdquo;
+                &ldquo;Minerva proved that the campus could be anywhere. Darwin proved that the journey could be the method. We proved that both were true — and that together, they were unstoppable. The world is not our campus. The world is our curriculum.&rdquo;
               </p>
               <footer className="text-sm text-gray-500 font-bold uppercase tracking-widest">
                 &mdash; Navigator, Voyage Convocation 2089
