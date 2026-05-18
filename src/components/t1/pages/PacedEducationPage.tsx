@@ -1,7 +1,27 @@
 'use client';
 
 import { Play } from "lucide-react";
-import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
+import type { TimelineEvent } from "../Shared";
+
+/* ─── Timeline Events ─── */
+const timelineEvents: TimelineEvent[] = [
+  {year: "2025", title: "Paced Learning Proposed", desc: "Artemis challenges the 4-year degree as the default educational timeline"},
+  {year: "2030", title: "Cognitive Biofeedback Piloted", desc: "Neural sensors measure real-time learning pace for first cohort"},
+  {year: "2035", title: "Three Stages Defined", desc: "Calibrate, Elevate, Activate replace freshman-sophomore-junior-senior"},
+  {year: "2042", title: "Chronos AI Deployed", desc: "AI pace advisor personalizes learning timelines for every learner"},
+  {year: "2050", title: "Age Requirements Abolished", desc: "No minimum or maximum age for any educational stage"},
+  {year: "2068", title: "Emotional Intelligence Integrated", desc: "EI metrics become co-equal with cognitive metrics in pace assessment"},
+];
+
+/* ─── Headlines from 2100 ─── */
+const headlines = [
+  "Learner completes Calibrate-Elevate-Activate cycle in record 14 months at age 47",
+  "Chronos AI achieves 99.2% accuracy in predicting optimal learning pace transitions",
+  "Cognitive Biofeedback Mirror standard issue for all Artemis learners since 2055",
+  "Traditional age-based grade levels officially abolished in 130 countries",
+  "Average learner now completes 3 full Calibrate-Elevate-Activate cycles over lifetime",
+];
 
 interface Props {
   goTo: (page: string) => void;
@@ -242,6 +262,173 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* ── #10 Old Model vs New Model ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>The Old Model vs The New Model</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
+            The contrast between the two systems is not incremental — it is civilizational. One was designed for the factory; the other, for the living organism. One measures time served; the other, mastery achieved.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8 mt-8">
+            {/* LEFT: The Industrial Model */}
+            <div className="border border-gray-300 bg-gray-50 p-6 md:p-8">
+              <h4 className="font-bold text-sm uppercase tracking-[0.2em] text-gray-400 mb-6 font-mono">The Industrial Model</h4>
+              
+              <div className="space-y-0">
+                {/* Age 6 */}
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-6 h-6 bg-gray-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white" />
+                    </div>
+                    <div className="w-px h-8 bg-gray-300" />
+                  </div>
+                  <div className="pb-4">
+                    <span className="text-xs font-mono text-gray-400">AGE 6</span>
+                    <p className="text-sm text-gray-500 font-mono">Primary School</p>
+                  </div>
+                </div>
+
+                {/* Age 12 */}
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-6 h-6 bg-gray-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white" />
+                    </div>
+                    <div className="w-px h-8 bg-gray-300" />
+                  </div>
+                  <div className="pb-4">
+                    <span className="text-xs font-mono text-gray-400">AGE 12</span>
+                    <p className="text-sm text-gray-500 font-mono">Secondary School</p>
+                  </div>
+                </div>
+
+                {/* Age 18 */}
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-6 h-6 bg-gray-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white" />
+                    </div>
+                    <div className="w-px h-8 bg-gray-300" />
+                  </div>
+                  <div className="pb-4">
+                    <span className="text-xs font-mono text-gray-400">AGE 18</span>
+                    <p className="text-sm text-gray-500 font-mono">University (4 years)</p>
+                  </div>
+                </div>
+
+                {/* Age 22 */}
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-6 h-6 bg-gray-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white" />
+                    </div>
+                    <div className="w-px h-8 bg-gray-300" />
+                  </div>
+                  <div className="pb-4">
+                    <span className="text-xs font-mono text-gray-400">AGE 22</span>
+                    <p className="text-sm text-gray-500 font-mono">Enter Workforce</p>
+                  </div>
+                </div>
+
+                {/* Age 65 */}
+                <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-6 h-6 bg-gray-400 flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-xs font-mono text-gray-400">AGE 65</span>
+                    <p className="text-sm text-gray-500 font-mono">Retire</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-mono">Linear · Fixed · One-pass</p>
+              </div>
+            </div>
+
+            {/* RIGHT: The Artemis Lifecycle */}
+            <div className="border-2 border-[#8A0000] bg-white p-6 md:p-8">
+              <h4 className="font-bold text-sm uppercase tracking-[0.2em] text-[#8A0000] mb-6">The Artemis Lifecycle</h4>
+              
+              <div className="w-full">
+                <svg viewBox="0 0 400 360" className="w-full" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <marker id="arrowCrimson" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                      <polygon points="0 0, 10 3.5, 0 7" fill="#8A0000"/>
+                    </marker>
+                  </defs>
+
+                  {/* Calibrate */}
+                  <g transform="translate(40, 20)">
+                    <rect width="320" height="70" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="1.5"/>
+                    <rect width="320" height="24" rx="4" fill="#8A0000"/>
+                    <text x="160" y="16" textAnchor="middle" fill="white" style={{fontSize:'11px', fontWeight:'bold', letterSpacing:'0.15em'}}>CALIBRATE</text>
+                    <text x="160" y="46" textAnchor="middle" fill="#6B7280" style={{fontSize:'9px'}}>Any age · 6–18 months</text>
+                    <text x="160" y="60" textAnchor="middle" fill="#8A0000" style={{fontSize:'8px', fontStyle:'italic'}}>Discover your cognitive signature</text>
+                  </g>
+
+                  {/* Curved arrow down */}
+                  <path d="M 200,94 C 200,110 200,110 200,120" fill="none" stroke="#8A0000" strokeWidth="1.5" markerEnd="url(#arrowCrimson)"/>
+
+                  {/* Elevate */}
+                  <g transform="translate(40, 125)">
+                    <rect width="320" height="70" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="1.5"/>
+                    <rect width="320" height="24" rx="4" fill="#6B0000"/>
+                    <text x="160" y="16" textAnchor="middle" fill="white" style={{fontSize:'11px', fontWeight:'bold', letterSpacing:'0.15em'}}>ELEVATE</text>
+                    <text x="160" y="46" textAnchor="middle" fill="#6B7280" style={{fontSize:'9px'}}>Any age · 12–36 months</text>
+                    <text x="160" y="60" textAnchor="middle" fill="#6B0000" style={{fontSize:'8px', fontStyle:'italic'}}>Deepen mastery at your pace</text>
+                  </g>
+
+                  {/* Curved arrow down */}
+                  <path d="M 200,199 C 200,215 200,215 200,225" fill="none" stroke="#8A0000" strokeWidth="1.5" markerEnd="url(#arrowCrimson)"/>
+
+                  {/* Activate */}
+                  <g transform="translate(40, 230)">
+                    <rect width="320" height="70" rx="4" fill="#fef2f2" stroke="#8A0000" strokeWidth="1.5"/>
+                    <rect width="320" height="24" rx="4" fill="#4A0000"/>
+                    <text x="160" y="16" textAnchor="middle" fill="white" style={{fontSize:'11px', fontWeight:'bold', letterSpacing:'0.15em'}}>ACTIVATE</text>
+                    <text x="160" y="46" textAnchor="middle" fill="#6B7280" style={{fontSize:'9px'}}>Any age · 12–24 months</text>
+                    <text x="160" y="60" textAnchor="middle" fill="#4A0000" style={{fontSize:'8px', fontStyle:'italic'}}>Apply knowledge in the real world</text>
+                  </g>
+
+                  {/* Circular return arrow */}
+                  <path d="M 360,265 C 390,265 395,190 395,120 C 395,50 390,45 360,45" fill="none" stroke="#8A0000" strokeWidth="1.5" strokeDasharray="6,3" markerEnd="url(#arrowCrimson)"/>
+                  <text x="385" y="160" textAnchor="middle" fill="#8A0000" style={{fontSize:'8px', fontStyle:'italic', writingMode:'vertical-rl'}}>Return to recalibrate</text>
+                </svg>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-[#8A0000]/20">
+                <p className="text-[10px] text-[#8A0000] uppercase tracking-widest font-bold">Cyclical · Adaptive · Lifelong</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Timeline ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Timeline</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <Timeline events={timelineEvents} />
+        </section>
+
+        {/* ── Headlines from 2100 ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Headlines from 2100</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <HeadlinesFrom2100 headlines={headlines} />
         </section>
 
         <section className="space-y-8">

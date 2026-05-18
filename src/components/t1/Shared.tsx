@@ -240,6 +240,76 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ─── Shared: Timeline Component ─── */
+export interface TimelineEvent {
+  year: string;
+  title: string;
+  desc: string;
+}
+
+export function Timeline({ events }: { events: TimelineEvent[] }) {
+  return (
+    <div className="w-full overflow-x-auto pb-4 -mx-2">
+      <div className="flex gap-0 min-w-max">
+        {events.map((ev, i) => (
+          <div key={i} className="flex items-stretch">
+            {/* Event node */}
+            <div className="flex flex-col items-center w-36 flex-shrink-0">
+              <div className="text-xs font-mono text-[#8A0000] font-bold mb-2">{ev.year}</div>
+              <div className="w-3 h-3 rounded-full bg-[#8A0000] border-2 border-white ring-2 ring-[#8A0000]/30 flex-shrink-0" />
+              <div className="w-px flex-1 bg-gray-200" />
+            </div>
+            {/* Event card */}
+            <div className="pb-6 pr-6 w-36">
+              <h5 className="text-xs font-bold text-gray-900 leading-tight mb-1">{ev.title}</h5>
+              <p className="text-[10px] text-gray-500 leading-relaxed">{ev.desc}</p>
+            </div>
+            {/* Connector line to next */}
+            {i < events.length - 1 && (
+              <div className="flex items-start pt-5">
+                <div className="w-6 h-px bg-gray-200 mt-1.5" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Shared: Headlines from 2100 ─── */
+export function HeadlinesFrom2100({ headlines }: { headlines: string[] }) {
+  return (
+    <div className="space-y-3">
+      {headlines.map((h, i) => (
+        <div key={i} className="flex items-start gap-3 group">
+          <span className="text-[9px] font-mono text-[#8A0000] mt-0.5 shrink-0">2100·</span>
+          <p className="text-sm text-gray-700 group-hover:text-[#8A0000] transition-colors leading-snug">{h}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Shared: Stats Bar ─── */
+export interface StatItem {
+  value: string;
+  label: string;
+}
+
+export function StatsBar({ stats }: { stats: StatItem[] }) {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+      {stats.map((s, i) => (
+        <div key={i} className="border-l-2 border-[#8A0000] pl-4">
+          <div className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">{s.value}</div>
+          <div className="text-[10px] font-mono text-gray-500 uppercase tracking-wider mt-1">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function HeroHeader({ title, description, bgImage }: { title: string; description: string; bgGradientClass?: string; bgImage?: string }) {
   return (
     <section className="relative w-full overflow-hidden">

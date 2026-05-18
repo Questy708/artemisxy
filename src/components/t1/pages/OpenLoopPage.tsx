@@ -1,7 +1,27 @@
 'use client';
 
 import { Play, ChevronLeft, ChevronRight } from "lucide-react";
-import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
+import type { TimelineEvent } from "../Shared";
+
+/* ─── Timeline Events ─── */
+const timelineEvents: TimelineEvent[] = [
+  {year: "2025", title: "Open Loop Proposed", desc: "Artemis challenges the closed loop of admission-to-graduation"},
+  {year: "2030", title: "Alumni Return Policy", desc: "Graduates can return for new credentials at no additional tuition"},
+  {year: "2035", title: "Credential Unbundling", desc: "Degrees replaced by micro-credentials that stack and combine freely"},
+  {year: "2042", title: "Corporate Partnership Act", desc: "Employers fund employee returns to learning; tax incentives enacted"},
+  {year: "2055", title: "Lifelong Learning Mandate", desc: "30 nations require employers to provide paid learning leave"},
+  {year: "2075", title: "The 5-Life Arc", desc: "Average person completes 5 distinct learning phases across their lifetime"},
+];
+
+/* ─── Headlines from 2100 ─── */
+const headlines = [
+  "Average learner now enrolls 5.3 times across lifetime — up from 1.2 in 2020",
+  "Corporate Learning Leave reaches 40 days per year in 67 countries",
+  "Micro-credential market surpasses $4 trillion as degrees become relics",
+  "Artemis alumna returns at age 71 to study quantum biology — her 4th enrollment",
+  "Lifelong learning tax incentives credited with 15% increase in workforce adaptability",
+];
 
 interface Props {
   goTo: (page: string) => void;
@@ -195,6 +215,24 @@ export default function OpenLoopPage({ goTo }: Props) {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ── Timeline ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Timeline</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <Timeline events={timelineEvents} />
+        </section>
+
+        {/* ── Headlines from 2100 ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Headlines from 2100</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <HeadlinesFrom2100 headlines={headlines} />
         </section>
 
         <section className="space-y-8">

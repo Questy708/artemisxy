@@ -1,13 +1,45 @@
 'use client';
 
+import { useState } from "react";
 import { Play } from "lucide-react";
-import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
+import type { TimelineEvent } from "../Shared";
+
+/* ─── Impact Lab Data ─── */
+const impactLabs = [
+  { city: "Lagos", x: 490, y: 220, name: "Clean Water Initiative", desc: "Community water purification and distribution" },
+  { city: "Medellín", x: 300, y: 240, name: "Urban Peace Lab", desc: "Violence reduction through education and economic opportunity" },
+  { city: "Chennai", x: 630, y: 240, name: "Health Equity Hub", desc: "Rural healthcare access and telemedicine deployment" },
+  { city: "Bethlehem", x: 540, y: 160, name: "Heritage & Innovation Center", desc: "Preserving cultural heritage through technology" },
+  { city: "Apia", x: 800, y: 310, name: "Climate Resilience Lab", desc: "Small island adaptation strategies and marine conservation" },
+];
+
+/* ─── Timeline Events ─── */
+const timelineEvents: TimelineEvent[] = [
+  {year: "2025", title: "The Oath Drafted", desc: "First version of the Artemis Oath written by founding faculty and students"},
+  {year: "2030", title: "Oath Seal Designed", desc: "The ceremonial seal becomes the symbol of purpose-driven education"},
+  {year: "2038", title: "Impact Labs Launched", desc: "First 5 Global Impact Labs open in Lagos, Medellín, Chennai, Bethlehem, and Apia"},
+  {year: "2045", title: "Purpose Declarations Required", desc: "Every Artemis learner must declare a purpose — not a major — before advancing"},
+  {year: "2060", title: "Oath Goes Global", desc: "60+ universities adopt the Oath framework; purpose-driven education becomes a movement"},
+  {year: "2085", title: "Impact Labs Merge", desc: "The 5 labs become a single global network with shared governance and resources"},
+];
+
+/* ─── Headlines from 2100 ─── */
+const headlines = [
+  "Artemis Oath signatories surpass 2 million — every continent represented",
+  "Lagos Impact Lab's water initiative reaches 10 million people across West Africa",
+  "Purpose Declarations replace major declarations at 89 universities worldwide",
+  "Bethlehem Heritage Lab digitizes 50,000 endangered manuscripts using AI preservation",
+  "Medellín Urban Peace Lab credited with 40% reduction in youth violence since founding",
+];
 
 interface Props {
   goTo: (page: string) => void;
 }
 
 export default function PurposeLearningPage({ goTo }: Props) {
+  const [hoveredLab, setHoveredLab] = useState<number | null>(null);
+
   return (
     <>
       <HeroHeader 
@@ -227,6 +259,102 @@ export default function PurposeLearningPage({ goTo }: Props) {
           </div>
         </section>
 
+        {/* ── #2 Global Impact Map ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Global Impact Labs</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
+            Five Impact Labs, five continents, five missions. Each lab is a living laboratory where the Artemis Oath becomes tangible — where purpose meets practice and learners confront the world&apos;s most urgent challenges alongside the communities most affected by them.
+          </p>
+
+          <div className="w-full max-w-4xl mx-auto border border-gray-200 bg-gray-50 p-4">
+            <svg viewBox="0 0 1000 500" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Background */}
+              <rect width="1000" height="500" fill="#f9fafb" />
+
+              {/* Grid lines */}
+              {[100, 200, 300, 400].map(y => (
+                <line key={`h${y}`} x1="0" y1={y} x2="1000" y2={y} stroke="#e5e7eb" strokeWidth="0.5" />
+              ))}
+              {[200, 400, 600, 800].map(x => (
+                <line key={`v${x}`} x1={x} y1="0" x2={x} y2="500" stroke="#e5e7eb" strokeWidth="0.5" />
+              ))}
+
+              {/* Simplified continent shapes */}
+              {/* Africa */}
+              <path d="M 470,120 L 500,100 L 520,120 L 540,160 L 550,200 L 540,260 L 520,320 L 500,350 L 480,340 L 470,300 L 460,240 L 460,180 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* South America */}
+              <path d="M 280,180 L 320,160 L 340,200 L 350,260 L 340,320 L 320,380 L 300,400 L 280,380 L 270,320 L 260,260 L 270,200 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Europe */}
+              <path d="M 460,60 L 500,50 L 540,60 L 550,80 L 530,100 L 500,110 L 470,100 L 460,80 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Asia */}
+              <path d="M 560,50 L 700,40 L 780,60 L 800,100 L 780,140 L 720,160 L 660,170 L 600,150 L 560,120 L 550,80 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Australia */}
+              <path d="M 760,280 L 820,270 L 860,290 L 870,330 L 840,360 L 800,360 L 770,340 L 750,310 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* North America */}
+              <path d="M 120,60 L 220,40 L 280,60 L 300,100 L 280,140 L 240,160 L 200,170 L 160,160 L 130,130 L 110,100 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+
+              {/* Impact Lab Pins */}
+              {impactLabs.map((lab, i) => (
+                <g key={lab.city}
+                   onMouseEnter={() => setHoveredLab(i)}
+                   onMouseLeave={() => setHoveredLab(null)}
+                   className="cursor-pointer"
+                >
+                  {/* Glow effect */}
+                  <circle cx={lab.x} cy={lab.y} r={hoveredLab === i ? 18 : 12} fill="#8A0000" opacity={hoveredLab === i ? 0.15 : 0.08} className="transition-all duration-300" />
+                  {/* Pin circle */}
+                  <circle cx={lab.x} cy={lab.y} r={hoveredLab === i ? 8 : 6} fill="#8A0000" stroke="white" strokeWidth="2" className="transition-all duration-300" />
+                  {/* White dot center */}
+                  <circle cx={lab.x} cy={lab.y} r={2.5} fill="white" />
+                  {/* City label */}
+                  <text x={lab.x} y={lab.y - 14} textAnchor="middle" style={{fontSize:'9px', fontWeight:'bold', fill:'#8A0000'}}>{lab.city}</text>
+
+                  {/* Tooltip on hover */}
+                  {hoveredLab === i && (
+                    <g>
+                      <rect x={lab.x - 100} y={lab.y + 16} width="200" height="46" rx="3" fill="white" stroke="#8A0000" strokeWidth="1" />
+                      <text x={lab.x} y={lab.y + 32} textAnchor="middle" style={{fontSize:'9px', fontWeight:'bold', fill:'#8A0000'}}>{lab.name}</text>
+                      <text x={lab.x} y={lab.y + 46} textAnchor="middle" style={{fontSize:'8px', fill:'#6B7280'}}>{lab.desc}</text>
+                    </g>
+                  )}
+                </g>
+              ))}
+
+              {/* Legend */}
+              <g transform="translate(30, 420)">
+                <rect width="180" height="40" fill="white" stroke="#e5e7eb" strokeWidth="1" rx="2" />
+                <circle cx="20" cy="20" r="6" fill="#8A0000" stroke="white" strokeWidth="2" />
+                <circle cx="20" cy="20" r="2.5" fill="white" />
+                <text x="35" y="24" style={{fontSize:'9px', fill:'#6B7280'}}>Impact Lab Location</text>
+              </g>
+
+              {/* Title */}
+              <text x="970" y="485" textAnchor="end" style={{fontSize:'9px', letterSpacing:'0.15em', fill:'#9CA3AF'}} className="font-mono uppercase">Global Impact Labs — Artemis 2100</text>
+            </svg>
+          </div>
+        </section>
+
+        {/* ── Timeline ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Timeline</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <Timeline events={timelineEvents} />
+        </section>
+
+        {/* ── Headlines from 2100 ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Headlines from 2100</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <HeadlinesFrom2100 headlines={headlines} />
+        </section>
+
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-6 text-gray-600 leading-relaxed text-sm md:text-base">
@@ -247,7 +375,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>
-              <span><strong className="text-gray-900">Whole-person development (2050–2075):</strong> Students grew academically, personally, and socially — prepared not just for careers, but for mission-driven lives. The reflective practice framework, initially met with skepticism by quantitative disciplines, became the single most-requested resource by 2060, with faculty across all Centers integrating it into capstone requirements.</span>
+              <span><strong className="text-gray-900">Whole-person development (2050–2075):</strong> Students grew acadically, personally, and socially — prepared not just for careers, but for mission-driven lives. The reflective practice framework, initially met with skepticism by quantitative disciplines, became the single most-requested resource by 2060, with faculty across all Centers integrating it into capstone requirements.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-[#8A0000] font-bold mt-1 shrink-0">&#9632;</span>

@@ -114,3 +114,102 @@ Stage Summary:
 - Each page uses its theme color for the square bullets and blockquote border
 - Bold labels create scannable key details (replacing flat bullet text)
 - Closing blockquotes add emotional anchor/personal voice to each section
+
+---
+Task ID: s3
+Agent: Subagent
+Task: Add 6 new artifacts to DarwinVoyagePage (World as Campus dimension)
+
+Work Log:
+- Read worklog.md for project context
+- Read existing DarwinVoyagePage.tsx (509 lines) and Shared.tsx (342 lines) fully
+- Added useState import and shared component imports (Timeline, HeadlinesFrom2100, StatsBar, TimelineEvent)
+- Created data constants: rotationStats, fieldNotebooks, specimens, voyageTimeline, voyageHeadlines, anchorCities
+- Implemented 6 new artifacts:
+  1. Live Rotation Tracker (#1): Interactive SVG map with hoveredCity state, tooltip via foreignObject, r=8 dots with hover scale/glow
+  2. Rotation Stats Dashboard (#8): StatsBar after Summary, "By the Numbers" heading
+  3. Field Notebook Excerpts (#13): 3 styled notebook cards with aged page effect, dashed border, serif italic, notebook line pattern
+  4. Specimen Gallery (#15): 2x3 grid of specimen cards with category tags, hover border-crimson effect
+  5. Timeline (#7): Shared Timeline component with 7 events (2014-2100)
+  6. Headlines from 2100 (#16): Shared HeadlinesFrom2100 component with 5 headlines
+- All existing content preserved unchanged
+- No lint errors in DarwinVoyagePage.tsx
+- Dev server compiles successfully
+
+Stage Summary:
+- DarwinVoyagePage now has 6 additional sections with rich interactive and visual content
+- Interactive SVG map provides hover tooltips for all 11 anchor cities
+- Stats, notebook excerpts, specimen gallery add depth and variety
+- Timeline and headlines use shared components for consistency
+- All styling follows the crimson (#8A0000) archival tone
+
+---
+Task ID: s4-s5-s6
+Agent: Subagent
+Task: Add artifacts to 3 dimension pages + add Timeline and Headlines to 2 more pages
+
+Work Log:
+- Read worklog.md for project context
+- Read all 4 target files: PurposeLearningPage.tsx, CentersOfInquiryPage.tsx, PacedEducationPage.tsx, OpenLoopPage.tsx
+- Read Shared.tsx for available shared components (Timeline, HeadlinesFrom2100, TimelineEvent type, StatsBar)
+- Read DarwinVoyagePage.tsx for SVG world map continent path data (reused simplified continent shapes)
+
+FILE 1 — PurposeLearningPage.tsx (3 new sections):
+- Added useState import for hover interactions
+- Added TimelineEvent import and shared component imports (Timeline, HeadlinesFrom2100)
+- Created impactLabs data: 5 labs with city, coordinates, name, description
+- Created timelineEvents data: 6 events (2025-2085)
+- Created headlines data: 5 headlines from 2100
+- Implemented Global Impact Map (#2): SVG world map with simplified continent paths, 5 crimson pins with white dot centers, city labels, hover tooltips showing lab name + mission, glow effect on hover, legend
+- Implemented Timeline: Shared Timeline component with 6 events
+- Implemented Headlines from 2100: Shared HeadlinesFrom2100 component with 5 headlines
+- All 3 sections placed before "The Achievement" section
+
+FILE 2 — CentersOfInquiryPage.tsx (3 new sections):
+- Added TimelineEvent import and shared component imports
+- Created nodeLocations data: 18 representative center nodes with city, coordinates, center name, focus area
+- Created timelineEvents data: 6 events (2025-2070)
+- Created headlines data: 5 headlines from 2100
+- Replaced the old "Global Node Map" section (45 numbered squares) with proper SVG world map
+- Implemented Global Node Network (#3): SVG world map with simplified continent paths, 18 crimson dots with city labels, hover tooltips showing center name + focus area, legend
+- Implemented Timeline: Shared Timeline component with 6 events
+- Implemented Headlines from 2100: Shared HeadlinesFrom2100 component with 5 headlines
+- All 3 sections placed before "The Achievement" section
+
+FILE 3 — PacedEducationPage.tsx (3 new sections):
+- Added TimelineEvent import and shared component imports
+- Created timelineEvents data: 6 events (2025-2068)
+- Created headlines data: 5 headlines from 2100
+- Implemented Old Model vs New Model (#10): Side-by-side visual comparison
+  - LEFT: "The Industrial Model" — rigid vertical timeline with gray boxes, monospace font, Age 6→12→18→22→65, connected by straight lines
+  - RIGHT: "The Artemis Lifecycle" — flowing SVG with Calibrate/Elevate/Activate phases, crimson accents, curved connectors, circular return arrow with dashed stroke
+- Implemented Timeline: Shared Timeline component with 6 events
+- Implemented Headlines from 2100: Shared HeadlinesFrom2100 component with 5 headlines
+- All 3 sections placed before "The Achievement" section
+
+FILE 4 — OpenLoopPage.tsx (2 new sections):
+- Added TimelineEvent import and shared component imports
+- Created timelineEvents data: 6 events (2025-2075)
+- Created headlines data: 5 headlines from 2100
+- Implemented Timeline: Shared Timeline component with 6 events
+- Implemented Headlines from 2100: Shared HeadlinesFrom2100 component with 5 headlines
+- Both sections placed before "The Achievement" section
+
+FILE 5 — HomePage.tsx: Skipped (no changes)
+
+Verification:
+- No lint errors in any of the 4 modified files
+- Dev server compiles successfully (confirmed via dev.log)
+- All existing content preserved — only additions made
+- All shared components imported correctly (Timeline, HeadlinesFrom2100, TimelineEvent type)
+- SVG world maps use same continent path data as DarwinVoyagePage.tsx
+- All new sections follow styling rules: max-w-[1400px], px-5 sm:px-8 lg:px-20, crimson #8A0000, SectionHeading + hr, space-y-12
+
+Stage Summary:
+- 4 pages modified with 11 total new sections added
+- 3 SVG world map artifacts (PurposeLearning: 5 impact lab pins, CentersOfInquiry: 18 node dots with hover tooltips)
+- 1 side-by-side comparison visual (PacedEducation: Industrial vs Artemis lifecycle)
+- 4 Timeline sections using shared component
+- 4 Headlines from 2100 sections using shared component
+- All interactive hover states implemented with useState
+- Zero new lint errors introduced

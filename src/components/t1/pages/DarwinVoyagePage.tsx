@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from "react";
 import { Play } from "lucide-react";
-import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100, StatsBar } from "../Shared";
+import type { TimelineEvent } from "../Shared";
 
 /* ─── Voyage Rotation Data ─── */
 const voyageLegs = [
@@ -99,11 +101,95 @@ const rotationProtocol = [
   },
 ];
 
+/* ─── Stats Data ─── */
+const rotationStats = [
+  { value: '2,400+', label: 'Active Learners' },
+  { value: '48', label: 'Anchor Cities' },
+  { value: '340+', label: 'Specimens Produced' },
+  { value: '12', label: 'Community Vetoes Exercised' },
+];
+
+/* ─── Field Notebook Data ─── */
+const fieldNotebooks = [
+  {
+    location: 'Lagos, 2037',
+    author: 'Amara Okafor',
+    text: 'Day 47. Makoko teaches what no classroom can: that the most sophisticated infrastructure is not steel and concrete but trust and adaptability. The floating school moves with the tide — and so does its curriculum. I have stopped taking notes on what they lack and started recording what they have. The gap between my training and their reality has never been wider.',
+  },
+  {
+    location: 'Zanzibar, 2046',
+    author: 'Rafiq Hamza',
+    text: 'The dhow builders do not use blueprints. They use embodied knowledge passed from father to son for 800 years. When I asked about the keel angle, they looked at me as if I had asked a bird to explain the physics of flight. Some knowledge refuses to be written. It must be lived.',
+  },
+  {
+    location: 'Svalbard, 2074',
+    author: 'Ingrid Solberg',
+    text: 'Minus 34 degrees. The seed vault hums behind its steel door — 1.1 million samples of the world\'s agricultural memory, preserved against the possibility that we might forget how to grow things. I am here to study governance but I cannot stop thinking about memory. What is the seed vault if not the world\'s most hopeful archive?',
+  },
+];
+
+/* ─── Specimen Gallery Data ─── */
+const specimens = [
+  { category: 'INFRASTRUCTURE', title: 'Floating School 2.0', city: 'Lagos, 2039', result: 'Deployed in 4 West African coastal communities' },
+  { category: 'GOVERNANCE', title: 'Seeds of Governance', city: 'Svalbard, 2074', result: 'Adopted by 14 climate-vulnerable regions' },
+  { category: 'TECHNOLOGY', title: 'Swahili NLP Engine', city: 'Zanzibar, 2048', result: 'First natural language processor for 12 Bantu languages' },
+  { category: 'ECOLOGY', title: 'Atoll Regeneration Protocol', city: 'Suva, 2057', result: 'Restored 23 hectares of coral reef across 3 Pacific nations' },
+  { category: 'ECONOMICS', title: 'Altitude Market Model', city: 'Bogotá, 2065', result: 'New economic framework for high-altitude communities' },
+  { category: 'EDUCATION', title: 'The Slow Knowing Curriculum', city: 'Global, 2052', result: 'Adopted by 200+ universities on 6 continents' },
+];
+
+/* ─── Timeline Data ─── */
+const voyageTimeline: TimelineEvent[] = [
+  { year: '2014', title: 'Minerva Founded', desc: 'The first university built entirely around global city rotation' },
+  { year: '2035', title: 'Voyage Rotation Launched', desc: 'First cohort of 120 learners departs for the Atlantic Awakening' },
+  { year: '2042', title: 'First Voyage Convocation', desc: 'Annual gathering becomes the world\'s premier interdisciplinary event' },
+  { year: '2050', title: 'Protocol Exported', desc: '200+ universities on six continents adopt the Rotation Protocol' },
+  { year: '2065', title: 'Campus Dissolved', desc: 'The last traditional Artemis campus repurposed as a global node' },
+  { year: '2082', title: 'Circumpolar Return Completed', desc: 'The most demanding rotation leg becomes a rite of passage' },
+  { year: '2100', title: '48 Anchor Cities', desc: 'The Voyage Rotation spans every continent, every ocean, every challenge' },
+];
+
+/* ─── Headlines Data ─── */
+const voyageHeadlines = [
+  'Voyage Convocation draws record 12,000 attendees to Lagos — largest interdisciplinary gathering in history',
+  'Artemis learner\'s floating school design adopted by 3 Pacific island nations',
+  'Community veto exercised 12 times in 2079 — the most in any single year',
+  'Svalbard Specimen credited with influencing governance frameworks across 14 regions',
+  'Rotation Protocol now standard at 200+ universities worldwide; traditional study abroad programs discontinued',
+];
+
+/* ─── Anchor City Tooltip Data ─── */
+interface AnchorCity {
+  cx: number;
+  cy: number;
+  name: string;
+  leg: string;
+  legName: string;
+  duration: string;
+  detail: string;
+}
+
+const anchorCities: AnchorCity[] = [
+  { cx: 490, cy: 220, name: 'Lagos', leg: 'I', legName: 'The Atlantic Awakening', duration: '12–18 months', detail: 'Urban innovation in the world\'s fastest-growing coastal city' },
+  { cx: 340, cy: 220, name: 'Salvador', leg: 'I', legName: 'The Atlantic Awakening', duration: '12–18 months', detail: 'Yoruba spiritual systems survived as Candomblé' },
+  { cx: 300, cy: 180, name: 'Port-au-Prince', leg: 'I', legName: 'The Atlantic Awakening', duration: '12–18 months', detail: 'The unfinished revolution of the first Black republic' },
+  { cx: 530, cy: 280, name: 'Zanzibar', leg: 'II', legName: 'The Indian Ocean Circuit', duration: '12–24 months', detail: 'Spice trade architecture and cosmopolitan coexistence' },
+  { cx: 620, cy: 260, name: 'Kochi', leg: 'II', legName: 'The Indian Ocean Circuit', duration: '12–24 months', detail: 'Ancient mathematical traditions prefiguring modern computing' },
+  { cx: 720, cy: 300, name: 'Jakarta', leg: 'II', legName: 'The Indian Ocean Circuit', duration: '12–24 months', detail: 'Megacity growth colliding with subsidence below sea level' },
+  { cx: 780, cy: 300, name: 'Suva', leg: 'III', legName: 'The Pacific Archipelago', duration: '10–18 months', detail: 'Laboratory for climate adaptation and floating infrastructure' },
+  { cx: 820, cy: 220, name: 'Osaka', leg: 'III', legName: 'The Pacific Archipelago', duration: '10–18 months', detail: 'Density breeding innovation — doing more with less for centuries' },
+  { cx: 500, cy: 320, name: 'Johannesburg', leg: 'IV', legName: 'The Continental Traverse', duration: '18–36 months', detail: 'Tracing the Great Rift Valley and vertical human adaptation' },
+  { cx: 300, cy: 260, name: 'Bogotá', leg: 'IV', legName: 'The Continental Traverse', duration: '18–36 months', detail: 'Communities building at altitude with ancient agricultural wisdom' },
+  { cx: 150, cy: 20, name: 'Svalbard', leg: 'V', legName: 'The Circumpolar Return', duration: '12–24 months', detail: 'The Global Seed Vault and the ethics of frozen preservation' },
+];
+
 interface Props {
   goTo: (page: string) => void;
 }
 
 export default function DarwinVoyagePage({ goTo }: Props) {
+  const [hoveredCity, setHoveredCity] = useState<string | null>(null);
+
   return (
     <>
       <HeroHeader
@@ -135,6 +221,15 @@ export default function DarwinVoyagePage({ goTo }: Props) {
               CONTENTS:_VOYAGE_ROTATION
             </div>
           </div>
+        </section>
+
+        {/* ── By the Numbers (#8) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>By the Numbers</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <StatsBar stats={rotationStats} />
         </section>
 
         {/* ── Two Lineages ── */}
@@ -198,7 +293,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
         </section>
 
-        {/* ── The Voyage Rotation Map ── */}
+        {/* ── The Voyage Rotation Map (#1 - Interactive) ── */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>The Voyage Rotation</SectionHeading>
@@ -206,8 +301,8 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
           <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">Five legs. Five years. Every learner completes at least two. Each leg combines Minerva&rsquo;s sequential immersion — the city as curriculum — with Darwin&rsquo;s observational methodology — the voyage as method. The routes follow the arcs of history and the circuits of contemporary challenge: the Atlantic world, the Indian Ocean, the Pacific, the continental interiors, the poles.</p>
 
-          {/* SVG Route Map */}
-          <div className="w-full max-w-4xl mx-auto border border-gray-200 bg-gray-50 p-4">
+          {/* Interactive SVG Route Map */}
+          <div className="w-full max-w-4xl mx-auto border border-gray-200 bg-gray-50 p-4 relative">
             <svg viewBox="0 0 1000 500" className="w-full" xmlns="http://www.w3.org/2000/svg">
               {/* World outline - simplified */}
               <rect width="1000" height="500" fill="#f9fafb" />
@@ -246,39 +341,58 @@ export default function DarwinVoyagePage({ goTo }: Props) {
               {/* Leg V: Circumpolar */}
               <path d="M 150,20 L 500,10 L 800,30" fill="none" stroke="#8A0000" strokeWidth="2.5" strokeDasharray="8,4" opacity="0.7" />
 
-              {/* Anchor points with labels */}
-              {/* Leg I */}
-              <circle cx="490" cy="220" r="6" fill="#8A0000" />
-              <text x="500" y="225" style={{fontSize:'9px', fontWeight:'bold', fill:'#8A0000'}}>Lagos</text>
-              <circle cx="340" cy="220" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="310" y="235" style={{fontSize:'8px', fill:'#6B7280'}}>Salvador</text>
-              <circle cx="300" cy="180" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="260" y="175" style={{fontSize:'8px', fill:'#6B7280'}}>Port-au-Prince</text>
+              {/* Anchor city dots - interactive with hover */}
+              {anchorCities.map((city) => (
+                <g key={city.name}>
+                  <circle
+                    cx={city.cx}
+                    cy={city.cy}
+                    r={8}
+                    fill={hoveredCity === city.name ? '#b91c1c' : '#8A0000'}
+                    stroke={hoveredCity === city.name ? '#fecaca' : 'none'}
+                    strokeWidth={2}
+                    className="cursor-pointer transition-all duration-200"
+                    style={{
+                      transformOrigin: `${city.cx}px ${city.cy}px`,
+                      transform: hoveredCity === city.name ? 'scale(1.35)' : 'scale(1)',
+                      filter: hoveredCity === city.name ? 'drop-shadow(0 0 6px rgba(138,0,0,0.5))' : 'none',
+                    }}
+                    onMouseEnter={() => setHoveredCity(city.name)}
+                    onMouseLeave={() => setHoveredCity(null)}
+                  />
+                  {/* City label */}
+                  <text
+                    x={city.cx + 12}
+                    y={city.cy + 4}
+                    style={{
+                      fontSize: hoveredCity === city.name ? '10px' : '8px',
+                      fontWeight: hoveredCity === city.name ? 'bold' : 'normal',
+                      fill: hoveredCity === city.name ? '#8A0000' : '#6B7280',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    {city.name}
+                  </text>
+                </g>
+              ))}
 
-              {/* Leg II */}
-              <circle cx="530" cy="280" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="540" y="285" style={{fontSize:'8px', fill:'#6B7280'}}>Zanzibar</text>
-              <circle cx="620" cy="260" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="630" y="255" style={{fontSize:'8px', fill:'#6B7280'}}>Kochi</text>
-              <circle cx="720" cy="300" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="730" y="305" style={{fontSize:'8px', fill:'#6B7280'}}>Jakarta</text>
-
-              {/* Leg III */}
-              <circle cx="780" cy="300" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="790" y="315" style={{fontSize:'8px', fill:'#6B7280'}}>Suva</text>
-              <circle cx="820" cy="220" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="830" y="215" style={{fontSize:'8px', fill:'#6B7280'}}>Osaka</text>
-              <circle cx="780" cy="200" r="5" fill="#8A0000" opacity="0.6" />
-
-              {/* Leg IV */}
-              <circle cx="500" cy="320" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="510" y="335" style={{fontSize:'8px', fill:'#6B7280'}}>Johannesburg</text>
-              <circle cx="300" cy="260" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="255" y="265" style={{fontSize:'8px', fill:'#6B7280'}}>Bogotá</text>
-
-              {/* Leg V */}
-              <circle cx="150" cy="20" r="5" fill="#8A0000" opacity="0.6" />
-              <text x="120" y="35" style={{fontSize:'8px', fill:'#6B7280'}}>Svalbard</text>
+              {/* Tooltip for hovered city - rendered as foreignObject */}
+              {hoveredCity && (() => {
+                const city = anchorCities.find(c => c.name === hoveredCity);
+                if (!city) return null;
+                const tooltipX = city.cx > 700 ? city.cx - 220 : city.cx + 20;
+                const tooltipY = city.cy > 350 ? city.cy - 100 : city.cy + 10;
+                return (
+                  <foreignObject x={tooltipX} y={tooltipY} width="220" height="90">
+                    <div className="bg-white border border-[#8A0000]/30 shadow-lg p-3 text-left" style={{ fontSize: '11px' }}>
+                      <div className="font-bold text-[#8A0000] text-xs mb-1">{city.name}</div>
+                      <div className="text-[10px] text-gray-500 mb-0.5">Leg {city.leg}: {city.legName}</div>
+                      <div className="text-[10px] text-gray-500 mb-1">Duration: {city.duration}</div>
+                      <div className="text-[10px] text-gray-700 italic leading-snug">{city.detail}</div>
+                    </div>
+                  </foreignObject>
+                );
+              })()}
 
               {/* Legend */}
               <g transform="translate(30, 420)">
@@ -286,7 +400,7 @@ export default function DarwinVoyagePage({ goTo }: Props) {
                 <line x1="15" y1="20" x2="45" y2="20" stroke="#8A0000" strokeWidth="2.5" strokeDasharray="8,4" />
                 <text x="55" y="24" style={{fontSize:'9px', fill:'#6B7280'}}>Voyage Rotation Legs I–V</text>
                 <circle cx="22" cy="42" r="5" fill="#8A0000" />
-                <text x="55" y="46" style={{fontSize:'9px', fill:'#6B7280'}}>Anchor City</text>
+                <text x="55" y="46" style={{fontSize:'9px', fill:'#6B7280'}}>Anchor City (hover for details)</text>
               </g>
 
               {/* Title */}
@@ -332,6 +446,44 @@ export default function DarwinVoyagePage({ goTo }: Props) {
                     alt={leg.name}
                     className="w-full h-full object-cover grayscale opacity-60" 
                   />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Field Notebook Excerpts (#13) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Field Notebook Excerpts</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {fieldNotebooks.map((nb, idx) => (
+              <div
+                key={nb.author}
+                className={`bg-[#faf8f5] border-2 border-dashed border-gray-300 p-6 relative overflow-hidden ${
+                  idx % 2 === 1 ? 'rotate-[-0.5deg]' : ''
+                }`}
+              >
+                {/* Notebook lines background pattern */}
+                <div className="absolute inset-0 pointer-events-none" style={{
+                  backgroundImage: 'repeating-linear-gradient(transparent, transparent 27px, #e5e0d8 27px, #e5e0d8 28px)',
+                  backgroundSize: '100% 28px',
+                  backgroundPosition: '0 60px',
+                  opacity: 0.5,
+                }} />
+                <div className="relative z-10">
+                  <div className="font-mono text-[10px] text-gray-400 uppercase tracking-wider mb-3">
+                    {nb.location}
+                  </div>
+                  <h4 className="font-serif italic text-sm font-bold text-gray-800 mb-4">
+                    — {nb.author}
+                  </h4>
+                  <p className="font-serif italic text-sm text-gray-700 leading-relaxed">
+                    &ldquo;{nb.text}&rdquo;
+                  </p>
                 </div>
               </div>
             ))}
@@ -409,6 +561,30 @@ export default function DarwinVoyagePage({ goTo }: Props) {
           </div>
         </section>
 
+        {/* ── Specimen Gallery (#15) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Specimen Gallery</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {specimens.map((sp) => (
+              <div
+                key={sp.title}
+                className="border border-gray-200 p-6 space-y-3 hover:border-[#8A0000] transition-colors cursor-default"
+              >
+                <div className="text-[10px] font-mono text-[#8A0000] font-bold tracking-wider">
+                  [{sp.category}]
+                </div>
+                <h4 className="font-bold text-sm text-gray-900">{sp.title}</h4>
+                <p className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">{sp.city}</p>
+                <p className="text-xs text-gray-600 leading-relaxed italic">&rarr; {sp.result}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* ── The Achievement ── */}
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
@@ -451,6 +627,24 @@ export default function DarwinVoyagePage({ goTo }: Props) {
               </footer>
             </blockquote>
           </div>
+        </section>
+
+        {/* ── Timeline (#7) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Voyage Timeline</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <Timeline events={voyageTimeline} />
+        </section>
+
+        {/* ── Dispatches from 2100 (#16) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Dispatches from 2100</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <HeadlinesFrom2100 headlines={voyageHeadlines} />
         </section>
 
         {/* ── Exhibit Article Archive ── */}

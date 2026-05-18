@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+import { SectionHeading, HeroHeader, ExploreAnotherFuture, Timeline, HeadlinesFrom2100 } from "../Shared";
+import type { TimelineEvent } from "../Shared";
 
 /* ─── Real Center Data (from Artemis University) ─── */
 const centers = [
@@ -39,12 +40,54 @@ const guildLayers = [
   { layer: 'Challenge Engines', desc: 'Seasonal sprints (2-6 weeks) and residencies', icon: '△' },
 ];
 
+/* ─── Node Network Map Data ─── */
+const nodeLocations = [
+  { city: "Accra", x: 485, y: 225, center: "Civilization Architecture", focus: "Governance & Social Contracts" },
+  { city: "Nairobi", x: 555, y: 265, center: "Next-Gen Education", focus: "AI Tutors & Lifelong Learning" },
+  { city: "Lagos", x: 488, y: 235, center: "Fintech, DeFi & Economics", focus: "Decentralized Economic Governance" },
+  { city: "Johannesburg", x: 510, y: 330, center: "Health & Bioethics", focus: "Biomedical Innovation Ethics" },
+  { city: "Cairo", x: 535, y: 170, center: "Space & Frontier Science", focus: "Deep-Space Propulsion Ethics" },
+  { city: "Berlin", x: 495, y: 100, center: "Materials & Manufacturing", focus: "Programmable Matter" },
+  { city: "London", x: 475, y: 95, center: "Fintech, DeFi & Economics", focus: "Decentralized Markets" },
+  { city: "Athens", x: 520, y: 135, center: "Urban Futures", focus: "Resilient City Design" },
+  { city: "Stockholm", x: 495, y: 70, center: "Gaming & Worldbuilding", focus: "Simulation & Civic Imagination" },
+  { city: "São Paulo", x: 320, y: 310, center: "Planetary Systems", focus: "Earth Systems Understanding" },
+  { city: "Bogotá", x: 280, y: 240, center: "Urban Futures", focus: "Equitable Adaptive Cities" },
+  { city: "Santiago", x: 290, y: 360, center: "Energy Systems", focus: "Post-Carbon Infrastructure" },
+  { city: "Mumbai", x: 630, y: 205, center: "Agriculture & Food Systems", focus: "Closed-Loop Food Ecosystems" },
+  { city: "Kochi", x: 630, y: 225, center: "Health & Bioethics", focus: "Rural Healthcare Access" },
+  { city: "Seoul", x: 755, y: 140, center: "Emerging Technologies", focus: "Quantum & Synthetic Biology" },
+  { city: "Osaka", x: 775, y: 155, center: "Robotics & Mechatronics", focus: "Autonomous Systems" },
+  { city: "Suva", x: 820, y: 310, center: "Planetary Systems", focus: "Climate & Ocean Systems" },
+  { city: "Jakarta", x: 720, y: 270, center: "Agriculture & Food Systems", focus: "Tropical Agriculture" },
+];
+
+/* ─── Timeline Events ─── */
+const timelineEvents: TimelineEvent[] = [
+  {year: "2025", title: "Centers Proposed", desc: "15 disciplinary centers proposed as replacement for traditional departments"},
+  {year: "2030", title: "First Centers Open", desc: "Centers for Bioethics, Climate Systems, and Computational Thought begin operations"},
+  {year: "2038", title: "Pillar System Adopted", desc: "The 5 pillars (Inquiry, Craft, Bridge, Forge, Loom) formalized as organizational logic"},
+  {year: "2045", title: "Guild Layers Introduced", desc: "Five mastery layers replace faculty ranks and student years"},
+  {year: "2055", title: "45 Nodes Active", desc: "The global node network spans 45 locations across 6 continents"},
+  {year: "2070", title: "Cycle System Refined", desc: "Residency-Sprint-Deployment becomes the universal operating rhythm"},
+];
+
+/* ─── Headlines from 2100 ─── */
+const headlines = [
+  "Center for Climate Systems deploys atmospheric carbon capture prototype from Santiago node",
+  "Guild Layer promotions reach record high — 340 artisans elevated across 45 nodes",
+  "Bridge Pillar facilitates unprecedented cross-center collaboration between Accra and Seoul",
+  "Loom Pillar's integration of indigenous knowledge with quantum computing wins Global Innovation Prize",
+  "45-node global network achieves 99.97% uptime — most resilient educational infrastructure ever built",
+];
+
 interface Props {
   goTo: (page: string) => void;
 }
 
 export default function CentersOfInquiryPage({ goTo }: Props) {
   const [activePillar, setActivePillar] = useState(0);
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
 
   return (
     <>
@@ -322,19 +365,99 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
               </p>
             </div>
           </div>
+        </section>
 
-          {/* Visual: Global Node Map */}
-          <div className="mt-8 border border-gray-200 bg-gray-50 p-8 text-center">
-            <p className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-4">45 Global Nodes Across 15 Centers</p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {centers.map((c) => (
-                <div key={c.num} className="text-center">
-                  <div className="w-8 h-8 bg-gray-900 flex items-center justify-center text-white text-[9px] font-bold">{c.num}</div>
-                  <div className="mt-1 text-[8px] text-gray-400 leading-tight max-w-[80px]">{c.nodes}</div>
-                </div>
-              ))}
-            </div>
+        {/* ── #3 Global Node Network Map ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Global Node Network</SectionHeading>
+            <hr className="border-t border-gray-200" />
           </div>
+          <p className="text-sm text-gray-600 max-w-3xl leading-relaxed">
+            45 nodes across 6 continents — each a physical anchor where learners, investigators, and community partners converge. Hover over any node to discover which Center calls it home and what grand challenge it pursues.
+          </p>
+
+          <div className="w-full max-w-4xl mx-auto border border-gray-200 bg-gray-50 p-4">
+            <svg viewBox="0 0 1000 500" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Background */}
+              <rect width="1000" height="500" fill="#f9fafb" />
+
+              {/* Grid lines */}
+              {[100, 200, 300, 400].map(y => (
+                <line key={`h${y}`} x1="0" y1={y} x2="1000" y2={y} stroke="#e5e7eb" strokeWidth="0.5" />
+              ))}
+              {[200, 400, 600, 800].map(x => (
+                <line key={`v${x}`} x1={x} y1="0" x2={x} y2="500" stroke="#e5e7eb" strokeWidth="0.5" />
+              ))}
+
+              {/* Simplified continent shapes */}
+              {/* Africa */}
+              <path d="M 470,120 L 500,100 L 520,120 L 540,160 L 550,200 L 540,260 L 520,320 L 500,350 L 480,340 L 470,300 L 460,240 L 460,180 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* South America */}
+              <path d="M 280,180 L 320,160 L 340,200 L 350,260 L 340,320 L 320,380 L 300,400 L 280,380 L 270,320 L 260,260 L 270,200 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Europe */}
+              <path d="M 460,60 L 500,50 L 540,60 L 550,80 L 530,100 L 500,110 L 470,100 L 460,80 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Asia */}
+              <path d="M 560,50 L 700,40 L 780,60 L 800,100 L 780,140 L 720,160 L 660,170 L 600,150 L 560,120 L 550,80 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* Australia */}
+              <path d="M 760,280 L 820,270 L 860,290 L 870,330 L 840,360 L 800,360 L 770,340 L 750,310 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+              {/* North America */}
+              <path d="M 120,60 L 220,40 L 280,60 L 300,100 L 280,140 L 240,160 L 200,170 L 160,160 L 130,130 L 110,100 Z" fill="#e5e7eb" stroke="#d1d5db" strokeWidth="1" />
+
+              {/* Node pins */}
+              {nodeLocations.map((node, i) => (
+                <g key={node.city}
+                   onMouseEnter={() => setHoveredNode(i)}
+                   onMouseLeave={() => setHoveredNode(null)}
+                   className="cursor-pointer"
+                >
+                  {/* Glow effect */}
+                  <circle cx={node.x} cy={node.y} r={hoveredNode === i ? 14 : 10} fill="#8A0000" opacity={hoveredNode === i ? 0.12 : 0.06} className="transition-all duration-300" />
+                  {/* Dot */}
+                  <circle cx={node.x} cy={node.y} r={hoveredNode === i ? 5 : 3.5} fill="#8A0000" className="transition-all duration-300" />
+                  {/* City label */}
+                  <text x={node.x} y={node.y - 10} textAnchor="middle" style={{fontSize:'7.5px', fontWeight:'bold', fill:'#8A0000'}}>{node.city}</text>
+
+                  {/* Tooltip on hover */}
+                  {hoveredNode === i && (
+                    <g>
+                      <rect x={node.x - 110} y={node.y + 10} width="220" height="42" rx="3" fill="white" stroke="#8A0000" strokeWidth="1" />
+                      <text x={node.x} y={node.y + 26} textAnchor="middle" style={{fontSize:'8.5px', fontWeight:'bold', fill:'#8A0000'}}>{node.center}</text>
+                      <text x={node.x} y={node.y + 40} textAnchor="middle" style={{fontSize:'7.5px', fill:'#6B7280'}}>{node.focus}</text>
+                    </g>
+                  )}
+                </g>
+              ))}
+
+              {/* Legend */}
+              <g transform="translate(30, 420)">
+                <rect width="180" height="40" fill="white" stroke="#e5e7eb" strokeWidth="1" rx="2" />
+                <circle cx="20" cy="20" r="3.5" fill="#8A0000" />
+                <text x="35" y="24" style={{fontSize:'9px', fill:'#6B7280'}}>Center Node Location</text>
+              </g>
+
+              {/* Title */}
+              <text x="970" y="485" textAnchor="end" style={{fontSize:'9px', letterSpacing:'0.15em', fill:'#9CA3AF'}} className="font-mono uppercase">Global Node Network — Artemis 2100</text>
+            </svg>
+          </div>
+        </section>
+
+        {/* ── Timeline ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Timeline</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <Timeline events={timelineEvents} />
+        </section>
+
+        {/* ── Headlines from 2100 ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Headlines from 2100</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <HeadlinesFrom2100 headlines={headlines} />
         </section>
 
         {/* ── The Achievement ── */}
