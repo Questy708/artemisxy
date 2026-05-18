@@ -1,26 +1,65 @@
 'use client';
 
+import { useState } from "react";
 import { Play } from "lucide-react";
 import { SectionHeading, HeroHeader, ExploreAnotherFuture } from "../Shared";
+
+/* ─── Real Center Data (from Artemis University) ─── */
+const centers = [
+  { num: '01', name: 'Frontiers of Artemis Research', desc: 'The coordinating hub defining Artemis\'s research identity, seeding bold interdisciplinary inquiries.', nodes: 'Valletta — Tokyo — San Francisco', investigators: 10, fellows: 40 },
+  { num: '02', name: 'Civilization Architecture', desc: 'Designing governance systems, legal frameworks, and social contracts for resilient civilizations.', nodes: 'Geneva — Singapore — Accra', investigators: 12, fellows: 44 },
+  { num: '03', name: 'Planetary Systems', desc: 'Understanding Earth as an integrated system — and extending that understanding to other worlds.', nodes: 'Reykjavik — Sydney — São Paulo', investigators: 11, fellows: 42 },
+  { num: '04', name: 'Space & Frontier Science', desc: 'Pushing human presence beyond Earth — orbital habitats, deep-space propulsion, cosmic expansion ethics.', nodes: 'Houston — Darmstadt — Tanegashima', investigators: 13, fellows: 48 },
+  { num: '05', name: 'Emerging Technologies', desc: 'Tracking and shaping quantum computing, synthetic biology, neurotechnology, and their convergence.', nodes: 'Zurich — Seoul — Boston', investigators: 14, fellows: 50 },
+  { num: '06', name: 'Next-Gen Education', desc: 'Reimagining learning with AI tutors, immersive environments, and lifelong learning continua.', nodes: 'Helsinki — Melbourne — Nairobi', investigators: 9, fellows: 36 },
+  { num: '07', name: 'Materials, Matter & Manufacturing Futures', desc: 'Metamaterials, programmable matter, additive manufacturing at scale.', nodes: 'Munich — Shenzhen — Detroit', investigators: 11, fellows: 38 },
+  { num: '08', name: 'Agriculture, Food Systems', desc: 'Precision agriculture, cellular agriculture, closed-loop food ecosystems.', nodes: 'Wageningen — Hyderabad — Davis', investigators: 10, fellows: 40 },
+  { num: '09', name: 'Robotics, Mechatronics & Physical Autonomy', desc: 'From surgical micro-robots to autonomous construction crews and swarm logistics.', nodes: 'Tokyo — Zurich — Pittsburgh', investigators: 13, fellows: 46 },
+  { num: '10', name: 'Gaming & Worldbuilding', desc: 'Play, simulation, and narrative worldbuilding as research and civic imagination tools.', nodes: 'Montreal — Kyoto — Stockholm', investigators: 8, fellows: 32 },
+  { num: '11', name: 'Energy Systems', desc: 'Post-carbon energy infrastructure: fusion, orbital solar, microgrids, energy sovereignty.', nodes: 'Copenhagen — Abu Dhabi — Santiago', investigators: 12, fellows: 44 },
+  { num: '12', name: 'Health & Bioethics', desc: 'Advancing health while examining moral dimensions of biomedical innovation.', nodes: 'Boston — Cape Town — Hyderabad', investigators: 14, fellows: 52 },
+  { num: '13', name: 'Urban Futures', desc: 'Designing resilient, equitable, adaptive cities.', nodes: 'Copenhagen — Medellín — Singapore', investigators: 10, fellows: 38 },
+  { num: '14', name: 'Biotech & Life Sciences', desc: 'Gene editing, synthetic organisms, ecosystem engineering, de-extinction.', nodes: 'Cambridge — Basel — Guangzhou', investigators: 15, fellows: 54 },
+  { num: '15', name: 'Fintech, DeFi & Economics', desc: 'Rethinking money, markets, and economic governance for a decentralized world.', nodes: 'London — Singapore — Lagos', investigators: 11, fellows: 42 },
+];
+
+const pillars = [
+  { title: 'Unified Knowledge', desc: 'Centers replace departments — knowledge as a cohesive whole, fostering a "philosophical habit of mind." When a biologist, a philosopher, and a computer scientist share a research agenda, the questions they ask become fundamentally different — and so do the answers they discover.' },
+  { title: 'Junior Fellows', desc: 'Students join as full participants — not peripheral interns. Every capstone must align with a Center mission, evaluated against dual criteria: epistemic contribution and civic impact. Centers function as research institutes, think tanks, and innovation incubators simultaneously.' },
+  { title: 'Core Investigators', desc: 'Long-term, renewable appointments free investigators from grant cycles. Intellectual risk-taking replaces short-term, outcome-predictable projects. Investigators anchor epistemic rigour, mentoring junior fellows and shaping research agendas that span years.' },
+  { title: 'Translational Programs', desc: 'Bridge research → application: IP licensing, funding, entrepreneurial mentorship, ethical oversight. Every translational project is reviewed for social implications, ensuring application never compromises equity, sustainability, and human dignity.' },
+  { title: 'Technology Centers', desc: 'The technological backbone — centralized innovation hub providing cutting-edge resources. Bio-fabrication labs, quantum computing cleanrooms, computational modelling infrastructure. Breakthrough tools developed for one domain are rapidly available across the entire network.' },
+];
+
+const guildLayers = [
+  { layer: 'Inquiry', desc: 'Transdisciplinary research advancing foundational questions', icon: '◆' },
+  { layer: 'Capstone Catalysts', desc: 'Student projects embedded in live Guild missions', icon: '◇' },
+  { layer: 'Deployment Interfaces', desc: 'Field-testing tools in civic, planetary, industry settings', icon: '▲' },
+  { layer: 'Commons Nodes', desc: 'Open-access outputs with modular remix licenses', icon: '○' },
+  { layer: 'Challenge Engines', desc: 'Seasonal sprints (2-6 weeks) and residencies', icon: '△' },
+];
 
 interface Props {
   goTo: (page: string) => void;
 }
 
 export default function CentersOfInquiryPage({ goTo }: Props) {
+  const [activePillar, setActivePillar] = useState(0);
+
   return (
     <>
       <HeroHeader
         title="Centers of Inquiry"
-        description="In 2100, we look back at the moment Artemis abolished the department and replaced it with interdisciplinary hubs — reimagining not just what students learn, but where learning happens, and who it happens with."
+        description="In 2100, we look back at the moment Artemis abolished the department and replaced it with interdisciplinary hubs organized around grand challenges — reimagining not just what students learn, but where learning happens, and who it happens with."
         bgGradientClass="bg-gradient-to-tr from-[#1a1a2e] via-[#16213e] to-[#0f3460]"
       />
       <div className="max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 py-16 lg:py-24 space-y-24">
 
+        {/* ── Summary ── */}
         <section className="space-y-6">
           <SectionHeading>A Summary</SectionHeading>
           <p className="text-sm text-gray-600">
-            Step into a virtual time capsule to discover how Artemis transformed the very architecture of knowledge — replacing departments with Centers of Inquiry, and reimagining &ldquo;place&rdquo; as a fluid, borderless, globally connected experience rather than a fixed campus with fixed boundaries.
+            Step into a virtual time capsule to discover how Artemis replaced the department with 15 Centers of Inquiry — each organized around a grand challenge, each spanning three global nodes, each dissolving the boundaries between disciplines, generations, and geographies.
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
@@ -40,47 +79,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
           </div>
         </section>
 
-        <section className="space-y-12">
-          <div className="space-y-4">
-            <SectionHeading>Key Details</SectionHeading>
-            <hr className="border-t border-gray-200" />
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 md:gap-24 relative">
-            {/* Left Column */}
-            <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-[#0f3460]">Dept</div>
-              <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
-                Knowledge was organized into departments — rigid silos that separated disciplines, isolated scholars, and trained students to think within walls they never chose. A physics student never sat with a poet. An economist never crossed paths with an ecologist. The campus was a map of boundaries.
-              </h3>
-
-              <ul className="text-xs text-gray-600 space-y-3 divide-y divide-gray-100">
-                 <li className="pt-2">Disciplines housed in separate buildings, budgets, and cultures</li>
-                 <li className="pt-2">Students declared a major and stayed within its borders</li>
-                 <li className="pt-2">Interdisciplinary work was the exception, not the architecture</li>
-                 <li className="pt-2">Campus was a fixed location — attendance meant relocation</li>
-                 <li className="pt-2">Global presence meant satellite campuses, not distributed collaboration</li>
-              </ul>
-            </div>
-
-            {/* Right Column */}
-            <div className="space-y-8 relative">
-              <div className="absolute -top-16 left-0 opacity-10 text-[120px] italic font-serif leading-none pointer-events-none text-[#0f3460]">Hub</div>
-              <h3 className="text-xl leading-relaxed font-normal bg-white relative z-10 p-2">
-                Centers of Inquiry dissolved the walls. Organized around grand challenges rather than academic traditions, these interdisciplinary hubs brought together everyone whose work touched a problem — regardless of discipline, geography, or generation. The campus became a network, not a location.
-              </h3>
-
-              <ul className="text-xs text-gray-600 space-y-3 divide-y divide-gray-100">
-                 <li className="pt-2">Hubs organized by challenge, not discipline</li>
-                 <li className="pt-2">Students moved fluidly between centers based on their mission</li>
-                 <li className="pt-2">Interdisciplinary collaboration was the default, not the exception</li>
-                 <li className="pt-2">Physical, virtual, and hybrid spaces for every mode of learning</li>
-                 <li className="pt-2">Global network of Impact Labs, Synchrony Pods, and partner sites</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
+        {/* ── Historical Notes ── */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>Historical Notes</SectionHeading>
@@ -91,143 +90,211 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm">The Setting</h4>
               <p className="font-bold italic text-sm text-gray-800 leading-relaxed">
-                The department was the atom of the university — the indivisible unit around which everything was organized. Faculty were hired by departments, promoted by departments, and protected by departments. Students were admitted to departments, advised by departments, and credentialed by departments. The entire architecture of higher education was departmental.
+                The department was the atom of the university — the indivisible unit around which everything was organized. Faculty were hired, promoted, and protected by departments. Students were admitted, advised, and credentialed by departments. The entire architecture of higher education was departmental.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                But the world&apos;s great challenges — climate change, pandemics, inequality, democratic erosion — did not respect departmental boundaries. They were inherently interdisciplinary, requiring the integration of knowledge, methods, and perspectives that no single department could provide. The gap between how problems existed in the world and how universities were organized to address them had become a chasm.
+                But the world&apos;s great challenges — climate change, pandemics, inequality, democratic erosion — did not respect departmental boundaries. They were inherently interdisciplinary, requiring integration of knowledge that no single department could provide. The gap between how problems existed in the world and how universities were organized to address them had become a chasm.
               </p>
             </div>
-
-            <div className="space-y-4 mt-8 md:mt-0">
-              <h4 className="font-bold italic uppercase tracking-wider text-sm">There Were Early Signs That A Change Was Needed</h4>
+            <div className="space-y-4">
+              <h4 className="font-bold italic uppercase tracking-wider text-sm">The Shift</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Interdisciplinary programs had been proliferating for decades — environmental studies, bioengineering, digital humanities — but they existed as exceptions within the departmental rule, often underfunded and always dependent on the goodwill of the very departments they sought to transcend. The most innovative research was already happening at the intersections, yet the institutional architecture discouraged exactly the kind of boundary-crossing that the future demanded.
+                Artemis abolished departments entirely, replacing them with 15 Centers of Inquiry — interdisciplinary hubs organized around grand challenges rather than historical divisions of academic knowledge. Where departments created silos, Centers created bridges. Where departments trained students to think within walls, Centers trained them to think across landscapes.
               </p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Meanwhile, the concept of &ldquo;place&rdquo; was being radically redefined. Remote work, virtual collaboration, and global networks had already dissolved the assumption that productive intellectual work required physical co-location. If the workplace had been liberated from geography, why not the campus?
+              <p className="text-sm text-gray-600 leading-relaxed italic">
+                &ldquo;The department was a container built for a world that no longer existed — a world where knowledge sat neatly in labeled boxes. But the most important questions had already escaped those boxes and were roaming free.&rdquo; — Dr. Lena Vasquez, 2028
               </p>
             </div>
           </div>
         </section>
 
+        {/* ── The 15 Centers (Visual Grid) ── */}
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>The Shift</SectionHeading>
+            <SectionHeading>The 15 Centers</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
+          <p className="text-sm text-gray-600 max-w-3xl">Each Center spans three global nodes, houses a team of Core Investigators and Junior Fellows, and pursues research organized around a single grand challenge. Together, they form a complete map of the questions that matter most to humanity&apos;s future.</p>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-              <p>
-                The shift was both structural and spatial. Structurally, Artemis abolished departments entirely, replacing them with Centers of Inquiry — interdisciplinary hubs organized around the grand challenges facing humanity rather than the historical divisions of academic knowledge. No longer would a student of water sustainability need to choose between engineering, ecology, public policy, and anthropology. At a Center of Inquiry, all of these perspectives converged around the challenge itself.
-              </p>
-              <p>
-                Spatially, the shift was equally radical. The campus was no longer a single location — it was a distributed network. Physical hubs existed in cities around the world, each designed for the specific challenges and communities it served. Virtual spaces used immersive telepresence, holographic collaboration, and AI-moderated environments to make distance irrelevant. The very concept of &ldquo;place&rdquo; was reimagined: where you learned mattered less than what you learned and who you learned with.
-              </p>
-            </div>
-            <div>
-               <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800" className="w-full h-full object-cover" alt="Centers of Inquiry" />
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            {centers.map((c) => (
+              <div key={c.num} className="border border-gray-200 p-5 hover:border-[#0f3460] transition-colors group cursor-default">
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-xs font-mono text-[#0f3460] font-bold">{c.num}</span>
+                  <div className="flex gap-2 text-[10px] text-gray-400">
+                    <span>{c.investigators} CI</span>
+                    <span>·</span>
+                    <span>{c.fellows} JF</span>
+                  </div>
+                </div>
+                <h4 className="font-bold text-sm text-gray-900 leading-tight group-hover:text-[#0f3460] transition-colors">{c.name}</h4>
+                <p className="text-xs text-gray-500 mt-2 leading-relaxed">{c.desc}</p>
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">{c.nodes}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
+        {/* ── The 5 Pillars (Interactive Tabs) ── */}
         <section className="space-y-12">
           <div className="space-y-4">
-            <SectionHeading>The Four Centers</SectionHeading>
+            <SectionHeading>The Five Pillars</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
+          <p className="text-sm text-gray-600 max-w-3xl">Every Center of Inquiry is built on five structural pillars — the organizational DNA that makes the model fundamentally different from the departmental system it replaced.</p>
 
-          <div className="space-y-16">
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Technology Development</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Where engineering, computer science, materials research, and quantum physics converge to create the tools and systems that will define the next century. This Center attracts everyone from AI architects to biotechnology pioneers, fostering collaboration between builders and theorists who would never have crossed paths in a traditional departmental structure. Researchers work alongside practitioners, students alongside seasoned Catalysts — all united by the conviction that technology must serve humanity, not the other way around.
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  The Technology Development Center maintains fabrication labs, quantum computing clusters, and simulation environments distributed across three continents. Its signature program — the Build Sprint — brings together mixed teams of students, Navigators, and external partners for intensive 12-week prototyping cycles that have produced breakthroughs in clean energy, medical diagnostics, and adaptive infrastructure.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-blue-50 to-indigo-50 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-indigo-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="text-4xl font-serif italic text-indigo-400">T</span>
-                      <p className="text-[10px] text-indigo-400 uppercase tracking-widest mt-2">Technology<br/>Development</p>
+          <div className="mt-8">
+            {/* Pillar Tabs */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {pillars.map((p, i) => (
+                <button
+                  key={p.title}
+                  onClick={() => setActivePillar(i)}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border ${
+                    activePillar === i
+                      ? 'bg-[#0f3460] text-white border-[#0f3460]'
+                      : 'bg-white text-gray-500 border-gray-200 hover:border-[#0f3460] hover:text-[#0f3460]'
+                  }`}
+                >
+                  {p.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Active Pillar Content */}
+            <div className="border border-gray-200 p-8 md:p-12 bg-gray-50">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 italic">{pillars[activePillar].title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed max-w-2xl">{pillars[activePillar].desc}</p>
+            </div>
+          </div>
+
+          {/* Visual: Pillar Architecture */}
+          <div className="relative w-full max-w-3xl mx-auto mt-12">
+            <div className="flex items-end justify-center gap-1 h-48">
+              {pillars.map((p, i) => (
+                <button
+                  key={p.title}
+                  onClick={() => setActivePillar(i)}
+                  className={`flex-1 max-w-[120px] transition-all duration-500 cursor-pointer flex flex-col items-center justify-end ${
+                    activePillar === i ? 'bg-[#0f3460]' : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  style={{ height: `${60 + (activePillar === i ? 40 : i * 10)}%` }}
+                >
+                  <span className={`text-[9px] font-bold uppercase tracking-wider mb-2 whitespace-nowrap ${
+                    activePillar === i ? 'text-white' : 'text-gray-600'
+                  }`} style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+                    {p.title}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="w-full h-2 bg-[#0f3460] mt-0" />
+            <p className="text-center text-[10px] font-mono text-gray-400 uppercase tracking-widest mt-3">Foundation: Centers of Inquiry</p>
+          </div>
+        </section>
+
+        {/* ── Guild Layers (Visual) ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Guild Layers</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl">Each Center operates through five nested Guild Layers — from foundational inquiry to challenge-driven action. Together, they ensure that research doesn&apos;t stay in the lab but cycles through application, reflection, and iteration.</p>
+
+          <div className="max-w-3xl mx-auto mt-8">
+            <div className="relative">
+              {/* Concentric layers visualization */}
+              <div className="flex flex-col items-center gap-2">
+                {guildLayers.map((g, i) => (
+                  <div
+                    key={g.layer}
+                    className="w-full border border-gray-200 p-4 flex items-center gap-4 hover:border-[#0f3460] transition-colors"
+                    style={{ marginLeft: `${i * 16}px`, marginRight: `${i * 16}px` }}
+                  >
+                    <span className="text-lg text-[#0f3460] font-serif">{g.icon}</span>
+                    <div>
+                      <h4 className="font-bold text-xs uppercase tracking-wider text-gray-900">{g.layer}</h4>
+                      <p className="text-xs text-gray-500 mt-1">{g.desc}</p>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Cycles ── */}
+        <section className="space-y-12">
+          <div className="space-y-4">
+            <SectionHeading>Cycles</SectionHeading>
+            <hr className="border-t border-gray-200" />
+          </div>
+          <p className="text-sm text-gray-600 max-w-3xl">Learning and research at the Centers move through three distinct cycles — each with its own rhythm, intensity, and output. Together, they ensure that inquiry is never static.</p>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-8">
+            <div className="border border-gray-200 p-6 space-y-4">
+              <div className="text-xs font-mono text-[#0f3460] font-bold">3–6 MONTHS</div>
+              <h4 className="font-bold text-lg text-gray-900 italic">Residency Cycles</h4>
+              <p className="text-xs text-gray-600 leading-relaxed">Immersive embeds in Guild missions. Students and fellows rotate across global nodes — from Nairobi for urban futures to Zurich for emerging tech — producing capstone prototypes tested in civic contexts.</p>
+              <div className="pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span>CoI Proposal</span>
+                  <span>→</span>
+                  <span>Team Formation</span>
+                  <span>→</span>
+                  <span>Research</span>
+                  <span>→</span>
+                  <span>Field Lab</span>
+                  <span>→</span>
+                  <span>Deploy</span>
                 </div>
               </div>
             </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Translational Programs</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Where knowledge moves from theory to practice. This Center bridges academic research and real-world application, pairing scholars with community leaders, policymakers, and industry partners. It is the engine of impact — ensuring that insights generated within Artemis don&apos;t remain confined to journals and conferences but reach the communities and contexts where they are needed most.
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Translational Programs operates Impact Labs in over forty countries, each a living laboratory where Artemis learners work alongside local partners on challenges defined by the community, not the academy. The Center also manages the Policy Bridge — a program that places Artemis graduates in government and NGO roles worldwide, translating academic expertise into actionable governance.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-teal-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="text-4xl font-serif italic text-teal-400">Tr</span>
-                      <p className="text-[10px] text-teal-400 uppercase tracking-widest mt-2">Translational<br/>Programs</p>
-                    </div>
-                  </div>
+            <div className="border border-gray-200 p-6 space-y-4">
+              <div className="text-xs font-mono text-[#0f3460] font-bold">2–6 WEEKS</div>
+              <h4 className="font-bold text-lg text-gray-900 italic">Sprint Cycles</h4>
+              <p className="text-xs text-gray-600 leading-relaxed">High-intensity challenges drawn from CoI priorities. Open to junior fellows and external collaborators, culminating in hackathon-style deliverables. Mandatory for Year 3+ students.</p>
+              <div className="pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span>Challenge</span>
+                  <span>→</span>
+                  <span>Team Up</span>
+                  <span>→</span>
+                  <span>Ideate</span>
+                  <span>→</span>
+                  <span>Prototype</span>
+                  <span>→</span>
+                  <span>Open IP</span>
                 </div>
               </div>
             </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Human Flourishing</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Where psychology, philosophy, neuroscience, and the arts converge to explore what it means to live a meaningful life. This Center addresses the questions that disciplines alone cannot answer — about purpose, well-being, identity, and the nature of human potential. It is the soul of Artemis, ensuring that technological and structural innovation never loses sight of the human beings they are meant to serve.
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Human Flourishing houses the Cognitive Biofeedback Mirror research program, the Slow Cognition initiative, and the Arts as Inquiry collective — a group of artists-in-residence who use creative practice as a mode of research. The Center also stewards the Legacy Builders program, ensuring that the wisdom of elder scholars is preserved and transmitted across generations.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-rose-50 to-pink-50 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-rose-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="text-4xl font-serif italic text-rose-400">H</span>
-                      <p className="text-[10px] text-rose-400 uppercase tracking-widest mt-2">Human<br/>Flourishing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Planetary Systems</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Where climate science, ecology, economics, and governance come together to address the existential challenges of the Planetary Phase of Civilization. This Center trains the leaders and thinkers who will navigate the Great Transition — the progressive transformation from industrial-era civilization to a sustainable, equitable, and globally coordinated future.
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Planetary Systems operates the Global Challenge Simulator, runs the Synchrony Pod network for real-time international collaboration, and coordinates Artemis&apos;s partnership with the United Nations, the African Union, and regional governance bodies worldwide. Its graduates don&apos;t just study the future of civilization — they build it.
-                </p>
-              </div>
-              <div className="flex justify-center items-center">
-                <div className="w-48 h-64 bg-gradient-to-br from-amber-50 to-yellow-50 p-4 border border-gray-300">
-                  <div className="w-full h-full border border-dashed border-amber-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="text-4xl font-serif italic text-amber-400">P</span>
-                      <p className="text-[10px] text-amber-400 uppercase tracking-widest mt-2">Planetary<br/>Systems</p>
-                    </div>
-                  </div>
+            <div className="border border-gray-200 p-6 space-y-4">
+              <div className="text-xs font-mono text-[#0f3460] font-bold">ONGOING · QUARTERLY REVIEWS</div>
+              <h4 className="font-bold text-lg text-gray-900 italic">Deployment Cycles</h4>
+              <p className="text-xs text-gray-600 leading-relaxed">Real-world testing in planetary settings, with iterative feedback from civic advisors. Outputs loop back to Inquiry layers for refinement — capstones contribute to the Knowledge Core, not just the classroom.</p>
+              <div className="pt-4 border-t border-gray-100">
+                <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                  <span className="w-1.5 h-1.5 bg-[#0f3460] rounded-full" />
+                  <span>Select</span>
+                  <span>→</span>
+                  <span>Field Test</span>
+                  <span>→</span>
+                  <span>Feedback</span>
+                  <span>→</span>
+                  <span>Refine</span>
+                  <span>→</span>
+                  <span>Archive</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* ── Reimagining Place ── */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>Reimagining Place</SectionHeading>
@@ -238,39 +305,54 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">The Distributed Campus</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Artemis&apos;s campus was never a single location — it was a network. Physical hubs existed in cities chosen for their cultural richness, strategic relevance, and connection to the challenges the Centers of Inquiry were designed to address. Each hub was architecturally distinct, reflecting the character and needs of its community, yet all were connected by immersive telepresence technology that made collaboration across time zones feel like sitting in the same room.
+                Every Center spans three global nodes — strategically chosen for cultural richness, challenge relevance, and community connection. A learner might begin in Valletta, deepen in Tokyo, and activate in San Francisco — all within a single Center of Inquiry. The distributed campus didn&apos;t just remove geographic barriers; it transformed them into opportunities for cultural immersion and local impact.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Learners could begin their journey in Kampala, deepen their mastery in Singapore, and activate their skills in São Paulo — all within a single Artemis education. The distributed campus didn&apos;t just remove geographic barriers; it transformed them into opportunities for cultural immersion, local impact, and global perspective.
+                With 15 Centers × 3 nodes each, Artemis maintains 45 physical locations worldwide — plus virtual environments, Synchrony Pods, and partner sites that extend the network to every inhabited continent.
               </p>
             </div>
             <div className="space-y-4">
               <h4 className="font-bold italic uppercase tracking-wider text-sm text-gray-900">Synchrony Pods & Virtual Spaces</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Synchrony Pods were groundbreaking technology enabling truly immersive collaboration between students across the world, regardless of time zones or language barriers. Advanced telepresence created the illusion of physical co-presence, while haptic feedback systems allowed students to manipulate virtual objects together. Real-time translation AI eliminated language barriers entirely.
+                Synchrony Pods enable truly immersive collaboration regardless of time zones or language barriers. Advanced telepresence creates the illusion of physical co-presence, haptic feedback allows manipulation of virtual objects together, and real-time translation AI eliminates language barriers entirely.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Beyond the Pods, Artemis developed a rich ecosystem of virtual learning environments — from holographic design studios to simulated field sites, from meditative reflection gardens to high-intensity crisis simulations. These spaces were not substitutes for physical presence; they were expansions of what &ldquo;place&rdquo; could mean. At Artemis, place was no longer defined by geography. It was defined by purpose.
+                Beyond the Pods, a rich ecosystem of virtual learning environments — holographic design studios, simulated field sites, meditative reflection gardens, high-intensity crisis simulations — expanded what &ldquo;place&rdquo; could mean. At Artemis, place is defined by purpose, not geography.
               </p>
+            </div>
+          </div>
+
+          {/* Visual: Global Node Map */}
+          <div className="mt-8 border border-gray-200 bg-gray-50 p-8 text-center">
+            <p className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-4">45 Global Nodes Across 15 Centers</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {centers.map((c) => (
+                <div key={c.num} className="text-center">
+                  <div className="w-8 h-8 bg-[#0f3460] flex items-center justify-center text-white text-[9px] font-bold">{c.num}</div>
+                  <div className="mt-1 text-[8px] text-gray-400 leading-tight max-w-[80px]">{c.nodes}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* ── The Achievement ── */}
         <section className="space-y-8">
           <SectionHeading>The Achievement</SectionHeading>
           <div className="space-y-4 text-sm text-gray-600">
             <p>In Centers of Inquiry:</p>
             <ul className="list-disc pl-5 space-y-2 leading-relaxed">
-              <li>Artemis abolished the department, replacing siloed disciplines with interdisciplinary hubs organized around grand challenges</li>
-              <li>Students moved fluidly between Centers, building unique combinations of knowledge no single department could provide</li>
-              <li>The campus became a distributed network — physical hubs in cities worldwide, connected by immersive technology</li>
-              <li>Place was reimagined: no longer a fixed location, but a purpose-driven constellation of spaces physical, virtual, and hybrid</li>
-              <li>Synchrony Pods and virtual environments made geography irrelevant to meaningful collaboration</li>
-              <li>The gap between how problems exist in the world and how universities address them was finally closed</li>
+              <li>Artemis abolished the department, replacing siloed disciplines with 15 interdisciplinary hubs organized around grand challenges</li>
+              <li>Five structural pillars — Unified Knowledge, Junior Fellows, Core Investigators, Translational Programs, Technology Centers — form the organizational DNA</li>
+              <li>Guild Layers and Cycles ensure research cycles from inquiry through deployment, never staying in the lab</li>
+              <li>The campus became a distributed network of 45 global nodes across every inhabited continent</li>
+              <li>Place was reimagined: defined by purpose, not geography — physical, virtual, and hybrid</li>
+              <li>By 2080, the Centers of Inquiry model had spread to 200+ universities worldwide</li>
             </ul>
           </div>
         </section>
 
+        {/* ── Exhibit Article Archive ── */}
         <section className="space-y-24">
           <div>
             <hr className="border-t border-gray-200 mb-12" />
@@ -285,8 +367,8 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                 <h4 className="font-bold italic uppercase tracking-wider text-sm">The Last Department: A Requiem</h4>
                 <p className="italic text-xs text-gray-500">Archived documentation from the Department Closure Ceremonies, 2027–2032</p>
                 <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The abolition of departments at Artemis was not a single event but a carefully orchestrated transition that unfolded over five years. Each department held a Closure Ceremony — part celebration, part mourning, part provocation — in which faculty and students publicly reflected on what the department had given the world and what its boundaries had cost. The ceremonies were deliberately emotional, acknowledging that disciplines carry identity, community, and belonging alongside their intellectual content.</p>
-                  <p>The last department to close was Philosophy — fittingly, the discipline that had spent millennia questioning the nature of boundaries. Its Closure Ceremony became one of the most-watched events in Artemis history, with the department&apos;s final chair declaring: &ldquo;We do not end. We dissolve into everything. Philosophy was never a container — it was a way of asking. And asking has no department.&rdquo;</p>
+                  <p>The abolition of departments was a carefully orchestrated transition over five years. Each department held a Closure Ceremony — part celebration, part mourning, part provocation — in which faculty and students publicly reflected on what the department had given the world and what its boundaries had cost.</p>
+                  <p>The last department to close was Philosophy. Its Closure Ceremony became one of the most-watched events in Artemis history, with the department&apos;s final chair declaring: &ldquo;We do not end. We dissolve into everything. Philosophy was never a container — it was a way of asking. And asking has no department.&rdquo;</p>
                 </div>
               </div>
               <div className="space-y-4">
@@ -305,8 +387,8 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
                 <h4 className="font-bold italic uppercase tracking-wider text-sm">The Kampala Hub: Architecture as Pedagogy</h4>
                 <p className="italic text-xs text-gray-500">Design documentation and impact assessment from the first Artemis Center of Inquiry building</p>
                 <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
-                  <p>The Kampala Hub was the first purpose-built Center of Inquiry — and its architecture was itself a provocation. There were no corridors, no offices with doors, no lecture halls. Instead, the building was organized around a series of overlapping &ldquo;convexities&rdquo; — open spaces where different activities naturally intersected. A quantum computing lab opened onto a ceramics studio. A policy simulation room shared a wall with a meditation garden. The building forced encounters that departmental architecture had spent centuries preventing.</p>
-                  <p>The Kampala Hub became a pilgrimage site for architects and educators worldwide, demonstrating that the physical environment of learning is not neutral — it either enables or prevents the kind of thinking the future requires. Within a decade, its design principles had been adapted for hubs on every inhabited continent.</p>
+                  <p>The Kampala Hub was the first purpose-built Center of Inquiry — and its architecture was itself a provocation. There were no corridors, no offices with doors, no lecture halls. Instead, the building was organized around overlapping &ldquo;convexities&rdquo; — open spaces where different activities naturally intersected. A quantum computing lab opened onto a ceramics studio. A policy simulation room shared a wall with a meditation garden.</p>
+                  <p>The building forced encounters that departmental architecture had spent centuries preventing. Within a decade, its design principles had been adapted for hubs on every inhabited continent, demonstrating that the physical environment of learning is not neutral — it either enables or prevents the kind of thinking the future requires.</p>
                 </div>
               </div>
               <div className="space-y-4">
