@@ -9,22 +9,40 @@ interface Props {
   goTo: (page: string) => void;
 }
 
-/* ─── Learner Profiles for Interactive Radar ─── */
+/* ─── Learner Profiles for Neural Constellation ─── */
 const learnerProfiles = [
   {
     name: "Amara Okafor",
     location: "Lagos, 2074",
     values: [92, 65, 88, 95, 72], // CT, TM, CI, CA, CS
+    tagline: "Civic engineer and community financier",
+    specializations: ["Data & Policy", "Urban Systems", "Community Finance"],
+    evidence: [
+      { title: "Designed floating school in Lagos", skills: "CI +12 · CA +8" },
+      { title: "Deployed microfinance platform in Medellín", skills: "CF spec · TM +6" },
+    ],
   },
   {
     name: "Kenji Tanaka",
     location: "Osaka, 2068",
     values: [71, 94, 60, 55, 89],
+    tagline: "Computational artist and systems architect",
+    specializations: ["Quantum Computing", "Generative Art", "Systems Design"],
+    evidence: [
+      { title: "Built quantum circuit visualizer for 12 research labs", skills: "TM +15 · CS +9" },
+      { title: "Composed algorithmic symphony performed by Osaka Philharmonic", skills: "CS spec · CT +4" },
+    ],
   },
   {
     name: "Elena Vasquez",
     location: "Bogotá, 2081",
     values: [78, 73, 82, 80, 85],
+    tagline: "Transdisciplinary bridge-builder and civic innovator",
+    specializations: ["Civic Innovation", "Andean Ecology", "Narrative Design"],
+    evidence: [
+      { title: "Mapped indigenous knowledge systems across 3 Andean communities", skills: "CI +10 · CA +7" },
+      { title: "Designed participatory governance toolkit for 14 municipalities", skills: "CA spec · CS +5" },
+    ],
   },
 ];
 
@@ -36,23 +54,31 @@ const axisLabels = [
   "Creative Synthesis",
 ];
 
-/* ─── Radar axis endpoints (matching the original pentagon geometry) ─── */
-const axesMax = [
-  { x: 0, y: -180 },     // Critical Thinking (top)
-  { x: 156, y: -51 },    // Technical Mastery (top-right)
-  { x: 96, y: 132 },     // Collaborative Impact (bottom-right)
-  { x: -96, y: 132 },    // Civic Adaptability (bottom-left)
-  { x: -156, y: -51 },   // Creative Synthesis (top-left)
+/* ─── Constellation node positions (5 competency nodes in a circle) ─── */
+const nodeBasePositions = [
+  { x: 0, y: -130 },     // Critical Thinking (top)
+  { x: 124, y: -40 },    // Technical Mastery (top-right)
+  { x: 76, y: 105 },     // Collaborative Impact (bottom-right)
+  { x: -76, y: 105 },    // Civic Adaptability (bottom-left)
+  { x: -124, y: -40 },   // Creative Synthesis (top-left)
 ];
 
-function computeRadarPoints(values: number[]) {
-  return values
-    .map((v, i) => {
-      const pct = v / 100;
-      return `${axesMax[i].x * pct},${axesMax[i].y * pct}`;
-    })
-    .join(" ");
-}
+// Evidence particles orbit around each node
+const evidenceParticles: { nodeIdx: number; angle: number; dist: number }[] = [
+  { nodeIdx: 0, angle: 0.4, dist: 28 },
+  { nodeIdx: 0, angle: 1.8, dist: 22 },
+  { nodeIdx: 0, angle: 3.2, dist: 30 },
+  { nodeIdx: 1, angle: 0.8, dist: 25 },
+  { nodeIdx: 1, angle: 2.5, dist: 32 },
+  { nodeIdx: 1, angle: 4.1, dist: 20 },
+  { nodeIdx: 2, angle: 0.3, dist: 26 },
+  { nodeIdx: 2, angle: 2.0, dist: 30 },
+  { nodeIdx: 3, angle: 1.1, dist: 28 },
+  { nodeIdx: 3, angle: 3.5, dist: 22 },
+  { nodeIdx: 4, angle: 0.6, dist: 24 },
+  { nodeIdx: 4, angle: 2.8, dist: 32 },
+  { nodeIdx: 4, angle: 4.4, dist: 18 },
+];
 
 /* ─── Timeline data ─── */
 const skillPrintTimeline: TimelineEvent[] = [
@@ -139,93 +165,251 @@ export default function AxisFlipPage({ goTo }: Props) {
           </div>
         </section>
 
-        {/* ═══ The SkillPrint — Interactive Radar (#5) ═══ */}
+        {/* ═══ The SkillPrint — Neural Constellation (#5) ═══ */}
         <section className="space-y-12">
           <div className="space-y-4">
             <SectionHeading>The SkillPrint</SectionHeading>
             <hr className="border-t border-gray-200" />
           </div>
-          <p className="text-sm text-gray-600 max-w-2xl">A SkillPrint is not a transcript — it is a living portrait of capability. Where transcripts list courses, SkillPrints map competencies across five dimensions, revealing not just what you studied, but what you can do, who you collaborate with, and where you are headed.</p>
+          <p className="text-sm text-gray-600 max-w-2xl">A SkillPrint is not a transcript — it is a living neural portrait of capability. Where transcripts list courses, SkillPrints map competencies as constellations of demonstrated ability: each node a skill cluster, each particle a verified achievement, each connection a relationship between domains.</p>
 
-          {/* Profile selector buttons */}
-          <div className="flex flex-wrap gap-3">
+          {/* Profile selector cards */}
+          <div className="grid md:grid-cols-3 gap-4">
             {learnerProfiles.map((profile, i) => (
               <button
                 key={i}
                 onClick={() => setActiveProfile(i)}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-wider border cursor-pointer transition-all duration-300 ${
+                className={`text-left p-5 border-2 cursor-pointer transition-all duration-500 ${
                   activeProfile === i
-                    ? "bg-[#8A0000] text-white border-[#8A0000]"
-                    : "bg-white text-gray-600 border-gray-300 hover:border-[#8A0000] hover:text-[#8A0000]"
+                    ? "border-[#8A0000] bg-[#8A0000]/5 shadow-sm"
+                    : "border-gray-200 bg-white hover:border-gray-400"
                 }`}
               >
-                {profile.name}, {profile.location}
+                <div className="flex items-center gap-3 mb-2">
+                  <div className={`w-8 h-8 flex items-center justify-center text-xs font-bold italic ${
+                    activeProfile === i ? "bg-[#8A0000] text-white" : "bg-gray-200 text-gray-500"
+                  } transition-colors duration-300`}>
+                    {profile.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <div className={`text-sm font-bold transition-colors duration-300 ${activeProfile === i ? "text-[#8A0000]" : "text-gray-900"}`}>
+                      {profile.name}
+                    </div>
+                    <div className="text-[10px] font-mono text-gray-400">{profile.location}</div>
+                  </div>
+                </div>
+                <p className="text-[11px] text-gray-500 italic leading-snug">{profile.tagline}</p>
+                {activeProfile === i && (
+                  <div className="mt-3 pt-3 border-t border-[#8A0000]/20 flex flex-wrap gap-1.5">
+                    {profile.specializations.map((spec) => (
+                      <span key={spec} className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider border border-[#8A0000]/30 text-[#8A0000] bg-[#8A0000]/5">
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </button>
             ))}
           </div>
 
-          {/* Interactive radar chart */}
-          <div className="w-full max-w-3xl mx-auto">
-            <svg viewBox="0 0 500 440" className="w-full" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(250,210)">
-                {/* Grid rings */}
-                <polygon points="0,-180 156,-51 96,132 -96,132 -156,-51" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
-                <polygon points="0,-135 117,-38 72,99 -72,99 -117,-38" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
-                <polygon points="0,-90 78,-26 48,66 -48,66 -78,-26" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
-                <polygon points="0,-45 39,-13 24,33 -24,33 -39,-13" fill="none" stroke="#e5e7eb" strokeWidth="1"/>
-                {/* Axes */}
-                <line x1="0" y1="0" x2="0" y2="-180" stroke="#d1d5db" strokeWidth="1"/>
-                <line x1="0" y1="0" x2="156" y2="-51" stroke="#d1d5db" strokeWidth="1"/>
-                <line x1="0" y1="0" x2="96" y2="132" stroke="#d1d5db" strokeWidth="1"/>
-                <line x1="0" y1="0" x2="-96" y2="132" stroke="#d1d5db" strokeWidth="1"/>
-                <line x1="0" y1="0" x2="-156" y2="-51" stroke="#d1d5db" strokeWidth="1"/>
+          {/* Neural Constellation visualization */}
+          <div className="w-full max-w-3xl mx-auto border border-gray-200 bg-gray-50/50 p-4">
+            <svg viewBox="0 0 500 400" className="w-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                {/* Glow filter for active nodes */}
+                <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                {/* Subtle pulse animation */}
+                <radialGradient id="centerGrad">
+                  <stop offset="0%" stopColor="#8A0000" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#8A0000" stopOpacity="0.2" />
+                </radialGradient>
+              </defs>
 
-                {/* Data polygon — animated via React state */}
-                <polygon
-                  points={computeRadarPoints(displayValues)}
-                  fill="rgba(138,0,0,0.15)"
-                  stroke="#8A0000"
-                  strokeWidth="2.5"
-                />
+              <g transform="translate(250,190)">
+                {/* Subtle background rings */}
+                <circle cx="0" cy="0" r="140" fill="none" stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="4,6" />
+                <circle cx="0" cy="0" r="95" fill="none" stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="4,6" />
+                <circle cx="0" cy="0" r="50" fill="none" stroke="#e5e7eb" strokeWidth="0.5" strokeDasharray="4,6" />
 
-                {/* Data points */}
-                {displayValues.map((v, i) => {
-                  const pct = v / 100;
+                {/* Cross-connections between competency nodes (dashed) */}
+                {displayValues.map((_, i) => {
+                  const next = (i + 2) % 5;
+                  const from = nodeBasePositions[i];
+                  const to = nodeBasePositions[next];
                   return (
-                    <circle
-                      key={i}
-                      cx={axesMax[i].x * pct}
-                      cy={axesMax[i].y * pct}
-                      r="5"
-                      fill="#8A0000"
+                    <line
+                      key={`cross-${i}`}
+                      x1={from.x} y1={from.y}
+                      x2={to.x} y2={to.y}
+                      stroke="#8A0000"
+                      strokeWidth="0.5"
+                      strokeDasharray="3,5"
+                      opacity="0.12"
                     />
                   );
                 })}
 
-                {/* Center dot */}
-                <circle cx="0" cy="0" r="3" fill="#8A0000"/>
+                {/* Connection lines from center to each node */}
+                {displayValues.map((v, i) => {
+                  const pct = v / 100;
+                  const nodePos = { x: nodeBasePositions[i].x * pct, y: nodeBasePositions[i].y * pct };
+                  return (
+                    <line
+                      key={`line-${i}`}
+                      x1="0" y1="0"
+                      x2={nodePos.x} y2={nodePos.y}
+                      stroke="#8A0000"
+                      strokeWidth="1.5"
+                      opacity={0.15 + (pct * 0.35)}
+                    />
+                  );
+                })}
+
+                {/* Connection lines between adjacent nodes */}
+                {displayValues.map((v, i) => {
+                  const next = (i + 1) % 5;
+                  const pct1 = v / 100;
+                  const pct2 = displayValues[next] / 100;
+                  const from = { x: nodeBasePositions[i].x * pct1, y: nodeBasePositions[i].y * pct1 };
+                  const to = { x: nodeBasePositions[next].x * pct2, y: nodeBasePositions[next].y * pct2 };
+                  return (
+                    <line
+                      key={`adj-${i}`}
+                      x1={from.x} y1={from.y}
+                      x2={to.x} y2={to.y}
+                      stroke="#8A0000"
+                      strokeWidth="1"
+                      opacity="0.15"
+                    />
+                  );
+                })}
+
+                {/* Evidence particles orbiting each node */}
+                {evidenceParticles.map((p, idx) => {
+                  const pct = displayValues[p.nodeIdx] / 100;
+                  const nodeX = nodeBasePositions[p.nodeIdx].x * pct;
+                  const nodeY = nodeBasePositions[p.nodeIdx].y * pct;
+                  const px = nodeX + Math.cos(p.angle) * p.dist * pct;
+                  const py = nodeY + Math.sin(p.angle) * p.dist * pct;
+                  return (
+                    <circle
+                      key={`particle-${idx}`}
+                      cx={px} cy={py}
+                      r={1.5 + pct}
+                      fill="#8A0000"
+                      opacity={0.15 + pct * 0.25}
+                    />
+                  );
+                })}
+
+                {/* Competency nodes — size and distance based on proficiency */}
+                {displayValues.map((v, i) => {
+                  const pct = v / 100;
+                  const nx = nodeBasePositions[i].x * pct;
+                  const ny = nodeBasePositions[i].y * pct;
+                  const nodeRadius = 6 + pct * 14;
+                  return (
+                    <g key={`node-${i}`}>
+                      {/* Outer glow ring */}
+                      <circle
+                        cx={nx} cy={ny}
+                        r={nodeRadius + 6}
+                        fill="#8A0000"
+                        opacity={0.04 + pct * 0.06}
+                      />
+                      {/* Node body */}
+                      <circle
+                        cx={nx} cy={ny}
+                        r={nodeRadius}
+                        fill="white"
+                        stroke="#8A0000"
+                        strokeWidth="2"
+                        filter="url(#nodeGlow)"
+                      />
+                      {/* Percentage inside node */}
+                      <text
+                        x={nx} y={ny + 1}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        style={{fontSize: `${8 + pct * 4}px`, fontWeight: 'bold', fill: '#8A0000'}}
+                      >
+                        {Math.round(v)}
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* Center node — the learner */}
+                <circle cx="0" cy="0" r="16" fill="url(#centerGrad)" />
+                <circle cx="0" cy="0" r="10" fill="#8A0000" />
+                <text x="0" y="1" textAnchor="middle" dominantBaseline="central" style={{fontSize:'7px', fontWeight:'bold', fill:'white', letterSpacing:'0.05em'}}>YOU</text>
               </g>
-              {/* Labels */}
-              <text x="250" y="22" textAnchor="middle" style={{fontSize:'11px', fontWeight:'bold'}} className="fill-gray-800">Critical Thinking</text>
-              <text x="430" y="172" textAnchor="start" style={{fontSize:'11px', fontWeight:'bold'}} className="fill-gray-800">Technical Mastery</text>
-              <text x="366" y="370" textAnchor="start" style={{fontSize:'11px', fontWeight:'bold'}} className="fill-gray-800">Collaborative Impact</text>
-              <text x="134" y="370" textAnchor="end" style={{fontSize:'11px', fontWeight:'bold'}} className="fill-gray-800">Civic Adaptability</text>
-              <text x="70" y="172" textAnchor="end" style={{fontSize:'11px', fontWeight:'bold'}} className="fill-gray-800">Creative Synthesis</text>
-              {/* Title — shows active profile */}
-              <text x="250" y="432" textAnchor="middle" style={{fontSize:'10px', letterSpacing:'0.15em'}} className="fill-gray-400 font-mono uppercase">
-                {learnerProfiles[activeProfile].name.toUpperCase()}, {learnerProfiles[activeProfile].location.toUpperCase()}
+
+              {/* Axis labels — positioned outside the constellation */}
+              <text x="250" y="32" textAnchor="middle" style={{fontSize:'10px', fontWeight:'bold', letterSpacing:'0.08em'}} className="fill-gray-700">CRITICAL THINKING</text>
+              <text x="440" y="158" textAnchor="start" style={{fontSize:'10px', fontWeight:'bold', letterSpacing:'0.08em'}} className="fill-gray-700">TECHNICAL MASTERY</text>
+              <text x="378" y="340" textAnchor="start" style={{fontSize:'10px', fontWeight:'bold', letterSpacing:'0.08em'}} className="fill-gray-700">COLLABORATIVE IMPACT</text>
+              <text x="122" y="340" textAnchor="end" style={{fontSize:'10px', fontWeight:'bold', letterSpacing:'0.08em'}} className="fill-gray-700">CIVIC ADAPTABILITY</text>
+              <text x="60" y="158" textAnchor="end" style={{fontSize:'10px', fontWeight:'bold', letterSpacing:'0.08em'}} className="fill-gray-700">CREATIVE SYNTHESIS</text>
+
+              {/* Footer label */}
+              <text x="250" y="392" textAnchor="middle" style={{fontSize:'9px', letterSpacing:'0.15em'}} className="fill-gray-400 font-mono uppercase">
+                Neural Constellation · {learnerProfiles[activeProfile].name.toUpperCase()} · {learnerProfiles[activeProfile].location.toUpperCase()}
               </text>
             </svg>
           </div>
 
-          {/* Animated percentage readout */}
-          <div className="grid grid-cols-5 gap-4 max-w-3xl mx-auto text-center">
-            {displayValues.map((v, i) => (
-              <div key={i} className="space-y-1">
-                <div className="text-xs font-bold text-[#8A0000]">{Math.round(v)}%</div>
-                <div className="text-[10px] text-gray-500">{axisLabels[i]}</div>
+          {/* Competency bars + profile details */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {/* Left: Animated competency bars */}
+            <div className="space-y-4">
+              <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400 mb-2">Competency Map</p>
+              {displayValues.map((v, i) => (
+                <div key={i} className="space-y-1.5">
+                  <div className="flex justify-between text-[11px]">
+                    <span className="text-gray-700 font-medium">{axisLabels[i]}</span>
+                    <span className="font-bold text-[#8A0000]">{Math.round(v)}%</span>
+                  </div>
+                  <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-[#8A0000] rounded-full transition-all duration-500"
+                      style={{ width: `${Math.round(v)}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Verified evidence for active profile */}
+            <div className="space-y-4">
+              <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400 mb-2">Verified Impact</p>
+              {learnerProfiles[activeProfile].evidence.map((ev, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <span className="text-[#8A0000] mt-1 shrink-0 text-xs">&#9654;</span>
+                  <div>
+                    <p className="text-[11px] font-bold text-gray-800">{ev.title}</p>
+                    <p className="text-[9px] text-gray-400 font-mono">{ev.skills}</p>
+                  </div>
+                </div>
+              ))}
+
+              <div className="mt-4 pt-4 border-t border-gray-200 space-y-2">
+                <p className="text-[9px] font-mono uppercase tracking-widest text-gray-400">Specializations</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {learnerProfiles[activeProfile].specializations.map((spec) => (
+                    <span key={spec} className="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider border border-[#8A0000]/30 text-[#8A0000] bg-[#8A0000]/5">
+                      {spec}
+                    </span>
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
