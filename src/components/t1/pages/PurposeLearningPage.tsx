@@ -24,7 +24,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2500" 
+              src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=2500" 
               alt="Video Thumbnail" 
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -73,7 +73,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               <p>This reorientation fundamentally changed the culture of Artemis. Conversations shifted from &ldquo;What are you majoring in?&rdquo; to &ldquo;What problem are you solving?&rdquo; Faculty reported that students arrived to class not merely prepared, but possessed by a sense of urgency and relevance that elevated every seminar and lab.</p>
             </div>
             <div>
-               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Students embracing The Artemis Oath at Artemis"/>
+               <img src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Students embracing The Artemis Oath at Artemis"/>
             </div>
           </div>
         </section>
@@ -147,7 +147,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1594398901394-4e34939a4fd0?auto=format&fit=crop&q=80&w=800" alt="Clean Water Initiative" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/3662617/pexels-photo-3662617.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clean Water Initiative" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=800" alt="Renewable Energy Solutions" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/9800029/pexels-photo-9800029.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Renewable Energy Solutions" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ export default function PurposeLearningPage({ goTo }: Props) {
               </div>
               <div className="space-y-4">
                 <div className="bg-gray-100 aspect-video overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800" alt="Healthcare Innovation" className="w-full h-full object-cover grayscale opacity-80" />
+                  <img src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healthcare Innovation" className="w-full h-full object-cover grayscale opacity-80" />
                 </div>
               </div>
             </div>

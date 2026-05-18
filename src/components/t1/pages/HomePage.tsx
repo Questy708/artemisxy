@@ -5,12 +5,12 @@ import { cn, SectionHeading } from '../Shared';
 import { Play } from 'lucide-react';
 
 const SECTIONS = [
-  { id: "intro", title: "Learning & Living at Artemis", desc: "An exploration of educational experiences for the future", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398817302287-HSJD6LY65BUT5GMUT8V7/Exhibit_Title.jpg" },
-  { id: "context-1", title: "A Complex and Special Moment", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398882588280-1K4AKDL84P3BAIJZE9OH/IMG_9794.jpg" },
-  { id: "context-3-1-1", title: "Our Process", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398882987952-X2GZ3OY7F53PLB1XL17Z/IMG_0350.jpg" },
-  { id: "context-3-1-1-1", title: "Dimensions to Spark Experiments", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398883065287-E99ZFQRMG4VM7XFARP97/IMG_0772.jpg" },
-  { id: "context-4", title: "Moments in Time", desc: "", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1406175906356-COAZHHD5LC8DP29XT15T/Time+Machine+1.jpg" },
-  { id: "fast-forward", title: "Let's fast forward to a possible future...", desc: "What might the university experience be then?", img: "https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398817195405-5BBO5QHPZPCZM28UISFD/calibcolors.jpg" },
+  { id: "intro", title: "Learning & Living at Artemis", desc: "An exploration of educational experiences for the future", img: "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-1", title: "A Complex and Special Moment", desc: "", img: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-3-1-1", title: "Our Process", desc: "", img: "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-3-1-1-1", title: "Dimensions to Spark Experiments", desc: "", img: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "context-4", title: "Moments in Time", desc: "", img: "https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "fast-forward", title: "Let's fast forward to a possible future...", desc: "What might the university experience be then?", img: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=2000" },
 ];
 
 interface HomePageProps {
@@ -164,7 +164,7 @@ export default function HomePage({ goTo }: HomePageProps) {
           
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden border border-gray-300 max-w-4xl">
               <img
-                src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1406177443557-T7R0F6NBRQXIAIQCI2SJ/Space+6.jpg?format=1000w"
+                src="https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=2000"
                 alt="Artemis 2100 Experience"
                 className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
               />
@@ -220,31 +220,31 @@ export default function HomePage({ goTo }: HomePageProps) {
               
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-8 w-full font-serif text-white">
                 <button onClick={() => goTo('open-loop-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902059821-RP15PQTSY8SOKL2MGTOS/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Open Loop Learning" />
+                   <img src="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Open Loop Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-base md:text-lg font-bold italic tracking-wide">Infinite Learning<br/>Continuum</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('adaptive-paced-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902029404-08X95JWIUC0ET7E7EMWQ/nav_paced_education.jpg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
+                   <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="Adaptive Paced Learning" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-base md:text-lg font-bold italic tracking-wide">Adaptive Paced<br/>Learning</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('global-skills-matrix')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902001655-AHTZLR3OYOOL337G49HW/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="SkillPrints" />
+                   <img src="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="SkillPrints" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-base md:text-lg font-bold italic tracking-wide">SkillPrints</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('purpose-learning')} className="relative group block aspect-square bg-gray-900 overflow-hidden cursor-pointer">
-                   <img src="https://images.squarespace-cdn.com/content/v1/535afa04e4b071a2c2df86e4/1398902073224-40XEGRCIXAE6GKIU1YL7/image-asset.jpeg" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The Artemis Oath" />
+                   <img src="https://images.pexels.com/photos/6646916/pexels-photo-6646916.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity transform group-hover:scale-105 duration-700" alt="The Artemis Oath" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-base md:text-lg font-bold italic tracking-wide">The Artemis<br/>Oath</span>
                    </div>
                 </button>
                 <button onClick={() => goTo('centers-of-inquiry')} className="relative group block aspect-square bg-[#0f3460] overflow-hidden cursor-pointer">
-                   <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
+                   <img src="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover opacity-40 group-hover:opacity-20 transition-opacity transform group-hover:scale-105 duration-700" alt="Centers of Inquiry" />
                    <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
                       <span className="text-base md:text-lg font-bold italic tracking-wide">Centers of<br/>Inquiry</span>
                    </div>

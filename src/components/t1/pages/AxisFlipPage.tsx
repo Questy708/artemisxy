@@ -24,7 +24,7 @@ export default function AxisFlipPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=2500"
+              src="https://images.pexels.com/photos/6147082/pexels-photo-6147082.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="Video Thumbnail"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -42,7 +42,7 @@ export default function AxisFlipPage({ goTo }: Props) {
             <hr className="border-t border-gray-200" />
           </div>
           <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="SkillPrints Diagram" />
+            <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=2000" className="w-full h-64 object-cover" alt="SkillPrints Diagram" />
           </div>
         </section>
 
@@ -89,7 +89,7 @@ export default function AxisFlipPage({ goTo }: Props) {
               </p>
             </div>
             <div>
-               <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800" className="w-full h-full object-cover" alt="Neural Skill Mapping Visualization" />
+               <img src="https://images.pexels.com/photos/8294554/pexels-photo-8294554.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full h-full object-cover" alt="Neural Skill Mapping Visualization" />
             </div>
           </div>
         </section>

@@ -63,7 +63,7 @@ export default function CentersOfInquiryPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=2500"
+              src="https://images.pexels.com/photos/256392/pexels-photo-256392.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="Video Thumbnail"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />

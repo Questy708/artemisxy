@@ -24,7 +24,7 @@ export default function PacedEducationPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2500" 
+              src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=2500" 
               alt="Video Thumbnail" 
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -42,7 +42,7 @@ export default function PacedEducationPage({ goTo }: Props) {
             <hr className="border-t border-gray-200" />
           </div>
           <div className="w-full max-w-4xl pb-12">
-            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2000" className="w-full h-64 object-cover" alt="Diagram" />
+            <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=2000" className="w-full h-64 object-cover" alt="Diagram" />
           </div>
         </section>
 
@@ -80,7 +80,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               <p>The shift was not merely structural but philosophical. The old model assumed all 18-year-olds were ready for the same challenges at the same time. Adaptive Paced Learning assumed the opposite: that every learner arrives at understanding on their own schedule, and that forcing pace creates the illusion of learning without its substance.</p>
             </div>
             <div>
-               <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Adaptive Paced Learning"/>
+               <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Adaptive Paced Learning"/>
             </div>
           </div>
         </section>
@@ -130,7 +130,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Elevate phase"/>
+              <img src="https://images.pexels.com/photos/4145192/pexels-photo-4145192.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Elevate phase"/>
             </div>
           </div>
 
@@ -145,7 +145,7 @@ export default function PacedEducationPage({ goTo }: Props) {
               </p>
             </div>
             <div>
-              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800" className="w-full object-cover" alt="Activate phase"/>
+              <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800" className="w-full object-cover" alt="Activate phase"/>
             </div>
           </div>
         </section>

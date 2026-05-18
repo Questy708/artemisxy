@@ -23,7 +23,7 @@ export default function OpenLoopPage({ goTo }: Props) {
           </p>
           <div className="w-full aspect-video bg-gray-200 relative group cursor-pointer overflow-hidden max-w-4xl border border-gray-300">
             <img
-              src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=2500"
+              src="https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=2500"
               alt="Video Thumbnail"
               className="w-full h-full object-cover filter grayscale opacity-70 group-hover:opacity-90 transition-opacity"
             />
@@ -240,13 +240,13 @@ export default function OpenLoopPage({ goTo }: Props) {
             <div className="grid md:grid-cols-2 gap-6">
                <div className="space-y-2">
                   <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800" alt="AI Learning Platform" className="w-full h-full object-cover grayscale opacity-80" />
+                    <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="AI Learning Platform" className="w-full h-full object-cover grayscale opacity-80" />
                   </div>
                   <p className="text-xs text-gray-500">Early AI-driven personalized learning interface.</p>
                </div>
                <div className="space-y-2">
                   <div className="bg-gray-100 aspect-video overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Learning analytics" className="w-full h-full object-cover grayscale opacity-80" />
+                    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Learning analytics" className="w-full h-full object-cover grayscale opacity-80" />
                   </div>
                   <p className="text-xs text-gray-500">Learning analytics dashboard in use.</p>
                </div>
@@ -307,14 +307,14 @@ export default function OpenLoopPage({ goTo }: Props) {
                       <path d="M 0,200 Q 150,50 300,200 T 600,200 T 900,100" />
                    </svg>
                 </div>
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply" alt="Gallery preview" />
+                <img src="https://images.pexels.com/photos/3184311/pexels-photo-3184311.jpeg?auto=compress&cs=tinysrgb&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply" alt="Gallery preview" />
              </div>
              <div className="flex justify-center items-center gap-4 py-4">
                 <ChevronLeft className="w-6 h-6 text-gray-400 cursor-pointer" />
                 <div className="flex gap-2 opacity-50">
-                  <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
-                  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/3184311/pexels-photo-3184311.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
+                  <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=100" className="w-12 h-16 object-cover border" alt="thumb"/>
                 </div>
                 <ChevronRight className="w-6 h-6 text-gray-400 cursor-pointer" />
              </div>
