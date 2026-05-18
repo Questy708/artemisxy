@@ -144,24 +144,21 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
       "w-full fixed top-0 left-0 z-[100] transition-all duration-300",
       scrolled
         ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
-        : "bg-transparent"
+        : "bg-white/70 backdrop-blur-lg"
     )}>
       <div className="flex items-center justify-between h-14 max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
 
         {/* Left: Logo */}
         <div className="flex items-center gap-3">
           <button className="lg:hidden p-1.5" onClick={() => { onMenuClick(); }}>
-            <Menu size={20} className={scrolled ? "text-gray-900" : "text-white"} />
+            <Menu size={20} className="text-gray-900" />
           </button>
           <button
             className="flex items-center gap-2.5 cursor-pointer group"
             onClick={goHome}
           >
-            <ArtemisLogo size={28} color={scrolled ? 'crimson' : 'white'} />
-            <div className={cn(
-              "leading-[1.15] group-hover:opacity-80 transition-opacity",
-              scrolled ? "text-gray-900" : "text-white"
-            )}>
+            <ArtemisLogo size={28} color="crimson" />
+            <div className="leading-[1.15] group-hover:opacity-80 transition-opacity text-gray-900">
               <div className="text-[11px] font-semibold tracking-tight">University of</div>
               <div className="text-[13px] font-bold tracking-tight">Artemis</div>
             </div>
@@ -169,10 +166,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
         </div>
 
         {/* Center: Desktop Nav Links with Dropdowns */}
-        <nav className={cn(
-          "hidden lg:flex items-center gap-1 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors",
-          scrolled ? "text-gray-500" : "text-white/70"
-        )}>
+        <nav className="hidden lg:flex items-center gap-1 text-[11px] font-bold tracking-[0.15em] uppercase text-gray-500">
           {NAV_STRUCTURE.map((link) => (
             link.children ? (
               <div
@@ -185,7 +179,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
                   onClick={() => goToPage(link.page)}
                   className={cn(
                     "flex items-center gap-1 px-3 py-2 hover:opacity-100 transition-opacity cursor-pointer",
-                    isActive(link) && (scrolled ? "text-gray-900" : "text-white")
+                    isActive(link) && "text-gray-900"
                   )}
                   suppressHydrationWarning
                 >
@@ -242,7 +236,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
                 onClick={() => goToPage(link.page)}
                 className={cn(
                   "px-3 py-2 hover:opacity-100 transition-opacity cursor-pointer",
-                  currentPage === link.page && (scrolled ? "text-gray-900" : "text-white")
+                  currentPage === link.page && "text-gray-900"
                 )}
                 suppressHydrationWarning
               >
@@ -257,12 +251,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
           {/* 2100 badge */}
           <button
             onClick={() => goToPage('artemis-2100')}
-            className={cn(
-              "hidden lg:inline-flex border px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors",
-              scrolled
-                ? "border-[#D4A853]/40 text-[#D4A853] hover:bg-[#D4A853]/10"
-                : "border-[#D4A853]/50 text-[#D4A853] hover:bg-[#D4A853]/10"
-            )}
+            className="hidden lg:inline-flex border border-[#D4A853]/40 text-[#D4A853] px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors hover:bg-[#D4A853]/10"
             suppressHydrationWarning
           >
             2100
@@ -271,12 +260,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
           {/* T1 badge */}
           <button
             onClick={() => goToPage('t1')}
-            className={cn(
-              "hidden lg:inline-flex border px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors",
-              scrolled
-                ? "border-[#007f9c]/40 text-[#007f9c] hover:bg-[#007f9c]/10"
-                : "border-[#007f9c]/50 text-[#7dd3fc] hover:bg-[#007f9c]/10"
-            )}
+            className="hidden lg:inline-flex border border-[#007f9c]/40 text-[#007f9c] px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors hover:bg-[#007f9c]/10"
             suppressHydrationWarning
           >
             T1
@@ -285,12 +269,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
           {/* Give */}
           <button
             onClick={() => goToPage('fundraising')}
-            className={cn(
-              "hidden lg:inline-flex border px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors",
-              scrolled
-                ? "border-gray-300 text-gray-600 hover:bg-gray-50"
-                : "border-white/30 text-white/80 hover:bg-white/10"
-            )}
+            className="hidden lg:inline-flex border border-gray-300 text-gray-600 px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors hover:bg-gray-50"
             suppressHydrationWarning
           >
             Give
@@ -299,12 +278,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
           {/* Apply */}
           <button
             onClick={() => goToPage('apply')}
-            className={cn(
-              "hidden lg:inline-flex px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors",
-              scrolled
-                ? "bg-[#8A0000] text-white hover:bg-[#6B0000]"
-                : "bg-white text-[#8A0000] hover:bg-gray-100"
-            )}
+            className="hidden lg:inline-flex px-3 py-1 text-[10px] uppercase tracking-wider cursor-pointer transition-colors bg-[#8A0000] text-white hover:bg-[#6B0000]"
             suppressHydrationWarning
           >
             Apply
@@ -313,10 +287,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
           {/* Search */}
           <button
             onClick={onSearchClick}
-            className={cn(
-              "flex items-center cursor-pointer p-2 hover:opacity-70 transition-opacity",
-              scrolled ? "text-gray-600" : "text-white"
-            )}
+            className="flex items-center cursor-pointer p-2 hover:opacity-70 transition-opacity text-gray-600"
             aria-label="Search"
             suppressHydrationWarning
           >
@@ -325,7 +296,7 @@ export default function Header({ onMenuClick, goHome, goToPage, onSearchClick, c
 
           {/* Mobile menu toggle */}
           <button
-            className={cn("lg:hidden p-1.5", scrolled ? "text-gray-900" : "text-white")}
+            className="lg:hidden p-1.5 text-gray-900"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}

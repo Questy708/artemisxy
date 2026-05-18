@@ -41,33 +41,24 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
   return (
     <header className={cn(
       "w-full fixed top-0 left-0 z-50 transition-all duration-300",
-      scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]" : "bg-transparent"
+      scrolled ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]" : "bg-white/70 backdrop-blur-lg"
     )}>
       <div className="flex items-center justify-between h-14 max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20">
         {/* Logo */}
         <button onClick={() => goTo('home')} className="flex items-center gap-3 cursor-pointer group">
-          <div className={cn(
-            "w-7 h-7 border-2 flex items-center justify-center text-[10px] font-bold italic transition-colors",
-            scrolled ? "border-gray-900 text-gray-900" : "border-white text-white"
-          )}>
+          <div className="w-7 h-7 border-2 border-gray-900 flex items-center justify-center text-[10px] font-bold italic text-gray-900">
             A
           </div>
-          <span className={cn(
-            "text-sm font-semibold tracking-[0.2em] uppercase transition-colors",
-            scrolled ? "text-gray-900" : "text-white"
-          )}>
+          <span className="text-sm font-semibold tracking-[0.2em] uppercase text-gray-900">
             Artemis<span className="font-light opacity-60">2100</span>
           </span>
         </button>
 
         {/* Desktop Nav */}
-        <nav className={cn(
-          "hidden md:flex items-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors",
-          scrolled ? "text-gray-500" : "text-white/70"
-        )}>
+        <nav className="hidden md:flex items-center gap-6 text-[10px] font-bold tracking-[0.2em] uppercase text-gray-500">
           <button
             onClick={() => goTo('home')}
-            className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'home' && (scrolled ? "text-gray-900" : "text-white"))}
+            className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'home' && "text-gray-900")}
           >
             Home
           </button>
@@ -76,7 +67,7 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
             onMouseEnter={() => setIsExploreOpen(true)}
             onMouseLeave={() => setIsExploreOpen(false)}
           >
-            <span className={cn("flex items-center gap-1 hover:opacity-100 transition-opacity", isExplorePath && (scrolled ? "text-gray-900" : "text-white"))}>
+            <span className={cn("flex items-center gap-1 hover:opacity-100 transition-opacity", isExplorePath && "text-gray-900")}>
               Dimensions <ChevronDown className="w-3 h-3" />
             </span>
             {isExploreOpen && (
@@ -99,18 +90,15 @@ export function NavBar({ currentPage, goTo, onExit }: NavBarProps) {
               </div>
             )}
           </div>
-          <button onClick={() => goTo('build')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'build' && (scrolled ? "text-gray-900" : "text-white"))}>Build</button>
-          <button onClick={() => goTo('about')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'about' && (scrolled ? "text-gray-900" : "text-white"))}>About</button>
-          <button onClick={onExit} className={cn(
-            "hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-1",
-            scrolled ? "text-[#8A0000]" : "text-red-300"
-          )}>
+          <button onClick={() => goTo('build')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'build' && "text-gray-900")}>Build</button>
+          <button onClick={() => goTo('about')} className={cn("hover:opacity-100 transition-opacity cursor-pointer", currentPage === 'about' && "text-gray-900")}>About</button>
+          <button onClick={onExit} className="hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-1 text-[#8A0000]">
             <ArrowLeft className="w-3 h-3" /> Exit
           </button>
         </nav>
 
         {/* Mobile Toggle */}
-        <button className={cn("md:hidden", scrolled ? "text-gray-900" : "text-white")} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button className="md:hidden text-gray-900" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
@@ -240,7 +228,7 @@ export function HeroHeader({ title, description, bgImage }: { title: string; des
         {/* Bottom gradient for title readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
         {/* Top gradient for navbar readability */}
-        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/40 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/20 to-transparent" />
 
         {/* Text content — bottom-left, over the image */}
         <div className="relative z-10 flex flex-col justify-end h-full max-w-[1400px] mx-auto w-full px-5 sm:px-8 lg:px-20 pb-12 pt-24">
