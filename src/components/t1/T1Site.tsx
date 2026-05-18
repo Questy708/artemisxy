@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState, useCallback, useSyncExternalStore } from 'react';
-import WelcomeGate from './onboarding/WelcomeGate';
-import IdentityStep from './onboarding/IdentityStep';
-import DimensionWalk, { dimensions as walkDimensions } from './onboarding/DimensionWalk';
-import Dashboard from './dashboard/Dashboard';
+import { LandingPage } from './onboarding/LandingPage';
+import { SplitLayout } from './onboarding/SplitLayout';
+import { IdentityPage } from './onboarding/IdentityPage';
+import { VerifyPage } from './onboarding/VerifyPage';
+import { WorkspacePage } from './onboarding/WorkspacePage';
+import { AppMockup } from './onboarding/AppMockup';
+import { MainApp } from './dashboard/MainApp';
 
-type AppPhase = 'onboarding' | 'dashboard';
-type OnboardingStep = 'welcome' | 'identity' | 'dimensions' | 'complete';
+type Step = 'LANDING' | 'AUTH' | 'VERIFY' | 'WORKSPACE' | 'APP';
 
 interface T1SiteProps {
   onExit: () => void;
@@ -16,17 +18,13 @@ interface T1SiteProps {
 const STORAGE_KEY = 'artemis-t1-state';
 
 interface AppState {
-  phase: AppPhase;
-  onboardingStep: OnboardingStep;
-  selectedArchetype: string | null;
-  exploredDimensions: string[];
+  currentStep: Step;
+  travelerName: string;
 }
 
 const defaultState: AppState = {
-  phase: 'onboarding',
-  onboardingStep: 'welcome',
-  selectedArchetype: null,
-  exploredDimensions: [],
+  currentStep: 'LANDING',
+  travelerName: '',
 };
 
 // ─── External store for persisted state ───
@@ -75,64 +73,17 @@ function parseSnapshot(snapshot: string): AppState {
 }
 
 export default function T1Site({ onExit }: T1SiteProps) {
-  // Subscribe to localStorage via useSyncExternalStore — no setState in effects needed
   const snapshot = useSyncExternalStore(storeSubscribe, storeGetSnapshot, storeGetServerSnapshot);
   const appState = parseSnapshot(snapshot);
 
-  // Track dimension walk index separately (not persisted)
-  const [currentDimensionIndex, setCurrentDimensionIndex] = useState(0);
+  const isClient = snapshot !== '';
 
-  // Check if we're on the client by comparing snapshot to server snapshot
-  const isClient = snapshot !== ''; // server always returns ''
-
-  // Handlers — write to external store, which triggers re-render via useSyncExternalStore
-  const handleBeginJourney = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), onboardingStep: 'identity' });
+  const setCurrentStep = useCallback((step: Step) => {
+    storeWrite({ ...parseSnapshot(storeGetSnapshot()), currentStep: step });
   }, []);
 
-  const handleGoToDashboard = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), phase: 'dashboard' });
-  }, []);
-
-  const handleIdentityBack = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), onboardingStep: 'welcome' });
-  }, []);
-
-  const handleIdentityContinue = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), onboardingStep: 'dimensions' });
-  }, []);
-
-  const handleDimensionsBack = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), onboardingStep: 'identity' });
-  }, []);
-
-  const handleMarkExplored = useCallback((dimId: string) => {
-    const current = parseSnapshot(storeGetSnapshot());
-    if (!current.exploredDimensions.includes(dimId)) {
-      storeWrite({ ...current, exploredDimensions: [...current.exploredDimensions, dimId] });
-    }
-  }, []);
-
-  const handleDimensionNext = useCallback(() => {
-    setCurrentDimensionIndex(prev => {
-      if (prev < walkDimensions.length - 1) return prev + 1;
-      return prev;
-    });
-  }, []);
-
-  const handleDimensionPrevious = useCallback(() => {
-    setCurrentDimensionIndex(prev => {
-      if (prev > 0) return prev - 1;
-      return prev;
-    });
-  }, []);
-
-  const handleCompleteOnboarding = useCallback(() => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), phase: 'dashboard', onboardingStep: 'complete' });
-  }, []);
-
-  const handleSelectArchetype = useCallback((archetype: string) => {
-    storeWrite({ ...parseSnapshot(storeGetSnapshot()), selectedArchetype: archetype });
+  const setTravelerName = useCallback((name: string) => {
+    storeWrite({ ...parseSnapshot(storeGetSnapshot()), travelerName: name });
   }, []);
 
   // Show loading spinner until client-side hydrated
@@ -144,59 +95,39 @@ export default function T1Site({ onExit }: T1SiteProps) {
     );
   }
 
-  const { phase, onboardingStep, selectedArchetype, exploredDimensions } = appState;
+  const { currentStep, travelerName } = appState;
 
-  // ─── Render based on phase ───
-  if (phase === 'dashboard') {
-    return (
-      <Dashboard
-        selectedArchetype={selectedArchetype}
-        exploredDimensions={exploredDimensions}
-        onExit={onExit}
-        onMarkExplored={handleMarkExplored}
-      />
-    );
+  if (currentStep === 'LANDING') {
+    return <LandingPage onNext={() => setCurrentStep('AUTH')} />;
   }
 
-  // ─── Onboarding phase ───
-  switch (onboardingStep) {
-    case 'welcome':
-      return (
-        <WelcomeGate
-          onBegin={handleBeginJourney}
-          onGoToDashboard={handleGoToDashboard}
-        />
-      );
-
-    case 'identity':
-      return (
-        <IdentityStep
-          selectedArchetype={selectedArchetype}
-          onSelect={handleSelectArchetype}
-          onContinue={handleIdentityContinue}
-          onBack={handleIdentityBack}
-        />
-      );
-
-    case 'dimensions':
-      return (
-        <DimensionWalk
-          currentDimensionIndex={currentDimensionIndex}
-          exploredDimensions={exploredDimensions}
-          onMarkExplored={handleMarkExplored}
-          onNext={handleDimensionNext}
-          onPrevious={handleDimensionPrevious}
-          onComplete={handleCompleteOnboarding}
-          onBack={handleDimensionsBack}
-        />
-      );
-
-    default:
-      return (
-        <WelcomeGate
-          onBegin={handleBeginJourney}
-          onGoToDashboard={handleGoToDashboard}
-        />
-      );
+  if (currentStep === 'APP') {
+    return <MainApp travelerName={travelerName} onExit={onExit} />;
   }
+
+  // Use SplitLayout for AUTH, VERIFY, WORKSPACE
+  return (
+    <SplitLayout stepId={currentStep} rightPanel={<AppMockup />}>
+      {currentStep === 'AUTH' && (
+        <IdentityPage 
+          onNext={() => setCurrentStep('VERIFY')} 
+          travelerName={travelerName}
+          setTravelerName={setTravelerName} 
+        />
+      )}
+      {currentStep === 'VERIFY' && (
+        <VerifyPage 
+          onNext={() => setCurrentStep('WORKSPACE')} 
+          onBack={() => setCurrentStep('AUTH')} 
+        />
+      )}
+      {currentStep === 'WORKSPACE' && (
+        <WorkspacePage 
+          onNext={() => setCurrentStep('APP')} 
+          onLogout={() => setCurrentStep('AUTH')} 
+          travelerName={travelerName}
+        />
+      )}
+    </SplitLayout>
+  );
 }

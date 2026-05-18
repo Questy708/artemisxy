@@ -1,6 +1,7 @@
-// University of Artemis - Main Entry Page
-import ArtemisApp from '@/components/artemis/ArtemisApp';
+'use client';
+
+import T1Site from '@/components/t1/T1Site';
 
 export default function Home() {
-  return <ArtemisApp />;
+  return <T1Site onExit={() => {}} />;
 }
