@@ -38,6 +38,7 @@ import CareersPage from '@/components/artemis/CareersPage';
 import ArtemisChatBot from '@/components/artemis/ArtemisChatBot';
 import AdminDashboard from '@/components/artemis/AdminDashboard';
 import T1Site from '@/components/t1/T1Site';
+import ArtemisProjectApp from '@/components/artemis-project/ArtemisProjectApp';
 import Breadcrumb, { BreadcrumbItem } from '@/components/artemis/Breadcrumb';
 import SearchOverlay from '@/components/artemis/SearchOverlay';
 
@@ -487,13 +488,20 @@ export default function ArtemisApp() {
   };
 
   const isHome = currentPage === 'home';
-  const isMicroSite = currentPage === 't1';
+  const isMicroSite = currentPage === 't1' || currentPage === 'artemis-project';
 
   // Get breadcrumbs for current page
   const breadcrumbData = !isHome && !isMicroSite ? getBreadcrumbs(currentPage, currentProgram) : null;
 
   // Micro-sites render fullscreen with their own navbar/footer
   if (isMicroSite) {
+    if (currentPage === 'artemis-project') {
+      return (
+        <div className="w-full min-h-screen">
+          <ArtemisProjectApp onExit={() => goToPage('home')} />
+        </div>
+      );
+    }
     return (
       <div className="w-full min-h-screen">
         <T1Site onExit={() => goToPage('home')} />

@@ -117,6 +117,18 @@ export default function SubPageFooter({ goToPage }: FooterProps) {
           </div>
         </div>
 
+        {/* Experimental: Artemis Project */}
+        <div className="py-4 border-t border-white/5 flex items-center justify-between">
+          <button
+            onClick={() => goToPage('artemis-project')}
+            className="flex items-center gap-2 text-[10px] text-white/20 hover:text-white/60 transition-colors cursor-pointer group"
+          >
+            <span className="w-5 h-5 rounded border border-white/10 group-hover:border-white/30 flex items-center justify-center text-[8px] font-bold font-mono">AP</span>
+            <span className="uppercase tracking-widest font-mono">Artemis Project</span>
+            <span className="text-[8px] text-white/10 group-hover:text-white/30 ml-1 uppercase tracking-wider">Experimental</span>
+          </button>
+        </div>
+
         {/* Bottom: Copyright */}
         <div className="py-5 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <p className="text-[10px] text-white/15">&copy; {new Date().getFullYear()} University of Artemis. All rights reserved.</p>
